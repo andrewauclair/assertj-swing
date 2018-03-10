@@ -23,29 +23,31 @@ import java.io.IOException;
 
 import org.assertj.swing.image.ScreenshotTaker;
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * Tests for <code>{@link FailureScreenshotTaker}</code>.
  * 
  * @author Alex Ruiz
  */
-public class FailureScreenshotTaker_saveScreenshot_Test {
+@ExtendWith(GUITestRunner.GUITestRunner_JUnit5.class)
+class FailureScreenshotTaker_saveScreenshot_Test {
 
   private ScreenshotTaker screenshotTaker;
   private File imageFolder;
   private FailureScreenshotTaker failureScreenshotTaker;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     screenshotTaker = createMock(ScreenshotTaker.class);
     imageFolder = createMock(File.class);
     failureScreenshotTaker = new FailureScreenshotTaker(imageFolder, screenshotTaker);
   }
 
   @Test
-  public void should_Save_Screenshot_With_Given_Test_Name_At_Given_Folder() {
+  void should_Save_Screenshot_With_Given_Test_Name_At_Given_Folder() {
     new EasyMockTemplate(screenshotTaker, imageFolder) {
       @Override
       protected void expectations() throws Exception {
@@ -62,7 +64,7 @@ public class FailureScreenshotTaker_saveScreenshot_Test {
   }
 
   @Test
-  public void should_Not_Rethrow_Exceptions() {
+  void should_Not_Rethrow_Exceptions() {
     new EasyMockTemplate(screenshotTaker, imageFolder) {
       @Override
       protected void expectations() throws Exception {

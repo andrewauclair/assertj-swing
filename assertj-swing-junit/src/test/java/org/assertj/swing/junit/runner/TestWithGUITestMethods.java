@@ -13,37 +13,37 @@
 package org.assertj.swing.junit.runner;
 
 import org.assertj.swing.annotation.GUITest;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * Understands a JUnit test to be used to manually test <code>{@link GUITestRunner}</code>.
  * 
  * @author Alex Ruiz
  */
-@RunWith(GUITestRunner.class)
-public class TestWithGUITestMethods {
+@ExtendWith(GUITestRunner.class)
+class TestWithGUITestMethods {
 
   @GUITest
   @Test
-  public void successfulGUITest() {
+  void successfulGUITest() {
   }
 
-  @Ignore("enable for manual testing")
+  @Disabled("enable for manual testing")
   @GUITest
   @Test
-  public void failedGUITest() {
+  void failedGUITest() {
     throw new RuntimeException("Failed on purpose");
   }
 
   @Test
-  public void successfulNonGUITest() {
+  void successfulNonGUITest() {
   }
 
-  @Ignore("enable for manual testing")
+  @Disabled("enable for manual testing")
   @Test
-  public void failedNonGUITest() {
+  void failedNonGUITest() {
     throw new RuntimeException("Failed on purpose");
   }
 }

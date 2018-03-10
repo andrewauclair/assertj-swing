@@ -34,7 +34,7 @@ import org.assertj.swing.junit.xml.XmlAttribute;
 import org.assertj.swing.junit.xml.XmlAttributes;
 import org.assertj.swing.junit.xml.XmlNode;
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for <code>{@link SuiteXmlNodeWriter}</code>.
@@ -46,7 +46,7 @@ public abstract class SuiteXmlNodeWriter_TestCase {
   XmlNode targetNode;
   SuiteXmlNodeWriter writer;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     targetNode = mockXmlNode();
     writer = new SuiteXmlNodeWriter();

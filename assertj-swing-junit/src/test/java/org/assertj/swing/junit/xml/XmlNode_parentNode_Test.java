@@ -12,19 +12,19 @@
  */
 package org.assertj.swing.junit.xml;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for <code>{@link XmlNode#parentNode()}</code>.
  * 
  * @author Alex Ruiz
  */
-public class XmlNode_parentNode_Test extends XmlNode_TestCase {
+class XmlNode_parentNode_Test extends XmlNode_TestCase {
 
   @Test
-  public void should_Return_Parent_Node() {
+  void should_Return_Parent_Node() {
     XmlNode newNode = node.addNewNode("new");
     XmlNode parent = newNode.parentNode();
     assertThat(parent).isEqualTo(node);

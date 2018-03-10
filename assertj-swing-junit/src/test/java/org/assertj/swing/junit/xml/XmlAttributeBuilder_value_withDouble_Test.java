@@ -12,19 +12,20 @@
  */
 package org.assertj.swing.junit.xml;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
 
 /**
  * Tests for <code>{@link org.assertj.swing.junit.xml.XmlAttribute.XmlAttributeBuilder#value(double)}</code>.
  *
  * @author Alex Ruiz
  */
-public class XmlAttributeBuilder_value_withDouble_Test {
+class XmlAttributeBuilder_value_withDouble_Test {
 
   @Test
-  public void should_Create_Attribute() {
+  void should_Create_Attribute() {
     XmlAttribute other = XmlAttribute.name("capacity").value(0.2d);
     assertThat(other.name()).isEqualTo("capacity");
     assertThat(other.value()).isEqualTo("0.2");

@@ -17,8 +17,8 @@ import static org.assertj.core.util.Strings.concat;
 
 import java.lang.reflect.Method;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Formatter#testNameFrom(Class, Method)}</code>.
@@ -26,31 +26,31 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class Formatter_testNameFrom_Test {
+class Formatter_testNameFrom_Test {
 
   private Class<?> type;
   private String typeName;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     type = TestClass.class;
     typeName = type.getName();
   }
 
   @Test
-  public void should_Format_Method_With_No_Parameters() throws Exception {
+  void should_Format_Method_With_No_Parameters() throws Exception {
     Method m = type.getDeclaredMethod("methodWithNoParameters");
     assertThat(Formatter.testNameFrom(type, m)).isEqualTo(concat(typeName, ".methodWithNoParameters"));
   }
 
   @Test
-  public void should_Format_Method_With_One_Parameter() throws Exception {
+  void should_Format_Method_With_One_Parameter() throws Exception {
     Method m = type.getDeclaredMethod("methodWithOneParameter", float.class);
     assertThat(Formatter.testNameFrom(type, m)).isEqualTo(concat(typeName, ".methodWithOneParameter(float)"));
   }
 
   @Test
-  public void should_Format_Method_With_Parameters() throws Exception {
+  void should_Format_Method_With_Parameters() throws Exception {
     Method m = type.getDeclaredMethod("methodWithParameters", String.class, int.class);
     assertThat(Formatter.testNameFrom(type, m)).isEqualTo(
         concat(typeName, ".methodWithParameters(java.lang.String, int)"));

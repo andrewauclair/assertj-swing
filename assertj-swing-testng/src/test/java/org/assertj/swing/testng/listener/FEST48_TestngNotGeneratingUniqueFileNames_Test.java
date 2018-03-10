@@ -16,25 +16,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.testng.listener.ScreenshotFileNameGenerator.screenshotFileNameFrom;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for issue <a href="https://kenai.com/jira/browse/FEST-48" target="_blank">FEST-48</a>.
  * 
  * @author Alex Ruiz
  */
-public class FEST48_TestngNotGeneratingUniqueFileNames_Test {
+class FEST48_TestngNotGeneratingUniqueFileNames_Test {
 
   private TestResultStub testResult;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     testResult = new TestResultStub();
   }
 
   @Test
-  public void should_Generate_Different_File_Names_Using_Parameter_Values() {
+  void should_Generate_Different_File_Names_Using_Parameter_Values() {
     testResult.getMethod().setMethodName("myMethod");
     testResult.getTestClass().setName("MyClass");
     assertThat(screenshotFileNameFrom(testResult)).isEqualTo("MyClass.myMethod.png");
@@ -43,7 +43,7 @@ public class FEST48_TestngNotGeneratingUniqueFileNames_Test {
   }
 
   @Test
-  public void should_Generate_File_Names_Even_If_Parameter_Value_Is_Null() {
+  void should_Generate_File_Names_Even_If_Parameter_Value_Is_Null() {
     testResult.getMethod().setMethodName("myMethod");
     testResult.getTestClass().setName("MyClass");
     testResult.setParameters(array("one", null));

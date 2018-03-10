@@ -12,6 +12,9 @@
  */
 package org.assertj.swing.junit.xml;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.junit.xml.XmlAttribute.name;
 
@@ -19,25 +22,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * Tests for <code>{@link XmlAttributes#iterator()}</code>.
  * 
  * @author Alex Ruiz
  */
-public class XmlAttributes_iterator_Test {
+class XmlAttributes_iterator_Test {
 
   private XmlAttributes attributes;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     attributes = XmlAttributes.attributes(name("firstName").value("Leia"), name("lastName").value("Organa"));
   }
 
   @Test
-  public void should_Return_All_Attributes_In_A_Iterator() {
+  void should_Return_All_Attributes_In_A_Iterator() {
     Iterator<XmlAttribute> iterator = attributes.iterator();
     List<XmlAttribute> attributeList = new ArrayList<XmlAttribute>();
     while (iterator.hasNext())

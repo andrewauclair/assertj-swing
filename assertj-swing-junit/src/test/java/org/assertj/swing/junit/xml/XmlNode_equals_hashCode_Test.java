@@ -21,7 +21,7 @@ import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsTransitiv
 import static org.fest.test.EqualsHashCodeContractAssert.assertMaintainsEqualsAndHashCodeContract;
 
 import org.fest.test.EqualsHashCodeContractTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link XmlNode#equals(Object)}</code> and <code>{@link XmlNode#hashCode()}</code>.

@@ -14,7 +14,7 @@ package org.assertj.swing.junit.xml;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,7 +30,7 @@ public abstract class XmlNode_TestCase {
   Element target;
   XmlNode node;
 
-  @Before
+  @BeforeEach
   public final void setUp() throws Exception {
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     target = document.createElement("person");

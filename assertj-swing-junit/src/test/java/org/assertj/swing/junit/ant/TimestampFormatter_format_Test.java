@@ -12,6 +12,9 @@
  */
 package org.assertj.swing.junit.ant;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static java.util.Calendar.AM;
 import static java.util.Calendar.AM_PM;
 import static java.util.Calendar.JUNE;
@@ -22,9 +25,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 /**
  * Tests for <code>{@link TimestampFormatter#format(java.util.Date)}</code>.
  * 
@@ -34,13 +34,13 @@ public class TimestampFormatter_format_Test {
 
   public static TimestampFormatter formatter;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     formatter = new TimestampFormatter();
   }
 
   @Test
-  public void should_Format_Date_Using_ISO8601_Pattern() {
+  void should_Format_Date_Using_ISO8601_Pattern() {
     // make sure we have the right timezone so that the expected string matches the result
     TimeZone.setDefault(TimeZone.getTimeZone("Etc/GMT"));
 

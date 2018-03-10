@@ -20,27 +20,27 @@ import static org.easymock.classextension.EasyMock.createMock;
 import java.io.File;
 
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link ImageFolderCreator#createImageFolder()}</code>.
  *
  * @author Alex Ruiz
  */
-public class ImageFolderCreator_createImageFolder_Test {
+class ImageFolderCreator_createImageFolder_Test {
 
   private FolderCreator folderCreator;
   private ImageFolderCreator imageFolderCreator;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     folderCreator = createMock(FolderCreator.class);
     imageFolderCreator = new ImageFolderCreator(folderCreator);
   }
 
   @Test
-  public void should_Create_Image_Folder() {
+  void should_Create_Image_Folder() {
     final File createdFolder = new File("fake");
     new EasyMockTemplate(folderCreator) {
       @Override

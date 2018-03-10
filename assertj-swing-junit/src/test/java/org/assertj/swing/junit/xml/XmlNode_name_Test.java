@@ -12,19 +12,19 @@
  */
 package org.assertj.swing.junit.xml;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for <code>{@link XmlNode#toString()}</code>.
  * 
  * @author Alex Ruiz
  */
-public class XmlNode_name_Test extends XmlNode_TestCase {
+class XmlNode_name_Test extends XmlNode_TestCase {
 
   @Test
-  public void should_Return_Node_Name() {
+  void should_Return_Node_Name() {
     assertThat(node.name()).isEqualTo("person");
   }
 }

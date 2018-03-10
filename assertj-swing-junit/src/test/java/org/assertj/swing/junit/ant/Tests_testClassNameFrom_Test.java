@@ -20,7 +20,7 @@ import junit.framework.TestCase;
 
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTaskMirrorImpl;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Tests}</code>.

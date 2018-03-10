@@ -26,8 +26,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.assertj.swing.annotation.GUITest;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.testng.Reporter;
 
 /**
@@ -35,7 +35,7 @@ import org.testng.Reporter;
  * 
  * @author Yvonne Wang
  */
-public class ScreenshotOnFailureListener_Test {
+class ScreenshotOnFailureListener_Test {
 
   @GUITest
   public static class SomeGUITestClass {
@@ -47,19 +47,19 @@ public class ScreenshotOnFailureListener_Test {
     }
   }
 
-  static TestContextStub testContext;
-  static TestResultStub testResult;
-  static ScreenshotOnFailureListener listener;
+  private static TestContextStub testContext;
+  private static TestResultStub testResult;
+  private static ScreenshotOnFailureListener listener;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     testContext = new TestContextStub();
     testResult = new TestResultStub();
     listener = new ScreenshotOnFailureListener();
   }
 
   @Test
-  public void should_Get_Output_Folder_On_Start() {
+  void should_Get_Output_Folder_On_Start() {
     String outputFolder = temporaryFolderPath();
     testContext.setOutputDirectory(outputFolder);
     listener.onStart(testContext);
@@ -67,7 +67,7 @@ public class ScreenshotOnFailureListener_Test {
   }
 
   @Test
-  public void should_Take_Screenshot_On_Test_Failure() throws Exception {
+  void should_Take_Screenshot_On_Test_Failure() throws Exception {
     setUpStubsForScreenshot();
     listener.onTestFailure(testResult);
     String imageFileName = screenshotFileName();

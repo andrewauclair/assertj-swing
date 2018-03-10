@@ -23,25 +23,25 @@ import java.io.IOException;
 import org.assertj.core.api.exception.RuntimeIOException;
 import org.easymock.EasyMock;
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link FolderCreator#createFolder(File, String)}</code>.
  *
  * @author Alex Ruiz
  */
-public class FolderCreator_createFolder_Test {
+class FolderCreator_createFolder_Test {
 
   private static FolderCreator creator;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     creator = new FolderCreator();
   }
 
   @Test
-  public void should_Create_Folder_In_Given_Parent() throws IOException {
+  void should_Create_Folder_In_Given_Parent() throws IOException {
     File parent = null;
     File child = null;
     try {
@@ -67,7 +67,7 @@ public class FolderCreator_createFolder_Test {
   }
 
   @Test
-  public void should_Throw_Exception_In_Case_Of_Error() {
+  void should_Throw_Exception_In_Case_Of_Error() {
     final File f = createMock(File.class);
     final RuntimeException error = new RuntimeException();
     new EasyMockTemplate(f) {

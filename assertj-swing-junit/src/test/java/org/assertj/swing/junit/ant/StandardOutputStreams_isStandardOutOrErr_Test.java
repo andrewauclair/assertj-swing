@@ -12,40 +12,40 @@
  */
 package org.assertj.swing.junit.ant;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * Tests for <code>{@link StandardOutputStreams#isStandardOutOrErr(OutputStream)}</code>.
  * 
  * @author Alex Ruiz
  */
-public class StandardOutputStreams_isStandardOutOrErr_Test {
+class StandardOutputStreams_isStandardOutOrErr_Test {
 
   private static StandardOutputStreams streams;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     streams = new StandardOutputStreams();
   }
 
   @Test
-  public void should_Return_True_If_Out_Is_SystemOut() {
+  void should_Return_True_If_Out_Is_SystemOut() {
     assertThat(streams.isStandardOutOrErr(System.out)).isTrue();
   }
 
   @Test
-  public void should_Return_True_If_Out_Is_SystemErr() {
+  void should_Return_True_If_Out_Is_SystemErr() {
     assertThat(streams.isStandardOutOrErr(System.err)).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Out_Is_Not_Standard() {
+  void should_Return_False_If_Out_Is_Not_Standard() {
     OutputStream out = new ByteArrayOutputStream();
     assertThat(streams.isStandardOutOrErr(out)).isFalse();
   }

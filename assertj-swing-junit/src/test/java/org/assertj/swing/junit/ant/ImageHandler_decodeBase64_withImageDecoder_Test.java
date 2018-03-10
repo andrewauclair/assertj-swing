@@ -16,27 +16,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.easymock.EasyMock.expect;
 
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link ImageHandler#decodeBase64(String, ImageDecoder)}</code>.
  * 
  * @author Alex Ruiz
  */
-public class ImageHandler_decodeBase64_withImageDecoder_Test extends ImageHandler_TestCase {
+class ImageHandler_decodeBase64_withImageDecoder_Test extends ImageHandler_TestCase {
 
   private ImageDecoder decoder;
   private String encoded;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     decoder = mockImageDecoder();
     encoded = "Hello";
   }
 
   @Test
-  public void should_Not_Rethrow_Error() {
+  void should_Not_Rethrow_Error() {
     new EasyMockTemplate(decoder) {
       @Override
       protected void expectations() throws Throwable {

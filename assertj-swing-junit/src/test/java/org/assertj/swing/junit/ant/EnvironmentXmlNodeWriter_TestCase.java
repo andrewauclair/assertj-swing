@@ -15,7 +15,7 @@ package org.assertj.swing.junit.ant;
 import static org.easymock.classextension.EasyMock.createMock;
 
 import org.assertj.swing.junit.xml.XmlNode;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for <code>{@link EnvironmentXmlNodeWriter}</code>.
@@ -29,7 +29,7 @@ public abstract class EnvironmentXmlNodeWriter_TestCase {
   HostNameReader hostNameReader;
   EnvironmentXmlNodeWriter writer;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     targetNode = createMock(XmlNode.class);
     timeStampFormatter = createMock(TimestampFormatter.class);

@@ -23,14 +23,14 @@ import java.util.Date;
 import org.assertj.swing.junit.xml.XmlAttribute;
 import org.easymock.IArgumentMatcher;
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for <code>{@link EnvironmentXmlNodeWriter#writeTimestamp(org.assertj.swing.junit.xml.XmlNode)}</code>.
  * 
  * @author Alex Ruiz
  */
-public class EnvironmentXmlNodeWriter_writeTimestamp_Test extends EnvironmentXmlNodeWriter_TestCase {
+class EnvironmentXmlNodeWriter_writeTimestamp_Test extends EnvironmentXmlNodeWriter_TestCase {
 
   private Date date;
   private String formatted;
@@ -43,7 +43,7 @@ public class EnvironmentXmlNodeWriter_writeTimestamp_Test extends EnvironmentXml
   }
 
   @Test
-  public void shouldWriteFormattedCurrentDateAsAttribute() {
+  void shouldWriteFormattedCurrentDateAsAttribute() {
     new EasyMockTemplate(timeStampFormatter, hostNameReader, targetNode) {
       @Override
       protected void expectations() {

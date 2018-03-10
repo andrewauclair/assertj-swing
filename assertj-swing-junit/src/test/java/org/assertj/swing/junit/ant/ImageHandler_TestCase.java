@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.junit.ant;
 
-import static org.easymock.classextension.EasyMock.createMock;
+import org.assertj.swing.image.ScreenshotTaker;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import org.assertj.swing.image.ScreenshotTaker;
-import org.junit.BeforeClass;
+import static org.easymock.classextension.EasyMock.createMock;
 
 /**
  * Base test case for <code>{@link ImageHandler}</code>.
@@ -29,7 +29,7 @@ public abstract class ImageHandler_TestCase {
 
   static ScreenshotTaker screenshotTaker;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     screenshotTaker = new ScreenshotTaker();
   }

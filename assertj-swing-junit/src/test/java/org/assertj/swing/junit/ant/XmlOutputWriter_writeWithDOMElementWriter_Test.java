@@ -23,7 +23,7 @@ import java.io.Writer;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.util.DOMElementWriter;
 import org.assertj.swing.junit.xml.XmlNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
 /**
@@ -33,10 +33,10 @@ import org.w3c.dom.Element;
  * 
  * @author Alex Ruiz
  */
-public class XmlOutputWriter_writeWithDOMElementWriter_Test extends XmlOutputWriter_TestCase {
+class XmlOutputWriter_writeWithDOMElementWriter_Test extends XmlOutputWriter_TestCase {
 
   @Test
-  public void should_Throw_BuildException_If_Something_Goes_Wrong() {
+  void should_Throw_BuildException_If_Something_Goes_Wrong() {
     XmlNode xmlNode = createMock(XmlNode.class);
     MyDOMElementWriter xmlWriter = new MyDOMElementWriter();
     try {

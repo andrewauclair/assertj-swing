@@ -19,17 +19,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.junit.xml.XmlDocument;
 import org.assertj.swing.junit.xml.XmlNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link TestXmlNodeWriter#writeError(XmlNode, Throwable)}</code>.
  * 
  * @author Alex Ruiz
  */
-public class TestXmlNodeWriter_writeTestExecutionTime_Test extends TestXmlNodeWriter_TestCase {
+class TestXmlNodeWriter_writeTestExecutionTime_Test extends TestXmlNodeWriter_TestCase {
 
   @Test
-  public void should_Add_Test_Execution_Time_As_Attribute() {
+  void should_Add_Test_Execution_Time_As_Attribute() {
     XmlNode root = new XmlDocument().newRoot("root");
     assertThat(writer.writeTestExecutionTime(root, currentTimeMillis() - 3000)).isSameAs(writer);
     double time = parseDouble(root.valueOfAttribute(ATTR_TIME));

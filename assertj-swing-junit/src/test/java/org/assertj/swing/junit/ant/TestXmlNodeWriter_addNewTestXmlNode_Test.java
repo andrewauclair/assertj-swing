@@ -23,7 +23,7 @@ import static org.easymock.EasyMock.expect;
 import org.assertj.swing.junit.xml.XmlAttributes;
 import org.assertj.swing.junit.xml.XmlNode;
 import org.fest.mocks.EasyMockTemplate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for
@@ -31,10 +31,10 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class TestXmlNodeWriter_addNewTestXmlNode_Test extends TestXmlNodeWriter_TestCase {
+class TestXmlNodeWriter_addNewTestXmlNode_Test extends TestXmlNodeWriter_TestCase {
 
   @Test
-  public void should_Add_Test_Node_As_Child() {
+  void should_Add_Test_Node_As_Child() {
     final TestStub test = new TestStub("hello");
     final XmlNode newNode = mockXmlNode();
     new EasyMockTemplate(targetNode) {
@@ -53,7 +53,7 @@ public class TestXmlNodeWriter_addNewTestXmlNode_Test extends TestXmlNodeWriter_
   }
 
   @Test
-  public void should_Add_Test_Node_As_Child_And_Set_Test_Name_To_Unknown_If_Test_Name_Is_Null() {
+  void should_Add_Test_Node_As_Child_And_Set_Test_Name_To_Unknown_If_Test_Name_Is_Null() {
     final TestStub test = new TestStub(null);
     final XmlNode newNode = mockXmlNode();
     new EasyMockTemplate(targetNode) {

@@ -27,7 +27,7 @@ import junit.framework.AssertionFailedError;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
 import org.assertj.core.api.AssertDelegateTarget;
 import org.assertj.swing.junit.xml.XmlNode;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for <code>{@link XmlJUnitResultFormatter}</code>.
@@ -43,7 +43,7 @@ public abstract class XmlJUnitResultFormatter_TestCase {
   BasicXmlJUnitResultFormatter formatter;
   TestCollection tests;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     formatter = new BasicXmlJUnitResultFormatter();
     tests = formatter.tests();

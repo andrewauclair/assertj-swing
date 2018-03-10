@@ -20,14 +20,14 @@ import java.io.ByteArrayOutputStream;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
 import org.apache.tools.ant.util.DOMElementWriter;
 import org.assertj.swing.junit.xml.XmlNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link XmlJUnitResultFormatter#endTestSuite(JUnitTest)}</code>.
  * 
  * @author Alex Ruiz
  */
-public class XmlJUnitResultFormatter_endTestSuite_Test extends XmlJUnitResultFormatter_TestCase {
+class XmlJUnitResultFormatter_endTestSuite_Test extends XmlJUnitResultFormatter_TestCase {
 
   private JUnitTest suite;
 
@@ -37,7 +37,7 @@ public class XmlJUnitResultFormatter_endTestSuite_Test extends XmlJUnitResultFor
   }
 
   @Test
-  public void should_Write_Suite_StatisticsAndWriteXmlToOutputStream() {
+  void should_Write_Suite_StatisticsAndWriteXmlToOutputStream() {
     formatter.endTestSuite(suite);
     assertThatStatisticsWereAddedToXml();
     XmlNode root = root();
@@ -46,13 +46,13 @@ public class XmlJUnitResultFormatter_endTestSuite_Test extends XmlJUnitResultFor
   }
 
   @Test
-  public void should_Write_XML_To_OutputStream() {
+  void should_Write_XML_To_OutputStream() {
     formatter.endTestSuite(suite);
     assertThat(textIn(output)).isEqualTo(textOf(root()));
   }
 
   @Test
-  public void should_Not_Throw_Error_If_Output_Is_Null() {
+  void should_Not_Throw_Error_If_Output_Is_Null() {
     formatter.setOutput(null);
     formatter.endTestSuite(suite);
     assertThatThereAreNoPropertiesIn(root());
