@@ -23,7 +23,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class GenericTypeMatcher_constructor_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Supported_Type_Is_Null() {
     new GenericTypeMatcher<JButton>(null) {
       @Override

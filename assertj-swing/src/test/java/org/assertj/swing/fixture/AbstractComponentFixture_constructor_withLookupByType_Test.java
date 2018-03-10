@@ -44,17 +44,17 @@ public class AbstractComponentFixture_constructor_withLookupByType_Test {
     type = Frame.class;
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_SelfType_Is_Null() {
     new ComponentFixture(null, robot, type);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Robot_Is_Null() {
     new ComponentFixture(ComponentFixture.class, null, type);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Class_Is_Null() {
     new ComponentFixture(ComponentFixture.class, robot, null);
   }

@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class JProgressBarDriver_waitUntilIsDeterminate_withTimeout_Test extends JProgressBarDriver_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Timeout_Is_Null() {
     driver.waitUntilIsDeterminate(progressBar, null);
   }

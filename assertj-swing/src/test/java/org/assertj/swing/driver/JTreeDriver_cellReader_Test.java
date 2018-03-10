@@ -33,7 +33,7 @@ public class JTreeDriver_cellReader_Test {
     driver = new JTreeDriver(singletonRobotMock());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_CellReader_Is_Null() {
     driver.replaceCellReader(null);
   }

@@ -19,6 +19,7 @@ import static org.assertj.swing.test.ExpectedException.none;
 import javax.swing.JTable;
 
 import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.driver.BasicJTableCellReader;
 import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Rule;
@@ -44,7 +45,7 @@ public class TableCellInSelectedRow_findCell_Test extends TableCellFinder_TestCa
   @Test
   public void should_Find_Cell_In_Selected_Row() {
     selectRow(1);
-    TableCell cell = finder.findCell(table, null);
+    TableCell cell = finder.findCell(table, new BasicJTableCellReader());
     assertThat(cell.row).isEqualTo(1);
     assertThat(cell.column).isEqualTo(2);
   }
@@ -63,6 +64,6 @@ public class TableCellInSelectedRow_findCell_Test extends TableCellFinder_TestCa
   @Test
   public void should_Throw_Error_If_JTable_Does_Not_Have_Selection() {
     thrown.expect(ActionFailedException.class, "The given JTable does not have any selection");
-    finder.findCell(table, null);
+    finder.findCell(table, new BasicJTableCellReader());
   }
 }

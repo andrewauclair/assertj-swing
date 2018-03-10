@@ -19,6 +19,7 @@ import static org.assertj.swing.data.TableCellByColumnId.row;
 
 import java.util.Collection;
 
+import org.assertj.swing.driver.BasicJTableCellReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -47,7 +48,7 @@ public class TableCellByColumnId_findCell_Test extends TableCellFinder_TestCase 
   @Test
   public void should_Find_Cell_By_Column_Id() {
     TableCellByColumnId finder = row(0).columnId(columnId);
-    TableCell cell = finder.findCell(table, null);
+    TableCell cell = finder.findCell(table, new BasicJTableCellReader());
     assertThat(cell.row).isEqualTo(0);
     assertThat(cell.column).isEqualTo(parseInt(columnId));
   }

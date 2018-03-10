@@ -38,7 +38,7 @@ public class IntrospectionComponentFormatter_format_withInvalidInput_Test extend
     formatter.format(comboBox().createNew());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Component_Is_Null() {
     formatter.format(null);
   }

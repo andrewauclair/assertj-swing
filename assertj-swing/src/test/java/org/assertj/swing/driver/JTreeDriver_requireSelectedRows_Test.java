@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class JTreeDriver_requireSelectedRows_Test extends JTreeDriver_selectCell_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
     driver.requireSelection(tree, (int[]) null);
   }

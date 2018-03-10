@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Christian Rösch
  */
 public class JListDriver_unselectItemsByIndex_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
     int[] indices = null;
     driver.unselectItems(list, indices);

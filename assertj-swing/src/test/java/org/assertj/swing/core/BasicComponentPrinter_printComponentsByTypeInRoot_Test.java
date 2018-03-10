@@ -28,12 +28,12 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class BasicComponentPrinter_printComponentsByTypeInRoot_Test extends BasicComponentPrinter_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_OutputStream_Is_Null() {
     printer.printComponents(null, JButton.class, windowOne);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Type_To_Match_Is_Null() {
     Class<? extends Component> type = null;
     printer.printComponents(out, type, windowOne);

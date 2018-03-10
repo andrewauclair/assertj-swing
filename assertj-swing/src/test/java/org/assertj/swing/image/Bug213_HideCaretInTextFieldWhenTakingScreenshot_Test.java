@@ -12,11 +12,15 @@
  */
 package org.assertj.swing.image;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -50,8 +54,41 @@ public class Bug213_HideCaretInTextFieldWhenTakingScreenshot_Test extends Sequen
     BufferedImage currentImage = screenshotTaker.takeScreenshotOf(window);
     for (int i = 0; i < 100; i++) {
       BufferedImage newImage = screenshotTaker.takeScreenshotOf(window);
-      assertThat(newImage).isEqualTo(currentImage);
+//      assertThat(newImage).isEqualTo(currentImage);
+      assertTrue(bufferedImagesEqual(currentImage, newImage));
     }
+  }
+
+  boolean bufferedImagesEqual(BufferedImage img1, BufferedImage img2) {
+    File out1 = new File("save1.png");
+    File out2 = new File("save2.png");
+    int height = img1.getHeight();
+    int width = img1.getWidth();
+    if (img1.getWidth() == img2.getWidth() && img1.getHeight() == img2.getHeight()) {
+      for (int x = 0; x < img1.getWidth(); x++) {
+        for (int y = 0; y < img1.getHeight(); y++) {
+          int rgb1 = img1.getRGB(x, y);
+          int rgb2 = img2.getRGB(x, y);
+          if (img1.getRGB(x, y) != img2.getRGB(x, y))
+
+          {
+            try {
+              ImageIO.write(img1, "png", out1);
+            ImageIO.write(img2, "png", out2);
+
+            System.out.println("Wrote to : " + out1.getAbsolutePath());
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+
+            return false;
+        }
+      }
+    } else {
+      return false;
+    }
+    return true;
   }
 
   private static class MyWindow extends TestWindow {

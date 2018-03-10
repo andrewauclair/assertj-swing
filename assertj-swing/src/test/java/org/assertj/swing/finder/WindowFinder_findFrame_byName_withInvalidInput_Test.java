@@ -37,7 +37,7 @@ public class WindowFinder_findFrame_byName_withInvalidInput_Test {
     WindowFinder.findFrame("frame").withTimeout(-20);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Time_Unit_Is_Null() {
     WindowFinder.findFrame("frame").withTimeout(10, null);
   }

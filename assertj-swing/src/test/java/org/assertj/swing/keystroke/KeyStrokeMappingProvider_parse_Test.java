@@ -57,7 +57,7 @@ public class KeyStrokeMappingProvider_parse_Test {
     parser = new KeyStrokeMappingsParser();
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_File_Name_Is_Null() {
     String file = null;
     parser.parse(file);
@@ -83,7 +83,7 @@ public class KeyStrokeMappingProvider_parse_Test {
     parser.parse("abc.txt");
   }
 
-  @Test(expected = AssertionError.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_File_Is_Null() {
     File file = null;
     parser.parse(file);

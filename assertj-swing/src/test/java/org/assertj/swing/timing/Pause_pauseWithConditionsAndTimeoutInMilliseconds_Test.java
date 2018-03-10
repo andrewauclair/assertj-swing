@@ -35,7 +35,7 @@ public class Pause_pauseWithConditionsAndTimeoutInMilliseconds_Test {
     Pause.pause(new Condition[] { new SatisfiedCondition(10), new NeverSatisfiedCondition() }, 1000);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Condition_Array_Is_Null() {
     Pause.pause((Condition[]) null, 1000);
   }

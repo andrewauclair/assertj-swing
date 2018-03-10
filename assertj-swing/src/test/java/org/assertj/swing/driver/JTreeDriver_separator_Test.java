@@ -31,7 +31,7 @@ public class JTreeDriver_separator_Test {
     driver = new JTreeDriver(singletonRobotMock());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void shouldThrowErrorIfSeparatorIsNull() {
     driver.replaceSeparator(null);
   }

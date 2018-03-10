@@ -40,17 +40,17 @@ public class AbstractComponentFixture_constructor_withTargetComponent_Test {
     frame = mock(Frame.class);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_SelfType_Is_Null() {
     new ComponentFixture(null, robot, frame);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Robot_Is_Null() {
     new ComponentFixture(ComponentFixture.class, null, frame);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Tareget_Is_Null() {
     new ComponentFixture(ComponentFixture.class, robot, null);
   }

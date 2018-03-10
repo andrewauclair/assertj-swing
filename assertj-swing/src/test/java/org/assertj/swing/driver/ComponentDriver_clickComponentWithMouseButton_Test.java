@@ -55,7 +55,7 @@ public class ComponentDriver_clickComponentWithMouseButton_Test extends Componen
     recorder.wasClickedWith(mouseButton).clickedAt(centerOf(window.button)).timesClicked(1);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_MouseButton_Is_Null() {
     driver.click(window.button, (MouseButton) null);
   }

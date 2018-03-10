@@ -32,7 +32,7 @@ public class ScreenshotTaker_saveImage_withInvalidInput_Test {
     taker = new ScreenshotTaker();
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_File_Path_Is_Null() {
     taker.saveImage(NO_IMAGE, null);
   }

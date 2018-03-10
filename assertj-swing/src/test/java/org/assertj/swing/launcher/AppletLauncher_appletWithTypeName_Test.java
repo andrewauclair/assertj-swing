@@ -23,7 +23,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class AppletLauncher_appletWithTypeName_Test extends AppletLauncher_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Applet_Type_Name_Is_Null() {
     String type = null;
     AppletLauncher.applet(type);

@@ -36,7 +36,7 @@ public class Pause_pauseWithConditionsAndTimeoutInTimeUnit_Test {
     Pause.pause(new Condition[] { new SatisfiedCondition(10), new NeverSatisfiedCondition() }, timeout(1000));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Condition_Array_Is_Null() {
     Pause.pause((Condition) null, timeout(1000));
   }
@@ -80,7 +80,7 @@ public class Pause_pauseWithConditionsAndTimeoutInTimeUnit_Test {
     Pause.pause(new Condition[] { new NeverSatisfiedCondition(), null }, timeout(1000));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Timeout_Is_Null() {
     Pause.pause(new Condition[] { new NeverSatisfiedCondition() }, null);
   }

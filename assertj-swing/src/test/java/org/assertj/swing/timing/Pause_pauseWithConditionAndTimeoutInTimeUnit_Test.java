@@ -58,12 +58,12 @@ public class Pause_pauseWithConditionAndTimeoutInTimeUnit_Test {
     Pause.pause(new RuntimeExceptionCondition(new NumberFormatException("expected")), timeout(TIMEOUT));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Condition_Is_Null() {
     Pause.pause((Condition) null, timeout(TIMEOUT));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Timeout_Is_Null() {
     Pause.pause(new NeverSatisfiedCondition(), null);
   }

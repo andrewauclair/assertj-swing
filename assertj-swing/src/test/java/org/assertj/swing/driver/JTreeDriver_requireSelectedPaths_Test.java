@@ -48,7 +48,7 @@ public class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCel
     select(root_branch1, root_branch1_Branch1_1);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Expected_Array_Of_Paths_Is_Null() {
     driver.requireSelection(tree, (String[]) null);
   }

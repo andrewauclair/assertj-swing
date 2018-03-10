@@ -43,7 +43,7 @@ public class Pause_pauseWithConditions_Test {
     Pause.pause(new Condition[] { new NeverSatisfiedCondition(), new NeverSatisfiedCondition() });
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Condition_Array_Is_Null() {
     Pause.pause((Condition[]) null);
   }

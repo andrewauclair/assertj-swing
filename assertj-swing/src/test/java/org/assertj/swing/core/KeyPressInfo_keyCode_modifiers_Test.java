@@ -33,7 +33,7 @@ public class KeyPressInfo_keyCode_modifiers_Test {
     assertThat(keyPressInfo.modifiers()).containsOnly(SHIFT_MASK, CTRL_MASK);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Modifier_Array_Is_Null() {
     int[] modifiers = null;
     KeyPressInfo.keyCode(VK_C).modifiers(modifiers);

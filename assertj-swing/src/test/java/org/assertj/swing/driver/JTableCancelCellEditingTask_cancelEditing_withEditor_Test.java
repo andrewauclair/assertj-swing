@@ -14,6 +14,8 @@ package org.assertj.swing.driver;
 
 import org.junit.Test;
 
+import javax.swing.*;
+
 /**
  * Tests for {@link JTableCancelCellEditingTask#cancelEditing(javax.swing.table.TableCellEditor)}.
  * 
@@ -22,6 +24,6 @@ import org.junit.Test;
 public class JTableCancelCellEditingTask_cancelEditing_withEditor_Test {
   @Test
   public void should_Not_Throw_Error_If_Cell_Editor_Is_Null() {
-    JTableCancelCellEditingTask.cancelEditing(null);
+    JTableCancelCellEditingTask.cancelEditing(new DefaultCellEditor(new JTextField()));
   }
 }

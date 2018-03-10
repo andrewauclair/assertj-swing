@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class JListDriver_requireSelectedItemsAsText_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_Of_Values_Is_Null() {
     String[] values = null;
     driver.requireSelectedItems(list, values);

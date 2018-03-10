@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_Of_Keys_Is_Null() {
     int[] keyCodes = null;
     driver.pressAndReleaseKeys(window.button, keyCodes);

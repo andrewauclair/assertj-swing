@@ -25,7 +25,7 @@ public class Colors_colorFromHexString_withInvalidInput_Test {
     Colors.colorFromHexString("zz");
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Hex_String_Is_Null() {
     Colors.colorFromHexString(null);
   }

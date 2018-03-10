@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class NameMatcher_constructorWithNameAndType_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Type_Is_Null() {
     new NameMatcher("label", null);
   }

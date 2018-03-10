@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.query.ComponentParentQuery.parentOf;
 
-import java.awt.Window;
+import java.awt.*;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -56,7 +56,7 @@ public class WindowAncestorFinder_windowAncestorOf_Test extends EDTSafeTestCase 
 
   @Test
   public void should_Return_Null_If_Component_Is_Null() {
-    Window ancestor = WindowAncestorFinder.windowAncestorOf(null);
+    Window ancestor = WindowAncestorFinder.windowAncestorOf(new Component(){});
     assertThat(ancestor).isSameAs(null);
   }
 

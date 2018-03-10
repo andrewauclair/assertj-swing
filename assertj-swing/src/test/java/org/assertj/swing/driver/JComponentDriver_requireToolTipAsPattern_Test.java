@@ -27,7 +27,7 @@ public class JComponentDriver_requireToolTipAsPattern_Test extends JComponentDri
     driver.requireToolTip(button, Pattern.compile("A Tool.*"));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Pattern_Is_Null() {
     Pattern p = null;
     driver.requireToolTip(button, p);

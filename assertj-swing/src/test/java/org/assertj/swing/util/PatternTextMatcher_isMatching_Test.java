@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class PatternTextMatcher_isMatching_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Any_Pattern_In_Array_Is_Null() {
     Pattern[] patterns = { null, Pattern.compile("hello"), null };
     PatternTextMatcher matcher = new PatternTextMatcher(patterns);

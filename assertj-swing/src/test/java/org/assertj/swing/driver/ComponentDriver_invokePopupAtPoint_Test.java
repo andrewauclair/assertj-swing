@@ -53,7 +53,7 @@ public class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_inv
     recorder.wasRightClicked().timesClicked(1).clickedAt(p);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Point_Is_Null() {
     driver.invokePopupMenu(window.textField, null);
   }

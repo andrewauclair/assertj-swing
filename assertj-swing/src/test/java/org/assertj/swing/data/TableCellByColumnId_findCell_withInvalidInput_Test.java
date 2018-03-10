@@ -14,6 +14,7 @@ package org.assertj.swing.data;
 
 import static org.assertj.swing.data.TableCellByColumnId.row;
 
+import org.assertj.swing.driver.BasicJTableCellReader;
 import org.assertj.swing.exception.ActionFailedException;
 import org.junit.Test;
 
@@ -27,6 +28,6 @@ public class TableCellByColumnId_findCell_withInvalidInput_Test extends TableCel
   @Test(expected = ActionFailedException.class)
   public void should_Throw_Error_If_A_Matching_Column_Was_Not_Found() {
     TableCellByColumnId finder = row(0).columnId("Hello");
-    finder.findCell(table, null);
+    finder.findCell(table, new BasicJTableCellReader());
   }
 }

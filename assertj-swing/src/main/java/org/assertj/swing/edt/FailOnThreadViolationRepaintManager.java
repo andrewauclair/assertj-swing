@@ -52,6 +52,7 @@ public class FailOnThreadViolationRepaintManager extends CheckThreadViolationRep
   @Nonnull public static FailOnThreadViolationRepaintManager install() {
     Object m = currentRepaintManager();
     if (m instanceof FailOnThreadViolationRepaintManager) {
+      previousRepaintManager = (FailOnThreadViolationRepaintManager)m;
       return (FailOnThreadViolationRepaintManager) m;
     }
     return installNew();

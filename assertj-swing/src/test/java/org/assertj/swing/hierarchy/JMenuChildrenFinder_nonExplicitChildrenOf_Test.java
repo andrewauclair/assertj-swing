@@ -53,7 +53,7 @@ public class JMenuChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestC
 
   @Test
   public void should_Return_Empty_Collection_If_Component_Is_Null() {
-    assertThat(finder.nonExplicitChildrenOf(null)).isEmpty();
+    assertThat(finder.nonExplicitChildrenOf(new Container())).isEmpty();
   }
 
   @Test

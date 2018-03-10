@@ -31,7 +31,7 @@ public class JTableDriver_cellReader_Test {
     driver = new JTableDriver(singletonRobotMock());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_CellReader_Is_Null() {
     driver.replaceCellReader(null);
   }

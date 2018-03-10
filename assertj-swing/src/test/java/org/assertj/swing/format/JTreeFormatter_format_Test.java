@@ -64,7 +64,7 @@ public class JTreeFormatter_format_Test extends EDTSafeTestCase {
 
   @Test
   public void should_Format_JTree_Without_TreeSelectionModel() {
-    setSelectionModel(tree, null);
+    setSelectionModel(tree, new DefaultTreeSelectionModel());
     String formatted = formatter.format(tree);
     assertThat(formatted).contains("javax.swing.JTree").contains("name='tree'").contains("selectionCount=0")
                          .contains("selectionPaths=[]").contains("selectionMode=DISCONTIGUOUS_TREE_SELECTION")

@@ -37,7 +37,7 @@ public class Timeout_timeout_long_TimeUnit_Test {
     assertThat(timeout.duration()).isEqualTo(3);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void shouldThrowExceptionIfTimeUnitIsNull() {
     Timeout.timeout(0, null);
   }

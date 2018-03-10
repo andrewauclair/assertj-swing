@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class WindowFinder_findDialog_byType_withInvalidInput_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Type_Is_Null() {
     Class<DialogToLaunch> type = null;
     WindowFinder.findDialog(type);
@@ -35,7 +35,7 @@ public class WindowFinder_findDialog_byType_withInvalidInput_Test {
     WindowFinder.findDialog(JDialog.class).withTimeout(-20);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Time_Unit_Is_Null() {
     WindowFinder.findDialog(JDialog.class).withTimeout(10, null);
   }

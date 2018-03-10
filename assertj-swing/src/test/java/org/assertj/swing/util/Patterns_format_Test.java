@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class Patterns_format_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Pattern_Array_Is_Null() {
     Pattern[] patterns = null;
     Patterns.format(patterns);

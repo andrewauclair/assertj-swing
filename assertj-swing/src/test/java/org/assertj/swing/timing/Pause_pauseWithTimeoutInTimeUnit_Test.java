@@ -35,7 +35,7 @@ public class Pause_pauseWithTimeoutInTimeUnit_Test {
     assertThat(watch.ellapsedTime() >= delay).isTrue();
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Unit_Is_Null() {
     Pause.pause(2, null);
   }

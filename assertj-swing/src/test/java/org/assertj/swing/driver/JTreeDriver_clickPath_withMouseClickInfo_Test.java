@@ -34,7 +34,7 @@ public class JTreeDriver_clickPath_withMouseClickInfo_Test extends JTreeDriver_c
 
   private static MouseClickInfo mouseClickInfo = rightButton().times(2);
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_MouseClickInfo_Is_Null() {
     MouseClickInfo info = null;
     driver.clickPath(tree, "root", info);

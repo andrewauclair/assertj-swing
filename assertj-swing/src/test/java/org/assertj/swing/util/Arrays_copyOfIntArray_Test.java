@@ -22,7 +22,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class Arrays_copyOfIntArray_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_To_Copy_Is_Null() {
     int[] original = null;
     Arrays.copyOf(original);

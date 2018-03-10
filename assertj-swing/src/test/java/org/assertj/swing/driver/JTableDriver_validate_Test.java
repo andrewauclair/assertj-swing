@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class JTableDriver_validate_Test extends JTableDriver_withMocks_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void shouldThrowErrorIfCellToValidateIsNull() {
     driver.checkCellIndicesInBounds(table, null);
   }

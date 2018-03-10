@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class BasicJListCellReader_constructor_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_CellRendererReader_Is_Null() {
     new BasicJComboBoxCellReader(null);
   }

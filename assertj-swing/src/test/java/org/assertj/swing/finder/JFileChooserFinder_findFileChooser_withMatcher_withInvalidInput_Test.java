@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class JFileChooserFinder_findFileChooser_withMatcher_withInvalidInput_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JFileChooser> matcher = null;
     JFileChooserFinder.findFileChooser(matcher);
@@ -36,7 +36,7 @@ public class JFileChooserFinder_findFileChooser_withMatcher_withInvalidInput_Tes
     JFileChooserFinder.findFileChooser(neverMatches(JFileChooser.class)).withTimeout(-20);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Time_Unit_Is_Null() {
     JFileChooserFinder.findFileChooser(neverMatches(JFileChooser.class)).withTimeout(10, null);
   }

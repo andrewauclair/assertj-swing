@@ -31,7 +31,7 @@ public class JTreeDriver_clickPath_withMouseButton_Test extends JTreeDriver_clic
   @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_MouseButton_Is_Null() {
     MouseButton button = null;
     driver.clickPath(tree, "root", button);

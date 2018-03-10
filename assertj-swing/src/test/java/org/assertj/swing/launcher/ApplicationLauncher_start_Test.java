@@ -73,7 +73,7 @@ public class ApplicationLauncher_start_Test extends RobotBasedTestCase {
     assertThat(arguments).containsOnly("arg1", "arg2");
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Argument_Array_Is_Null() {
     String[] args = null;
     ApplicationLauncher.application(JavaApp.class).withArgs(args).start();

@@ -74,7 +74,7 @@ public class Pause_pauseWithConditionAndTimeoutInMilliseconds_Test {
     Pause.pause(new RuntimeExceptionCondition(new NumberFormatException("expected")), 1000);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Condition_Is_Null() {
     Pause.pause((Condition) null, 1000);
   }

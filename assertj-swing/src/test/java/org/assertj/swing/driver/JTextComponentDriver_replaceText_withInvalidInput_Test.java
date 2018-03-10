@@ -36,7 +36,7 @@ public class JTextComponentDriver_replaceText_withInvalidInput_Test {
     textField = mock(JTextComponent.class);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Replacement_Text_Is_Null() {
     driver.replaceText(textField, null);
   }

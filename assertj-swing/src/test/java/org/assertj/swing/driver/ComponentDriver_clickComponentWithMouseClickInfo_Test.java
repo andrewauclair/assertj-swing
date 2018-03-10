@@ -31,7 +31,7 @@ public class ComponentDriver_clickComponentWithMouseClickInfo_Test extends Compo
   @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_MouseClickInfo_Is_Null() {
     driver.click(window.button, (MouseClickInfo) null);
   }

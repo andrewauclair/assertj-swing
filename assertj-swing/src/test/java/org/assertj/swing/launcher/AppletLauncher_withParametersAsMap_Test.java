@@ -26,7 +26,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class AppletLauncher_withParametersAsMap_Test extends AppletLauncher_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Parameter_Map_Is_Null() {
     Map<String, String> parameters = null;
     AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters);

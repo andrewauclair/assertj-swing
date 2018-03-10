@@ -40,7 +40,7 @@ public class EmergencyAbortListener_keyCombination_Test {
     listener = new EmergencyAbortListener(singletonToolkitMock());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_KeyPressInfo_Is_Null() {
     listener.keyCombination(null);
   }

@@ -39,7 +39,7 @@ public class JProgressBarDriver_waitUntilValueIs_withTimeout_Test extends JProgr
     driver.waitUntilValueIs(progressBar, 200, timeout(2, SECONDS));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Timeout_Is_Null() {
     driver.waitUntilValueIs(progressBar, 10, null);
   }

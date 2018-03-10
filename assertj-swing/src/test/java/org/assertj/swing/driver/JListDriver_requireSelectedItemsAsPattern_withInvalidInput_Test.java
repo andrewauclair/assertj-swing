@@ -23,7 +23,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class JListDriver_requireSelectedItemsAsPattern_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_Of_Patterns_Is_Null() {
     Pattern[] patterns = null;
     driver.requireSelectedItems(list, patterns);

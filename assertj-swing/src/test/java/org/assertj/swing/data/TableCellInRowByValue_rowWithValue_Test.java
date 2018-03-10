@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class TableCellInRowByValue_rowWithValue_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Array_Of_Values_Is_Null() {
     String[] values = null;
     TableCellInRowByValue.rowWithValue(values);

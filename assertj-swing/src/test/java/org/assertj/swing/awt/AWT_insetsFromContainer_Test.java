@@ -49,7 +49,12 @@ public class AWT_insetsFromContainer_Test {
 
   @Test
   public void should_Return_Empty_Insets_If_Exception_Thrown() {
-    Insets insets = insetsFrom(null);
+    Insets insets = insetsFrom(new Container() {
+      @Override
+      public Insets getInsets() {
+        throw new NullPointerException();
+      }
+    });
     assertThat(insets).isEqualTo(EMPTY_INSETS);
   }
 
