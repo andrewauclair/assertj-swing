@@ -23,28 +23,28 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWT#isHeavyWeightPopup(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-public class AWT_isHeavyWeightPopup_Test extends EDTSafeTestCase {
+class AWT_isHeavyWeightPopup_Test extends EDTSafeTestCase {
   @Test
-  public void should_Return_False_If_Component_Is_Window() {
+  void should_Return_False_If_Component_Is_Window() {
     Window w = singletonWindowMock();
     assertThat(AWT.isHeavyWeightPopup(w)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Dialog() {
+  void should_Return_False_If_Component_Is_Dialog() {
     JDialog d = dialog().createNew();
     assertThat(AWT.isHeavyWeightPopup(d)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Frame() {
+  void should_Return_False_If_Component_Is_Frame() {
     JFrame f = frame().createNew();
     assertThat(AWT.isHeavyWeightPopup(f)).isFalse();
   }

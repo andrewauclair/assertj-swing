@@ -19,27 +19,27 @@ import static org.assertj.swing.test.builder.JTextFields.textField;
 import javax.swing.JDialog;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWT#isSharedInvisibleFrame(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-public class AWT_isSharedInvisibleFrame_Test extends EDTSafeTestCase {
+class AWT_isSharedInvisibleFrame_Test extends EDTSafeTestCase {
   @Test
-  public void should_Return_True_If_Component_Is_Shared_Invisible_Frame() {
+  void should_Return_True_If_Component_Is_Shared_Invisible_Frame() {
     JDialog dialog = dialog().createNew();
     assertThat(AWT.isSharedInvisibleFrame(dialog.getOwner())).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Not_Shared_Invisible_Frame() {
+  void should_Return_False_If_Component_Is_Not_Shared_Invisible_Frame() {
     assertThat(AWT.isSharedInvisibleFrame(textField().createNew())).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Null() {
+  void should_Return_False_If_Component_Is_Null() {
     assertThat(AWT.isSharedInvisibleFrame(null)).isFalse();
   }
 }

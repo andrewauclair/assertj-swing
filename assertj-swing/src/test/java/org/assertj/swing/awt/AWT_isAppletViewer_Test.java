@@ -12,24 +12,24 @@
  */
 package org.assertj.swing.awt;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.builder.JTextFields.textField;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link AWT#isAppletViewer(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-public class AWT_isAppletViewer_Test {
+class AWT_isAppletViewer_Test {
   @Test
-  public void should_Return_False_If_Component_Is_Not_AppletViewer() {
+  void should_Return_False_If_Component_Is_Not_AppletViewer() {
     assertThat(AWT.isAppletViewer(textField().createNew())).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Null() {
+  void should_Return_False_If_Component_Is_Null() {
     assertThat(AWT.isAppletViewer(null)).isFalse();
   }
 }

@@ -24,18 +24,18 @@ import java.awt.Insets;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWT#insetsFrom(java.awt.Container)}.
  *
  * @author Alex Ruiz
  */
-public class AWT_insetsFromContainer_Test {
+class AWT_insetsFromContainer_Test {
   private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
 
   @Test
-  public void should_Return_Insets_From_Container() {
+  void should_Return_Insets_From_Container() {
     Robot robot = robotWithNewAwtHierarchy();
     TestWindow window = TestWindow.createNewWindow(getClass());
     try {
@@ -48,7 +48,7 @@ public class AWT_insetsFromContainer_Test {
   }
 
   @Test
-  public void should_Return_Empty_Insets_If_Exception_Thrown() {
+  void should_Return_Empty_Insets_If_Exception_Thrown() {
     Insets insets = insetsFrom(new Container() {
       @Override
       public Insets getInsets() {
@@ -59,7 +59,7 @@ public class AWT_insetsFromContainer_Test {
   }
 
   @Test
-  public void should_Return_Empty_Insets_If_Container_Insets_Is_Null() {
+  void should_Return_Empty_Insets_If_Container_Insets_Is_Null() {
     TestWindow window = WindowWithNullInsets.createNew();
     Insets insets = insetsFrom(window);
     assertThat(insets).isEqualTo(EMPTY_INSETS);
