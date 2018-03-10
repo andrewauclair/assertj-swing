@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.assertions.image;
 
-import static org.mockito.Mockito.verify;
-
-import java.awt.Dimension;
-
 import org.assertj.swing.assertions.ImageAssert;
 import org.assertj.swing.assertions.ImageAssertBaseTest;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+
+import java.awt.*;
+
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests for <code>{@link ImageAssert#hasSize(Dimension)}</code>.
@@ -29,7 +29,7 @@ public class ImageAssert_hasSize_Test extends ImageAssertBaseTest {
 
   private static Dimension size;
 
-  @BeforeClass
+  @BeforeAll
   public static void beforeOnce() {
     size = new Dimension(6, 8);
   }

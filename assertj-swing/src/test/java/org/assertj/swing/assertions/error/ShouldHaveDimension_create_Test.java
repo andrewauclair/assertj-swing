@@ -21,8 +21,8 @@ import java.awt.Dimension;
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.error.ErrorMessageFactory;
 import org.assertj.core.presentation.StandardRepresentation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link ShouldHaveDimension#create(Description)}</code>.
@@ -30,17 +30,17 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ShouldHaveDimension_create_Test {
+class ShouldHaveDimension_create_Test {
 
   private ErrorMessageFactory factory;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     factory = shouldHaveDimension(newArrayList("Luke", "Yoda"), new Dimension(12, 20), new Dimension(42, 15));
   }
 
   @Test
-  public void should_Create_Error_Message() {
+  void should_Create_Error_Message() {
     String message = factory.create(new TextDescription("Test"), new StandardRepresentation());
     assertEquals("[Test] expected size:<42x15> but was:<12x20> in:<[\"Luke\", \"Yoda\"]>", message);
   }

@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.assertions.image;
 
-import static org.assertj.core.data.Offset.offset;
-import static org.assertj.swing.test.awt.AwtTestData.fivePixelYellowImage;
-import static org.mockito.Mockito.verify;
-
-import java.awt.image.BufferedImage;
-
 import org.assertj.core.data.Offset;
 import org.assertj.swing.assertions.ImageAssert;
 import org.assertj.swing.assertions.ImageAssertBaseTest;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+
+import java.awt.image.BufferedImage;
+
+import static org.assertj.core.data.Offset.offset;
+import static org.assertj.swing.test.awt.AwtTestData.fivePixelYellowImage;
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests for <code>{@link ImageAssert#isEqualTo(BufferedImage, Offset)}</code>.
@@ -32,7 +32,7 @@ public class ImageAssert_isEqualTo_WithOffset_Test extends ImageAssertBaseTest {
 
   private static Offset<Integer> offset;
 
-  @BeforeClass
+  @BeforeAll
   public static void beforeOnce() {
     offset = offset(6);
   }

@@ -19,65 +19,65 @@ import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsSymmetric
 import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsTransitive;
 import static org.fest.test.EqualsHashCodeContractAssert.assertMaintainsEqualsAndHashCodeContract;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link RgbColor#equals(Object)}</code> and <code>{@link RgbColor#hashCode()}</code>.
  * 
  * @author Alex Ruiz
  */
-public class RgbColor_equals_hashCode_Test {
+class RgbColor_equals_hashCode_Test {
 
   private static RgbColor color;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     color = color(0xFFFFFF);
   }
 
   @Test
-  public void should_Have_Reflexive_Equals() {
+  void should_Have_Reflexive_Equals() {
     assertEqualsIsReflexive(color);
   }
 
   @Test
-  public void should_Have_Symmetric_Equals() {
+  void should_Have_Symmetric_Equals() {
     assertEqualsIsSymmetric(color, color(0xFFFFFF));
   }
 
   @Test
-  public void should_Have_Transitive_Equals() {
+  void should_Have_Transitive_Equals() {
     assertEqualsIsTransitive(color, color(0xFFFFFF), color(0xFFFFFF));
   }
 
   @Test
-  public void should_Maintain_Equals_And_HashCode_Contract() {
+  void should_Maintain_Equals_And_HashCode_Contract() {
     assertMaintainsEqualsAndHashCodeContract(color, color(0xFFFFFF));
   }
 
   @Test
-  public void should_Not_Be_Equal_To_Object_Of_Different_Type() {
+  void should_Not_Be_Equal_To_Object_Of_Different_Type() {
     assertFalse(color.equals("WHITE"));
   }
 
   @Test
-  public void should_Not_Be_Equal_To_Null() {
+  void should_Not_Be_Equal_To_Null() {
     assertFalse(color.equals(null));
   }
 
   @Test
-  public void should_Not_Be_Equal_To_RgbColor_With_Different_Red_Component() {
+  void should_Not_Be_Equal_To_RgbColor_With_Different_Red_Component() {
     assertFalse(color.equals(color(0x00FFFF)));
   }
 
   @Test
-  public void should_Not_Be_Equal_To_RgbColor_With_Different_Green_Component() {
+  void should_Not_Be_Equal_To_RgbColor_With_Different_Green_Component() {
     assertFalse(color.equals(color(0xFF00FF)));
   }
 
   @Test
-  public void should_Not_Be_Equal_To_RgbColor_With_Different_Blue_Component() {
+  void should_Not_Be_Equal_To_RgbColor_With_Different_Blue_Component() {
     assertFalse(color.equals(color(0xFFFF00)));
   }
 }

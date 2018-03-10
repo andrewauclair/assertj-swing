@@ -15,25 +15,25 @@ package org.assertj.swing.assertions.data;
 import static junit.framework.Assert.assertEquals;
 import static org.assertj.swing.assertions.data.RgbColor.color;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link RgbColor#toString()}</code>.
  * 
  * @author Alex Ruiz
  */
-public class RgbColor_toString_Test {
+class RgbColor_toString_Test {
 
   private static RgbColor color;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     color = color(0xFF87AB);
   }
 
   @Test
-  public void should_Implement_ToString() {
+  void should_Implement_ToString() {
     assertEquals("color[r=255, g=135, b=171]", color.toString());
   }
 }

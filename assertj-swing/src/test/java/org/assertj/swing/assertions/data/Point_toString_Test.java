@@ -15,25 +15,25 @@ package org.assertj.swing.assertions.data;
 import static junit.framework.Assert.assertEquals;
 import static org.assertj.swing.assertions.data.Point.atPoint;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Index#toString()}</code>.
  * 
  * @author Yvonne Wang
  */
-public class Point_toString_Test {
+class Point_toString_Test {
 
   private static Point point;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     point = atPoint(6, 8);
   }
 
   @Test
-  public void should_Implement_ToString() {
+  void should_Implement_ToString() {
     assertEquals("[6, 8]", point.toString());
   }
 }

@@ -21,25 +21,25 @@ import static org.assertj.swing.assertions.error.ShouldBeEqualColors.shouldBeEqu
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.error.ErrorMessageFactory;
 import org.assertj.core.presentation.StandardRepresentation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link ShouldBeEqualColors#create(Description)}</code>.
  * 
  * @author Yvonne Wang
  */
-public class ShouldBeEqualColors_create_Test {
+class ShouldBeEqualColors_create_Test {
 
   private ErrorMessageFactory factory;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     factory = shouldBeEqualColors(color(0), color(8), atPoint(6, 10), offset(12));
   }
 
   @Test
-  public void should_Create_Error_Message() {
+  void should_Create_Error_Message() {
     String message = factory.create(new TextDescription("Test"), new StandardRepresentation());
     assertEquals(
         "[Test] expected:<color[r=0, g=0, b=0]> but was:<color[r=0, g=0, b=8]> at:<[6, 10]> within offset:<12>",
