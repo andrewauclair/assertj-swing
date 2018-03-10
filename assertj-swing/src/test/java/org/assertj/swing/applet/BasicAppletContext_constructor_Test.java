@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.applet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link BasicAppletContext#BasicAppletContext(StatusDisplay)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletContext_constructor_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_StatusDisplay_Is_Null() {
-    new BasicAppletContext(null);
+class BasicAppletContext_constructor_Test {
+  @Test
+  void should_Throw_Error_If_StatusDisplay_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicAppletContext(null));
   }
 }

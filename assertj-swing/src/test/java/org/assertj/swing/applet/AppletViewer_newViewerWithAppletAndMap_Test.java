@@ -14,23 +14,24 @@ package org.assertj.swing.applet;
 
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.awt.TestApplets.singletonAppletMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AppletViewer#newViewer(Applet, Map)}.
  *
  * @author Alex Ruiz
  */
-public class AppletViewer_newViewerWithAppletAndMap_Test extends EDTSafeTestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_ParameterMap_Is_Null() {
-    execute(() -> {
+class AppletViewer_newViewerWithAppletAndMap_Test extends EDTSafeTestCase {
+  @Test
+  void should_Throw_Error_If_ParameterMap_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> execute(() -> {
       Map<String, String> map = null;
       AppletViewer.newViewer(singletonAppletMock(), map);
-    });
+    }));
   }
 }

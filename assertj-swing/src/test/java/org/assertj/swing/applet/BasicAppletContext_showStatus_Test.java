@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.applet;
 
-import static org.mockito.Mockito.verify;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests for {@link BasicAppletContext#showStatus(String)}.
  * 
  * @author Alex Ruiz
  */
-public class BasicAppletContext_showStatus_Test extends BasicAppletContext_TestCase {
+class BasicAppletContext_showStatus_Test extends BasicAppletContext_TestCase {
   @Test
-  public void should_Show_Status() {
+  void should_Show_Status() {
     String status = "Hi";
     context.showStatus(status);
     verify(statusDisplay).showStatus(status);

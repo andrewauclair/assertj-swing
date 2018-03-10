@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.applet;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.applet.Applet;
 import java.util.Enumeration;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link BasicAppletContext#getApplets()}.
@@ -25,9 +25,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletContext_getApplets_Test extends BasicAppletContext_TestCase {
+class BasicAppletContext_getApplets_Test extends BasicAppletContext_TestCase {
   @Test
-  public void should_Always_Return_Empty_Enumeration() {
+  void should_Always_Return_Empty_Enumeration() {
     Enumeration<Applet> applets = context.getApplets();
     assertThat(applets.hasMoreElements()).isFalse();
     assertThat(applets.nextElement()).isNull();

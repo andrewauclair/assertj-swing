@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.applet;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link BasicAppletStub#getCodeBase()}.
@@ -22,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletStub_getCodeBase_Test extends BasicAppletStub_TestCase {
+class BasicAppletStub_getCodeBase_Test extends BasicAppletStub_TestCase {
   @Test
-  public void should_Return_NonNull_CodeBase() {
+  void should_Return_NonNull_CodeBase() {
     assertThat(stub.getCodeBase()).isNotNull();
   }
 }

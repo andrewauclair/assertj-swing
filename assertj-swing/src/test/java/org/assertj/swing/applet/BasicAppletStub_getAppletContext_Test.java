@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.applet;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link BasicAppletStub#getAppletContext()}.
@@ -22,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletStub_getAppletContext_Test extends BasicAppletStub_TestCase {
+class BasicAppletStub_getAppletContext_Test extends BasicAppletStub_TestCase {
   @Test
-  public void should_Return_Context() {
+  void should_Return_Context() {
     assertThat(stub.getAppletContext()).isSameAs(context);
   }
 }

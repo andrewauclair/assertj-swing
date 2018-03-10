@@ -12,15 +12,16 @@
  */
 package org.assertj.swing.applet;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.swing.test.awt.TestAppletContexts.singletonAppletContextMock;
 import static org.assertj.swing.test.awt.TestWindows.singletonWindowMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.applet.AppletContext;
 import java.awt.Window;
 import java.util.HashMap;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * Tests for {@link BasicAppletStub#BasicAppletStub(java.awt.Window, java.applet.AppletContext, java.util.Map)}.
@@ -28,32 +29,32 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletStub_constructor_withViewerContextAndMap_Test {
+class BasicAppletStub_constructor_withViewerContextAndMap_Test {
   private static AppletContext context;
   private static Window viewer;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     context = singletonAppletContextMock();
     viewer = singletonWindowMock();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Viewer_Is_Null() {
-    new BasicAppletStub(null, context, emptyMap());
+  @Test
+  void should_Throw_Error_If_Viewer_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicAppletStub(null, context, emptyMap()));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Context_Is_Null() {
-    new BasicAppletStub(viewer, null, emptyMap());
+  @Test
+  void should_Throw_Error_If_Context_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicAppletStub(viewer, null, emptyMap()));
   }
 
   private static HashMap<String, String> emptyMap() {
-    return new HashMap<String, String>();
+    return new HashMap<>();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_ParameterMap_Is_Null() {
-    new BasicAppletStub(viewer, context, null);
+  @Test
+  void should_Throw_Error_If_ParameterMap_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicAppletStub(viewer, context, null));
   }
 }

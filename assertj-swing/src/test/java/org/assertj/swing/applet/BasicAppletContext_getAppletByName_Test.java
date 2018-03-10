@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.applet;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link BasicAppletContext#getApplet(String)}.
@@ -22,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletContext_getAppletByName_Test extends BasicAppletContext_TestCase {
+class BasicAppletContext_getAppletByName_Test extends BasicAppletContext_TestCase {
   @Test
-  public void should_Always_Return_Null_For_Any_Given_Name() {
+  void should_Always_Return_Null_For_Any_Given_Name() {
     assertThat(context.getApplet("aName")).isNull();
   }
 }

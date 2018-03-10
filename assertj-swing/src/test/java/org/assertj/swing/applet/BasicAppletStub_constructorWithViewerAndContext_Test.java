@@ -12,10 +12,11 @@
  */
 package org.assertj.swing.applet;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.swing.test.awt.TestAppletContexts.singletonAppletContextMock;
 import static org.assertj.swing.test.awt.TestWindows.singletonWindowMock;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link BasicAppletStub#BasicAppletStub(java.awt.Window, java.applet.AppletContext)}.
@@ -23,14 +24,14 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletStub_constructorWithViewerAndContext_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Viewer_Is_Null() {
-    new BasicAppletStub(null, singletonAppletContextMock());
+class BasicAppletStub_constructorWithViewerAndContext_Test {
+  @Test
+  void should_Throw_Error_If_Viewer_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicAppletStub(null, singletonAppletContextMock()));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Context_Is_Null() {
-    new BasicAppletStub(singletonWindowMock(), null);
+  @Test
+  void should_Throw_Error_If_Context_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicAppletStub(singletonWindowMock(), null));
   }
 }

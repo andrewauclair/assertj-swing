@@ -12,7 +12,7 @@
  */
 package org.assertj.swing.applet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AppletViewer#reloadApplet()}.
@@ -20,9 +20,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class AppletViewer_reloadApplet_Test extends AppletViewer_TestCase {
+class AppletViewer_reloadApplet_Test extends AppletViewer_TestCase {
   @Test
-  public void should_Reload_Applet() {
+  void should_Reload_Applet() {
     viewer.reloadApplet();
     assertThatAppletIsStoppedAndDestroyed();
     assertThatAppletIsShowingAndViewerIsLoaded();

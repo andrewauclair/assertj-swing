@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.applet;
 
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.BeforeEach;
 
-import org.junit.Before;
+import static org.mockito.Mockito.mock;
 
 /**
  * Base class for tests for {@link BasicAppletContext}.
@@ -26,7 +26,7 @@ public abstract class BasicAppletContext_TestCase {
   BasicAppletContext context;
   StatusDisplay statusDisplay;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     statusDisplay = mock(StatusDisplay.class);
     context = new BasicAppletContext(statusDisplay);

@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.applet;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.Maps.newHashMap;
 
 import java.util.Map;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link BasicAppletStub#getParameter(String)}.
@@ -25,9 +25,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Price
  */
-public class BasicAppletStub_getParameter_Test extends BasicAppletStub_TestCase {
+class BasicAppletStub_getParameter_Test extends BasicAppletStub_TestCase {
   @Test
-  public void should_Return_Parameter() {
+  void should_Return_Parameter() {
     Map<String, String> parameters = newHashMap();
     parameters.put("key1", "value1");
     stub = new BasicAppletStub(viewer, context, parameters);

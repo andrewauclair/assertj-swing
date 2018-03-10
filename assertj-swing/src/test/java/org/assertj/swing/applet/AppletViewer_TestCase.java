@@ -22,8 +22,8 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestApplet;
 import org.assertj.swing.timing.Condition;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base class for GUI tests for {@link AppletViewer}.
@@ -35,7 +35,7 @@ public abstract class AppletViewer_TestCase extends EDTSafeTestCase {
   FrameFixture fixture; // TODO should not depend on fixture
   AppletViewer viewer;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     applet = createApplet();
     viewer = createViewer();
@@ -62,7 +62,7 @@ public abstract class AppletViewer_TestCase extends EDTSafeTestCase {
     });
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     unloadAppletIn(viewer);
     assertThatAppletIsStoppedAndDestroyed();

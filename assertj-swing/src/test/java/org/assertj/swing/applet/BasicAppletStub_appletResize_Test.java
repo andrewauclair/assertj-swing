@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.applet;
 
-import static org.mockito.Mockito.verify;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests for {@link BasicAppletStub#appletResize(int, int)}.
@@ -22,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicAppletStub_appletResize_Test extends BasicAppletStub_TestCase {
+class BasicAppletStub_appletResize_Test extends BasicAppletStub_TestCase {
   @Test
-  public void should_Resize_Viewer_When_Applet_Is_Resized() {
+  void should_Resize_Viewer_When_Applet_Is_Resized() {
     int w = 800;
     int h = 600;
     stub.appletResize(w, h);

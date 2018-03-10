@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.applet;
 
-import static org.assertj.swing.test.awt.TestAppletContexts.singletonAppletContextMock;
-import static org.assertj.swing.test.awt.TestWindows.singletonWindowMock;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.applet.AppletContext;
-import java.awt.Window;
+import java.awt.*;
 
-import org.junit.Before;
+import static org.assertj.swing.test.awt.TestAppletContexts.singletonAppletContextMock;
+import static org.assertj.swing.test.awt.TestWindows.singletonWindowMock;
 
 /**
  * Tests for {@link BasicAppletStub}.
@@ -31,7 +31,7 @@ public abstract class BasicAppletStub_TestCase {
   AppletContext context;
   BasicAppletStub stub;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     viewer = singletonWindowMock();
     context = singletonAppletContextMock();
