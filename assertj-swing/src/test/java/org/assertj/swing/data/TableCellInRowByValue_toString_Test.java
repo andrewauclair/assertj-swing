@@ -14,24 +14,24 @@ package org.assertj.swing.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TableCellInRowByValue#toString()}.
  * 
  * @author Alex Ruiz
  */
-public class TableCellInRowByValue_toString_Test {
+class TableCellInRowByValue_toString_Test {
   private TableCellInRowByValue finder;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     finder = TableCellInRowByValue.rowWithValue("one", "two").column(1);
   }
 
   @Test
-  public void should_Implement_ToString() {
+  void should_Implement_ToString() {
     assertThat(finder.toString()).isEqualTo(
         "org.assertj.swing.data.TableCellInRowByValue[values=[\"one\", \"two\"], column=1]");
   }

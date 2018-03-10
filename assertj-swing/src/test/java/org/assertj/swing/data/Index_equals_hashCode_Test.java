@@ -13,18 +13,17 @@
 package org.assertj.swing.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Index#equals(Object)} and {@link Index#hashCode()}.
  *
  * @author Christian Rösch
  */
-public class Index_equals_hashCode_Test {
+class Index_equals_hashCode_Test {
 
   @Test
-  public void should_Be_Correct() {
+  void should_Be_Correct() {
     EqualsVerifier.forClass(Index.class).verify();
   }
 }

@@ -14,6 +14,7 @@ package org.assertj.swing.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Strings.concat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -23,16 +24,16 @@ import javax.swing.JTable;
 
 import org.assertj.swing.cell.JTableCellReader;
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TableCellInRowByValue#findCell(JTable, JTableCellReader)}.
  * 
  * @author Alex Ruiz
  */
-public class TableCellInRowByValue_findCell_Test extends TableCellFinder_TestCase {
+class TableCellInRowByValue_findCell_Test extends TableCellFinder_TestCase {
   @Test
-  public void should_Find_Cell_In_Selected_Row() {
+  void should_Find_Cell_In_Selected_Row() {
     TableCellInRowByValue finder = TableCellInRowByValue.rowWithValue("1-0", "1-1", "1-2", "1-3", "1-4", "1-5").column(
         2);
     TableCell cell = finder.findCell(table, new JTableCellReaderStub());
@@ -40,16 +41,20 @@ public class TableCellInRowByValue_findCell_Test extends TableCellFinder_TestCas
     assertThat(cell.column).isEqualTo(2);
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void should_Throw_Error_If_Size_Of_Value_Array_Is_Not_Equal_To_Number_Of_Columns_In_JTable() {
-    TableCellInRowByValue finder = TableCellInRowByValue.rowWithValue("1-0", "1-1", "1-2").column(2);
-    finder.findCell(table, new JTableCellReaderStub());
+  @Test
+  void should_Throw_Error_If_Size_Of_Value_Array_Is_Not_Equal_To_Number_Of_Columns_In_JTable() {
+    assertThrows(IllegalStateException.class, () -> {
+      TableCellInRowByValue finder = TableCellInRowByValue.rowWithValue("1-0", "1-1", "1-2").column(2);
+      finder.findCell(table, new JTableCellReaderStub());
+    });
   }
 
-  @Test(expected = ActionFailedException.class)
-  public void should_Throw_Error_If_Cell_Not_Found() {
-    TableCellInRowByValue finder = TableCellInRowByValue.rowWithValue("0", "1", "2", "3", "4", "5").column(2);
-    finder.findCell(table, new JTableCellReaderStub());
+  @Test
+  void should_Throw_Error_If_Cell_Not_Found() {
+    assertThrows(ActionFailedException.class, () -> {
+      TableCellInRowByValue finder = TableCellInRowByValue.rowWithValue("0", "1", "2", "3", "4", "5").column(2);
+      finder.findCell(table, new JTableCellReaderStub());
+    });
   }
 
   private static class JTableCellReaderStub implements JTableCellReader {

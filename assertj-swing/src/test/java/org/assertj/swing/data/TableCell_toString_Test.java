@@ -12,26 +12,27 @@
  */
 package org.assertj.swing.data;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Tests for {@link TableCell#toString()}.
  * 
  * @author Alex Ruiz
  */
-public class TableCell_toString_Test {
+class TableCell_toString_Test {
   private TableCell cell;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     cell = TableCell.row(6).column(8);
   }
 
   @Test
-  public void should_Implement_ToString() {
+  void should_Implement_ToString() {
     assertThat(cell.toString()).isEqualTo("[row=6, column=8]");
   }
 }

@@ -14,24 +14,24 @@ package org.assertj.swing.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Index#toString()}.
  * 
  * @author Alex Ruiz
  */
-public class Index_toString_Test {
+class Index_toString_Test {
   private Index index;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     index = Index.atIndex(8);
   }
 
   @Test
-  public void should_Implement_ToString() {
+  void should_Implement_ToString() {
     assertThat(index.toString()).isEqualTo("org.assertj.swing.data.Index[value=8]");
   }
 }

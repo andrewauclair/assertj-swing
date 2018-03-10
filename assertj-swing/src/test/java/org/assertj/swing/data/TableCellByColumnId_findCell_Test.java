@@ -12,18 +12,16 @@
  */
 package org.assertj.swing.data;
 
+import org.assertj.swing.driver.BasicJTableCellReader;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
 import static java.lang.Integer.parseInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.data.TableCellByColumnId.row;
-
-import java.util.Collection;
-
-import org.assertj.swing.driver.BasicJTableCellReader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link TableCellByColumnId#findCell(javax.swing.JTable, JTableCellReader)}.
@@ -31,22 +29,16 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class TableCellByColumnId_findCell_Test extends TableCellFinder_TestCase {
-  private final String columnId;
+class TableCellByColumnId_findCell_Test extends TableCellFinder_TestCase {
 
-  @Parameters
-  public static Collection<Object[]> ids() {
+  private static Collection<Object[]> ids() {
     Object[][] ids = new Object[][] { { "0" }, { "1" }, { "2" }, { "3" } };
     return newArrayList(ids);
   }
 
-  public TableCellByColumnId_findCell_Test(String columnId) {
-    this.columnId = columnId;
-  }
-
-  @Test
-  public void should_Find_Cell_By_Column_Id() {
+  @ParameterizedTest
+  @MethodSource("ids")
+  void should_Find_Cell_By_Column_Id(String columnId) {
     TableCellByColumnId finder = row(0).columnId(columnId);
     TableCell cell = finder.findCell(table, new BasicJTableCellReader());
     assertThat(cell.row).isEqualTo(0);

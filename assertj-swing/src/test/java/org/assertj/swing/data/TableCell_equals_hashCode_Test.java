@@ -13,18 +13,17 @@
 package org.assertj.swing.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TableCell#equals(Object)} and {@link TableCell#hashCode()}.
  *
  * @author Christian Rösch
  */
-public class TableCell_equals_hashCode_Test {
+class TableCell_equals_hashCode_Test {
 
   @Test
-  public void should_Be_Correct() {
+  void should_Be_Correct() {
     EqualsVerifier.forClass(TableCell.class).verify();
   }
 }

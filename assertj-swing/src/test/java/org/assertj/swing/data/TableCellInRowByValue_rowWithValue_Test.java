@@ -12,17 +12,21 @@
  */
 package org.assertj.swing.data;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link TableCellInRowByValue#rowWithValue(String...)}.
  * 
  * @author Alex Ruiz
  */
-public class TableCellInRowByValue_rowWithValue_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Values_Is_Null() {
-    String[] values = null;
-    TableCellInRowByValue.rowWithValue(values);
+class TableCellInRowByValue_rowWithValue_Test {
+  @Test
+  void should_Throw_Error_If_Array_Of_Values_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      String[] values = null;
+      TableCellInRowByValue.rowWithValue(values);
+    });
   }
 }

@@ -13,10 +13,11 @@
 package org.assertj.swing.data;
 
 import static org.assertj.swing.data.TableCellByColumnId.row;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.driver.BasicJTableCellReader;
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TableCellByColumnId#findCell(javax.swing.JTable, JTableCellReader)}.
@@ -24,10 +25,12 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class TableCellByColumnId_findCell_withInvalidInput_Test extends TableCellFinder_TestCase {
-  @Test(expected = ActionFailedException.class)
-  public void should_Throw_Error_If_A_Matching_Column_Was_Not_Found() {
-    TableCellByColumnId finder = row(0).columnId("Hello");
-    finder.findCell(table, new BasicJTableCellReader());
+class TableCellByColumnId_findCell_withInvalidInput_Test extends TableCellFinder_TestCase {
+  @Test
+  void should_Throw_Error_If_A_Matching_Column_Was_Not_Found() {
+    assertThrows(ActionFailedException.class, () -> {
+      TableCellByColumnId finder = row(0).columnId("Hello");
+      finder.findCell(table, new BasicJTableCellReader());
+    });
   }
 }

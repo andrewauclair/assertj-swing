@@ -15,8 +15,8 @@ package org.assertj.swing.test.core;
 import static org.assertj.swing.core.BasicRobot.robotWithNewAwtHierarchy;
 
 import org.assertj.swing.core.Robot;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case that uses a {@link Robot}. It ensures that Swing components are created and accessed in the EDT.
@@ -26,7 +26,7 @@ import org.junit.Before;
 public class RobotBasedTestCase extends EDTSafeTestCase {
   public Robot robot;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     robot = robotWithNewAwtHierarchy();
     onSetUp();
@@ -35,7 +35,7 @@ public class RobotBasedTestCase extends EDTSafeTestCase {
   protected void onSetUp() {
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     try {
       onTearDown();

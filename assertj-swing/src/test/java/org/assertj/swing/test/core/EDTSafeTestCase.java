@@ -13,7 +13,7 @@
 package org.assertj.swing.test.core;
 
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 /**
  * Base test case that ensures that Swing components are created and accessed in the EDT.
@@ -21,7 +21,7 @@ import org.junit.BeforeClass;
  * @author Alex Ruiz
  */
 public abstract class EDTSafeTestCase {
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     FailOnThreadViolationRepaintManager.install();
   }
