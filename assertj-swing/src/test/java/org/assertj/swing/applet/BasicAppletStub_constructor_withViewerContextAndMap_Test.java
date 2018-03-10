@@ -38,12 +38,12 @@ public class BasicAppletStub_constructor_withViewerContextAndMap_Test {
     viewer = singletonWindowMock();
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Viewer_Is_Null() {
     new BasicAppletStub(null, context, emptyMap());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Context_Is_Null() {
     new BasicAppletStub(viewer, null, emptyMap());
   }
@@ -52,7 +52,7 @@ public class BasicAppletStub_constructor_withViewerContextAndMap_Test {
     return new HashMap<String, String>();
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_ParameterMap_Is_Null() {
     new BasicAppletStub(viewer, context, null);
   }

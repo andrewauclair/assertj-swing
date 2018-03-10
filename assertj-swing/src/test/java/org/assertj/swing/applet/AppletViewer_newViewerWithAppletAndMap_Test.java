@@ -26,7 +26,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class AppletViewer_newViewerWithAppletAndMap_Test extends EDTSafeTestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_ParameterMap_Is_Null() {
     execute(() -> {
       Map<String, String> map = null;

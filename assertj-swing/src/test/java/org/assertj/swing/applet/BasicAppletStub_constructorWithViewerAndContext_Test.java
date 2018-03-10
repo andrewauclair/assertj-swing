@@ -24,12 +24,12 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class BasicAppletStub_constructorWithViewerAndContext_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Viewer_Is_Null() {
     new BasicAppletStub(null, singletonAppletContextMock());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Context_Is_Null() {
     new BasicAppletStub(singletonWindowMock(), null);
   }

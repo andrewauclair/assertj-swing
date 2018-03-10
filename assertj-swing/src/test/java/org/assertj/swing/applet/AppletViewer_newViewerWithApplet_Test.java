@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class AppletViewer_newViewerWithApplet_Test extends AppletViewer_TestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_Applet_Is_Null() {
     AppletViewer.newViewer(null);
   }

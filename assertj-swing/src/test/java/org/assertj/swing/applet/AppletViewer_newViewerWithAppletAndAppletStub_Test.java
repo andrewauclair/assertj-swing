@@ -26,7 +26,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class AppletViewer_newViewerWithAppletAndAppletStub_Test extends EDTSafeTestCase {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_AppletStub_Is_Null() {
     execute(() -> {
       AppletStub appletStub = null;

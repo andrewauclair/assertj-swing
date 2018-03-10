@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class BasicAppletContext_constructor_Test {
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void should_Throw_Error_If_StatusDisplay_Is_Null() {
     new BasicAppletContext(null);
   }
