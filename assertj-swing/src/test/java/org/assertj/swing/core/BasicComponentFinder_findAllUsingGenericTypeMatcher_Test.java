@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collection;
@@ -19,17 +21,15 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link BasicComponentFinder#findAll(GenericTypeMatcher)}.
  * 
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findAllUsingGenericTypeMatcher_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findAllUsingGenericTypeMatcher_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Return_All_Components_Matching_GenericTypeMatcher() {
+  void should_Return_All_Components_Matching_GenericTypeMatcher() {
     Collection<JTextField> found = finder.findAll(new GenericTypeMatcher<JTextField>(JTextField.class) {
       @Override
       protected boolean isMatching(@Nonnull JTextField c) {

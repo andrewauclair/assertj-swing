@@ -12,36 +12,36 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
 
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link JOptionPaneDriver#requireMessage(JOptionPane, java.util.regex.Pattern)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_requireMessageByPattern_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_requireMessageByPattern_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Pass_If_Message_Matches_Pattern() {
+  void should_Pass_If_Message_Matches_Pattern() {
     JOptionPane optionPane = messageWithValue("Leia");
     pack(optionPane, title());
     driver.requireMessage(optionPane, Pattern.compile("Le.*"));
   }
 
   @Test
-  public void should_Pass_If_Non_String_Message_Is_Equal_To_Expected() {
+  void should_Pass_If_Non_String_Message_Is_Equal_To_Expected() {
     JOptionPane optionPane = messageWithValue(new Person("Leia"));
     pack(optionPane, title());
     driver.requireMessage(optionPane, Pattern.compile("Le.*"));
   }
 
   @Test
-  public void should_Fail_Is_Message_Does_Match_Pattern() {
+  void should_Fail_Is_Message_Does_Match_Pattern() {
     JOptionPane optionPane = messageWithValue("Palpatine");
     pack(optionPane, title());
     thrown.expectAssertionError("message", "Palpatine", Pattern.compile("Anakin"));

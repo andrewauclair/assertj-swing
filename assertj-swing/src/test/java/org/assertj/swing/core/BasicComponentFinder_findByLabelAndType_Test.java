@@ -12,16 +12,13 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link BasicComponentFinder#findByLabel(String, Class)}.
@@ -29,20 +26,15 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findByLabelAndType_Test extends BasicComponentFinder_TestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
+class BasicComponentFinder_findByLabelAndType_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Find_Component() {
+  void should_Find_Component() {
     JButton button = finder.findByLabel("A Label", JButton.class);
     assertThat(button).isSameAs(window.button);
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Not_Found() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("label='list'", "type=javax.swing.JLabel");
-    finder.findByLabel("list", JLabel.class);
+  void should_Throw_Error_If_Component_Not_Found() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByLabel("list", JLabel.class), "label='list'", "type=javax.swing.JLabel");
   }
 }

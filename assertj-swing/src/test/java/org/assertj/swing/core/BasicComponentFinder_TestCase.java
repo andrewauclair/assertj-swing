@@ -35,8 +35,8 @@ public abstract class BasicComponentFinder_TestCase extends SequentialEDTSafeTes
   BasicComponentFinder finder;
   MyWindow window;
 
-  @Rule
-  public ExpectedException thrown = none();
+//  @Rule
+//  public ExpectedException thrown = none();
 
   @Override
   protected final void onSetUp() {

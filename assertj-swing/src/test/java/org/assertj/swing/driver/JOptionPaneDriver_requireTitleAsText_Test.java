@@ -12,36 +12,36 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
 
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link JOptionPaneDriver#requireTitle(JOptionPane, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_requireTitleAsText_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_requireTitleAsText_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Pass_Is_Title_Is_Equal_To_Expected() {
+  void should_Pass_Is_Title_Is_Equal_To_Expected() {
     JOptionPane optionPane = informationMessage();
     pack(optionPane, title());
     driver.requireTitle(optionPane, title());
   }
 
   @Test
-  public void should_Pass_If_Title_Matches_Pattern() {
+  void should_Pass_If_Title_Matches_Pattern() {
     JOptionPane optionPane = informationMessage();
     pack(optionPane, title());
     driver.requireTitle(optionPane, "JOptionP.*");
   }
 
   @Test
-  public void should_Fail_If_Title_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Title_Is_Not_Equal_To_Expected() {
     JOptionPane optionPane = informationMessage();
     pack(optionPane, title());
     thrown.expectAssertionError("title", title(), Pattern.compile("Yoda"));

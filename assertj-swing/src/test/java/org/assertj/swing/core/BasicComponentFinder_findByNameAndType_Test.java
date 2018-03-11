@@ -18,7 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import org.assertj.swing.exception.ComponentLookupException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentFinder#findByName(String, Class)}.
@@ -26,24 +27,20 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findByNameAndType_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findByNameAndType_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Find_Component() {
+  void should_Find_Component() {
     JButton button = finder.findByName("button", JButton.class);
     assertThat(button).isSameAs(window.button);
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Not_Found() {
-    thrown.expect(ComponentLookupException.class, "name='list'");
-    thrown.expectMessageToContain("type=javax.swing.JLabel");
-    finder.findByName("list", JLabel.class);
+  void should_Throw_Error_If_Component_Not_Found() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByName("list", JLabel.class), "name='list'", "type=javax.swing.JLabel");
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Found_By_Name_But_Not_By_Type() {
-    thrown.expect(ComponentLookupException.class, "name='button'");
-    thrown.expectMessageToContain("type=javax.swing.JLabel");
-    finder.findByName("button", JLabel.class);
+  void should_Throw_Error_If_Component_Found_By_Name_But_Not_By_Type() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByName("button", JLabel.class), "name='button'", "type=javax.swing.JLabel");
   }
 }

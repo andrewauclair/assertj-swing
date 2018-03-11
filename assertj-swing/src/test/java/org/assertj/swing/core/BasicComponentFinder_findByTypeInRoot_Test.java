@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 import org.assertj.swing.exception.ComponentLookupException;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.Test;
 
 /**
@@ -38,8 +39,9 @@ public class BasicComponentFinder_findByTypeInRoot_Test extends BasicComponentFi
 
   @Test
   public void should_Throw_Error_If_Component_Not_Found() {
-    thrown.expect(ComponentLookupException.class, "type=javax.swing.JList");
-    finder.findByType(window, JList.class);
+//    thrown.expect(ComponentLookupException.class, "type=javax.swing.JList");
+//    finder.findByType(window, JList.class);
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByType(window, JList.class), "type=javax.swing.JList");
   }
 
   @Override

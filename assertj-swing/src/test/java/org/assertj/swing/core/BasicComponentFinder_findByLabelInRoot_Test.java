@@ -17,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.awt.Component;
 
 import org.assertj.swing.exception.ComponentLookupException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentFinder#findByLabel(java.awt.Container, String)}.
@@ -25,20 +26,19 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findByLabelInRoot_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findByLabelInRoot_Test extends BasicComponentFinder_TestCase {
   private MyWindow windowTwo;
 
   @Test
-  public void should_Find_Component() {
+  void should_Find_Component() {
     windowTwo = MyWindow.createNew(getClass());
     Component button = finder.findByLabel(window, "A Label");
     assertThat(button).isSameAs(window.button);
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Not_Found() {
-    thrown.expect(ComponentLookupException.class, "label='list'");
-    finder.findByLabel(window, "list");
+  void should_Throw_Error_If_Component_Not_Found() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByLabel(window, "list"), "label='list'");
   }
 
   @Override

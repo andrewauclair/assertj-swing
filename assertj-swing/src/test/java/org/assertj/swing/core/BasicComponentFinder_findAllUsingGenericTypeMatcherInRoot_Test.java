@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collection;
@@ -19,19 +21,17 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.swing.JButton;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link BasicComponentFinder#findAll(java.awt.Container, GenericTypeMatcher)}.
  * 
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findAllUsingGenericTypeMatcherInRoot_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findAllUsingGenericTypeMatcherInRoot_Test extends BasicComponentFinder_TestCase {
   private MyWindow windowTwo;
 
   @Test
-  public void should_Return_All_Matching_Components() {
+  void should_Return_All_Matching_Components() {
     windowTwo = MyWindow.createNew(getClass());
     Collection<JButton> found = finder.findAll(windowTwo, new GenericTypeMatcher<JButton>(JButton.class) {
       @Override

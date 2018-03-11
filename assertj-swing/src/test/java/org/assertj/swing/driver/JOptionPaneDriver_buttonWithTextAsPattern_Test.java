@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.AbstractButtonTextQuery.textOf;
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.launch;
@@ -21,16 +23,14 @@ import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link JOptionPaneDriver#buttonWithText(JOptionPane, java.util.regex.Pattern)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_buttonWithTextAsPattern_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_buttonWithTextAsPattern_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Find_Button_With_Text_Matching_Pattern() {
+  void should_Find_Button_With_Text_Matching_Pattern() {
     JOptionPane optionPane = messageWithOptions("First", "Second");
     launch(optionPane, title());
     JButton button = driver.buttonWithText(optionPane, Pattern.compile("Sec.*"));

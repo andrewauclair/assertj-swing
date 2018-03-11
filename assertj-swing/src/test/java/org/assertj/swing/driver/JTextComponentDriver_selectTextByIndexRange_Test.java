@@ -13,7 +13,8 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#selectText(javax.swing.text.JTextComponent, int, int)}.
@@ -21,31 +22,28 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_selectTextByIndexRange_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_selectTextByIndexRange_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Select_Text_Range() {
+  void should_Select_Text_Range() {
     showWindow();
     driver.selectText(textField, 8, 14);
     requireSelectedTextInTextField("a test");
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectText(textField, 8, 14);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectText(textField, 8, 14));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectText(textField, 8, 14);
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectText(textField, 8, 14));
   }
 
   @Test
-  public void should_Throw_Error_If_Indices_Are_Out_Of_Bounds() {
+  void should_Throw_Error_If_Indices_Are_Out_Of_Bounds() {
     showWindow();
-    thrown.expect(ActionFailedException.class, "Unable to get location for index <20> in javax.swing.JTextField");
-    driver.selectText(textField, 20, 22);
+    ExpectedException.assertContainsMessage(ActionFailedException.class, () -> driver.selectText(textField, 20, 22), "Unable to get location for index <20> in javax.swing.JTextField");
   }
 }

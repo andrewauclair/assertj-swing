@@ -12,21 +12,21 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.launch;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JOptionPaneDriver#cancelButton(JOptionPane)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_cancelButton_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_cancelButton_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Find_Cancel_Button() {
+  void should_Find_Cancel_Button() {
     JOptionPane optionPane = inputMessage();
     launch(optionPane, title());
     JButton button = driver.cancelButton(optionPane);
