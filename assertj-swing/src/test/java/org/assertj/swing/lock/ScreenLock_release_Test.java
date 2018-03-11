@@ -13,40 +13,42 @@
 package org.assertj.swing.lock;
 
 import org.assertj.swing.exception.ScreenLockException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link ScreenLock#release(Object)}.
  * 
  * @author Alex Ruiz
  */
-public class ScreenLock_release_Test {
+class ScreenLock_release_Test {
   private ScreenLock lock;
   private Object owner;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     lock = new ScreenLock();
     owner = new Object();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     if (lock.acquiredBy(owner)) {
       lock.release(owner);
     }
   }
 
-  @Test(expected = ScreenLockException.class)
-  public void should_Throw_Error_If_Trying_To_Release_With_Different_Owner() {
+  @Test
+  void should_Throw_Error_If_Trying_To_Release_With_Different_Owner() {
     lock.acquire(owner);
-    lock.release(new Object());
+    assertThrows(ScreenLockException.class, () -> lock.release(new Object()));
   }
 
-  @Test(expected = ScreenLockException.class)
-  public void should_Throw_Error_If_Trying_To_Release_Without_Being_Locked() {
-    lock.release(owner);
+  @Test
+  void should_Throw_Error_If_Trying_To_Release_Without_Being_Locked() {
+    assertThrows(ScreenLockException.class, () -> lock.release(owner));
   }
 }

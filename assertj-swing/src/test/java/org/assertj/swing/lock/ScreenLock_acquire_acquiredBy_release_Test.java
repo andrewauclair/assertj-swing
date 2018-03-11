@@ -15,9 +15,8 @@ package org.assertj.swing.lock;
 import static edu.umd.cs.mtc.TestFramework.runManyTimes;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
-
 import edu.umd.cs.mtc.MultithreadedTestCase;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScreenLock#acquire(Object)}, {@link ScreenLock#acquiredBy(Object)} and
@@ -58,7 +57,7 @@ public class ScreenLock_acquire_acquiredBy_release_Test extends MultithreadedTes
   }
 
   @Test
-  public void should_Acquire_Lock_And_Queue_Others_Wanting_Lock() throws Throwable {
+  void should_Acquire_Lock_And_Queue_Others_Wanting_Lock() throws Throwable {
     runManyTimes(new ScreenLock_acquire_acquiredBy_release_Test(), 5);
   }
 

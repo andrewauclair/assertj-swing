@@ -15,9 +15,8 @@ package org.assertj.swing.lock;
 import static edu.umd.cs.mtc.TestFramework.runOnce;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
-
 import edu.umd.cs.mtc.MultithreadedTestCase;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScreenLock#getOwner()}.
@@ -51,7 +50,7 @@ public class ScreenLock_getOwner_Test extends MultithreadedTestCase {
   }
 
   @Test
-  public void should_Not_Block_If_Current_Owner_Tries_To_Acquire_Lock_Again() throws Throwable {
+  void should_Not_Block_If_Current_Owner_Tries_To_Acquire_Lock_Again() throws Throwable {
     runOnce(new ScreenLock_getOwner_Test());
   }
 }
