@@ -12,38 +12,36 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSpinnerDriver#selectValue(javax.swing.JSpinner, Object)}.
  * 
  * @author Alex Ruiz
  */
-public class JSpinnerDriver_selectValue_Test extends JSpinnerDriver_TestCase {
+class JSpinnerDriver_selectValue_Test extends JSpinnerDriver_TestCase {
   @Test
-  public void should_Select_Value() {
+  void should_Select_Value() {
     showWindow();
     driver.selectValue(spinner, "Gandalf");
     assertThatLastValueIsSelected();
   }
 
   @Test
-  public void should_Throw_Error_If_Value_Is_Not_Valid() {
+  void should_Throw_Error_If_Value_Is_Not_Valid() {
     showWindow();
-    thrown.expectIllegalArgumentException("Value 'Yoda' is not valid");
-    driver.selectValue(spinner, "Yoda");
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.selectValue(spinner, "Yoda"), "Value 'Yoda' is not valid");
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Disabled() {
+  void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disableSpinner();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectValue(spinner, "Gandalf");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectValue(spinner, "Gandalf"));
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectValue(spinner, "Gandalf");
+  void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectValue(spinner, "Gandalf"));
   }
 }

@@ -45,8 +45,7 @@ public class JListDriver_showPopupMenuAtItemByIndex_Test extends JListDriver_sho
   @Test
   public void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.showPopupMenu(list, 0);
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.showPopupMenu(list, 0));
   }
 
   @Test

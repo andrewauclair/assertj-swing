@@ -14,20 +14,22 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Dimension;
 
 import org.assertj.swing.test.awt.FluentDimension;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#resizeHeightTo(java.awt.Window, int)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowDriver_resizeHeightTo_Test extends WindowDriver_TestCase {
+class WindowDriver_resizeHeightTo_Test extends WindowDriver_TestCase {
   @Test
-  public void should_Resize_Height() {
+  void should_Resize_Height() {
     showWindow();
     Dimension newSize = new FluentDimension(sizeOf(window)).addToHeight(100);
     driver.resizeHeightTo(window, newSize.height);
@@ -35,22 +37,23 @@ public class WindowDriver_resizeHeightTo_Test extends WindowDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Disabled() {
+  void should_Throw_Error_If_Window_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.resizeHeightTo(window, 10);
+    Throwable exception = assertThrows(IllegalStateException.class, () -> driver.resizeHeightTo(window, 10));
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be enabled"));
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.resizeHeightTo(window, 10);
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void should_Throw_Error_If_Window_Is_Not_Resizable() {
+  @Test
+  void should_Throw_Error_If_Window_Is_Not_Resizable() {
     makeWindowNotResizable();
     showWindow();
-    driver.resizeHeightTo(window, 10);
+    assertThrows(IllegalStateException.class, () -> driver.resizeHeightTo(window, 10));
   }
 }

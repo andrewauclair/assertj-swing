@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Strings.isNullOrEmpty;
 import static org.assertj.swing.driver.AbstractButtonTextQuery.textOf;
@@ -19,17 +21,15 @@ import static org.assertj.swing.driver.AbstractButtonTextQuery.textOf;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link JFileChooserDriver#approveButton(javax.swing.JFileChooser)}.
  * 
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JFileChooserDriver_approveButton_Test extends JFileChooserDriver_TestCase {
+class JFileChooserDriver_approveButton_Test extends JFileChooserDriver_TestCase {
   @Test
-  public void should_Find_Approve_Button() {
+  void should_Find_Approve_Button() {
     showWindow();
     JButton approveButton = driver.approveButton(fileChooser);
     assertThat(approveButton).isNotNull();

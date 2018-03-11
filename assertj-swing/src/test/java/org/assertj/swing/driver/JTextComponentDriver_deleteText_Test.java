@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#deleteText(javax.swing.text.JTextComponent)}.
@@ -20,29 +21,27 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_deleteText_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_deleteText_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Delete_Text() {
+  void should_Delete_Text() {
     showWindow();
     driver.deleteText(textField);
     requireEmptyTextField();
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.deleteText(textField);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.deleteText(textField));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.deleteText(textField);
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.deleteText(textField));
   }
 
   @Test
-  public void should_Delete_Text_In_Empty_JTextComponent() {
+  void should_Delete_Text_In_Empty_JTextComponent() {
     showWindow();
     setTextFieldText("");
     driver.deleteText(textField);

@@ -12,21 +12,23 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.query.ComponentLocationOnScreenQuery.locationOnScreen;
-
-import java.awt.Point;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for {@link WindowDriver#moveTo(java.awt.Window, java.awt.Point)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowDriver_moveTo_Test extends WindowDriver_TestCase {
+class WindowDriver_moveTo_Test extends WindowDriver_TestCase {
   @Test
-  public void should_Move_Window() {
+  void should_Move_Window() {
     showWindow();
     Point newPosition = new Point(200, 200);
     driver.moveTo(window, newPosition);
@@ -34,15 +36,17 @@ public class WindowDriver_moveTo_Test extends WindowDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Disabled() {
+  void should_Throw_Error_If_Window_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.moveTo(window, new Point(100, 100));
+    Throwable exception = assertThrows(IllegalStateException.class, () -> driver.moveTo(window, new Point(100, 100)));
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be enabled"));
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.moveTo(window, new Point(100, 100));
+  void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
+    Throwable exception = assertThrows(IllegalStateException.class, () -> driver.moveTo(window, new Point(100, 100)));
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be showing on the screen"));
   }
 }

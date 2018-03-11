@@ -21,7 +21,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JFileChooserApproveButtonTextQuery#approveButtonTextFrom(JFileChooser)}.
@@ -39,7 +39,7 @@ public class JFileChooserApproveButtonTextQuery_approveButtonTextFrom_Test exten
   }
 
   @Test
-  public void should_Return_Text_For_Approve_Button_From_JFileChooser() {
+  void should_Return_Text_For_Approve_Button_From_JFileChooser() {
     fileChooser.startRecording();
     String approveButtonText = JFileChooserApproveButtonTextQuery.approveButtonTextFrom(fileChooser);
     assertThat(approveButtonText).isNotEmpty();
@@ -47,7 +47,7 @@ public class JFileChooserApproveButtonTextQuery_approveButtonTextFrom_Test exten
   }
 
   @Test
-  public void should_Return_Text_For_Approve_Button_From_UI_If_JFileChooser_Does_Not_Have_It() {
+  void should_Return_Text_For_Approve_Button_From_UI_If_JFileChooser_Does_Not_Have_It() {
     fileChooser.shouldReturnNullAsApproveButtonText(true);
     fileChooser.startRecording();
     String approveButtonText = JFileChooserApproveButtonTextQuery.approveButtonTextFrom(fileChooser);

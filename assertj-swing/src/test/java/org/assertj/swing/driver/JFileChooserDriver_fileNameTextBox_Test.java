@@ -12,11 +12,11 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JTextField;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JFileChooserDriver#fileNameTextBox(JFileChooser)}.
@@ -24,9 +24,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JFileChooserDriver_fileNameTextBox_Test extends JFileChooserDriver_TestCase {
+class JFileChooserDriver_fileNameTextBox_Test extends JFileChooserDriver_TestCase {
   @Test
-  public void should_Find_FileName_TextBox() {
+  void should_Find_FileName_TextBox() {
     // TODO(Alex): Test in Windows
     showWindow();
     JTextField fileNameTextBox = driver.fileNameTextBox(fileChooser);

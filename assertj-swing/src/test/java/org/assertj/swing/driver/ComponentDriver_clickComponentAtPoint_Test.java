@@ -58,9 +58,9 @@ public class ComponentDriver_clickComponentAtPoint_Test extends ComponentDriver_
     robot.settings().clickOnDisabledComponentsAllowed(false);
     disableButton();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
-    thrown.expectIllegalStateIsDisabledComponent();
+
     try {
-      driver.click(window.button, new Point(10, 10));
+      thrown.assertIllegalStateIsDisabledComponent(() -> driver.click(window.button, new Point(10, 10)));
     } finally {
       recorder.wasNotClicked();
     }

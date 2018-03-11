@@ -35,8 +35,7 @@ public class JTreeDriver_unselectRows_Test extends JTreeDriver_selectCell_TestCa
   public void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
     int[] rows = { 0, 1, 2 };
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.unselectRows(tree, rows);
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.unselectRows(tree, rows));
   }
 
   @Test

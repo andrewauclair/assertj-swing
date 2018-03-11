@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.AbstractButtonTextQuery.textOf;
 
 import javax.swing.JButton;
 import javax.swing.UIManager;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JFileChooserDriver#cancelButton(javax.swing.JFileChooser)}.
@@ -26,9 +26,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JFileChooserDriver_cancelButton_Test extends JFileChooserDriver_TestCase {
+class JFileChooserDriver_cancelButton_Test extends JFileChooserDriver_TestCase {
   @Test
-  public void should_Find_Cancel_Button() {
+  void should_Find_Cancel_Button() {
     showWindow();
     JButton cancelButton = driver.cancelButton(fileChooser);
     assertThat(cancelButton).isNotNull();

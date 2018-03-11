@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#replaceText(javax.swing.text.JTextComponent, String)}.
@@ -20,9 +21,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_replaceText_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_replaceText_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Replace_Text() {
+  void should_Replace_Text() {
     showWindow();
     setTextFieldText("Hi");
     driver.replaceText(textField, "Bye");
@@ -30,7 +31,7 @@ public class JTextComponentDriver_replaceText_Test extends JTextComponentDriver_
   }
 
   @Test
-  public void should_Replace_Text_With_Empty_String() {
+  void should_Replace_Text_With_Empty_String() {
     showWindow();
     setTextFieldText("Hi");
     driver.replaceText(textField, "");
@@ -38,15 +39,13 @@ public class JTextComponentDriver_replaceText_Test extends JTextComponentDriver_
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.replaceText(textField, "Hello");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.replaceText(textField, "Hello"));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.replaceText(textField, "Hello");
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.replaceText(textField, "Hello"));
   }
 }

@@ -50,9 +50,8 @@ public class AbstractButtonDriver_click_Test extends AbstractButtonDriver_TestCa
     robot.settings().clickOnDisabledComponentsAllowed(false);
     disableCheckBox();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(checkBox);
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.click(checkBox);
+      thrown.assertIllegalStateIsDisabledComponent(() -> driver.click(checkBox));
     } finally {
       recorder.wasNotClicked();
     }

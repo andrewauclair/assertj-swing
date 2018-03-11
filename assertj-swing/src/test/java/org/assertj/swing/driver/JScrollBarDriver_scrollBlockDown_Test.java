@@ -30,8 +30,7 @@ public class JScrollBarDriver_scrollBlockDown_Test extends JScrollBarDriver_Test
   @Test
   public void should_Throw_Error_If_JScrollBar_Is_Disabled() {
     disableScrollBar();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.scrollBlockDown(scrollBar);
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.scrollBlockDown(scrollBar));
   }
 
   @Test

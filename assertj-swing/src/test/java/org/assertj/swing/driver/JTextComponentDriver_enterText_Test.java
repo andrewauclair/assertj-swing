@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#enterText(javax.swing.text.JTextComponent, String)}.
@@ -20,9 +21,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_enterText_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_enterText_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Enter_Text() {
+  void should_Enter_Text() {
     showWindow();
     clearTextField();
     driver.enterText(textField, "Entering text");
@@ -30,15 +31,13 @@ public class JTextComponentDriver_enterText_Test extends JTextComponentDriver_Te
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.enterText(textField, "Entering text");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.enterText(textField, "Entering text"));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.enterText(textField, "Entering text");
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.enterText(textField, "Entering text"));
   }
 }

@@ -36,7 +36,7 @@ public abstract class WindowDriver_TestCase extends RobotBasedTestCase {
   Frame window;
   WindowDriver driver;
 
-  @Rule
+//  @Rule
   public ExpectedException thrown = none();
 
   @Override

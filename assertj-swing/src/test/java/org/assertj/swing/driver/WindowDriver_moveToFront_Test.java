@@ -15,16 +15,16 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#moveToFront(java.awt.Window)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowDriver_moveToFront_Test extends WindowDriver_TestCase {
+class WindowDriver_moveToFront_Test extends WindowDriver_TestCase {
   @Test
-  public void should_Move_Window_To_Front() {
+  void should_Move_Window_To_Front() {
     showWindow();
     TestWindow.createAndShowNewWindow(getClass());
     assertThat(isActive(window)).isFalse();

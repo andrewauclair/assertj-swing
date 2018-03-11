@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#requireEmpty(javax.swing.text.JTextComponent)}.
@@ -20,24 +21,22 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_requireEmpty_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_requireEmpty_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_JTexComponent_Is_Empty() {
+  void should_Pass_If_JTexComponent_Is_Empty() {
     clearTextField();
     driver.requireEmpty(textField);
   }
 
   @Test
-  public void should_Pass_If_Text_In_JTexComponent_Is_Null() {
+  void should_Pass_If_Text_In_JTexComponent_Is_Null() {
     setTextFieldText(null);
     driver.requireEmpty(textField);
   }
 
   @Test
-  public void should_Fail_If_JTexComponent_Is_Not_Empty() {
+  void should_Fail_If_JTexComponent_Is_Not_Empty() {
     setTextFieldText("Hi");
-    thrown.expect(AssertionError.class);
-    thrown.expectMessageToContain("property:'text'", "Expecting empty but was:<\"Hi\">");
-    driver.requireEmpty(textField);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireEmpty(textField), "property:'text'", "Expecting empty but was:<\"Hi\">");
   }
 }

@@ -14,20 +14,22 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Dimension;
 
 import org.assertj.swing.test.awt.FluentDimension;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#resize(java.awt.Container, int, int)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowDriver_resize_Test extends WindowDriver_TestCase {
+class WindowDriver_resize_Test extends WindowDriver_TestCase {
   @Test
-  public void should_Resize_Window() {
+  void should_Resize_Window() {
     showWindow();
     Dimension newSize = new FluentDimension(sizeOf(window)).addToHeight(100).addToWidth(200);
     driver.resize(window, newSize.width, newSize.height);
@@ -35,22 +37,24 @@ public class WindowDriver_resize_Test extends WindowDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Disabled() {
+  void should_Throw_Error_If_Window_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.resize(window, 10, 10);
+    Throwable exception = assertThrows(IllegalStateException.class, () -> driver.resize(window, 10, 10));
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be enabled"));
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.resize(window, 10, 10);
+  void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
+    Throwable exception = assertThrows(IllegalStateException.class, () -> driver.resize(window, 10, 10));
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be showing on the screen"));
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void should_Throw_Error_If_Window_Is_Not_Resizable() {
+  @Test
+  void should_Throw_Error_If_Window_Is_Not_Resizable() {
     makeWindowNotResizable();
     showWindow();
-    driver.resize(window, 10, 10);
+    assertThrows(IllegalStateException.class, () -> driver.resize(window, 10, 10));
   }
 }

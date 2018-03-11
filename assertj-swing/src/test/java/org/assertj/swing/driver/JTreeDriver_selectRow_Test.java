@@ -52,8 +52,7 @@ public class JTreeDriver_selectRow_Test extends JTreeDriver_selectCell_TestCase 
   @Test
   public void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectRow(tree, 0);
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.selectRow(tree, 0));
   }
 
   @Test

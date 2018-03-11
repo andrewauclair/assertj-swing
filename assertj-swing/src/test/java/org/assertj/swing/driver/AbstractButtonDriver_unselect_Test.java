@@ -39,8 +39,7 @@ public class AbstractButtonDriver_unselect_Test extends AbstractButtonDriver_Tes
   @Test
   public void should_Throw_Error_If_AbstractButton_Disabled() {
     disableCheckBox();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.deselect(checkBox);
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.deselect(checkBox));
   }
 
   @Test

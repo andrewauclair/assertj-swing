@@ -59,8 +59,7 @@ public class JListDriver_selectItemByText_Test extends JListDriver_TestCase {
   @Test
   public void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectItem(list, "two");
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.selectItem(list, "two"));
   }
 
   @Test

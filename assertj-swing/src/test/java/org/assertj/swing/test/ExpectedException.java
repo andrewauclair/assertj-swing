@@ -16,9 +16,13 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.junit.internal.matchers.TypeSafeMatcher;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Allows in-test specification of expected exception types and messages.
@@ -183,13 +187,38 @@ public class ExpectedException implements TestRule {
     expectMessageToContain("to be showing on the screen");
   }
 
+  public static void assertIllegalStateIsNotShowingComponent(Executable executable) {
+    Throwable exception = assertThrows(IllegalStateException.class, executable);
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be showing on the screen"));
+  }
+
   public void expectIllegalStateIsNotResizableComponent() {
     expect(IllegalStateException.class, "Expecting component");
     expectMessageToContain("to be resizable by the user");
   }
 
+  public static void assertIllegalStateIsNotResizableComponent(Executable executable) {
+    Throwable exception = assertThrows(IllegalStateException.class, executable);
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be resizable by the user"));
+  }
+
   public void expectIllegalStateIsDisabledComponent() {
     expect(IllegalStateException.class, "Expecting component");
     expectMessageToContain("to be enabled");
+  }
+
+  public static void assertIllegalStateIsDisabledComponent(Executable executable) {
+    Throwable exception = assertThrows(IllegalStateException.class, executable);
+    assertTrue(exception.getMessage().contains("Expecting component"));
+    assertTrue(exception.getMessage().contains("to be enabled"));
+  }
+
+  public static void assertContainsMessage(Class<? extends Throwable> exceptionClass, Executable executable, String ... messages) {
+    Throwable exception = assertThrows(exceptionClass, executable);
+    for (String message : messages) {
+      assertTrue(exception.getMessage().contains(message));
+    }
   }
 }

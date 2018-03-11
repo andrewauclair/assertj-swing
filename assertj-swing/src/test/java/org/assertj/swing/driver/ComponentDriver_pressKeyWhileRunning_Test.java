@@ -26,9 +26,8 @@ public class ComponentDriver_pressKeyWhileRunning_Test extends ComponentDriver_T
   @Test
   public void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.pressKeyWhileRunning(window.textField, VK_A, mock(Runnable.class));
+      thrown.assertIllegalStateIsDisabledComponent(() -> driver.pressKeyWhileRunning(window.textField, VK_A, mock(Runnable.class)));
     } finally {
       assertThatTextFieldIsEmpty();
     }

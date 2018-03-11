@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-137" target="_blank">FEST-137</a>
  * 
  * @author Alex Ruiz
  */
-public class FEST137_SelectAllOnDoubleClickInJTextComponent_Test extends JTextComponentDriver_TestCase {
+class FEST137_SelectAllOnDoubleClickInJTextComponent_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Select_All_Text_On_Double_Click() {
+  void should_Select_All_Text_On_Double_Click() {
     setTextFieldText("Hello");
     showWindow();
     driver.doubleClick(textField);

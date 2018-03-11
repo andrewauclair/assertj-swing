@@ -31,8 +31,7 @@ public class JSpinnerDriver_incrementWithTimes_Test extends JSpinnerDriver_TestC
   @Test
   public void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disableSpinner();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.increment(spinner, 2);
+    thrown.assertIllegalStateIsDisabledComponent(() -> driver.increment(spinner, 2));
   }
 
   @Test

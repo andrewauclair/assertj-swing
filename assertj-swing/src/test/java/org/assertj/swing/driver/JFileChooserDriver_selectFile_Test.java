@@ -22,7 +22,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JFileChooserDriver#selectFile(JFileChooser, File)}.
@@ -30,9 +31,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JFileChooserDriver_selectFile_Test extends JFileChooserDriver_TestCase {
+class JFileChooserDriver_selectFile_Test extends JFileChooserDriver_TestCase {
   @Test
-  public void should_Select_File() {
+  void should_Select_File() {
     showWindow();
     File temporaryFile = newTemporaryFile();
     try {
@@ -50,34 +51,30 @@ public class JFileChooserDriver_selectFile_Test extends JFileChooserDriver_TestC
   }
 
   @Test
-  public void should_Throw_Error_If_JFileChooser_Is_Disabled() {
+  void should_Throw_Error_If_JFileChooser_Is_Disabled() {
     disableFileChooser();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectFile(fileChooser, fakeFile());
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectFile(fileChooser, fakeFile()));
   }
 
   @Test
-  public void should_Throw_Error_If_JFileChooser_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectFile(fileChooser, fakeFile());
+  void should_Throw_Error_If_JFileChooser_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectFile(fileChooser, fakeFile()));
   }
 
   @Test
-  public void should_Throw_Error_When_Selecting_File_While_JFileChooser_Can_Only_Select_Folders() {
+  void should_Throw_Error_When_Selecting_File_While_JFileChooser_Can_Only_Select_Folders() {
     makeFileChooserSelectDirectoriesOnly();
     showWindow();
-    thrown.expectIllegalArgumentException("the file chooser can only open directories");
-    driver.selectFile(fileChooser, fakeFile());
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () ->driver.selectFile(fileChooser, fakeFile()), "the file chooser can only open directories");
   }
 
   @Test
-  public void should_Throw_Error_When_Selecing_Folder_While_JFileChooser_Can_Only_Select_Files() {
+  void should_Throw_Error_When_Selecing_Folder_While_JFileChooser_Can_Only_Select_Files() {
     File temporaryFolder = newTemporaryFolder();
     makeFileChooserSelectFilesOnly();
     showWindow();
-    thrown.expectIllegalArgumentException("the file chooser can only open files");
     try {
-      driver.selectFile(fileChooser, temporaryFolder);
+      ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.selectFile(fileChooser, temporaryFolder), "the file chooser can only open files");
     } finally {
       temporaryFolder.delete();
     }

@@ -12,18 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
-
-import java.awt.Component;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
 
 /**
  * Tests for {@link ComponentPreconditions#checkEnabledAndShowing(java.awt.Component)}.
@@ -33,33 +31,28 @@ import org.junit.Test;
 public class ComponentStateValidator_validateIsEnabledAndShowing_Test extends RobotBasedTestCase {
   private TestWindow window;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected void onSetUp() {
     window = TestWindow.createNewWindow(getClass());
   }
 
   @Test
-  public void should_Not_Throw_Error_If_Component_Is_Enabled_And_Showing_On_The_Screen() {
+  void should_Not_Throw_Error_If_Component_Is_Enabled_And_Showing_On_The_Screen() {
     robot.showWindow(window);
     validateWindowIsEnabledAndShowing(window);
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled() {
+  void should_Throw_Error_If_Component_Is_Disabled() {
     robot.showWindow(window);
     disable(window);
     robot.waitForIdle();
-    thrown.expectIllegalStateIsDisabledComponent();
-    validateWindowIsEnabledAndShowing(window);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> validateWindowIsEnabledAndShowing(window));
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    validateWindowIsEnabledAndShowing(window);
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> validateWindowIsEnabledAndShowing(window));
   }
 
   @RunsInEDT
