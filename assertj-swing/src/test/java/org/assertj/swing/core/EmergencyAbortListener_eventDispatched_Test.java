@@ -29,26 +29,26 @@ import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EmergencyAbortListener#eventDispatched(AWTEvent)}.
  * 
  * @author Alex Ruiz
  */
-public class EmergencyAbortListener_eventDispatched_Test extends EDTSafeTestCase {
+class EmergencyAbortListener_eventDispatched_Test extends EDTSafeTestCase {
   private TestTerminator terminator;
   private EmergencyAbortListener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     terminator = mock(TestTerminator.class);
     listener = new EmergencyAbortListener(singletonToolkitMock(), terminator);
   }
 
   @Test
-  public void should_Not_Terminate_Tests_If_Event_Id_Is_Not_KeyPressed() {
+  void should_Not_Terminate_Tests_If_Event_Id_Is_Not_KeyPressed() {
     AWTEvent event = newAWTEventMock();
     int eventId = KEY_PRESSED + 1;
     when(event.getID()).thenReturn(eventId);
@@ -57,7 +57,7 @@ public class EmergencyAbortListener_eventDispatched_Test extends EDTSafeTestCase
   }
 
   @Test
-  public void should_Not_Terminate_Tests_If_Event_Is_Not_KeyEvent() {
+  void should_Not_Terminate_Tests_If_Event_Is_Not_KeyEvent() {
     AWTEvent event = newAWTEventMock();
     when(event.getID()).thenReturn(KEY_PRESSED);
     listener.eventDispatched(event);
@@ -65,21 +65,21 @@ public class EmergencyAbortListener_eventDispatched_Test extends EDTSafeTestCase
   }
 
   @Test
-  public void should_Not_Terminate_Tests_If_Key_Code_Does_Not_Match() {
+  void should_Not_Terminate_Tests_If_Key_Code_Does_Not_Match() {
     KeyEvent event = new KeyEvent(button().createNew(), KEY_PRESSED, 0, 0, VK_Z, 'Z');
     listener.eventDispatched(event);
     verifyZeroInteractions(terminator);
   }
 
   @Test
-  public void should_Not_Terminate_Tests_If_Modifiers_Do_Not_Match() {
+  void should_Not_Terminate_Tests_If_Modifiers_Do_Not_Match() {
     KeyEvent event = new KeyEvent(button().createNew(), KEY_PRESSED, 0, 0, VK_A, 'A');
     listener.eventDispatched(event);
     verifyZeroInteractions(terminator);
   }
 
   @Test
-  public void should_Terminate_Tests_If_Key_Combination_Matches() {
+  void should_Terminate_Tests_If_Key_Combination_Matches() {
     KeyEvent event = new KeyEvent(button().createNew(), KEY_PRESSED, 0, CTRL_MASK | SHIFT_MASK, VK_A, 'A');
     listener.eventDispatched(event);
     verify(terminator).terminateTests();

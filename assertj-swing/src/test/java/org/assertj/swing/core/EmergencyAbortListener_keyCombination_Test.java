@@ -12,6 +12,9 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static java.awt.event.InputEvent.ALT_MASK;
 import static java.awt.event.InputEvent.META_MASK;
 import static java.awt.event.KeyEvent.VK_C;
@@ -23,30 +26,29 @@ import static org.assertj.swing.core.InputModifiers.isMetaDown;
 import static org.assertj.swing.core.InputModifiers.isShiftDown;
 import static org.assertj.swing.core.KeyPressInfo.keyCode;
 import static org.assertj.swing.test.awt.Toolkits.singletonToolkitMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Tests for {@link EmergencyAbortListener#keyCombination(KeyPressInfo)}.
  * 
  * @author Alex Ruiz
  */
-public class EmergencyAbortListener_keyCombination_Test {
+class EmergencyAbortListener_keyCombination_Test {
   private EmergencyAbortListener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     listener = new EmergencyAbortListener(singletonToolkitMock());
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_KeyPressInfo_Is_Null() {
-    listener.keyCombination(null);
+  @Test
+  void should_Throw_Error_If_KeyPressInfo_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> listener.keyCombination(null));
   }
 
   @Test
-  public void should_Update_Key_Combination() {
+  void should_Update_Key_Combination() {
     listener.keyCombination(keyCode(VK_C).modifiers(ALT_MASK, META_MASK));
     assertThat(listener.keyCode()).isEqualTo(VK_C);
     assertThatModifiersAreAltAndMeta(listener.modifiers());

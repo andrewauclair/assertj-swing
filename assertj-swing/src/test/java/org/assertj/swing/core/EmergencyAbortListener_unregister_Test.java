@@ -17,26 +17,26 @@ import static org.mockito.Mockito.verify;
 
 import java.awt.Toolkit;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EmergencyAbortListener#unregister()}.
  * 
  * @author Alex Ruiz
  */
-public class EmergencyAbortListener_unregister_Test {
+class EmergencyAbortListener_unregister_Test {
   private Toolkit toolkit;
   private EmergencyAbortListener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     toolkit = singletonToolkitMock();
     listener = new EmergencyAbortListener(toolkit);
   }
 
   @Test
-  public void should_Unregister_From_Toolkit() {
+  void should_Unregister_From_Toolkit() {
     listener.unregister();
     verify(toolkit).removeAWTEventListener(listener);
   }

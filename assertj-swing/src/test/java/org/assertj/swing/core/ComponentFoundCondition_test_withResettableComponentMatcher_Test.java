@@ -22,9 +22,9 @@ import java.awt.Container;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentFoundCondition#test()}.
@@ -39,27 +39,27 @@ public class ComponentFoundCondition_test_withResettableComponentMatcher_Test ex
 
   private ComponentFoundCondition condition;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     root = singletonContainerMock();
   }
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     finder = mock(ComponentFinder.class);
     matcher = mock(ResettableComponentMatcher.class);
     condition = new ComponentFoundCondition("", finder, matcher, root);
   }
 
   @Test
-  public void should_Reset_Matcher_When_Match_Not_Found() {
+  void should_Reset_Matcher_When_Match_Not_Found() {
     when(finder.find(root, matcher)).thenThrow(new ComponentLookupException("Thrown on purpose"));
     condition.test();
     verify(matcher).reset(false);
   }
 
   @Test
-  public void should_Reset_Matcher_When_Match_Found() {
+  void should_Reset_Matcher_When_Match_Found() {
     when(finder.find(root, matcher)).thenReturn(singletonComponentMock());
     condition.test();
     verify(matcher).reset(true);

@@ -12,39 +12,30 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-
-import java.util.Collection;
+import org.assertj.swing.test.data.BooleanProvider;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 
-import org.assertj.swing.test.data.BooleanProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link AbstractComponentMatcher#AbstractComponentMatcher(boolean)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class AbstractComponentMatcher_constructorWithRequireShowing_Test {
-  private final boolean requireShowing;
-
-  @Parameters
-  @Nonnull public static Collection<Object[]> booleans() {
+class AbstractComponentMatcher_constructorWithRequireShowing_Test {
+  @Nonnull
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
   }
 
-  public AbstractComponentMatcher_constructorWithRequireShowing_Test(boolean requireShowing) {
-    this.requireShowing = requireShowing;
-  }
-
-  @Test
-  public void should_Require_Showing_As_Specified_In_Constructor() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Require_Showing_As_Specified_In_Constructor(boolean requireShowing) {
     AbstractComponentMatcher matcher = new ConcreteComponentMatcher(requireShowing);
     assertThat(matcher.requireShowing()).isEqualTo(requireShowing);
   }

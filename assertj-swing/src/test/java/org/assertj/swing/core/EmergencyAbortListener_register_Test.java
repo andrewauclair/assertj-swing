@@ -22,26 +22,26 @@ import static org.mockito.Mockito.when;
 import java.awt.Toolkit;
 import java.awt.event.AWTEventListener;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EmergencyAbortListener#register()}.
  * 
  * @author Alex Ruiz
  */
-public class EmergencyAbortListener_register_Test {
+class EmergencyAbortListener_register_Test {
   private Toolkit toolkit;
   private EmergencyAbortListener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     toolkit = newToolkitMock();
     listener = new EmergencyAbortListener(toolkit);
   }
 
   @Test
-  public void should_Remove_Previous_And_Register_Itself_In_Toolkit() {
+  void should_Remove_Previous_And_Register_Itself_In_Toolkit() {
     EmergencyAbortListener previous = mock(EmergencyAbortListener.class);
     AWTEventListener[] allPrevious = { previous, singletonAWTEventListenerMock() };
     when(toolkit.getAWTEventListeners(KEY_EVENT_MASK)).thenReturn(allPrevious);

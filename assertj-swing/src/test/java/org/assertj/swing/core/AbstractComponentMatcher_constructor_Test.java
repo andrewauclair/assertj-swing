@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link AbstractComponentMatcher#AbstractComponentMatcher()}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractComponentMatcher_constructor_Test {
+class AbstractComponentMatcher_constructor_Test {
   @Test
-  public void should_Not_Require_Showing_By_Default() {
+  void should_Not_Require_Showing_By_Default() {
     AbstractComponentMatcher matcher = new ConcreteComponentMatcher();
     assertThat(matcher.requireShowing()).isFalse();
   }

@@ -21,24 +21,24 @@ import static org.assertj.swing.core.InputModifiers.isMetaDown;
 import static org.assertj.swing.core.InputModifiers.isShiftDown;
 import static org.assertj.swing.test.awt.Toolkits.singletonToolkitMock;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EmergencyAbortListener#EmergencyAbortListener(java.awt.Toolkit)}.
  * 
  * @author Alex Ruiz
  */
-public class EmergencyAbortListener_constructor_Test {
+class EmergencyAbortListener_constructor_Test {
   private EmergencyAbortListener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     listener = new EmergencyAbortListener(singletonToolkitMock());
   }
 
   @Test
-  public void should_Have_CTRL_SHIFT_A_As_Default_Key_Combination() {
+  void should_Have_CTRL_SHIFT_A_As_Default_Key_Combination() {
     assertThat(listener.keyCode()).isEqualTo(VK_A);
     assertThatModifiersAreCtrlAndShift(listener.modifiers());
   }

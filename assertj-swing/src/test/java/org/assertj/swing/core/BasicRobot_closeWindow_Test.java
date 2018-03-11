@@ -21,9 +21,9 @@ import static org.assertj.swing.timing.Pause.pause;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.timing.Condition;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#close(java.awt.Window)}.
@@ -31,24 +31,24 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_closeWindow_Test extends EDTSafeTestCase {
+class BasicRobot_closeWindow_Test extends EDTSafeTestCase {
   private BasicRobot robot;
   private TestWindow w;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robot = (BasicRobot) BasicRobot.robotWithNewAwtHierarchy();
     w = TestWindow.createNewWindow(getClass());
     w.display();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     robot.cleanUp();
   }
 
   @Test
-  public void should_Close_Window() {
+  void should_Close_Window() {
     robot.close(w);
     pause(new Condition("Window closed") {
       @Override
@@ -60,7 +60,7 @@ public class BasicRobot_closeWindow_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Not_Close_Window_If_Window_Not_Showing() {
+  void should_Not_Close_Window_If_Window_Not_Showing() {
     hide(w);
     robot.waitForIdle();
     robot.close(w);

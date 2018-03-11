@@ -12,23 +12,17 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.timing.Pause.pause;
-
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Collection;
-
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.timing.Condition;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.timing.Pause.pause;
 
 /**
  * Tests for {@link BasicRobot#requireNoJOptionPaneIsShowing()}.
@@ -36,37 +30,29 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_requireNoJOptionPaneIsShowing_Test extends BasicRobot_TestCase {
+class BasicRobot_requireNoJOptionPaneIsShowing_Test extends BasicRobot_TestCase {
   private JButton button;
-  @Rule
-  public ExpectedException thrown = none();
 
   @RunsInEDT
   @Override
   void beforeShowingWindow() {
     execute(() -> {
       button = new JButton("Click Me");
-      button.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          JOptionPane.showMessageDialog(window(), "A Message");
-        }
-      });
+      button.addActionListener(e -> JOptionPane.showMessageDialog(window(), "A Message"));
       window().add(button);
     });
   }
 
   @Test
-  public void should_Pass_If_No_JOptionPane_Is_Showing() {
+  void should_Pass_If_No_JOptionPane_Is_Showing() {
     robot().requireNoJOptionPaneIsShowing();
   }
 
   @Test
-  public void should_Fail_If_A_JOptionPane_Is_Showing() {
+  void should_Fail_If_A_JOptionPane_Is_Showing() {
     robot().click(button);
     pauseTillJOptionPaneIsShowing();
-    thrown.expectAssertionError("Expecting no JOptionPane to be showing");
-    robot().requireNoJOptionPaneIsShowing();
+    ExpectedException.assertAssertionError(() -> robot().requireNoJOptionPaneIsShowing(), "Expecting no JOptionPane to be showing");
   }
 
   private void pauseTillJOptionPaneIsShowing() {

@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.test.recorder.KeyRecorder;
 import org.assertj.swing.timing.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#pressAndReleaseKeys(int...)}.
@@ -32,15 +32,15 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_pressAndReleaseKeys_Test extends BasicRobot_TestCase {
+class BasicRobot_pressAndReleaseKeys_Test extends BasicRobot_TestCase {
   @Test
-  public void should_Press_And_Release_Given_Keys() {
+  void should_Press_And_Release_Given_Keys() {
     giveFocusToTextField();
     final JTextField textField = window().textField();
     final KeyRecorder recorder = KeyRecorder.attachTo(textField);
     execute(() -> textField.setText(""));
     robot().waitForIdle();
-    robot().pressAndReleaseKeys(new int[] { VK_A, VK_B, VK_Z });
+    robot().pressAndReleaseKeys(VK_A, VK_B, VK_Z);
     pause(new Condition("until keys VK_A, VK_B and VK_Z are pressed and released") {
       @Override
       public boolean test() {

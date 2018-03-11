@@ -12,27 +12,23 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.KeyEvent.VK_A;
-import static java.awt.event.KeyEvent.VK_B;
-import static java.awt.event.KeyEvent.VK_C;
+import org.assertj.swing.test.recorder.KeyRecorder;
+import org.assertj.swing.timing.Condition;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.concurrent.Executors;
+
+import static java.awt.event.KeyEvent.*;
 import static org.assertj.swing.timing.Pause.pause;
 import static org.assertj.swing.timing.Timeout.timeout;
 import static org.fest.util.Arrays.array;
 
-import java.awt.AWTEvent;
-import java.awt.EventQueue;
-import java.awt.Toolkit;
-import java.util.concurrent.Executors;
-
-import org.assertj.swing.test.recorder.KeyRecorder;
-import org.assertj.swing.timing.Condition;
-import org.junit.After;
-import org.junit.Test;
-
 /**
  * Tests for issue with slow waitForIdle with a custom event queue
  */
-public class CustomEventQueue_Test extends BasicRobot_TestCase {
+class CustomEventQueue_Test extends BasicRobot_TestCase {
   private CustomEventQueue newEventQueue = new CustomEventQueue();
 
   @Override
@@ -41,20 +37,16 @@ public class CustomEventQueue_Test extends BasicRobot_TestCase {
     Toolkit.getDefaultToolkit().getSystemEventQueue().push(newEventQueue);
   }
 
-  @After
-  public void cleanup() {
+  @AfterEach
+  void cleanup() {
     newEventQueue.remove();
   }
 
   @Test
-  public void type_keys_before_timeout() {
+  void type_keys_before_timeout() {
     giveFocusToTextField();
     final KeyRecorder recorder = KeyRecorder.attachTo(window().textField());
-    Executors.newSingleThreadExecutor().execute(new Runnable() {
-      public void run() {
-        robot().pressAndReleaseKeys(VK_A, VK_B, VK_C);
-      }
-    });
+    Executors.newSingleThreadExecutor().execute(() -> robot().pressAndReleaseKeys(VK_A, VK_B, VK_C));
     pause(new Condition("until all keys are typed") {
       @Override
       public boolean test() {

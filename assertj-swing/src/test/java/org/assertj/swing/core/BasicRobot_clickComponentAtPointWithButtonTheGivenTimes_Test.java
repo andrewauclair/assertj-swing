@@ -12,22 +12,19 @@
  */
 package org.assertj.swing.core;
 
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.swing.awt.AWT.locationOnScreenOf;
 import static org.assertj.swing.awt.AWT.visibleCenterOf;
 import static org.assertj.swing.core.ClickingDataProvider.clickingData;
-
-import java.awt.Point;
-import java.util.Collection;
-
-import javax.swing.JTextField;
-
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link BasicRobot#click(java.awt.Component, java.awt.Point, MouseButton, int)}.
@@ -35,23 +32,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class BasicRobot_clickComponentAtPointWithButtonTheGivenTimes_Test extends BasicRobot_ClickTestCase {
-  private final MouseButton button;
-  private final int times;
-
-  @Parameters
-  public static Collection<Object[]> buttons() {
+class BasicRobot_clickComponentAtPointWithButtonTheGivenTimes_Test extends BasicRobot_ClickTestCase {
+  private static Collection<Object[]> buttons() {
     return newArrayList(clickingData());
   }
 
-  public BasicRobot_clickComponentAtPointWithButtonTheGivenTimes_Test(MouseButton button, int times) {
-    this.button = button;
-    this.times = times;
-  }
-
-  @Test
-  public void should_Click_At_Given_Point_With_Given_Mouse_Button_And_Given_Number_Of_Times() {
+  @ParameterizedTest
+  @MethodSource("buttons")
+  void should_Click_At_Given_Point_With_Given_Mouse_Button_And_Given_Number_Of_Times(MouseButton button, int times) {
     JTextField textField = window().textField();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(textField);
     Point screenLocation = checkNotNull(locationOnScreenOf(textField));

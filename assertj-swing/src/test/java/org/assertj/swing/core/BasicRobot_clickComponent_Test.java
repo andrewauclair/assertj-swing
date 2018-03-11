@@ -15,7 +15,7 @@ package org.assertj.swing.core;
 import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
 
 import org.assertj.swing.test.recorder.ClickRecorder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#click(java.awt.Component)}.
@@ -23,9 +23,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_clickComponent_Test extends BasicRobot_ClickTestCase {
+class BasicRobot_clickComponent_Test extends BasicRobot_ClickTestCase {
   @Test
-  public void should_Click_Component() {
+  void should_Click_Component() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window().textField());
     robot().click(window().textField());
     recorder.clicked(LEFT_BUTTON).timesClicked(1);

@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static java.awt.event.InputEvent.CTRL_MASK;
 import static java.awt.event.InputEvent.SHIFT_MASK;
 import static java.awt.event.KeyEvent.KEY_PRESSED;
@@ -30,21 +32,19 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link BasicRobot#pressAndReleaseKey(int, int...)}.
  * 
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_pressAndReleaseKeyWithModifiers_Test extends BasicRobot_TestCase {
+class BasicRobot_pressAndReleaseKeyWithModifiers_Test extends BasicRobot_TestCase {
   @Test
-  public void should_Press_Key_And_Modifiers() {
+  void should_Press_Key_And_Modifiers() {
     JTextField textField = window().textField();
     robot().focusAndWaitForFocusGain(textField);
     KeyPressRecorder recorder = KeyPressRecorder.attachTo(textField);
-    robot().pressAndReleaseKey(VK_C, new int[] { CTRL_MASK, SHIFT_MASK });
+    robot().pressAndReleaseKey(VK_C, CTRL_MASK, SHIFT_MASK);
     robot().waitForIdle();
     List<KeyAction> actions = recorder.actions;
     assertThat(actions).containsOnly(KeyAction.action(KEY_PRESSED, VK_SHIFT),

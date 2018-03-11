@@ -24,7 +24,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#findActivePopupMenu()}.
@@ -36,7 +36,7 @@ import org.junit.Test;
 public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
 
   @RunsInEDT
-  final JPopupMenu[] addPopupMenuToTextFieldWithCascade(int cascadePosition) {
+  private final JPopupMenu[] addPopupMenuToTextFieldWithCascade(int cascadePosition) {
     return createAndSetPopupMenuWithCascade(cascadePosition, window().textField(), "Luke", "Leia");
   }
 
@@ -54,10 +54,10 @@ public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
    *         cascadePosition
    */
   @RunsInEDT
-  public static JPopupMenu[] createAndSetPopupMenuWithCascade(
-                                                              final int cascadePosition, final JComponent c,
-                                                              final String itemOne,
-                                                              final String itemTwo) {
+  private static JPopupMenu[] createAndSetPopupMenuWithCascade(
+          final int cascadePosition, final JComponent c,
+          final String itemOne,
+          final String itemTwo) {
     return execute(() -> {
       // build the outer cascade popup
       JMenu outerMenu = new JMenu("cascade test");
@@ -103,7 +103,7 @@ public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
   }
 
   @RunsInEDT
-  final JPopupMenu[] addPopupMenuToTextFieldWithCascadeWithCascade(int cascadeCascadePosition) {
+  private final JPopupMenu[] addPopupMenuToTextFieldWithCascadeWithCascade(int cascadeCascadePosition) {
     return createAndSetPopupMenuWithCascadeWithCascade(cascadeCascadePosition, window().textField(),
                                                        "Luke2", "Leia2");
   }
@@ -121,10 +121,10 @@ public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
    *         cascadeCascadePosition
    */
   @RunsInEDT
-  public static JPopupMenu[] createAndSetPopupMenuWithCascadeWithCascade(
-                                                                         final int cascadeCascadePosition,
-                                                                         final JComponent c, final String itemOne,
-                                                                         final String itemTwo) {
+  private static JPopupMenu[] createAndSetPopupMenuWithCascadeWithCascade(
+          final int cascadeCascadePosition,
+          final JComponent c, final String itemOne,
+          final String itemTwo) {
     return execute(() -> {
 
       JMenu outerMenu = new JMenu("cascade2 test");
@@ -277,37 +277,37 @@ public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
   }
 
   @Test
-  public void should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_3() throws InterruptedException {
+  void should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_3() throws InterruptedException {
     should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_N(3);
   }
 
   @Test
-  public void should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_2() throws InterruptedException {
+  void should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_2() throws InterruptedException {
     should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_N(2);
   }
 
   @Test
-  public void should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_1() throws InterruptedException {
+  void should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_1() throws InterruptedException {
     should_Return_Outer_PopupMenu_When_Having_A_CascadingPopup_Select_N(1);
   }
 
   @Test
-  public void should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_3() throws InterruptedException {
+  void should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_3() throws InterruptedException {
     should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_N(3);
   }
 
   @Test
-  public void should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_2() throws InterruptedException {
+  void should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_2() throws InterruptedException {
     should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_N(2);
   }
 
   @Test
-  public void should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_1() throws InterruptedException {
+  void should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_1() throws InterruptedException {
     should_Return_Outer_PopupMenu_When_Having_A_CascadingCascadePopup_Select_N(1);
   }
 
   @Test
-  public void should_Return_Active_PopupMenu() {
+  void should_Return_Active_PopupMenu() {
     JPopupMenu popupMenu = addPopupMenuToTextField();
     robot().showPopupMenu(window().textField());
     JPopupMenu found = robot().findActivePopupMenu();
@@ -315,7 +315,7 @@ public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
   }
 
   @Test
-  public void should_Return_Null_If_Active_PopupMenu_Not_Found() {
+  void should_Return_Null_If_Active_PopupMenu_Not_Found() {
     JPopupMenu found = robot().findActivePopupMenu();
     assertThat(found).isNull();
   }

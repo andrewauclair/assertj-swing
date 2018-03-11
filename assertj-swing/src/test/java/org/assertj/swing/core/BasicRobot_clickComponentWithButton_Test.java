@@ -12,22 +12,16 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.core.util.Preconditions.checkNotNull;
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
-import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-
-import java.util.Collection;
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.annotation.Nonnull;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.util.Collection;
 
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.core.MouseButton.*;
 
 /**
  * Tests for {@link BasicRobot#click(java.awt.Component, MouseButton)}.
@@ -35,21 +29,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class BasicRobot_clickComponentWithButton_Test extends BasicRobot_ClickTestCase {
-  private final MouseButton button;
-
-  @Parameters
-  public static Collection<Object[]> buttons() {
+class BasicRobot_clickComponentWithButton_Test extends BasicRobot_ClickTestCase {
+  private static Collection<Object[]> buttons() {
     return newArrayList(new Object[][] { { LEFT_BUTTON }, { MIDDLE_BUTTON }, { RIGHT_BUTTON } });
   }
 
-  public BasicRobot_clickComponentWithButton_Test(@Nonnull MouseButton button) {
-    this.button = checkNotNull(button);
-  }
-
-  @Test
-  public void should_Click_Component_Once_With_Given_Button() {
+  @ParameterizedTest
+  @MethodSource("buttons")
+  void should_Click_Component_Once_With_Given_Button(@Nonnull MouseButton button) {
     JTextField textField = window().textField();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(textField);
     robot().click(textField, button);

@@ -18,7 +18,7 @@ import static org.assertj.swing.timing.Timeout.timeout;
 
 import org.assertj.swing.test.recorder.KeyRecorder;
 import org.assertj.swing.timing.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#pressKey(int)} and {@link BasicRobot#releaseKey(int)}.
@@ -26,9 +26,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_pressKeyAndReleaseKey_Test extends BasicRobot_TestCase {
+class BasicRobot_pressKeyAndReleaseKey_Test extends BasicRobot_TestCase {
   @Test
-  public void should_Press_Given_Key() {
+  void should_Press_Given_Key() {
     giveFocusToTextField();
     final KeyRecorder recorder = KeyRecorder.attachTo(window().textField());
     robot().pressKey(VK_A);
@@ -41,7 +41,7 @@ public class BasicRobot_pressKeyAndReleaseKey_Test extends BasicRobot_TestCase {
   }
 
   @Test
-  public void should_Release_Given_Key() {
+  void should_Release_Given_Key() {
     giveFocusToTextField();
     final KeyRecorder recorder = KeyRecorder.attachTo(window().textField());
     robot().pressKey(VK_A);

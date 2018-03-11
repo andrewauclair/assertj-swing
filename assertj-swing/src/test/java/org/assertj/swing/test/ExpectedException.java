@@ -50,7 +50,7 @@ public class ExpectedException implements TestRule {
     expect(AssertionError.class, message);
   }
 
-  public void assertAssertionError(Executable executable, String message) {
+  public static void assertAssertionError(Executable executable, String message) {
     assertContainsMessage(AssertionError.class, executable, message);
   }
 

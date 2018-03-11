@@ -30,15 +30,15 @@ import org.assertj.swing.monitor.WindowMonitor;
 import org.assertj.swing.test.awt.TestComponents;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWTEventPoster#postEvent(Component, AWTEvent)}.
  * 
  * @author Alex Ruiz
  */
-public class AWTEventPoster_postEvent_Test extends EDTSafeTestCase {
+class AWTEventPoster_postEvent_Test extends EDTSafeTestCase {
   private static final int WAIT_DELAY = 1000;
   private Toolkit toolkit;
   private InputState inputState;
@@ -48,8 +48,8 @@ public class AWTEventPoster_postEvent_Test extends EDTSafeTestCase {
   private AWTEvent event;
   private AWTEventPoster poster;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     toolkit = newToolkitMock();
     inputState = mock(InputState.class);
     monitor = mock(WindowMonitor.class);
@@ -60,7 +60,7 @@ public class AWTEventPoster_postEvent_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Post_Event_In_Component_EventQueue_If_Component_Is_Not_Null() {
+  void should_Post_Event_In_Component_EventQueue_If_Component_Is_Not_Null() {
     final Component c = TestComponents.newComponentMock();
     when(settings.delayBetweenEvents()).thenReturn(WAIT_DELAY);
     when(monitor.eventQueueFor(c)).thenReturn(eventQueue);
@@ -70,7 +70,7 @@ public class AWTEventPoster_postEvent_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Post_Event_In_System_EventQueue_Ff_Component_Is_Null() {
+  void should_Post_Event_In_System_EventQueue_Ff_Component_Is_Null() {
     when(settings.delayBetweenEvents()).thenReturn(WAIT_DELAY);
     when(toolkit.getSystemEventQueue()).thenReturn(eventQueue);
     postEventAndAssertItWaited(null);

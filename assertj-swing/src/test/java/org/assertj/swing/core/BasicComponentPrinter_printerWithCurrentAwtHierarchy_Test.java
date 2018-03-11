@@ -15,7 +15,7 @@ package org.assertj.swing.core;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.hierarchy.ExistingHierarchy;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentPrinter#printerWithCurrentAwtHierarchy()}.
@@ -23,9 +23,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentPrinter_printerWithCurrentAwtHierarchy_Test {
+class BasicComponentPrinter_printerWithCurrentAwtHierarchy_Test {
   @Test
-  public void should_Create_ComponentPrinter_With_ExistingHierarchy() {
+  void should_Create_ComponentPrinter_With_ExistingHierarchy() {
     BasicComponentPrinter printer = (BasicComponentPrinter) BasicComponentPrinter.printerWithCurrentAwtHierarchy();
     assertThat(printer.hierarchy()).isInstanceOf(ExistingHierarchy.class);
   }

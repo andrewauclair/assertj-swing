@@ -19,9 +19,9 @@ import static org.mockito.Mockito.when;
 import java.awt.Component;
 
 import org.assertj.swing.test.builder.JLabels;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FocusOwnerFinder#focusOwner()}.
@@ -29,12 +29,12 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class FocusOwnerFinder_focusOwner_Test {
+class FocusOwnerFinder_focusOwner_Test {
   private FocusOwnerFinderStrategy strategy1;
   private FocusOwnerFinderStrategy strategy2;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     strategy1 = mockFocusOwnerFinderStrategy();
     strategy2 = mockFocusOwnerFinderStrategy();
     FocusOwnerFinder.replaceStrategiesWith(strategy1, strategy2);
@@ -44,13 +44,13 @@ public class FocusOwnerFinder_focusOwner_Test {
     return mock(FocusOwnerFinderStrategy.class);
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     FocusOwnerFinder.initializeStrategies();
   }
 
   @Test
-  public void should_Try_Next_Strategy_If_Focus_Owner_Not_Found() {
+  void should_Try_Next_Strategy_If_Focus_Owner_Not_Found() {
     Component focusOwner = JLabels.label().createNew();
     when(strategy1.focusOwner()).thenThrow(new RuntimeException());
     when(strategy2.focusOwner()).thenReturn(focusOwner);
@@ -58,7 +58,7 @@ public class FocusOwnerFinder_focusOwner_Test {
   }
 
   @Test
-  public void should_Return_Null_If_Strategies_Do_Not_Find_Focus_Owner() {
+  void should_Return_Null_If_Strategies_Do_Not_Find_Focus_Owner() {
     when(strategy1.focusOwner()).thenThrow(new RuntimeException());
     when(strategy2.focusOwner()).thenThrow(new RuntimeException());
     assertThat(FocusOwnerFinder.focusOwner()).isNull();

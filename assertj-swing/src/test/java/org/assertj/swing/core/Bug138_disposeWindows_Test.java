@@ -27,9 +27,9 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.hierarchy.ComponentHierarchy;
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=138">Bug 138</a>.
@@ -37,26 +37,26 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class Bug138_disposeWindows_Test extends EDTSafeTestCase {
+class Bug138_disposeWindows_Test extends EDTSafeTestCase {
   private ComponentHierarchy hierarchy;
   private BasicRobot robot;
   private JFrame frame;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     hierarchy = newComponentHierarchyMock();
     robot = new TestRobotFixture(hierarchy);
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     if (frame != null) {
       hideAndDisposeInEDT(frame);
     }
   }
 
   @Test
-  public void should_Dispose_Windows() {
+  void should_Dispose_Windows() {
     frame = frame().withTitle("Hello").createNew();
     List<Container> roots = newArrayList((Container) frame);
     when(hierarchy.roots()).thenReturn(roots);
@@ -65,7 +65,7 @@ public class Bug138_disposeWindows_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Not_Dispose_Windows() {
+  void should_Not_Dispose_Windows() {
     robot.cleanUpWithoutDisposingWindows();
     verifyZeroInteractions(hierarchy);
   }

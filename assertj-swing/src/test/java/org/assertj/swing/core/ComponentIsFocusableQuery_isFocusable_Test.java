@@ -26,6 +26,9 @@ import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -35,27 +38,22 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class ComponentIsFocusableQuery_isFocusable_Test extends EDTSafeTestCase {
-  private final boolean isFocusable;
+class ComponentIsFocusableQuery_isFocusable_Test extends EDTSafeTestCase {
   private Component component;
 
-  @Parameters
-  @Nonnull public static Collection<Object[]> isFocusable() {
+  @Nonnull
+  private static Collection<Object[]> isFocusable() {
     return newArrayList(BooleanProvider.booleans());
   }
 
-  public ComponentIsFocusableQuery_isFocusable_Test(boolean isFocusable) {
-    this.isFocusable = isFocusable;
-  }
-
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     component = mock(Component.class);
   }
 
-  @Test
-  public void should_Return_Component_Is_Focusable() {
+  @ParameterizedTest
+  @MethodSource("isFocusable")
+  void should_Return_Component_Is_Focusable(boolean isFocusable) {
     when(component.isFocusable()).thenReturn(isFocusable);
     assertThat(ComponentIsFocusableQuery.isFocusable(component)).isEqualTo(isFocusable);
   }

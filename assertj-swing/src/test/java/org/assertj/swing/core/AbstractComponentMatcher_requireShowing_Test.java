@@ -21,6 +21,8 @@ import javax.annotation.Nonnull;
 
 import org.assertj.swing.test.data.BooleanProvider;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -31,21 +33,15 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class AbstractComponentMatcher_requireShowing_Test {
-  private final boolean requireShowing;
-
-  @Parameters
-  @Nonnull public static Collection<Object[]> booleans() {
+class AbstractComponentMatcher_requireShowing_Test {
+  @Nonnull
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
   }
 
-  public AbstractComponentMatcher_requireShowing_Test(boolean requireShowing) {
-    this.requireShowing = requireShowing;
-  }
-
-  @Test
-  public void should_Require_Showing_As_Specified_In_Setter() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Require_Showing_As_Specified_In_Setter(boolean requireShowing) {
     AbstractComponentMatcher matcher = new ConcreteComponentMatcher();
     matcher.requireShowing(requireShowing);
     assertThat(matcher.requireShowing()).isEqualTo(requireShowing);

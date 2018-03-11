@@ -12,19 +12,18 @@
  */
 package org.assertj.swing.core;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
-
-import java.awt.Dimension;
-
-import javax.swing.JWindow;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Tests for {@link BasicRobot#showWindow(java.awt.Window, java.awt.Dimension, boolean)}.
@@ -32,21 +31,21 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_showWindowBySizeAndPacking_Test extends EDTSafeTestCase {
+class BasicRobot_showWindowBySizeAndPacking_Test extends EDTSafeTestCase {
   private BasicRobot robot;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robot = (BasicRobot) BasicRobot.robotWithNewAwtHierarchy();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     robot.cleanUp();
   }
 
   @Test
-  public void should_Not_Pack_Window_As_Specified() {
+  void should_Not_Pack_Window_As_Specified() {
     // TODO split this test case in 2+
     Dimension size = new Dimension(100, 100);
     WindowToShow result = execute(() -> new WindowToShow());

@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 import javax.swing.JDialog;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=257">Bug 257</a>.
@@ -30,9 +30,9 @@ import org.junit.Test;
  * @author Juhos Csaba-Zsolt
  * @author Alex Ruiz
  */
-public class Bug257_GenericMatcherMatchesAnyType_Test extends EDTSafeTestCase {
+class Bug257_GenericMatcherMatchesAnyType_Test extends EDTSafeTestCase {
   @Test
-  public void should_Not_Match_Components_Other_Than_Specified() {
+  void should_Not_Match_Components_Other_Than_Specified() {
     Class<JDialog> typeToMatch = JDialog.class;
     GenericTypeMatcher<JDialog> matcher = new ExtendedGenericTypeMatcher<JDialog>(typeToMatch);
     assertThat(matcher.matches(textField().createNew())).isFalse();

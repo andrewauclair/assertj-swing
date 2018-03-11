@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.swing.JButton;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#focusAndWaitForFocusGain(Component)}.
@@ -29,7 +29,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_focusAndWaitForFocusGain_Test extends BasicRobot_TestCase {
+class BasicRobot_focusAndWaitForFocusGain_Test extends BasicRobot_TestCase {
   private JButton button;
 
   @RunsInEDT
@@ -42,7 +42,7 @@ public class BasicRobot_focusAndWaitForFocusGain_Test extends BasicRobot_TestCas
   }
 
   @Test
-  public void should_Give_Focus_And_Wait_Until_Component_Has_Focus() {
+  void should_Give_Focus_And_Wait_Until_Component_Has_Focus() {
     giveFocusAndVerifyThatHasFocus(button);
     giveFocusAndVerifyThatHasFocus(window().textField());
   }

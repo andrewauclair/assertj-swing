@@ -17,7 +17,7 @@ import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
 import javax.swing.JTextField;
 
 import org.assertj.swing.test.recorder.ClickRecorder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#rightClick(java.awt.Component)}.
@@ -25,9 +25,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_rightClickComponent_Test extends BasicRobot_ClickTestCase {
+class BasicRobot_rightClickComponent_Test extends BasicRobot_ClickTestCase {
   @Test
-  public void should_RightClick_Component() {
+  void should_RightClick_Component() {
     JTextField textField = window().textField();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(textField);
     robot().rightClick(textField);

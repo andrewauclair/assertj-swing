@@ -27,7 +27,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#rotateMouseWheel(java.awt.Component, int)}.
@@ -35,7 +35,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_rotateMouseWheelTest extends BasicRobot_TestCase {
+class BasicRobot_rotateMouseWheelTest extends BasicRobot_TestCase {
   private JList list;
   private JScrollPane scrollPane;
 
@@ -51,7 +51,7 @@ public class BasicRobot_rotateMouseWheelTest extends BasicRobot_TestCase {
   }
 
   @Test
-  public void should_Rotate_Mouse_Wheel() {
+  void should_Rotate_Mouse_Wheel() {
     assertThat(firstVisibleIndexOf(list)).isEqualTo(0);
     MouseWheelRecorder recorder = MouseWheelRecorder.attachTo(scrollPane);
     int amount = 50;

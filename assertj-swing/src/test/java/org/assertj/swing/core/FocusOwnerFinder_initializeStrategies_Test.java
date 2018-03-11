@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link FocusOwnerFinder#initializeStrategies()}.
  * 
  * @author Alex Ruiz
  */
-public class FocusOwnerFinder_initializeStrategies_Test {
+class FocusOwnerFinder_initializeStrategies_Test {
   @Test
-  public void should_Initialize_Correct_Strategies() {
+  void should_Initialize_Correct_Strategies() {
     assertThatFocusOwnerFinderHasStrategiesOfType(ReflectionBasedFocusOwnerFinder.class,
         HierarchyBasedFocusOwnerFinder.class);
   }
