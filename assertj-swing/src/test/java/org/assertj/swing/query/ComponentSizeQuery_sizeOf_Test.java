@@ -21,7 +21,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentSizeQuery#sizeOf(java.awt.Component)}.
@@ -29,7 +29,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentSizeQuery_sizeOf_Test extends SequentialEDTSafeTestCase {
+class ComponentSizeQuery_sizeOf_Test extends SequentialEDTSafeTestCase {
   private static final Dimension SIZE = new Dimension(500, 300);
 
   private MyWindow window;
@@ -46,7 +46,7 @@ public class ComponentSizeQuery_sizeOf_Test extends SequentialEDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_Size_Of_Component() {
+  void should_Return_Size_Of_Component() {
     window.startRecording();
     assertThat(ComponentSizeQuery.sizeOf(window)).isEqualTo(SIZE);
     window.requireInvoked("getSize");

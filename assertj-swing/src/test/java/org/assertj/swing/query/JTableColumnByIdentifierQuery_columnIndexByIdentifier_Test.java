@@ -12,38 +12,29 @@
  */
 package org.assertj.swing.query;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
 import static java.lang.Integer.parseInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.core.MethodInvocations.Args.args;
-
-import java.util.Collection;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JTableColumnByIdentifierQuery#columnIndexByIdentifier(javax.swing.JTable, Object)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JTableColumnByIdentifierQuery_columnIndexByIdentifier_Test extends JTableColumnByIdentifierQuery_TestCase {
-  private final String identifier;
-
-  @Parameters
-  public static Collection<Object[]> columnNames() {
+class JTableColumnByIdentifierQuery_columnIndexByIdentifier_Test extends JTableColumnByIdentifierQuery_TestCase {
+  private static Collection<Object[]> columnNames() {
     return newArrayList(new Object[][] { { "0" }, { "1" }, { "2" }, { "3" } });
   }
 
-  public JTableColumnByIdentifierQuery_columnIndexByIdentifier_Test(String identifier) {
-    this.identifier = identifier;
-  }
-
-  @Test
-  public void should_Return_Column_Index_Given_Identifier() {
+  @ParameterizedTest
+  @MethodSource("columnNames")
+  void should_Return_Column_Index_Given_Identifier(String identifier) {
     table.startRecording();
     int index = parseInt(identifier);
     assertThat(columnIndexByIdentifier(identifier)).isEqualTo(index);

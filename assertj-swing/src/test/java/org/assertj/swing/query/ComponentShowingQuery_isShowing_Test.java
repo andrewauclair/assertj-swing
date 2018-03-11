@@ -19,7 +19,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentShowingQuery#isShowing(java.awt.Component)}.
@@ -27,7 +27,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentShowingQuery_isShowing_Test extends SequentialEDTSafeTestCase {
+class ComponentShowingQuery_isShowing_Test extends SequentialEDTSafeTestCase {
   private MyWindow window;
 
   @Override
@@ -41,14 +41,14 @@ public class ComponentShowingQuery_isShowing_Test extends SequentialEDTSafeTestC
   }
 
   @Test
-  public void should_Return_False_Component_Is_Not_Showing() {
+  void should_Return_False_Component_Is_Not_Showing() {
     window.startRecording();
     assertThat(ComponentShowingQuery.isShowing(window)).isFalse();
     window.requireInvoked("isShowing");
   }
 
   @Test
-  public void should_Return_True_If_Component_Is_Showing() {
+  void should_Return_True_If_Component_Is_Showing() {
     window.display();
     window.startRecording();
     assertThat(ComponentShowingQuery.isShowing(window)).isTrue();

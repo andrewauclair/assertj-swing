@@ -19,7 +19,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentVisibleQuery#isVisible(java.awt.Component)}.
@@ -27,7 +27,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentVisibleQuery_isVisible_Test extends SequentialEDTSafeTestCase {
+class ComponentVisibleQuery_isVisible_Test extends SequentialEDTSafeTestCase {
   private MyWindow window;
 
   @Override
@@ -41,14 +41,14 @@ public class ComponentVisibleQuery_isVisible_Test extends SequentialEDTSafeTestC
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Not_Visible() {
+  void should_Return_False_If_Component_Is_Not_Visible() {
     window.startRecording();
     assertThat(ComponentVisibleQuery.isVisible(window)).isFalse();
     window.requireInvoked("isVisible");
   }
 
   @Test
-  public void should_Return_True_If_Component_Is_Visible() {
+  void should_Return_True_If_Component_Is_Visible() {
     window.display();
     window.startRecording();
     assertThat(ComponentVisibleQuery.isVisible(window)).isTrue();

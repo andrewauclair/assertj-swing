@@ -24,7 +24,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentParentQuery#parentOf(java.awt.Component)}.
@@ -32,7 +32,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentParentQuery_parentOf_Test extends SequentialEDTSafeTestCase {
+class ComponentParentQuery_parentOf_Test extends SequentialEDTSafeTestCase {
   private MyButton button;
 
   @Override
@@ -42,7 +42,7 @@ public class ComponentParentQuery_parentOf_Test extends SequentialEDTSafeTestCas
   }
 
   @Test
-  public void should_Return_Parent_Of_Component() {
+  void should_Return_Parent_Of_Component() {
     button.startRecording();
     Container parent = ComponentParentQuery.parentOf(button);
     assertThat(parent).isInstanceOf(JPanel.class);
@@ -68,7 +68,7 @@ public class ComponentParentQuery_parentOf_Test extends SequentialEDTSafeTestCas
     private boolean recording;
     private final MethodInvocations methodInvocations = new MethodInvocations();
 
-    public MyButton(String text) {
+    MyButton(String text) {
       super(text);
     }
 

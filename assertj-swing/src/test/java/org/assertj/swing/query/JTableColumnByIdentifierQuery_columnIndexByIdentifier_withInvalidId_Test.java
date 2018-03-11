@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.query;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.core.MethodInvocations.Args.args;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JTableColumnByIdentifierQuery#columnIndexByIdentifier(javax.swing.JTable, Object)}.
  * 
  * @author Alex Ruiz
  */
-public class JTableColumnByIdentifierQuery_columnIndexByIdentifier_withInvalidId_Test extends
+class JTableColumnByIdentifierQuery_columnIndexByIdentifier_withInvalidId_Test extends
     JTableColumnByIdentifierQuery_TestCase {
   @Test
-  public void should_Return_Negative_One_If_Column_Index_Not_Found() {
+  void should_Return_Negative_One_If_Column_Index_Not_Found() {
     String invalid = "Hello World";
     table.startRecording();
     assertThat(columnIndexByIdentifier(invalid)).isEqualTo(-1);

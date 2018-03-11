@@ -22,7 +22,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentLocationOnScreenQuery#locationOnScreen(java.awt.Component)}.
@@ -30,7 +30,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentLocationOnScreenQuery_locationOnScreen_Test extends RobotBasedTestCase {
+class ComponentLocationOnScreenQuery_locationOnScreen_Test extends RobotBasedTestCase {
   private MyWindow window;
 
   @Override
@@ -40,7 +40,7 @@ public class ComponentLocationOnScreenQuery_locationOnScreen_Test extends RobotB
   }
 
   @Test
-  public void should_Return_Component_Location_On_Screen() {
+  void should_Return_Component_Location_On_Screen() {
     Point expected = new Point(100, 100);
     window.startRecording();
     assertThat(ComponentLocationOnScreenQuery.locationOnScreen(window)).isEqualTo(expected);

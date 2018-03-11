@@ -12,22 +12,20 @@
  */
 package org.assertj.swing.query;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.task.ComponentSetEnabledTask.setEnabled;
-
-import java.util.Collection;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.task.ComponentSetEnabledTask.setEnabled;
 
 /**
  * Tests for {@link ComponentEnabledQuery#isEnabled(java.awt.Component)}.
@@ -35,19 +33,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class ComponentEnabledQuery_isEnabled_Test extends RobotBasedTestCase {
-  private final boolean enabled;
-
+class ComponentEnabledQuery_isEnabled_Test extends RobotBasedTestCase {
   private MyWindow window;
 
-  @Parameters
-  public static Collection<Object[]> booleans() {
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
-  }
-
-  public ComponentEnabledQuery_isEnabled_Test(boolean enabled) {
-    this.enabled = enabled;
   }
 
   @Override
@@ -55,8 +45,9 @@ public class ComponentEnabledQuery_isEnabled_Test extends RobotBasedTestCase {
     window = MyWindow.createNew();
   }
 
-  @Test
-  public void should_Indicate_If_Component_Is_Enabled_Or_Not() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Indicate_If_Component_Is_Enabled_Or_Not(boolean enabled) {
     setEnabled(window, enabled);
     robot.waitForIdle();
     window.startRecording();
