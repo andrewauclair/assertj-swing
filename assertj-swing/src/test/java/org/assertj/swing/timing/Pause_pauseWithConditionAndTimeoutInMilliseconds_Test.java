@@ -15,49 +15,55 @@ package org.assertj.swing.timing;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 
 /**
  * Tests for {@link Pause#pause(Condition, long)}.
  * 
  * @author Alex Ruiz
  */
-public class Pause_pauseWithConditionAndTimeoutInMilliseconds_Test {
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Timeout_If_Condition_Is_Never_Satisfied() {
-    Pause.pause(new NeverSatisfiedCondition(), 1000);
+class Pause_pauseWithConditionAndTimeoutInMilliseconds_Test {
+  @Test
+  void should_Timeout_If_Condition_Is_Never_Satisfied() {
+    assertThrows(WaitTimedOutError.class, () -> Pause.pause(new NeverSatisfiedCondition(), 1000));
   }
 
-  @Test(timeout = 20000)
-  public void should_Stop_Condition_if_Timedout() throws InterruptedException {
-    NeverSatisfiedCondition condition = new NeverSatisfiedCondition();
-    try {
-      Pause.pause(condition, 1000);
-      fail("Should have timed out");
-    } catch (WaitTimedOutError e) {
-      // expected
-    }
-
-    while (true) {
-      int lastCount = condition.getCount();
-      Thread.sleep(2000);
-      // if condition hasn't been tested again this test succeeded
-      if (condition.getCount() == lastCount) {
-        break;
+  @Test//(timeout = 20000)
+  void should_Stop_Condition_if_Timedout() {
+    assertTimeoutPreemptively(Duration.ofSeconds(20), () -> {
+      NeverSatisfiedCondition condition = new NeverSatisfiedCondition();
+      try {
+        Pause.pause(condition, 1000);
+        fail("Should have timed out");
+      } catch (WaitTimedOutError e) {
+        // expected
       }
-    }
-  }
 
-  @Test(expected = WaitTimedOutError.class, timeout = 1100)
-  public void should_Timeout_If_Condition_Runs_Longer_Than_Timeout() {
-    Pause.pause(new SatisfiedCondition(10000), 1000);
+      while (true) {
+        int lastCount = condition.getCount();
+        Thread.sleep(2000);
+        // if condition hasn't been tested again this test succeeded
+        if (condition.getCount() == lastCount) {
+          break;
+        }
+    }});
   }
 
   @Test
-  public void should_Wait_Till_Condition_Is_Satisfied() {
+  void should_Timeout_If_Condition_Runs_Longer_Than_Timeout() {
+    assertTimeoutPreemptively(Duration.ofMillis(1100), () -> assertThrows(WaitTimedOutError.class, () -> Pause.pause(new SatisfiedCondition(10000), 1000)));
+  }
+
+  @Test
+  void should_Wait_Till_Condition_Is_Satisfied() {
     int timeToWaitTillSatisfied = 1000;
     SatisfiedCondition condition = new SatisfiedCondition(timeToWaitTillSatisfied);
 
@@ -69,13 +75,13 @@ public class Pause_pauseWithConditionAndTimeoutInMilliseconds_Test {
     assertThat(condition.satisfied).isTrue();
   }
 
-  @Test(expected = NumberFormatException.class)
-  public void should_Throw_Error_If_Condition_Throws_Any() {
-    Pause.pause(new RuntimeExceptionCondition(new NumberFormatException("expected")), 1000);
+  @Test
+  void should_Throw_Error_If_Condition_Throws_Any() {
+    assertThrows(NumberFormatException.class, () -> Pause.pause(new RuntimeExceptionCondition(new NumberFormatException("expected")), 1000));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Condition_Is_Null() {
-    Pause.pause((Condition) null, 1000);
+  @Test
+  void should_Throw_Error_If_Condition_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause((Condition) null, 1000));
   }
 }

@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Strings.concat;
 
 import org.assertj.core.description.Description;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Condition#toString()}.
@@ -24,9 +24,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class Condition_toString_Test {
+class Condition_toString_Test {
   @Test
-  public void should_Return_Description_Text() {
+  void should_Return_Description_Text() {
     Description description = new Description() {
       @Override
       public String value() {
@@ -38,20 +38,20 @@ public class Condition_toString_Test {
   }
 
   @Test
-  public void should_Return_Description_Text_Set_As_String() {
+  void should_Return_Description_Text_Set_As_String() {
     MyCondition condition = new MyCondition("Hello World!");
     assertThat(condition.toString()).isEqualTo("Hello World!");
   }
 
   @Test
-  public void should_Return_Condition_Type_If_Description_Is_Null() {
+  void should_Return_Condition_Type_If_Description_Is_Null() {
     Description noDescription = null;
     MyCondition condition = new MyCondition(noDescription);
     assertThat(condition.toString()).isEqualTo(concat("condition of type [", MyCondition.class.getName(), "]"));
   }
 
   @Test
-  public void should_Append_Addendum() {
+  void should_Append_Addendum() {
     MyCondition condition = new MyCondition("Hello World!") {
       @Override
       protected String descriptionAddendum() {
