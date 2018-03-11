@@ -21,43 +21,43 @@ import java.awt.AWTEvent;
 import java.awt.event.AWTEventListener;
 
 import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WeakEventListener#eventDispatched(AWTEvent)}.
  * 
  * @author Alex Ruiz
  */
-public class WeakEventListener_eventDispatched_Test {
+class WeakEventListener_eventDispatched_Test {
   private static final long EVENT_MASK = WINDOW_EVENT_MASK;
 
   private ToolkitStub toolkit;
   private UnderlyingEventListener underlying;
   private WeakEventListener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     toolkit = newToolkitStub();
     underlying = new UnderlyingEventListener();
     listener = WeakEventListener.attachAsWeakEventListener(toolkit, underlying, EVENT_MASK);
   }
 
   @Test
-  public void should_Wrap_Given_EventListener_And_Add_Itself_To_Toolkit_With_Given_Mask() {
+  void should_Wrap_Given_EventListener_And_Add_Itself_To_Toolkit_With_Given_Mask() {
     assertThat(listener.underlyingListener()).isSameAs(underlying);
     assertThat(toolkit.contains(listener, EVENT_MASK)).isTrue();
   }
 
   @Test
-  public void should_Dispatch_Events_To_Wrapped_EventListener() {
+  void should_Dispatch_Events_To_Wrapped_EventListener() {
     AWTEvent event = singletonAWTEventMock();
     listener.eventDispatched(event);
     assertThat(underlying.dispatchedEvent).isSameAs(event);
   }
 
   @Test
-  public void should_Remove_Itself_From_Toolkit_If_Wrapped_EventListener_Is_Null() {
+  void should_Remove_Itself_From_Toolkit_If_Wrapped_EventListener_Is_Null() {
     listener.simulateUnderlyingListenerIsGarbageCollected();
     listener.eventDispatched(singletonAWTEventMock());
     assertThat(toolkit.contains(listener, EVENT_MASK)).isFalse();

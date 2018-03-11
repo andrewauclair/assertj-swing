@@ -23,26 +23,26 @@ import java.awt.AWTEvent;
 import javax.annotation.Nonnull;
 
 import org.assertj.swing.timing.Condition;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EventDispatchThreadedEventListener#eventDispatched(AWTEvent)}.
  * 
  * @author Alex Ruiz
  */
-public class EventDispatchThreadedEventListener_eventDispatched_Test {
+class EventDispatchThreadedEventListener_eventDispatched_Test {
   private AWTEvent event;
   private Listener listener;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     event = singletonAWTEventMock();
     listener = new Listener();
   }
 
   @Test
-  public void should_Always_Process_Event_In_EDT() {
+  void should_Always_Process_Event_In_EDT() {
     listener.eventDispatched(event);
     pause(new Condition("event to be processed in EDT") {
       @Override
@@ -53,7 +53,7 @@ public class EventDispatchThreadedEventListener_eventDispatched_Test {
   }
 
   @Test
-  public void should_Process_Event_Directly_If_Called_In_EDT() throws Exception {
+  void should_Process_Event_Directly_If_Called_In_EDT() throws Exception {
     execute(() -> listener.eventDispatched(event));
     assertThat(listener.event).isSameAs(event);
     assertThat(listener.wasProcessedInEventDispatchThread).isTrue();
