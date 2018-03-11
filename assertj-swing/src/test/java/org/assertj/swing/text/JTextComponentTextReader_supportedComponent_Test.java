@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.text;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.text.JTextComponent;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JTextComponentTextReader#supportedComponent()}.
  * 
  * @author Alex Ruiz
  */
-public class JTextComponentTextReader_supportedComponent_Test {
+class JTextComponentTextReader_supportedComponent_Test {
   @Test
-  public void should_Return_JTextComponent_Class() {
+  void should_Return_JTextComponent_Class() {
     JTextComponentTextReader reader = new JTextComponentTextReader();
     assertThat(reader.supportedComponent()).isEqualTo(JTextComponent.class);
   }

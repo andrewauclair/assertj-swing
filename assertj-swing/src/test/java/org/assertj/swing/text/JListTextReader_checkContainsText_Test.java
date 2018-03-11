@@ -22,34 +22,34 @@ import javax.swing.JList;
 import org.assertj.swing.cell.JListCellReader;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestListModel;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListTextReader#checkContainsText(JList, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JListTextReader_checkContainsText_Test extends EDTSafeTestCase {
+class JListTextReader_checkContainsText_Test extends EDTSafeTestCase {
   private JList list;
   private TestListModel listModel;
   private JListTextReader reader;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     list = mock(JList.class);
     listModel = new TestListModel(null, "Yoda", "Luke", "Leia");
     reader = new JListTextReader(new TestJListCellReader());
   }
 
   @Test
-  public void should_Return_False_If_Text_In_JList_Does_Not_Contain_Given_String() {
+  void should_Return_False_If_Text_In_JList_Does_Not_Contain_Given_String() {
     when(list.getModel()).thenReturn(listModel);
     assertThat(reader.checkContainsText(list, "Han")).isFalse();
   }
 
   @Test
-  public void should_Return_True_If_Text_In_JList_Contains_Given_String() {
+  void should_Return_True_If_Text_In_JList_Contains_Given_String() {
     when(list.getModel()).thenReturn(listModel);
     assertThat(reader.checkContainsText(list, "Yo")).isTrue();
   }

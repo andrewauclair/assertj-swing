@@ -19,38 +19,38 @@ import static org.mockito.Mockito.when;
 import javax.swing.text.JTextComponent;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentTextReader#checkContainsText(JTextComponent, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JTextComponentTextReader_checkContainsText_Test extends EDTSafeTestCase {
+class JTextComponentTextReader_checkContainsText_Test extends EDTSafeTestCase {
   private JTextComponent textComponent;
   private JTextComponentTextReader reader;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     textComponent = mock(JTextComponent.class);
     reader = new JTextComponentTextReader();
   }
 
   @Test
-  public void should_Return_False_If_Text_In_JTextComponent_Is_Null() {
+  void should_Return_False_If_Text_In_JTextComponent_Is_Null() {
     when(textComponent.getText()).thenReturn(null);
     assertThat(reader.checkContainsText(textComponent, "Yoda")).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Text_In_JTextComponent_Does_Not_Contain_Given_String() {
+  void should_Return_False_If_Text_In_JTextComponent_Does_Not_Contain_Given_String() {
     when(textComponent.getText()).thenReturn("Leia");
     assertThat(reader.checkContainsText(textComponent, "Yoda")).isFalse();
   }
 
   @Test
-  public void should_Return_True_If_Text_In_JTextComponent_Contains_Given_String() {
+  void should_Return_True_If_Text_In_JTextComponent_Contains_Given_String() {
     when(textComponent.getText()).thenReturn("Yoda");
     assertThat(reader.checkContainsText(textComponent, "Yo")).isTrue();
   }

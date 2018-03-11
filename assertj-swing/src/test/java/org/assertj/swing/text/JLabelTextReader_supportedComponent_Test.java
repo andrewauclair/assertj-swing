@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.text;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JLabel;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JLabelTextReader#supportedComponent()}.
  * 
  * @author Alex Ruiz
  */
-public class JLabelTextReader_supportedComponent_Test {
+class JLabelTextReader_supportedComponent_Test {
   @Test
-  public void should_Return_JLabel_Class() {
+  void should_Return_JLabel_Class() {
     JLabelTextReader reader = new JLabelTextReader();
     assertThat(reader.supportedComponent()).isEqualTo(JLabel.class);
   }

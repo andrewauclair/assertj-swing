@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.text;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.AbstractButton;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link AbstractButtonTextReader#supportedComponent()}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractButtonTextReader_supportedComponent_Test {
+class AbstractButtonTextReader_supportedComponent_Test {
   @Test
-  public void should_Return_AbstractButton_Class() {
+  void should_Return_AbstractButton_Class() {
     AbstractButtonTextReader reader = new AbstractButtonTextReader();
     assertThat(reader.supportedComponent()).isEqualTo(AbstractButton.class);
   }

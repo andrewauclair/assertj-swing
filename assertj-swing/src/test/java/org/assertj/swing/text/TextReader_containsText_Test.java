@@ -12,53 +12,46 @@
  */
 package org.assertj.swing.text;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.builder.JLabels.label;
-import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.assertj.swing.test.ExpectedException;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nonnull;
-import javax.swing.JButton;
+import javax.swing.*;
 
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.builder.JLabels.label;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link TextReader#containsText(java.awt.Component, String)}.
  * 
  * @author Alex Ruiz
  */
-public class TextReader_containsText_Test extends EDTSafeTestCase {
-  @Rule
-  public final ExpectedException thrown = none();
-
+class TextReader_containsText_Test extends EDTSafeTestCase {
   private TextReader<JButton> reader;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     reader = new TestTextReader();
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Supported() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("Expecting component of type javax.swing.JButton but got javax.swing.JLabel");
-    reader.containsText(label().createNew(), "Yoda");
+  void should_Throw_Error_If_Component_Is_Not_Supported() {
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> reader.containsText(label().createNew(), "Yoda"), "Expecting component of type javax.swing.JButton but got javax.swing.JLabel");
   }
 
   @Test
-  public void should_Return_True_If_Component_Contains_Text() {
+  void should_Return_True_If_Component_Contains_Text() {
     JButton button = mock(JButton.class);
     when(button.getText()).thenReturn("Yoda");
     assertThat(reader.containsText(button, "Yoda")).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Component_Doesn_Not_Contain_Text() {
+  void should_Return_False_If_Component_Doesn_Not_Contain_Text() {
     JButton button = mock(JButton.class);
     when(button.getText()).thenReturn("Yoda");
     assertThat(reader.containsText(button, "Leia")).isFalse();
