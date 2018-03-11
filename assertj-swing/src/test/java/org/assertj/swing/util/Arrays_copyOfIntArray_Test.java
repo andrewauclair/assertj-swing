@@ -12,29 +12,30 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link Arrays#copyOf(int[])}.
  * 
  * @author Alex Ruiz
  */
-public class Arrays_copyOfIntArray_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_To_Copy_Is_Null() {
+class Arrays_copyOfIntArray_Test {
+  @Test
+  void should_Throw_Error_If_Array_To_Copy_Is_Null() {
     int[] original = null;
-    Arrays.copyOf(original);
+    assertThrows(IllegalArgumentException.class, () -> Arrays.copyOf(original));
   }
 
   @Test
-  public void should_Return_Empty_Array_If_Array_To_Copy_Is_Emtpy() {
+  void should_Return_Empty_Array_If_Array_To_Copy_Is_Emtpy() {
     assertThat(Arrays.copyOf(new int[0])).isEmpty();
   }
 
   @Test
-  public void should_Return_Copy_Of_Array() {
+  void should_Return_Copy_Of_Array() {
     int[] original = { 1, 2, 3 };
     int[] copy = Arrays.copyOf(original);
     assertThat(copy).isEqualTo(original).isNotSameAs(original);

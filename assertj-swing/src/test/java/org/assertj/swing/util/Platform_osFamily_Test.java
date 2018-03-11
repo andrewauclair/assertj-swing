@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.util;
 
-import static org.mockito.Mockito.verify;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests for {@link Platform#osFamily()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_osFamily_Test extends Platform_TestCase {
+class Platform_osFamily_Test extends Platform_TestCase {
   @Test
-  public void should_Return_OsFamily() {
+  void should_Return_OsFamily() {
     Platform.osFamily();
     verify(osIdentifier).osFamily();
   }

@@ -12,45 +12,30 @@
  */
 package org.assertj.swing.util;
 
-import static java.awt.Color.BLACK;
-import static java.awt.Color.BLUE;
-import static java.awt.Color.GREEN;
-import static java.awt.Color.RED;
-import static java.awt.Color.YELLOW;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static java.awt.Color.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link Colors#colorFromHexString(String)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class Colors_colorFromHexString_Test {
-  private final String hexString;
-  private final Color color;
-
-  @Parameters
-  public static Collection<Object[]> colors() {
+class Colors_colorFromHexString_Test {
+  private static Collection<Object[]> colors() {
     return newArrayList(new Object[][] { { "000000", BLACK }, { "FF0000", RED }, { "00FF00", GREEN },
         { "0000FF", BLUE }, { "FFFF00", YELLOW } });
   }
 
-  public Colors_colorFromHexString_Test(String hexString, Color color) {
-    this.hexString = hexString;
-    this.color = color;
-  }
-
-  @Test
-  public void should_Return_Color_From_Hex_String() {
+  @ParameterizedTest
+  @MethodSource("colors")
+  void should_Return_Color_From_Hex_String(String hexString, Color color) {
     Color actual = Colors.colorFromHexString(hexString);
     assertThat(actual).isEqualTo(color);
   }

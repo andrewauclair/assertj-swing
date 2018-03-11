@@ -12,24 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link PatternTextMatcher#PatternTextMatcher(java.util.regex.Pattern...)}.
  * 
  * @author Alex Ruiz
  */
-public class PatternTextMatcher_constructor_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Pattern_Array_Is_Null() {
+class PatternTextMatcher_constructor_Test {
+  @Test
+  void should_Throw_Error_If_Pattern_Array_Is_Null() {
     Pattern[] patterns = null;
-    new PatternTextMatcher(patterns);
+    assertThrows(IllegalArgumentException.class, () -> new PatternTextMatcher(patterns));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Pattern_Array_Is_Empty() {
-    new PatternTextMatcher(new Pattern[0]);
+  @Test
+  void should_Throw_Error_If_Pattern_Array_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> new PatternTextMatcher(new Pattern[0]));
   }
 }

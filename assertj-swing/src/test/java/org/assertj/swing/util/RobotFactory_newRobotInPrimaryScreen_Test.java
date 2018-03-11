@@ -17,24 +17,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.awt.AWTException;
 import java.awt.Robot;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link RobotFactory#newRobotInPrimaryScreen}.
  * 
  * @author Alex Ruiz
  */
-public class RobotFactory_newRobotInPrimaryScreen_Test {
+class RobotFactory_newRobotInPrimaryScreen_Test {
   private RobotFactory robotFactory;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robotFactory = new RobotFactory();
   }
 
   @Test
-  public void shouldCreateNewRobot() throws AWTException {
+  void shouldCreateNewRobot() throws AWTException {
     Robot last = null;
     for (int i = 0; i < 6; i++) {
       Robot current = robotFactory.newRobotInLeftScreen();

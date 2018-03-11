@@ -12,30 +12,30 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link StringTextMatcher#isMatching(String)}.
  * 
  * @author Alex Ruiz
  */
-public class StringTextMatcher_isMatching_Test {
+class StringTextMatcher_isMatching_Test {
   @Test
-  public void should_Return_True_If_Text_Is_Equal_To_Any_Value() {
+  void should_Return_True_If_Text_Is_Equal_To_Any_Value() {
     StringTextMatcher matcher = new StringTextMatcher("hello", "world");
     assertThat(matcher.isMatching("world")).isTrue();
   }
 
   @Test
-  public void should_Return_True_If_Text_Matches_Any_Value_As_Pattern() {
+  void should_Return_True_If_Text_Matches_Any_Value_As_Pattern() {
     StringTextMatcher matcher = new StringTextMatcher("hell.*", "world");
     assertThat(matcher.isMatching("hello")).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Text_Does_Not_Match_Any_Value() {
+  void should_Return_False_If_Text_Does_Not_Match_Any_Value() {
     StringTextMatcher matcher = new StringTextMatcher("hell.*", "world");
     assertThat(matcher.isMatching("bye")).isFalse();
   }

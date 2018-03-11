@@ -12,37 +12,28 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.util.OSFamily.MAC;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.util.OSFamily.MAC;
 
 /**
  * Tests for {@link OSIdentifier#isOSX()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class OSIdentifier_isOSX_Test extends OSIdentifier_TestCase {
-  private final String osX;
-
-  @Parameters
-  public static Collection<Object[]> osX() {
+class OSIdentifier_isOSX_Test extends OSIdentifier_TestCase {
+  private static Collection<Object[]> osX() {
     return newArrayList(new Object[][] { { "os x" }, { "OS X" } });
   }
 
-  public OSIdentifier_isOSX_Test(String osX) {
-    this.osX = osX;
-  }
-
-  @Test
-  public void should_Return_OSX_If_MRJVersion_Not_Null_And_OS_Name_Contains_OSX() {
+  @ParameterizedTest
+  @MethodSource("osX")
+  void should_Return_OSX_If_MRJVersion_Not_Null_And_OS_Name_Contains_OSX(String osX) {
     returnOSName(osX);
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isMacintosh()).isTrue();

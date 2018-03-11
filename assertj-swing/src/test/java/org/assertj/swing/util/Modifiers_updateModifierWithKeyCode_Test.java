@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
 import static java.awt.event.InputEvent.ALT_MASK;
 import static java.awt.event.InputEvent.CTRL_MASK;
@@ -25,16 +27,14 @@ import static java.awt.event.KeyEvent.VK_META;
 import static java.awt.event.KeyEvent.VK_SHIFT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link Modifiers#updateModifierWithKeyCode(int, int)}.
  * 
  * @author Alex Ruiz
  */
-public class Modifiers_updateModifierWithKeyCode_Test {
+class Modifiers_updateModifierWithKeyCode_Test {
   @Test
-  public void should_Update_Modifier_If_KeyCode_Is_Alt() {
+  void should_Update_Modifier_If_KeyCode_Is_Alt() {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_ALT, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
@@ -42,7 +42,7 @@ public class Modifiers_updateModifierWithKeyCode_Test {
   }
 
   @Test
-  public void should_Update_Modifier_If_KeyCode_Is_AltGraph() {
+  void should_Update_Modifier_If_KeyCode_Is_AltGraph() {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_ALT_GRAPH, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
@@ -50,7 +50,7 @@ public class Modifiers_updateModifierWithKeyCode_Test {
   }
 
   @Test
-  public void should_Update_Modifier_If_KeyCode_Is_Ctrl() {
+  void should_Update_Modifier_If_KeyCode_Is_Ctrl() {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_CONTROL, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
@@ -58,7 +58,7 @@ public class Modifiers_updateModifierWithKeyCode_Test {
   }
 
   @Test
-  public void should_Update_Modifier_If_KeyCode_Is_Meta() {
+  void should_Update_Modifier_If_KeyCode_Is_Meta() {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_META, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
@@ -66,7 +66,7 @@ public class Modifiers_updateModifierWithKeyCode_Test {
   }
 
   @Test
-  public void should_Update_Modifier_If_KeyCode_Is_Shift() {
+  void should_Update_Modifier_If_KeyCode_Is_Shift() {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_SHIFT, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
@@ -74,7 +74,7 @@ public class Modifiers_updateModifierWithKeyCode_Test {
   }
 
   @Test
-  public void should_Not_Update_Modifier_If_KeyCode_Is_Not_Modifier() {
+  void should_Not_Update_Modifier_If_KeyCode_Is_Not_Modifier() {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_A, modifierMask);
     assertThat(updatedModifierMask).isEqualTo(modifierMask);

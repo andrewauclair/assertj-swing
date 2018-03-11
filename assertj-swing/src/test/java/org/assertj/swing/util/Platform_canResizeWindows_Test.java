@@ -12,33 +12,33 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.OSIdentifierStub.linux;
 import static org.assertj.swing.util.OSIdentifierStub.osX;
 import static org.assertj.swing.util.OSIdentifierStub.windows9x;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#canResizeWindows()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_canResizeWindows_Test extends Platform_TestCase {
+class Platform_canResizeWindows_Test extends Platform_TestCase {
   @Test
-  public void should_Return_Cannot_Resize_Windows_If_OS_Is_Windows() {
+  void should_Return_Cannot_Resize_Windows_If_OS_Is_Windows() {
     Platform.initialize(windows9x(), toolkit);
     assertThat(Platform.canResizeWindows()).isEqualTo(false);
   }
 
   @Test
-  public void should_Return_Cannot_Resize_Windows_If_OS_Is_OSX() {
+  void should_Return_Cannot_Resize_Windows_If_OS_Is_OSX() {
     Platform.initialize(osX(), toolkit);
     assertThat(Platform.canResizeWindows()).isEqualTo(false);
   }
 
   @Test
-  public void should_Return_Can_Resize_Windows_If_OS_Is_Not_Windows_Or_OSX() {
+  void should_Return_Can_Resize_Windows_If_OS_Is_Not_Windows_Or_OSX() {
     Platform.initialize(linux(), toolkit);
     assertThat(Platform.canResizeWindows()).isEqualTo(true);
   }

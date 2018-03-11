@@ -12,43 +12,32 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.task.AbstractButtonSetArmedTask.setArmed;
-
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-import javax.swing.JCheckBox;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.task.AbstractButtonSetArmedTask.setArmed;
 
 /**
  * Tests for {@link AbstractButtonArmedQuery#isArmed(javax.swing.AbstractButton)}.
  *
  * @author Christian Rösch
  */
-@RunWith(Parameterized.class)
 public class AbstractButtonArmedQuery_isArmed_Test extends RobotBasedTestCase {
   private JCheckBox checkBox;
 
-  private final boolean armed;
-
-  @Parameters
   @Nonnull public static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
-  }
-
-  public AbstractButtonArmedQuery_isArmed_Test(boolean armed) {
-    this.armed = armed;
   }
 
   @Override
@@ -57,8 +46,9 @@ public class AbstractButtonArmedQuery_isArmed_Test extends RobotBasedTestCase {
     checkBox = window.checkBox;
   }
 
-  @Test
-  public void should_Indicate_If_AbstractButton_Is_Armed() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Indicate_If_AbstractButton_Is_Armed(boolean armed) {
     setArmed(checkBox, armed);
     robot.waitForIdle();
     boolean isArmed = AbstractButtonArmedQuery.isArmed(checkBox);

@@ -12,37 +12,28 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.util.OSFamily.LINUX;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.util.OSFamily.LINUX;
 
 /**
  * Tests for {@link OSIdentifier#isLinux()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class OSIdentifier_isLinux_Test extends OSIdentifier_TestCase {
-  private final String linux;
-
-  @Parameters
-  public static Collection<Object[]> linux() {
+class OSIdentifier_isLinux_Test extends OSIdentifier_TestCase {
+  private static Collection<Object[]> linux() {
     return newArrayList(new Object[][] { { "linux" }, { "Linux" }, { "LINUX" } });
   }
 
-  public OSIdentifier_isLinux_Test(String linux) {
-    this.linux = linux;
-  }
-
-  @Test
-  public void shouldReturnLinuxIfOSNameIsEqualToLinux() {
+  @ParameterizedTest
+  @MethodSource("linux")
+  void shouldReturnLinuxIfOSNameIsEqualToLinux(String linux) {
     returnOSName(linux);
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isLinux()).isTrue();

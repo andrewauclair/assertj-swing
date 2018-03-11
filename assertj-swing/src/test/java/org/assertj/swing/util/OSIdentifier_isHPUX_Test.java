@@ -12,37 +12,28 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.util.OSFamily.UNIX;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.util.OSFamily.UNIX;
 
 /**
  * Tests for {@link OSIdentifier#isWindows()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class OSIdentifier_isHPUX_Test extends OSIdentifier_TestCase {
-  private final String hpUX;
-
-  @Parameters
-  public static Collection<Object[]> hpUX() {
+class OSIdentifier_isHPUX_Test extends OSIdentifier_TestCase {
+  private static Collection<Object[]> hpUX() {
     return newArrayList(new Object[][] { { "hp-ux" }, { "HP-UX" }, { "Hp-Ux" } });
   }
 
-  public OSIdentifier_isHPUX_Test(String hpUX) {
-    this.hpUX = hpUX;
-  }
-
-  @Test
-  public void should_Return_HPUX_If_OS_Name_Is_Equal_To_HPUX() {
+  @ParameterizedTest
+  @MethodSource("hpUX")
+  void should_Return_HPUX_If_OS_Name_Is_Equal_To_HPUX(String hpUX) {
     returnOSName(hpUX);
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isHPUX()).isTrue();

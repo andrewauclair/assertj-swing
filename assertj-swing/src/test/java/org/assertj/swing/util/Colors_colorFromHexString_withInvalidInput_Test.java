@@ -12,26 +12,28 @@
  */
 package org.assertj.swing.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link Colors#colorFromHexString(String)}, passing invalid input.
  * 
  * @author Alex Ruiz
  */
-public class Colors_colorFromHexString_withInvalidInput_Test {
-  @Test(expected = NumberFormatException.class)
-  public void should_Throw_Error_If_Hex_String_Is_Not_Valid() {
-    Colors.colorFromHexString("zz");
+class Colors_colorFromHexString_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Hex_String_Is_Not_Valid() {
+    assertThrows(NumberFormatException.class, () -> Colors.colorFromHexString("zz"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Hex_String_Is_Null() {
-    Colors.colorFromHexString(null);
+  @Test
+  void should_Throw_Error_If_Hex_String_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> Colors.colorFromHexString(null));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Hex_String_Is_Empty() {
-    Colors.colorFromHexString("");
+  @Test
+  void should_Throw_Error_If_Hex_String_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> Colors.colorFromHexString(""));
   }
 }

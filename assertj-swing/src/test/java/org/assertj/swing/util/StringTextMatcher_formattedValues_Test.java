@@ -12,24 +12,24 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link StringTextMatcher#formattedValues()}.
  * 
  * @author Alex Ruiz
  */
-public class StringTextMatcher_formattedValues_Test {
+class StringTextMatcher_formattedValues_Test {
   @Test
-  public void should_Return_Single_Value_As_Formatted_Value_If_Matcher_Has_Only_One_Value() {
+  void should_Return_Single_Value_As_Formatted_Value_If_Matcher_Has_Only_One_Value() {
     StringTextMatcher matcher = new StringTextMatcher("one");
     assertThat(matcher.formattedValues()).isEqualTo("'one'");
   }
 
   @Test
-  public void should_Return_Array_Of_Values_As_Formatted_Value_If_Matcher_Has_More_Than_One_Value() {
+  void should_Return_Array_Of_Values_As_Formatted_Value_If_Matcher_Has_More_Than_One_Value() {
     StringTextMatcher matcher = new StringTextMatcher("one", "two");
     assertThat(matcher.formattedValues()).isEqualTo("[\"one\", \"two\"]");
   }

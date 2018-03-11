@@ -23,6 +23,8 @@ import static org.mockito.Mockito.when;
 import java.util.Collection;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -32,23 +34,14 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class Platform_controlOrCommandKey_Test extends Platform_TestCase {
-  private final int mask;
-  private final int keyCode;
-
-  @Parameters
-  public static Collection<Object[]> booleans() {
+class Platform_controlOrCommandKey_Test extends Platform_TestCase {
+  static Collection<Object[]> booleans() {
     return newArrayList(new Object[][] { { CTRL_MASK, VK_CONTROL }, { META_MASK, VK_META } });
   }
 
-  public Platform_controlOrCommandKey_Test(int mask, int keyCode) {
-    this.mask = mask;
-    this.keyCode = keyCode;
-  }
-
-  @Test
-  public void should_Return_Control_Or_Command_Key() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Return_Control_Or_Command_Key(int mask, int keyCode) {
     when(toolkit.getMenuShortcutKeyMask()).thenReturn(mask);
     assertThat(Platform.controlOrCommandKey()).isEqualTo(keyCode);
   }

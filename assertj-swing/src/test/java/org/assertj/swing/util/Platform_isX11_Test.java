@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.OSIdentifierStub.windowsXP;
 import static org.assertj.swing.util.OSIdentifierStub.x11;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#isX11()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_isX11_Test extends Platform_TestCase {
+class Platform_isX11_Test extends Platform_TestCase {
   @Test
-  public void should_Return_True_If_OS_Is_X11() {
+  void should_Return_True_If_OS_Is_X11() {
     Platform.initialize(x11(), toolkit);
     assertThat(Platform.isX11()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_OS_Is_Not_X11() {
+  void should_Return_False_If_OS_Is_Not_X11() {
     Platform.initialize(windowsXP(), toolkit);
     assertThat(Platform.isX11()).isFalse();
   }

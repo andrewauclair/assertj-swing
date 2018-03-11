@@ -12,24 +12,24 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link TimeoutWatch#startWatchWithTimeoutOf(long)} and {@link TimeoutWatch#isTimeOut()}.
  * 
  * @author Alex Ruiz
  */
-public class TimeoutWatch_startWithTimeout_isTimeOut_Test {
+class TimeoutWatch_startWithTimeout_isTimeOut_Test {
   @Test
-  public void should_Not_Timeout() {
+  void should_Not_Timeout() {
     TimeoutWatch watch = TimeoutWatch.startWatchWithTimeoutOf(5000);
     assertThat(watch.isTimeOut()).isFalse();
   }
 
   @Test
-  public void should_Timeout() throws Exception {
+  void should_Timeout() throws Exception {
     TimeoutWatch watch = TimeoutWatch.startWatchWithTimeoutOf(10);
     Thread.sleep(100);
     assertThat(watch.isTimeOut()).isTrue();

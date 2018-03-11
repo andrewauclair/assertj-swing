@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.regex.Pattern;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link PatternTextMatcher#formattedValues()}.
  * 
  * @author Alex Ruiz
  */
-public class PatternTextMatcher_formattedValues_Test {
+class PatternTextMatcher_formattedValues_Test {
   @Test
-  public void should_Return_Single_Pattern_As_Formatted_Value_If_Matcher_Has_Only_One_Pattern() {
+  void should_Return_Single_Pattern_As_Formatted_Value_If_Matcher_Has_Only_One_Pattern() {
     PatternTextMatcher matcher = new PatternTextMatcher(Pattern.compile("one"));
     assertThat(matcher.formattedValues()).isEqualTo("'one'");
   }
 
   @Test
-  public void should_Return_Array_Of_Patterns_As_Formatted_Value_If_Matcher_Has_More_Than_One_Pattern() {
+  void should_Return_Array_Of_Patterns_As_Formatted_Value_If_Matcher_Has_More_Than_One_Pattern() {
     PatternTextMatcher matcher = new PatternTextMatcher(Pattern.compile("one"), Pattern.compile("two"));
     assertThat(matcher.formattedValues()).isEqualTo("[\"one\", \"two\"]");
   }

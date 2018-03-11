@@ -15,7 +15,7 @@ package org.assertj.swing.util;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for {@link OSIdentifier}.
@@ -25,7 +25,7 @@ import org.junit.Before;
 public abstract class OSIdentifier_TestCase {
   SystemPropertyReader propertyReader;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     propertyReader = mock(SystemPropertyReader.class);
   }

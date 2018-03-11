@@ -81,6 +81,12 @@ public class ExpectedException implements TestRule {
     expectMessageToContain("\nExpecting:\n \"" + content + "\"\nto match pattern:\n \"" + pattern.pattern() + "\"");
   }
 
+  public static void assertAssertionError(Executable executable, String property, String content, Pattern pattern) {
+    Throwable exception = assertThrows(AssertionError.class, executable);
+    assertTrue(exception.getMessage().contains("property:" + property + "'"));
+    assertTrue(exception.getMessage().contains("\nExpecting:\n \"" + content + "\"\nto match pattern:\n \"" + pattern.pattern() + "\""));
+  }
+
   private String buildStringForMessage(String[] array) {
     StringBuilder sb = new StringBuilder();
     sb.append("[");

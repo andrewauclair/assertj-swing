@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.OSIdentifierStub.linux;
 import static org.assertj.swing.util.OSIdentifierStub.windowsXP;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#isLinux()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_isLinux_Test extends Platform_TestCase {
+class Platform_isLinux_Test extends Platform_TestCase {
   @Test
-  public void should_Return_True_If_OS_Is_Linux() {
+  void should_Return_True_If_OS_Is_Linux() {
     Platform.initialize(linux(), toolkit);
     assertThat(Platform.isLinux()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_OS_Is_Not_Linux() {
+  void should_Return_False_If_OS_Is_Not_Linux() {
     Platform.initialize(windowsXP(), toolkit);
     assertThat(Platform.isLinux()).isFalse();
   }

@@ -12,25 +12,24 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractButtonDriver#requireSelected(javax.swing.AbstractButton)}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractButtonDriver_requireSelected_Test extends AbstractButtonDriver_TestCase {
+class AbstractButtonDriver_requireSelected_Test extends AbstractButtonDriver_TestCase {
   @Test
-  public void should_Pass_If_Button_Is_Selected() {
+  void should_Pass_If_Button_Is_Selected() {
     selectCheckBox();
     driver.requireSelected(checkBox);
   }
 
   @Test
-  public void should_Fail_If_Button_Is_Not_Selected() {
+  void should_Fail_If_Button_Is_Not_Selected() {
     unselectCheckBox();
-    thrown.expectAssertionError("property:'selected'");
-    thrown.expectMessageToContain("expected:<[tru]e> but was:<[fals]e>");
-    driver.requireSelected(checkBox);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelected(checkBox), "property:'selected'", "expected:<[tru]e> but was:<[fals]e>");
   }
 }

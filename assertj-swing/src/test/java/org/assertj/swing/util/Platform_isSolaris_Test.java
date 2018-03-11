@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.OSIdentifierStub.solaris;
 import static org.assertj.swing.util.OSIdentifierStub.windowsXP;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#isSolaris()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_isSolaris_Test extends Platform_TestCase {
+class Platform_isSolaris_Test extends Platform_TestCase {
   @Test
-  public void should_Return_True_If_OS_Is_Solaris() {
+  void should_Return_True_If_OS_Is_Solaris() {
     Platform.initialize(solaris(), toolkit);
     assertThat(Platform.isSolaris()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_OS_Is_Not_Solaris() {
+  void should_Return_False_If_OS_Is_Not_Solaris() {
     Platform.initialize(windowsXP(), toolkit);
     assertThat(Platform.isSolaris()).isFalse();
   }

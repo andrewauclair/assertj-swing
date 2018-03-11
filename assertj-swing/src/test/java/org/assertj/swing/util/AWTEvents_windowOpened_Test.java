@@ -21,7 +21,7 @@ import java.awt.event.WindowEvent;
 
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWTEvents#wasWindowOpened(java.awt.AWTEvent)}.
@@ -42,13 +42,13 @@ public class AWTEvents_windowOpened_Test extends SequentialEDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_True_If_Window_Opened() {
+  void should_Return_True_If_Window_Opened() {
     AWTEvent event = new WindowEvent(source, WINDOW_OPENED);
     assertThat(AWTEvents.wasWindowOpened(event)).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Window_Not_Opened() {
+  void should_Return_False_If_Window_Not_Opened() {
     AWTEvent event = new WindowEvent(source, WINDOW_CLOSING);
     assertThat(AWTEvents.wasWindowOpened(event)).isFalse();
   }

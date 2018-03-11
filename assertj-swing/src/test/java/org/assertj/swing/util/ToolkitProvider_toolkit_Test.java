@@ -16,24 +16,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.awt.Toolkit;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ToolkitProvider}.
  * 
  * @author Alex Ruiz
  */
-public class ToolkitProvider_toolkit_Test {
+class ToolkitProvider_toolkit_Test {
   private ToolkitProvider provider;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     provider = new ToolkitProvider();
   }
 
   @Test
-  public void should_Return_Default_Toolkit() {
+  void should_Return_Default_Toolkit() {
     assertThat(provider.defaultToolkit()).isSameAs(Toolkit.getDefaultToolkit());
   }
 }

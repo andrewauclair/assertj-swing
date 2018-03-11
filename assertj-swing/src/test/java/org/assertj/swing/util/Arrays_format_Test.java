@@ -12,37 +12,37 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Strings.concat;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Arrays#format(String[][])}.
  *
  * @author Alex Ruiz
  */
-public class Arrays_format_Test {
+class Arrays_format_Test {
   @Test
-  public void should_Return_Null_If_Array_Is_Null() {
+  void should_Return_Null_If_Array_Is_Null() {
     assertThat(Arrays.format(null)).isEqualTo("null");
   }
 
   @Test
-  public void should_Return_Empty_Brackets_If_First_Dimension_Is_Zero() {
+  void should_Return_Empty_Brackets_If_First_Dimension_Is_Zero() {
     String[][] array = new String[0][];
     assertThat(Arrays.format(array)).isEqualTo("[]");
   }
 
   @Test
-  public void should_Return_Empty_Brackets_If_Second_Dimension_Is_Zero() {
+  void should_Return_Empty_Brackets_If_Second_Dimension_Is_Zero() {
     String[][] array = new String[1][0];
     assertThat(Arrays.format(array)).isEqualTo("[[]]");
   }
 
   @Test
-  public void should_Format_Array() {
+  void should_Format_Array() {
     String[][] array = { { "0-0", "0-1", "0-2" }, { "1-0", "1-1", "1-2" }, { "2-0", "2-1", "2-2" },
         { "3-0", "3-1", "3-2" }, };
     String formatted = concat("[['0-0', '0-1', '0-2'],", lineSeparator(), " ['1-0', '1-1', '1-2'],", lineSeparator(),

@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link OSIdentifier#isX11()}.
  * 
  * @author Alex Ruiz
  */
-public class OSIdentifier_isX11_Test extends OSIdentifier_TestCase {
+class OSIdentifier_isX11_Test extends OSIdentifier_TestCase {
   @Test
-  public void should_Return_X11_If_OS_Not_OSX_Or_Windows() {
+  void should_Return_X11_If_OS_Not_OSX_Or_Windows() {
     returnOSName("");
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isX11()).isTrue();

@@ -12,38 +12,38 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link Strings#isDefaultToString(String)}.
  * 
  * @author Alex Ruiz
  */
-public class Strings_isDefaultToString_Test {
+class Strings_isDefaultToString_Test {
   @Test
-  public void should_Return_False_If_String_Is_Null() {
+  void should_Return_False_If_String_Is_Null() {
     assertThat(Strings.isDefaultToString(null)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_String_Is_Empty() {
+  void should_Return_False_If_String_Is_Empty() {
     assertThat(Strings.isDefaultToString("")).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_At_Symbol_Is_Not_Followed_By_Hash() {
+  void should_Return_False_If_At_Symbol_Is_Not_Followed_By_Hash() {
     assertThat(Strings.isDefaultToString("abc@xyz"));
   }
 
   @Test
-  public void should_Return_False_If_There_Is_No_At_Symbol() {
+  void should_Return_False_If_There_Is_No_At_Symbol() {
     assertThat(Strings.isDefaultToString("abc"));
   }
 
   @Test
-  public void should_Return_True_If_Default_ToString() {
+  void should_Return_True_If_Default_ToString() {
     class Person {
     }
     assertThat(Strings.isDefaultToString(new Person().toString())).isTrue();

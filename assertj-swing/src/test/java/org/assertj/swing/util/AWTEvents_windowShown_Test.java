@@ -22,7 +22,7 @@ import java.awt.event.ComponentEvent;
 
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWTEvents#wasWindowShown(java.awt.AWTEvent)}.
@@ -43,19 +43,19 @@ public class AWTEvents_windowShown_Test extends SequentialEDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_True_If_Window_Shown() {
+  void should_Return_True_If_Window_Shown() {
     AWTEvent event = new ComponentEvent(source, COMPONENT_SHOWN);
     assertThat(AWTEvents.wasWindowShown(event)).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Component_Shown_Is_Not_Window() {
+  void should_Return_False_If_Component_Shown_Is_Not_Window() {
     AWTEvent event = new ComponentEvent(label().createNew(), COMPONENT_SHOWN);
     assertThat(AWTEvents.wasWindowShown(event)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Window_Not_Shown() {
+  void should_Return_False_If_Window_Not_Shown() {
     AWTEvent event = new ComponentEvent(source, COMPONENT_HIDDEN);
     assertThat(AWTEvents.wasWindowShown(event)).isFalse();
   }

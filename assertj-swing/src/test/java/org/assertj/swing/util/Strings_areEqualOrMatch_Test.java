@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link Strings#areEqualOrMatch(String, String)}.
@@ -22,45 +22,45 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Uli Schrempp
  */
-public class Strings_areEqualOrMatch_Test {
+class Strings_areEqualOrMatch_Test {
   @Test
-  public void should_Return_True_If_String_And_Pattern_Are_Equal() {
+  void should_Return_True_If_String_And_Pattern_Are_Equal() {
     assertThat(Strings.areEqualOrMatch("hello", "hello")).isTrue();
   }
 
   @Test
-  public void should_Return_True_If_String_Matches_Pattern() {
+  void should_Return_True_If_String_Matches_Pattern() {
     assertThat(Strings.areEqualOrMatch("hell.", "hello")).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_String_Does_Not_Match_Pattern() {
+  void should_Return_False_If_String_Does_Not_Match_Pattern() {
     assertThat(Strings.areEqualOrMatch("hi", "hello")).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_String_Is_Null() {
+  void should_Return_False_If_String_Is_Null() {
     assertThat(Strings.areEqualOrMatch("hell.", null)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Pattern_Is_Null() {
+  void should_Return_False_If_Pattern_Is_Null() {
     assertThat(Strings.areEqualOrMatch(null, "Hello")).isFalse();
   }
 
   @Test
-  public void should_Return_True_If_String_And_Pattern_Are_Null() {
+  void should_Return_True_If_String_And_Pattern_Are_Null() {
     assertThat(Strings.areEqualOrMatch(null, null)).isTrue();
   }
 
   @Test
-  public void should_Return_True_If_Pattern_Is_Invalid_Regex_But_Is_Contained_In_String() {
+  void should_Return_True_If_Pattern_Is_Invalid_Regex_But_Is_Contained_In_String() {
     assertThat(Strings.areEqualOrMatch("\\\\server\\share\\myfolder", "\\\\server\\share\\myfolder\\mysubfolder"))
         .isTrue();
   }
 
   @Test
-  public void should_Return_True_If_Pattern_Is_Invalid_Regex_And_Doesnt_Match_String() {
+  void should_Return_True_If_Pattern_Is_Invalid_Regex_And_Doesnt_Match_String() {
     assertThat(Strings.areEqualOrMatch("\\myfolder", "this does not match")).isFalse();
   }
 }

@@ -12,33 +12,34 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.regex.Pattern;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link PatternTextMatcher#isMatching(String)}.
  * 
  * @author Alex Ruiz
  */
-public class PatternTextMatcher_isMatching_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Any_Pattern_In_Array_Is_Null() {
+class PatternTextMatcher_isMatching_Test {
+  @Test
+  void should_Throw_Error_If_Any_Pattern_In_Array_Is_Null() {
     Pattern[] patterns = { null, Pattern.compile("hello"), null };
     PatternTextMatcher matcher = new PatternTextMatcher(patterns);
-    matcher.isMatching("hello");
+    assertThrows(IllegalArgumentException.class, () -> matcher.isMatching("hello"));
   }
 
   @Test
-  public void should_Return_True_If_Text_Matches_Any_Pattern() {
+  void should_Return_True_If_Text_Matches_Any_Pattern() {
     PatternTextMatcher matcher = new PatternTextMatcher(Pattern.compile("hello"));
     assertThat(matcher.isMatching("hello")).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Text_Does_Not_Match_Any_Pattern() {
+  void should_Return_False_If_Text_Does_Not_Match_Any_Pattern() {
     PatternTextMatcher matcher = new PatternTextMatcher(Pattern.compile("bye"), Pattern.compile("hello"));
     assertThat(matcher.isMatching("world")).isFalse();
   }

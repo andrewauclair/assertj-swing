@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.OSIdentifierStub.osX;
 import static org.assertj.swing.util.OSIdentifierStub.windowsXP;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#isOSX()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_isOSX_Test extends Platform_TestCase {
+class Platform_isOSX_Test extends Platform_TestCase {
   @Test
-  public void should_Return_True_If_OS_Is_OSX() {
+  void should_Return_True_If_OS_Is_OSX() {
     Platform.initialize(osX(), toolkit);
     assertThat(Platform.isOSX()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_OS_Is_Not_OSX() {
+  void should_Return_False_If_OS_Is_Not_OSX() {
     Platform.initialize(windowsXP(), toolkit);
     assertThat(Platform.isOSX()).isFalse();
   }

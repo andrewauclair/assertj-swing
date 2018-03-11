@@ -12,32 +12,33 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.regex.Pattern;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Patterns#format(Pattern[])}.
  * 
  * @author Alex Ruiz
  */
-public class Patterns_format_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Pattern_Array_Is_Null() {
+class Patterns_format_Test {
+  @Test
+  void should_Throw_Error_If_Pattern_Array_Is_Null() {
     Pattern[] patterns = null;
-    Patterns.format(patterns);
-  }
-
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Pattern_In_Array_Is_Null() {
-    Pattern[] patterns = { Pattern.compile("hello"), null };
-    Patterns.format(patterns);
+    assertThrows(IllegalArgumentException.class, () -> Patterns.format(patterns));
   }
 
   @Test
-  public void should_Format_Pattern_Array() {
+  void should_Throw_Error_If_Pattern_In_Array_Is_Null() {
+    Pattern[] patterns = { Pattern.compile("hello"), null };
+    assertThrows(NullPointerException.class, () -> Patterns.format(patterns));
+  }
+
+  @Test
+  void should_Format_Pattern_Array() {
     Pattern[] patterns = { Pattern.compile("hello"), Pattern.compile("world") };
     String formatted = Patterns.format(patterns);
     assertThat(formatted).isEqualTo("[\"hello\", \"world\"]");

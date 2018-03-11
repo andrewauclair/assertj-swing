@@ -12,37 +12,28 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.util.OSFamily.WINDOWS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.util.OSFamily.WINDOWS;
 
 /**
  * Tests for {@link OSIdentifier#isWindowsXP()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class OSIdentifier_isWindowsXP_Test extends OSIdentifier_TestCase {
-  private final String windowsXP;
-
-  @Parameters
-  public static Collection<Object[]> windowsXP() {
+class OSIdentifier_isWindowsXP_Test extends OSIdentifier_TestCase {
+  private static Collection<Object[]> windowsXP() {
     return newArrayList(new Object[][] { { "windowsxp" }, { "WindowsXP" }, { "WINDOWSXP" } });
   }
 
-  public OSIdentifier_isWindowsXP_Test(String windowsXP) {
-    this.windowsXP = windowsXP;
-  }
-
-  @Test
-  public void should_Return_WindowsXP_If_OS_Name_Starts_With_Windows_And_Contains_XP() {
+  @ParameterizedTest
+  @MethodSource("windowsXP")
+  void should_Return_WindowsXP_If_OS_Name_Starts_With_Windows_And_Contains_XP(String windowsXP) {
     returnOSName(windowsXP);
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isWindows()).isTrue();

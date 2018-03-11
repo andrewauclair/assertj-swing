@@ -13,8 +13,8 @@
 package org.assertj.swing.test.core;
 
 import org.assertj.swing.lock.ScreenLock;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base class for test classes that use {@link ScreenLock} to guarantee sequential execution of UI tests.
@@ -22,7 +22,7 @@ import org.junit.Before;
  * @author Alex Ruiz
  */
 public abstract class SequentialEDTSafeTestCase extends EDTSafeTestCase {
-  @Before
+  @BeforeEach
   public final void setUp() {
     ScreenLock.instance().acquire(this);
     onSetUp();
@@ -31,7 +31,7 @@ public abstract class SequentialEDTSafeTestCase extends EDTSafeTestCase {
   protected void onSetUp() {
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     try {
       onTearDown();

@@ -12,37 +12,28 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.util.OSFamily.WINDOWS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.util.OSFamily.WINDOWS;
 
 /**
  * Tests for {@link OSIdentifier#isWindows()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class OSIdentifier_isWindows9x_Test extends OSIdentifier_TestCase {
-  private final String windows9x;
-
-  @Parameters
-  public static Collection<Object[]> windows9x() {
+class OSIdentifier_isWindows9x_Test extends OSIdentifier_TestCase {
+  private static Collection<Object[]> windows9x() {
     return newArrayList(new Object[][] { { "windows95" }, { "Windows98" }, { "WINDOWSME" } });
   }
 
-  public OSIdentifier_isWindows9x_Test(String windows9x) {
-    this.windows9x = windows9x;
-  }
-
-  @Test
-  public void should_Return_Is_Windows9x_If_OS_Name_Starts_With_Windows_And_Contains_Any_9x_Version() {
+  @ParameterizedTest
+  @MethodSource("windows9x")
+  void should_Return_Is_Windows9x_If_OS_Name_Starts_With_Windows_And_Contains_Any_9x_Version(String windows9x) {
     returnOSName(windows9x);
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isWindows()).isTrue();

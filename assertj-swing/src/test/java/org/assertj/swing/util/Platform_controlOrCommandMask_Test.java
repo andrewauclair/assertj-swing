@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static java.awt.Event.CTRL_MASK;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#controlOrCommandMask()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_controlOrCommandMask_Test extends Platform_TestCase {
+class Platform_controlOrCommandMask_Test extends Platform_TestCase {
   @Test
-  public void should_Return_Control_Or_Command_Mask() {
+  void should_Return_Control_Or_Command_Mask() {
     when(toolkit.getMenuShortcutKeyMask()).thenReturn(CTRL_MASK);
     assertThat(Platform.controlOrCommandMask()).isEqualTo(CTRL_MASK);
   }

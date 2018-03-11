@@ -12,22 +12,24 @@
  */
 package org.assertj.swing.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link StringTextMatcher#StringTextMatcher(String...)}.
  * 
  * @author Alex Ruiz
  */
-public class StringTextMatcher_constructor_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Is_Null() {
+class StringTextMatcher_constructor_Test {
+  @Test
+  void should_Throw_Error_If_Array_Is_Null() {
     String[] values = null;
-    new StringTextMatcher(values);
+    assertThrows(IllegalArgumentException.class, () -> new StringTextMatcher(values));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Is_Empty() {
-    new StringTextMatcher(new String[0]);
+  @Test
+  void should_Throw_Error_If_Array_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> new StringTextMatcher(new String[0]));
   }
 }

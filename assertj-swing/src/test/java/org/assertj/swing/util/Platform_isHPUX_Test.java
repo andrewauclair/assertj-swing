@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.util.OSIdentifierStub.hpUX;
 import static org.assertj.swing.util.OSIdentifierStub.windowsXP;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link Platform#isHPUX()}.
  * 
  * @author Alex Ruiz
  */
-public class Platform_isHPUX_Test extends Platform_TestCase {
+class Platform_isHPUX_Test extends Platform_TestCase {
   @Test
-  public void should_Return_True_If_OS_Is_HPUX() {
+  void should_Return_True_If_OS_Is_HPUX() {
     Platform.initialize(hpUX(), toolkit);
     assertThat(Platform.isHPUX()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_OS_Is_Not_HPUX() {
+  void should_Return_False_If_OS_Is_Not_HPUX() {
     Platform.initialize(windowsXP(), toolkit);
     assertThat(Platform.isHPUX()).isFalse();
   }

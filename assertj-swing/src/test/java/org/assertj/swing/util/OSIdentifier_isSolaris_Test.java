@@ -12,38 +12,29 @@
  */
 package org.assertj.swing.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.util.OSFamily.UNIX;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.util.OSFamily.UNIX;
 
 /**
  * Tests for {@link OSIdentifier#isSolaris()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class OSIdentifier_isSolaris_Test extends OSIdentifier_TestCase {
-  private final String solaris;
-
-  @Parameters
-  public static Collection<Object[]> solaris() {
+class OSIdentifier_isSolaris_Test extends OSIdentifier_TestCase {
+  private static Collection<Object[]> solaris() {
     return newArrayList(new Object[][] { { "sunos" }, { "SunOS" }, { "SUNOS" }, { "solaris" }, { "Solaris" },
         { "SOLARIS" } });
   }
 
-  public OSIdentifier_isSolaris_Test(String solaris) {
-    this.solaris = solaris;
-  }
-
-  @Test
-  public void should_Return_Solaris_If_OS_Name_Starts_With_SunOS_Or_Solaris() {
+  @ParameterizedTest
+  @MethodSource("solaris")
+  void should_Return_Solaris_If_OS_Name_Starts_With_SunOS_Or_Solaris(String solaris) {
     returnOSName(solaris);
     OSIdentifier osIdentifier = new OSIdentifier(propertyReader);
     assertThat(osIdentifier.isSolaris()).isTrue();

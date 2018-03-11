@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.edt;
 
-import javax.swing.JTextField;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import javax.swing.JTextField;
 
 /**
  * Tests for {@link FailOnThreadViolationRepaintManager#uninstall()}.
  * 
  * @author Christian Rösch
  */
-public class FailOnThreadViolationRepaintManager_uninstall_Test {
+class FailOnThreadViolationRepaintManager_uninstall_Test {
   @Test
-  public void should_Not_Throw_Error_In_Case_Of_EDT_Access_Violation() {
+  void should_Not_Throw_Error_In_Case_Of_EDT_Access_Violation() {
     FailOnThreadViolationRepaintManager.install();
     FailOnThreadViolationRepaintManager.uninstall();
     new JTextField();

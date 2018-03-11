@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.regex.Pattern;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link PatternTextMatcher#description()}.
  * 
  * @author Alex Ruiz
  */
-public class PatternTextMatcher_description_Test {
+class PatternTextMatcher_description_Test {
   @Test
-  public void should_Erturn_Pattern_Word_As_Description_If_Matcher_Has_Only_One_Pattern() {
+  void should_Erturn_Pattern_Word_As_Description_If_Matcher_Has_Only_One_Pattern() {
     PatternTextMatcher matcher = new PatternTextMatcher(Pattern.compile("one"));
     assertThat(matcher.description()).isEqualTo("pattern");
   }
 
   @Test
-  public void should_Return_Patterns_Word_As_Description_If_Matcher_Has_More_Than_One_Pattern() {
+  void should_Return_Patterns_Word_As_Description_If_Matcher_Has_More_Than_One_Pattern() {
     PatternTextMatcher matcher = new PatternTextMatcher(Pattern.compile("one"), Pattern.compile("two"));
     assertThat(matcher.description()).isEqualTo("patterns");
   }
