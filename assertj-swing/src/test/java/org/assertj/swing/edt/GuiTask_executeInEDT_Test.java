@@ -17,16 +17,16 @@ import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.timing.Pause.pause;
 
 import org.assertj.swing.timing.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link GuiTask#executeInEDT()}.
  * 
  * @author Alex Ruiz
  */
-public class GuiTask_executeInEDT_Test {
+class GuiTask_executeInEDT_Test {
   @Test
-  public void should_Execute_In_EDT_When_Called_In_EDT() {
+  void should_Execute_In_EDT_When_Called_In_EDT() {
     final GuiTaskInEDT task = new GuiTaskInEDT();
     execute(task);
     pause(new Condition("Task is executed") {

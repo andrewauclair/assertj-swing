@@ -12,41 +12,42 @@
  */
 package org.assertj.swing.keystroke;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static java.util.Locale.setDefault;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.keystroke.KeyStrokeLocale.ASSERTJ_SWING_KEYBOARD_LOCALE;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.awt.im.InputContext;
 import java.util.Locale;
 
-import org.junit.After;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Provides tests for {@link KeyStrokeLocale#get()}.
  * 
  * @author Christian Roesch
  */
-public class KeyStrokeLocale_get_Test {
+class KeyStrokeLocale_get_Test {
   private Locale originalLocale;
   private String originalProperty;
 
-  @Before
-  public void backupSettings() {
+  @BeforeEach
+  void backupSettings() {
     originalLocale = Locale.getDefault();
     originalProperty = System.getProperty(ASSERTJ_SWING_KEYBOARD_LOCALE);
   }
 
-  @After
-  public void restoreSettings() {
+  @AfterEach
+  void restoreSettings() {
     setDefault(originalLocale);
     setProperty(originalProperty);
   }
 
   @Test
-  public void should_Return_Locale_From_Property_If_Set_To_German() {
+  void should_Return_Locale_From_Property_If_Set_To_German() {
     setProperty("de");
 
     KeyStrokeLocale.reloadFromSystemSettings();
@@ -54,7 +55,7 @@ public class KeyStrokeLocale_get_Test {
   }
 
   @Test
-  public void should_Return_Locale_From_Property_If_Set_To_Italian() {
+  void should_Return_Locale_From_Property_If_Set_To_Italian() {
     setProperty("it");
 
     KeyStrokeLocale.reloadFromSystemSettings();
@@ -62,7 +63,7 @@ public class KeyStrokeLocale_get_Test {
   }
 
   @Test
-  public void should_Return_Locale_With_String_From_Property() {
+  void should_Return_Locale_With_String_From_Property() {
     setProperty("abcde");
 
     KeyStrokeLocale.reloadFromSystemSettings();
@@ -70,8 +71,8 @@ public class KeyStrokeLocale_get_Test {
   }
 
   @Test
-  public void should_Return_Locale_From_Input_Context_If_Property_Is_Null() {
-    Assume.assumeNotNull(InputContext.getInstance().getLocale());
+  void should_Return_Locale_From_Input_Context_If_Property_Is_Null() {
+    assumeTrue(InputContext.getInstance().getLocale() != null);
 
     setProperty(null);
     setDefault(Locale.ITALIAN);
@@ -81,8 +82,8 @@ public class KeyStrokeLocale_get_Test {
   }
 
   @Test
-  public void should_Return_Default_Locale_If_Property_Is_Null_And_InputContext_Delivers_Null() {
-    Assume.assumeTrue(InputContext.getInstance().getLocale() == null);
+  void should_Return_Default_Locale_If_Property_Is_Null_And_InputContext_Delivers_Null() {
+    assumeTrue(InputContext.getInstance().getLocale() == null);
 
     setProperty(null);
     setDefault(Locale.ITALIAN);

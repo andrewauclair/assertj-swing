@@ -40,7 +40,9 @@ import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.KeyRecorder;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.timing.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Test case for implementations of {@link KeyStrokeMappingProvider}.
@@ -61,14 +63,6 @@ public abstract class KeyStrokeMappingProvider_TestCase extends RobotBasedTestCa
   private JTextComponent textArea;
   private JTextComponentDriver driver;
 
-  final char character;
-  final KeyStroke keyStroke;
-
-  public KeyStrokeMappingProvider_TestCase(char character, KeyStroke keyStroke) {
-    this.character = character;
-    this.keyStroke = keyStroke;
-  }
-
   @Override
   protected final void onSetUp() {
     MyWindow window = MyWindow.createNew(getClass());
@@ -77,16 +71,8 @@ public abstract class KeyStrokeMappingProvider_TestCase extends RobotBasedTestCa
     driver = new JTextComponentDriver(robot);
   }
 
-  @Test
-  public void should_Provide_Key_Strokes_For_Keyboard() {
-    if (basicCharacterVerified()) {
-      return;
-    }
-    pressKeyStrokeAndVerify(character);
-  }
-
-  private void pressKeyStrokeAndVerify(char expectedChar) {
-    pressInTextArea();
+  void pressKeyStrokeAndVerify(char expectedChar, KeyStroke keyStroke) {
+    pressInTextArea(keyStroke);
     final String expectedText = valueOf(expectedChar);
     pause(new Condition(concat("text in JTextArea to be ", quote(expectedText))) {
       @Override
@@ -96,19 +82,19 @@ public abstract class KeyStrokeMappingProvider_TestCase extends RobotBasedTestCa
     }, 500);
   }
 
-  private boolean basicCharacterVerified() {
+  boolean basicCharacterVerified(char character, KeyStroke keyStroke) {
     if (!BASIC_CHARS_AND_KEYS_MAP.containsKey(character)) {
       return false;
     }
     int key = BASIC_CHARS_AND_KEYS_MAP.get(character);
-    pressKeyStrokeAndVerify(key);
+    pressKeyStrokeAndVerify(key, keyStroke);
     return true;
   }
 
-  private void pressKeyStrokeAndVerify(final int expectedKey) {
+  private void pressKeyStrokeAndVerify(final int expectedKey, KeyStroke keyStroke) {
     assertThat(keyStroke.getModifiers()).as("no modifiers should be specified").isEqualTo(0);
     final KeyRecorder recorder = KeyRecorder.attachTo(textArea);
-    pressInTextArea();
+    pressInTextArea(keyStroke);
     pause(new Condition(concat("key with code ", expectedKey, " is pressed")) {
       @Override
       public boolean test() {
@@ -117,7 +103,7 @@ public abstract class KeyStrokeMappingProvider_TestCase extends RobotBasedTestCa
     }, 2000);
   }
 
-  private void pressInTextArea() {
+  private void pressInTextArea(KeyStroke keyStroke) {
     driver.pressAndReleaseKey(textArea, keyStroke.getKeyCode(), new int[] { keyStroke.getModifiers() });
   }
 

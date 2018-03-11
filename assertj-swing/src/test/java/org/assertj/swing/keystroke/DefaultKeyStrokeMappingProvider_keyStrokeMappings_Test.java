@@ -16,6 +16,8 @@ import java.util.Collection;
 
 import javax.swing.KeyStroke;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -25,15 +27,18 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class DefaultKeyStrokeMappingProvider_keyStrokeMappings_Test extends KeyStrokeMappingProvider_TestCase {
-  public DefaultKeyStrokeMappingProvider_keyStrokeMappings_Test(char character, KeyStroke keyStroke) {
-    super(character, keyStroke);
-  }
-
-  @Parameters
-  public static Collection<Object[]> keyStrokes() {
+class DefaultKeyStrokeMappingProvider_keyStrokeMappings_Test extends KeyStrokeMappingProvider_TestCase {
+  private static Collection<Object[]> keyStrokes() {
     Collection<KeyStrokeMapping> mappings = new DefaultKeyStrokeMappingProvider().keyStrokeMappings();
     return keyStrokesFrom(mappings);
+  }
+
+  @ParameterizedTest
+  @MethodSource("keyStrokes")
+  void should_Provide_Key_Strokes_For_Keyboard(char character, KeyStroke keyStroke) {
+    if (basicCharacterVerified(character, keyStroke)) {
+      return;
+    }
+    pressKeyStrokeAndVerify(character, keyStroke);
   }
 }

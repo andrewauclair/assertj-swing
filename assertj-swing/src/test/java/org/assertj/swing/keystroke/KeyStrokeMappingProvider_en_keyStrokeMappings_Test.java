@@ -12,28 +12,29 @@
  */
 package org.assertj.swing.keystroke;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
 import java.util.Collection;
-
-import javax.swing.KeyStroke;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link KeyStrokeMappingProvider_en#keyStrokeMappings()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class KeyStrokeMappingProvider_en_keyStrokeMappings_Test extends KeyStrokeMappingProvider_TestCase {
-  public KeyStrokeMappingProvider_en_keyStrokeMappings_Test(char character, KeyStroke keyStroke) {
-    super(character, keyStroke);
-  }
-
-  @Parameters
-  public static Collection<Object[]> keyStrokes() {
+class KeyStrokeMappingProvider_en_keyStrokeMappings_Test extends KeyStrokeMappingProvider_TestCase {
+  private static Collection<Object[]> keyStrokes() {
     Collection<KeyStrokeMapping> mappings = new KeyStrokeMappingProvider_en().keyStrokeMappings();
     return keyStrokesFrom(mappings);
+  }
+
+  @ParameterizedTest
+  @MethodSource("keyStrokes")
+  void should_Provide_Key_Strokes_For_Keyboard(char character, KeyStroke keyStroke) {
+    if (basicCharacterVerified(character, keyStroke)) {
+      return;
+    }
+    pressKeyStrokeAndVerify(character, keyStroke);
   }
 }
