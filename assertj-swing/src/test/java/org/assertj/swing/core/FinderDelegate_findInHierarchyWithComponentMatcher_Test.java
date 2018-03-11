@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.awt.Component;
@@ -21,16 +23,14 @@ import javax.annotation.Nullable;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link FinderDelegate#find(org.assertj.swing.hierarchy.ComponentHierarchy, ComponentMatcher)}.
  * 
  * @author Alex Ruiz
  */
-public class FinderDelegate_findInHierarchyWithComponentMatcher_Test extends FinderDelegate_TestCase {
+class FinderDelegate_findInHierarchyWithComponentMatcher_Test extends FinderDelegate_TestCase {
   @Test
-  public void should_Return_Components_Matching_ComponentMatcher() {
+  void should_Return_Components_Matching_ComponentMatcher() {
     ComponentMatcher matcher = new ComponentMatcher() {
       @Override
       public boolean matches(@Nullable Component c) {
@@ -42,7 +42,7 @@ public class FinderDelegate_findInHierarchyWithComponentMatcher_Test extends Fin
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Matching_Components_Not_Found() {
+  void should_Return_Empty_Collection_If_Matching_Components_Not_Found() {
     ComponentMatcher matcher = new ComponentMatcher() {
       @Override
       public boolean matches(@Nullable Component c) {

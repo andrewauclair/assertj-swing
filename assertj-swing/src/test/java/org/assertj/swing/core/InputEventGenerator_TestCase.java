@@ -35,7 +35,7 @@ import org.junit.Ignore;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public abstract class InputEventGenerator_TestCase extends SequentialEDTSafeTestCase {
+public class InputEventGenerator_TestCase extends SequentialEDTSafeTestCase {
   static final int DELAY = 200;
 
   MyWindow window;
@@ -54,7 +54,9 @@ public abstract class InputEventGenerator_TestCase extends SequentialEDTSafeTest
   void extraSetUp() {
   }
 
-  abstract InputEventGenerator eventGenerator();
+  private InputEventGenerator eventGenerator() {
+    return new RobotEventGenerator();
+  }
 
   @Override
   protected final void onTearDown() {

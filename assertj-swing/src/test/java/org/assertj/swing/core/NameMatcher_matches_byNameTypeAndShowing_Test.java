@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link NameMatcher#matches(java.awt.Component)}.
@@ -28,22 +28,22 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class NameMatcher_matches_byNameTypeAndShowing_Test extends NameMatcher_TestCase {
+class NameMatcher_matches_byNameTypeAndShowing_Test extends NameMatcher_TestCase {
   @Test
-  public void should_Return_False_If_Type_Does_Not_Match() {
+  void should_Return_False_If_Type_Does_Not_Match() {
     window.display();
     NameMatcher matcher = new NameMatcher("b", JTextField.class, true);
     assertThat(matcher.matches(window.button)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Name_And_Type_Match_But_Component_Is_Not_Showing() {
+  void should_Return_False_If_Name_And_Type_Match_But_Component_Is_Not_Showing() {
     NameMatcher matcher = new NameMatcher(LABEL_TEXT, JButton.class, true);
     assertThat(matcher.matches(window.button)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Nothing_Matches() {
+  void should_Return_False_If_Nothing_Matches() {
     NameMatcher matcher = new NameMatcher("b", JTextField.class, true);
     assertThat(matcher.matches(window.button)).isFalse();
   }

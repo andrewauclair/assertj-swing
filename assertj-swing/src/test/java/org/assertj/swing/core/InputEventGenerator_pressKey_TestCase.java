@@ -12,50 +12,34 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.KeyEvent.CHAR_UNDEFINED;
-import static java.awt.event.KeyEvent.VK_A;
-import static java.awt.event.KeyEvent.VK_D;
-import static java.awt.event.KeyEvent.VK_S;
+import org.assertj.swing.annotation.RunsInEDT;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.text.JTextComponent;
+import java.util.Collection;
+
+import static java.awt.event.KeyEvent.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.task.ComponentRequestFocusAndWaitForFocusGainTask.giveFocusAndWaitTillIsFocused;
 import static org.assertj.swing.timing.Pause.pause;
 
-import java.util.Collection;
-
-import javax.swing.text.JTextComponent;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 /**
  * Base test case for implementations of {@link InputEventGenerator#pressKey(int, char)} and
  * {@link InputEventGenerator#releaseKey(int)}.
- * 
+ *
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public abstract class InputEventGenerator_pressKey_TestCase extends InputEventGenerator_TestCase {
-  private final int keyToPress;
-  private final String expectedText;
-
-  @Parameters
-  public static Collection<Object[]> keys() {
+abstract class InputEventGenerator_pressKey_TestCase extends InputEventGenerator_TestCase {
+  private static Collection<Object[]> keys() {
     return newArrayList(new Object[][] { { VK_A, "a" }, { VK_S, "s" }, { VK_D, "d" } });
   }
 
-  public InputEventGenerator_pressKey_TestCase(int keyToPress, String expectedText) {
-    this.keyToPress = keyToPress;
-    this.expectedText = expectedText;
-
-  }
-
-  @Test
-  public void should_Type_Key() {
+  @ParameterizedTest
+  @MethodSource("keys")
+  void should_Type_Key(int keyToPress, String expectedText) {
     giveFocusAndWaitTillIsFocused(window.textBox);
     eventGenerator.pressKey(keyToPress, CHAR_UNDEFINED);
     eventGenerator.releaseKey(keyToPress);

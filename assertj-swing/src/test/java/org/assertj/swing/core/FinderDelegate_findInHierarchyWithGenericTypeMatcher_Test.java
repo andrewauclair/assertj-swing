@@ -12,6 +12,8 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
 
@@ -20,16 +22,14 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.swing.JTextField;
 
-import org.junit.Test;
-
 /**
  * Tests for {@link FinderDelegate#find(org.assertj.swing.hierarchy.ComponentHierarchy, GenericTypeMatcher)}.
  * 
  * @author Alex Ruiz
  */
-public class FinderDelegate_findInHierarchyWithGenericTypeMatcher_Test extends FinderDelegate_TestCase {
+class FinderDelegate_findInHierarchyWithGenericTypeMatcher_Test extends FinderDelegate_TestCase {
   @Test
-  public void should_Return_Components_Matching_GenericTypeMatcher() {
+  void should_Return_Components_Matching_GenericTypeMatcher() {
     GenericTypeMatcher<JTextField> matcher = new GenericTypeMatcher<JTextField>(JTextField.class) {
       @Override
       protected boolean isMatching(@Nonnull JTextField textField) {
@@ -41,7 +41,7 @@ public class FinderDelegate_findInHierarchyWithGenericTypeMatcher_Test extends F
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Matching_Components_Not_Found() {
+  void should_Return_Empty_Collection_If_Matching_Components_Not_Found() {
     Collection<JTextField> found = finder.find(hierarchy, neverMatches(JTextField.class));
     assertThat(found).isEmpty();
   }

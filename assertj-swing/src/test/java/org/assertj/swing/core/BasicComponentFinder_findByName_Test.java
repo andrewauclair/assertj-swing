@@ -18,7 +18,7 @@ import java.awt.Component;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentFinder#findByName(String)}.
@@ -26,17 +26,15 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Price
  */
-public class BasicComponentFinder_findByName_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findByName_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Find_Component() {
+  void should_Find_Component() {
     Component button = finder.findByName("button");
     assertThat(button).isSameAs(window.button);
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Not_Found() {
-//    thrown.expect(ComponentLookupException.class, "name='list'");
-//    finder.findByName("list");
+  void should_Throw_Error_If_Component_Not_Found() {
     ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByName("list"), "name='list'");
   }
 }

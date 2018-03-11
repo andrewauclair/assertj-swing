@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentFinder#includeHierarchyIfComponentNotFound(boolean)} and
@@ -27,23 +27,18 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Price
  */
-public class BasicComponentFinder_includeHierarchyIfComponentNotFound_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_includeHierarchyIfComponentNotFound_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Throw_Error_Without_ComponentHierarchy_As_Configured() {
+  void should_Throw_Error_Without_ComponentHierarchy_As_Configured() {
     finder.includeHierarchyIfComponentNotFound(false);
     assertThat(finder.includeHierarchyIfComponentNotFound()).isFalse();
-//    thrown.expect(ComponentLookupException.class);
-//    thrown.expectMessageNotToContain("Component hierarchy:");
-//    finder.findByName(window, "button", JLabel.class);
-    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByName(window, "button", JLabel.class), "Component hierarchy:");
+    ExpectedException.assertDoesNotContainMessage(ComponentLookupException.class, () -> finder.findByName(window, "button", JLabel.class), "Component hierarchy:");
   }
 
   @Test
-  public void should_Throw_Error_With_ComponentHierarchy_As_Configured() {
+  void should_Throw_Error_With_ComponentHierarchy_As_Configured() {
     finder.includeHierarchyIfComponentNotFound(true);
     assertThat(finder.includeHierarchyIfComponentNotFound()).isTrue();
-//    thrown.expect(ComponentLookupException.class, "Component hierarchy:");
-//    finder.findByName(window, "button", JLabel.class);
     ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByName(window, "button", JLabel.class), "Component hierarchy:");
   }
 }

@@ -12,24 +12,19 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.core.util.Preconditions.checkNotNull;
-import static org.assertj.swing.awt.AWT.centerOf;
-import static org.assertj.swing.timing.Pause.pause;
-
-import java.awt.Point;
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.awt.AWT.centerOf;
+import static org.assertj.swing.timing.Pause.pause;
 
 /**
  * Base test case for implementations of {@link InputEventGenerator#pressMouse(Point, int)} and
@@ -37,31 +32,22 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public abstract class InputEventGenerator_pressMouse_TestCase extends InputEventGenerator_TestCase {
-  @Rule
+public class InputEventGenerator_pressMouse_TestCase extends InputEventGenerator_TestCase {
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
-  private final MouseButton button;
-  private final int buttonMask;
-
-  @Parameters
-  @Nonnull public static Collection<Object[]> mouseButtons() {
+  @Nonnull
+  private static Collection<Object[]> mouseButtons() {
     return newArrayList(MouseButtonProvider.mouseButtons());
   }
 
-  public InputEventGenerator_pressMouse_TestCase(@Nonnull MouseButton button) {
-    this.button = checkNotNull(button);
-    buttonMask = button.mask;
-  }
-
-  @Test
-  public void should_Press_Mouse_Button_At_Given_Point_And_Release_Mouse_Button() {
+  @ParameterizedTest
+  @MethodSource("mouseButtons")
+  void should_Press_Mouse_Button_At_Given_Point_And_Release_Mouse_Button(@Nonnull MouseButton button) {
     Point center = centerOf(window);
     eventGenerator.moveMouse(window, center.x, center.y); // indirectly testing mouseMove :)
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window);
-    eventGenerator.pressMouse(buttonMask);
-    eventGenerator.releaseMouse(buttonMask);
+    eventGenerator.pressMouse(button.mask);
+    eventGenerator.releaseMouse(button.mask);
     pause(DELAY);
     assertThat(recorder.clicked(button));
   }

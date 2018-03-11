@@ -24,14 +24,14 @@ import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for bug <a href="http://jira.codehaus.org/browse/FEST-331" target="_blank">FEST_331</a>.
  *
  * @author Yvonne Wang
  */
-public class FEST331_ShowPopupForNonFocusableComponents_Test extends RobotBasedTestCase {
+class FEST331_ShowPopupForNonFocusableComponents_Test extends RobotBasedTestCase {
   private MyWindow window;
 
   @Override
@@ -41,7 +41,7 @@ public class FEST331_ShowPopupForNonFocusableComponents_Test extends RobotBasedT
   }
 
   @Test
-  public void should_Show_JPopupMenu_For_NonFocusable_Component() {
+  void should_Show_JPopupMenu_For_NonFocusable_Component() {
     JPopupMenu popupMenu = robot.showPopupMenu(window.nonFocusableTextField);
     assertThat(popupMenu).isEqualTo(window.popupMenu);
   }

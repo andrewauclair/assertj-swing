@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link NameMatcher#matches(java.awt.Component)}.
@@ -25,22 +25,22 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class NameMatcher_matches_byNameAndShowing_Test extends NameMatcher_TestCase {
+class NameMatcher_matches_byNameAndShowing_Test extends NameMatcher_TestCase {
   @Test
-  public void should_Return_False_If_Name_Does_Not_Match_And_Component_Is_Showing() {
+  void should_Return_False_If_Name_Does_Not_Match_And_Component_Is_Showing() {
     window.display();
     NameMatcher matcher = new NameMatcher("b", true);
     assertThat(matcher.matches(window.button)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Name_Matches_But_Component_Is_Not_Showing() {
+  void should_Return_False_If_Name_Matches_But_Component_Is_Not_Showing() {
     NameMatcher matcher = new NameMatcher(LABEL_TEXT, true);
     assertThat(matcher.matches(window.button)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Nothing_Matches() {
+  void should_Return_False_If_Nothing_Matches() {
     NameMatcher matcher = new NameMatcher("b", true);
     assertThat(matcher.matches(window.button)).isFalse();
   }

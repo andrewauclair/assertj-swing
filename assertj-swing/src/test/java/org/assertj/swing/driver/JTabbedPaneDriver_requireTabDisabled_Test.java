@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.swing.data.Index.atIndex;
 
@@ -21,17 +22,14 @@ import static org.assertj.swing.data.Index.atIndex;
  * 
  * @author William Bakker
  */
-public class JTabbedPaneDriver_requireTabDisabled_Test extends JTabbedPaneDriver_TestCase {
+class JTabbedPaneDriver_requireTabDisabled_Test extends JTabbedPaneDriver_TestCase {
   @Test
-  public void should_Fail_If_Tab_Is_Enabled() {
-    thrown.expectAssertionError("property:'enabledAt'");
-    thrown.expectMessageToContain("expected:<[fals]e> but was:<[tru]e>");
-
-    driver.requireTabDisabled(tabbedPane, atIndex(0));
+  void should_Fail_If_Tab_Is_Enabled() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireTabDisabled(tabbedPane, atIndex(0)), "property:'enabledAt'", "expected:<fals>e but was:<[tru]e>");
   }
 
   @Test
-  public void should_Pass_If_Tab_Is_Disabled() {
+  void should_Pass_If_Tab_Is_Disabled() {
     driver.requireTabDisabled(tabbedPane, atIndex(2));
   }
 }

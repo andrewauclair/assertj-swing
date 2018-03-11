@@ -28,7 +28,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.CustomCellRenderer;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicJTreeCellReader#valueAt(JTree, Object)}.
@@ -50,7 +50,7 @@ public class BasicJTreeCellReader_valueAt_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Text_From_CellRenderer_If_Renderer_Is_JLabel() {
+  void should_Return_Text_From_CellRenderer_If_Renderer_Is_JLabel() {
     JLabel label = label().withText("First").createNew();
     setCellRendererComponent(tree, label);
     robot.waitForIdle();
@@ -59,7 +59,7 @@ public class BasicJTreeCellReader_valueAt_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Text_From_JTree_If_CellRenderer_Is_Not_JLabel() {
+  void should_Return_Text_From_JTree_If_CellRenderer_Is_Not_JLabel() {
     setCellRendererComponent(tree, unrecognizedRenderer());
     robot.waitForIdle();
     Object value = reader.valueAt(tree, root);
@@ -67,7 +67,7 @@ public class BasicJTreeCellReader_valueAt_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Null_If_Model_Does_Not_Implement_ToString() {
+  void should_Return_Null_If_Model_Does_Not_Implement_ToString() {
     class Person {
     }
     root = new DefaultMutableTreeNode(new Person());

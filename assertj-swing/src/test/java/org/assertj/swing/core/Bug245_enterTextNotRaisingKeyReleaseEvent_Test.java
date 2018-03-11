@@ -30,14 +30,14 @@ import javax.swing.JTextField;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=245">Bug 245</a>.
  *
  * @author Alex Ruiz
  */
-public class Bug245_enterTextNotRaisingKeyReleaseEvent_Test extends RobotBasedTestCase {
+class Bug245_enterTextNotRaisingKeyReleaseEvent_Test extends RobotBasedTestCase {
   private JTextField textField;
 
   @Override
@@ -48,7 +48,7 @@ public class Bug245_enterTextNotRaisingKeyReleaseEvent_Test extends RobotBasedTe
   }
 
   @Test
-  public void should_Raise_KeyReleased_Event() {
+  void should_Raise_KeyReleased_Event() {
     KeyReleaseListener keyReleaseListener = new KeyReleaseListener();
     textField.addKeyListener(keyReleaseListener);
     robot.focusAndWaitForFocusGain(textField);

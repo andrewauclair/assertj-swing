@@ -21,14 +21,14 @@ import java.util.List;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameDisposer#disposeFrames()}.
  *
  * @author Alex Ruiz
  */
-public class FrameDisposer_disposeFrames_Test extends SequentialEDTSafeTestCase {
+class FrameDisposer_disposeFrames_Test extends SequentialEDTSafeTestCase {
   private MyWindow[] windows;
   private FrameDisposer disposer;
 
@@ -46,7 +46,7 @@ public class FrameDisposer_disposeFrames_Test extends SequentialEDTSafeTestCase 
   }
 
   @Test
-  public void shouldDisposeFrames() {
+  void shouldDisposeFrames() {
     disposer.disposeFrames();
     for (MyWindow w : windows) {
       assertThat(w.disposed).isTrue();

@@ -12,11 +12,11 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JButton;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link NameMatcher#matches(java.awt.Component)}.
@@ -27,9 +27,9 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class NameMatcher_matches_byNameAndType_Test extends NameMatcher_TestCase {
+class NameMatcher_matches_byNameAndType_Test extends NameMatcher_TestCase {
   @Test
-  public void should_Return_True_If_Name_And_Type_Match() {
+  void should_Return_True_If_Name_And_Type_Match() {
     window.display();
     NameMatcher matcher = new NameMatcher(LABEL_TEXT, JButton.class);
     assertThat(matcher.matches(window.button)).isTrue();

@@ -25,16 +25,16 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=289">Bug 289</a>.
  *
  * @author Alex Ruiz
  */
-public class Bug289_robotShouldFocusWindowBeforeClosing_Test extends RobotBasedTestCase {
+class Bug289_robotShouldFocusWindowBeforeClosing_Test extends RobotBasedTestCase {
   @Test
-  public void should_Give_Focus_To_Window_Before_Closing_It() {
+  void should_Give_Focus_To_Window_Before_Closing_It() {
     MyWindow window1 = MyWindow.createNew();
     WindowCloseMonitor monitor1 = new WindowCloseMonitor();
     window1.addWindowListener(monitor1);

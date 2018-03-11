@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentFoundCondition#test()} and {@link ComponentFoundCondition#found()}.
@@ -32,7 +32,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class ComponentFoundCondition_TestAndFound_Test extends RobotBasedTestCase {
+class ComponentFoundCondition_TestAndFound_Test extends RobotBasedTestCase {
   private TypeMatcher matcher;
   private TestWindow toFind;
 
@@ -46,14 +46,14 @@ public class ComponentFoundCondition_TestAndFound_Test extends RobotBasedTestCas
   }
 
   @Test
-  public void should_Return_True_In_Test_And_Reference_Found_Component() {
+  void should_Return_True_In_Test_And_Reference_Found_Component() {
     matcher.typeToMatch(TestWindow.class);
     assertThat(condition.test()).isTrue();
     assertThat(condition.found()).isSameAs(toFind);
   }
 
   @Test
-  public void should_Return_False_If_Component_Not_Found() {
+  void should_Return_False_If_Component_Not_Found() {
     matcher.typeToMatch(JTextField.class);
     assertThat(condition.test()).isFalse();
     assertThat(condition.found()).isNull();

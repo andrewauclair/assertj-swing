@@ -26,14 +26,14 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestDialog;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for implementations of {@link FocusOwnerFinderStrategy#focusOwner()}.
  *
  * @author Alex Ruiz
  */
-public abstract class FocusOwnerFinderStrategy_focusOwner_TestCase extends SequentialEDTSafeTestCase {
+abstract class FocusOwnerFinderStrategy_focusOwner_TestCase extends SequentialEDTSafeTestCase {
   private MyWindow window;
   private JTextField textField;
   private FocusOwnerFinderStrategy finder;
@@ -53,14 +53,14 @@ public abstract class FocusOwnerFinderStrategy_focusOwner_TestCase extends Seque
   }
 
   @Test
-  public final void should_Find_Focus_Owner() {
+  final void should_Find_Focus_Owner() {
     giveFocusAndWaitTillIsFocused(textField);
     Component focusOwner = execute(() -> finder.focusOwner());
     assertThat(focusOwner).isSameAs(textField);
   }
 
   @Test
-  public final void should_Find_Focus_In_Owned_Window() {
+  final void should_Find_Focus_In_Owned_Window() {
     MyDialog dialog = MyDialog.createAndShow(window);
     giveFocusAndWaitTillIsFocused(dialog.button);
     try {

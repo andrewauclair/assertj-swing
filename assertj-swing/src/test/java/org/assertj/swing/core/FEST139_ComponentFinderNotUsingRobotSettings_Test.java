@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for bug <a href="http://jira.codehaus.org/browse/FEST-139" target="_blank">FEST_139</a>.
@@ -30,9 +30,9 @@ import org.junit.Test;
  * @author Woody Folsom
  * @author Alex Ruiz
  */
-public class FEST139_ComponentFinderNotUsingRobotSettings_Test extends RobotBasedTestCase {
+class FEST139_ComponentFinderNotUsingRobotSettings_Test extends RobotBasedTestCase {
   @Test
-  public void finder_should_use_settings_from_Robot() {
+  void finder_should_use_settings_from_Robot() {
     MyWindow.createNew();
     MyWindow window = MyWindow.createNew();
     robot.showWindow(window);

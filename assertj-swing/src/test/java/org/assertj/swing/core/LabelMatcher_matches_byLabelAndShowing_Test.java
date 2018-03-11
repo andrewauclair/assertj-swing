@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link LabelMatcher#matches(java.awt.Component)}.
@@ -25,22 +25,22 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class LabelMatcher_matches_byLabelAndShowing_Test extends LabelMatcher_TestCase {
+class LabelMatcher_matches_byLabelAndShowing_Test extends LabelMatcher_TestCase {
   @Test
-  public void should_Return_False_If_Label_Does_Not_Match() {
+  void should_Return_False_If_Label_Does_Not_Match() {
     window.display();
     LabelMatcher matcher = new LabelMatcher("b", true);
     assertThat(matcher.matches(window.buttonLabel)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Label_Matches_And_Component_Is_Not_Showing() {
+  void should_Return_False_If_Label_Matches_And_Component_Is_Not_Showing() {
     LabelMatcher matcher = new LabelMatcher(LABEL_TEXT, true);
     assertThat(matcher.matches(window.buttonLabel)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Nothing_Matches() {
+  void should_Return_False_If_Nothing_Matches() {
     LabelMatcher matcher = new LabelMatcher("b", true);
     assertThat(matcher.matches(window.buttonLabel)).isFalse();
   }

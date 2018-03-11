@@ -19,12 +19,12 @@ package org.assertj.swing.core;
  * @author Alex Ruiz
  */
 public class RobotEventGenerator_pressMouse_Test extends InputEventGenerator_pressMouse_TestCase {
-  public RobotEventGenerator_pressMouse_Test(MouseButton button) {
-    super(button);
-  }
+//  public RobotEventGenerator_pressMouse_Test(MouseButton button) {
+//    super(button);
+//  }
 
-  @Override
-  InputEventGenerator eventGenerator() {
-    return new RobotEventGenerator();
-  }
+//  @Override
+//  InputEventGenerator eventGenerator() {
+//    return new RobotEventGenerator();
+//  }
 }

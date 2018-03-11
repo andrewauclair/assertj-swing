@@ -18,16 +18,16 @@ import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
 import javax.swing.JOptionPane;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JOptionPaneDriver#requireQuestionMessage(JOptionPane)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_requireQuestionMessage_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_requireQuestionMessage_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Pass_If_Error_Type_Is_Equal_To_Expected() {
+  void should_Pass_If_Error_Type_Is_Equal_To_Expected() {
     JOptionPane optionPane = questionMessage();
     pack(optionPane, title());
     driver.requireQuestionMessage(optionPane);
@@ -39,7 +39,7 @@ public class JOptionPaneDriver_requireQuestionMessage_Test extends JOptionPaneDr
   }
 
   @Test
-  public void should_Fail_If_Error_Type_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Error_Type_Is_Not_Equal_To_Expected() {
     JOptionPane optionPane = errorMessage();
     pack(optionPane, title());
     thrown.expectAssertionError("messageType", "[Question] Message", "[Error] Message");

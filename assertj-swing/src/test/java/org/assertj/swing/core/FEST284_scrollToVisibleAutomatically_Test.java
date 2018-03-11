@@ -31,8 +31,7 @@ import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for bug <a href="http://jira.codehaus.org/browse/FEST-284" target="_blank">FEST_284</a>.
@@ -40,9 +39,8 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Juhos Csaba-Zsolt
  */
-public class FEST284_scrollToVisibleAutomatically_Test extends RobotBasedTestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class FEST284_scrollToVisibleAutomatically_Test extends RobotBasedTestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private MyWindow window;
 
@@ -52,7 +50,7 @@ public class FEST284_scrollToVisibleAutomatically_Test extends RobotBasedTestCas
   }
 
   @Test
-  public void should_Auto_Scroll_When_Clicking_JButton() {
+  void should_Auto_Scroll_When_Clicking_JButton() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     robot.click(window.button);
     recorder.clicked(LEFT_BUTTON).timesClicked(1);

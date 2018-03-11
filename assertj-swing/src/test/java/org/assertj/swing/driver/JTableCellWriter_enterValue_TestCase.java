@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 abstract class JTableCellWriter_enterValue_TestCase extends JTableCellWriter_TestCase {
   @Test
   void should_Throw_Error_If_Editor_Component_Cannot_Be_Handled() {
-    assertActionFailedExceptionWithMessageIndicatingWriterWasUnableToActivateEditor();
-    writer.enterValue(window.table, 0, 1, "hello");
+    assertActionFailedExceptionWithMessageIndicatingWriterWasUnableToActivateEditor(() -> writer.enterValue(window.table, 0, 1, "hello"));
   }
 }

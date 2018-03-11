@@ -23,7 +23,7 @@ import javax.swing.JButton;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentRequestFocusTask#giveFocusTo(java.awt.Component)}.
@@ -31,7 +31,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentRequestFocusTask_giveFocusTo_Test extends SequentialEDTSafeTestCase {
+class ComponentRequestFocusTask_giveFocusTo_Test extends SequentialEDTSafeTestCase {
   private MyWindow window;
 
   @Override
@@ -46,7 +46,7 @@ public class ComponentRequestFocusTask_giveFocusTo_Test extends SequentialEDTSaf
   }
 
   @Test
-  public void should_Call_RequestFocusInWindow() {
+  void should_Call_RequestFocusInWindow() {
     final JButton toReceiveFocus = window.buttonTwo;
     assertThat(hasFocus(toReceiveFocus)).isFalse();
     ComponentRequestFocusTask.giveFocusTo(toReceiveFocus);

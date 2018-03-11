@@ -25,7 +25,7 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.timing.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ActivateWindowTask#activateWindow(java.awt.Window)}.
@@ -58,7 +58,7 @@ public class ActivateWindowTask_activeWindow_Test extends SequentialEDTSafeTestC
   }
 
   @Test
-  public void should_Activate_Window() {
+  void should_Activate_Window() {
     pause(new HasFocusCondition(frameTwo));
     ActivateWindowTask.activateWindow(frameOne);
     // verify that frameOne was given focus (i.e. was activated)

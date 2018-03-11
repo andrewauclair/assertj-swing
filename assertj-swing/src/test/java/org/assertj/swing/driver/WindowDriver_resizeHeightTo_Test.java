@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Dimension;
 
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.awt.FluentDimension;
 import org.junit.jupiter.api.Test;
 
@@ -46,8 +47,7 @@ class WindowDriver_resizeHeightTo_Test extends WindowDriver_TestCase {
 
   @Test
   void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.resizeHeightTo(window, 10);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.resizeHeightTo(window, 10));
   }
 
   @Test

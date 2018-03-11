@@ -12,23 +12,22 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JProgressBarDriver#requireValue(JProgressBar, int)}.
  * 
  * @author Alex Ruiz
  */
-public class JProgressBarDriver_requireValue_Test extends JProgressBarDriver_TestCase {
+class JProgressBarDriver_requireValue_Test extends JProgressBarDriver_TestCase {
   @Test
-  public void should_Pass_If_Value_Is_Equal_To_Expected() {
+  void should_Pass_If_Value_Is_Equal_To_Expected() {
     driver.requireValue(progressBar, 60);
   }
 
   @Test
-  public void should_Fail_If_Value_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("property:'value'");
-    thrown.expectMessageToContain("expected:<[5]0> but was:<[6]0>");
-    driver.requireValue(progressBar, 50);
+  void should_Fail_If_Value_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireValue(progressBar, 50), "property:'value'", "expected:<[5]0> but was:<[6]0>");
   }
 }

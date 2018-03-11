@@ -25,6 +25,7 @@ import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.junit.Rule;
+import org.junit.jupiter.api.function.Executable;
 
 /**
  * Test case for implementations of {@link JTableCellWriter}.
@@ -50,8 +51,9 @@ public abstract class JTableCellWriter_TestCase extends RobotBasedTestCase {
 
   abstract JTableCellWriter createWriter();
 
-  final void assertActionFailedExceptionWithMessageIndicatingWriterWasUnableToActivateEditor() {
-    thrown.expect(ActionFailedException.class, "Unable to find or activate editor");
+  final void assertActionFailedExceptionWithMessageIndicatingWriterWasUnableToActivateEditor(Executable executable) {
+//    thrown.expect(ActionFailedException.class, "Unable to find or activate editor");
+    ExpectedException.assertContainsMessage(ActionFailedException.class, executable, "Unable to find or activate editor");
   }
 
   @RunsInEDT

@@ -14,6 +14,7 @@ package org.assertj.swing.core;
 
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.finder.WindowFinder.findFrame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
@@ -21,7 +22,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=108">Bug 108</a>.
@@ -29,7 +30,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class Bug108_findFrameByNameAndType_Test extends RobotBasedTestCase {
+class Bug108_findFrameByNameAndType_Test extends RobotBasedTestCase {
   private MyWindow window;
 
   @Override
@@ -38,9 +39,9 @@ public class Bug108_findFrameByNameAndType_Test extends RobotBasedTestCase {
     robot.showWindow(window);
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Not_Find_Frame_When_Using_Wrong_Name() {
-    findFrame("yourFrame").using(robot);
+  @Test
+  void should_Not_Find_Frame_When_Using_Wrong_Name() {
+    assertThrows(WaitTimedOutError.class, () -> findFrame("yourFrame").using(robot));
   }
 
   private static class MyWindow extends TestWindow {

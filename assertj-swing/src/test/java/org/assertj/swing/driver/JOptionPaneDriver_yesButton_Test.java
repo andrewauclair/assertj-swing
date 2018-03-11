@@ -12,21 +12,21 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.launch;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JOptionPaneDriver#yesButton(JOptionPane)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_yesButton_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_yesButton_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Find_Yes_Button() {
+  void should_Find_Yes_Button() {
     JOptionPane optionPane = confirmMessage();
     launch(optionPane, title());
     JButton button = driver.yesButton(optionPane);

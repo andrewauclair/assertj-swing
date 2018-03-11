@@ -21,6 +21,8 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -48,10 +50,17 @@ public class ExpectedException implements TestRule {
     expect(AssertionError.class, message);
   }
 
+  public void assertAssertionError(Executable executable, String message) {
+    assertContainsMessage(AssertionError.class, executable, message);
+  }
+
   public void expectAssertionError(String property, String expected, String actual) {
     expectAssertionErrorForProperty(property, doubleQuote(expected), doubleQuote(actual));
   }
 
+  public void assertAssertionError(Executable executable, String property, String expected, String actual) {
+
+  }
   public void expectAssertionError(String property, int expected, int actual) {
     expectAssertionErrorForProperty(property, quote(expected), quote(actual));
   }
@@ -68,11 +77,19 @@ public class ExpectedException implements TestRule {
     expectAssertionErrorForProperty(property, buildStringForMessage(expected), buildStringForMessage(actual));
   }
 
+  public void assertAssertionError(Executable executable, String property, String[] expected, String[] actual) {
+    assertAssertionErrorForProperty(executable, property, buildStringForMessage(expected), buildStringForMessage(actual));
+  }
+
   private void expectAssertionErrorForProperty(String property, String expected, String actual) {
     expect(AssertionError.class);
     expectMessageToContain("property:'" + property + "'");
     expectMessageToContain("expected:<" + expected + ">");
     expectMessageToContain("but was:<" + actual + ">");
+  }
+
+  private void assertAssertionErrorForProperty(Executable executable, String property, String expected, String actual) {
+    assertContainsMessage(AssertionError.class, executable, "property:;" + property + "'", "expected:<" + expected + ">", "but was:<" + actual + ">");
   }
 
   public void expectAssertionError(String property, String content, Pattern pattern) {
@@ -224,7 +241,14 @@ public class ExpectedException implements TestRule {
   public static void assertContainsMessage(Class<? extends Throwable> exceptionClass, Executable executable, String ... messages) {
     Throwable exception = assertThrows(exceptionClass, executable);
     for (String message : messages) {
-      assertTrue(exception.getMessage().contains(message));
+      assertThat(exception.getMessage()).contains(message);
+    }
+  }
+
+  public static void assertDoesNotContainMessage(Class<? extends Throwable> exceptionClass, Executable executable, String ... messages) {
+    Throwable exception = assertThrows(exceptionClass, executable);
+    for (String message : messages) {
+      assertThat(exception.getMessage()).doesNotContain(message);
     }
   }
 }

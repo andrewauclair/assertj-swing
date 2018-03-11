@@ -19,7 +19,7 @@ import javax.swing.JTree;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentFinder#findByType(Class)}.
@@ -27,17 +27,15 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findByType_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findByType_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Find_Component() {
+  void should_Find_Component() {
     JButton button = finder.findByType(JButton.class);
     assertThat(button).isSameAs(window.button);
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Not_Found() {
-//    thrown.expect(ComponentLookupException.class, "type=javax.swing.JTree");
-//    finder.findByType(JTree.class);
+  void should_Throw_Error_If_Component_Not_Found() {
     ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.findByType(JTree.class), "type=javax.swing.JTree");
   }
 }

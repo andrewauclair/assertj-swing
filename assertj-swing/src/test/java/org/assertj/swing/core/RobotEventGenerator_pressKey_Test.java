@@ -18,12 +18,12 @@ package org.assertj.swing.core;
  * @author Alex Ruiz
  */
 public class RobotEventGenerator_pressKey_Test extends InputEventGenerator_pressKey_TestCase {
-  public RobotEventGenerator_pressKey_Test(int keyToPress, String expectedText) {
-    super(keyToPress, expectedText);
-  }
+//  public RobotEventGenerator_pressKey_Test(int keyToPress, String expectedText) {
+//    super(keyToPress, expectedText);
+//  }
 
-  @Override
-  InputEventGenerator eventGenerator() {
-    return new RobotEventGenerator();
-  }
+//  @Override
+//  InputEventGenerator eventGenerator() {
+//    return new RobotEventGenerator();
+//  }
 }

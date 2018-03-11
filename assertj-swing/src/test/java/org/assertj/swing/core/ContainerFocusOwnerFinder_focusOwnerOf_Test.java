@@ -28,14 +28,14 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestDialog;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ContainerFocusOwnerFinder#focusOwnerOf(Container)}.
  *
  * @author Alex Ruiz
  */
-public class ContainerFocusOwnerFinder_focusOwnerOf_Test extends SequentialEDTSafeTestCase {
+class ContainerFocusOwnerFinder_focusOwnerOf_Test extends SequentialEDTSafeTestCase {
   private MyWindow window;
   private ContainerFocusOwnerFinder finder;
 
@@ -51,18 +51,18 @@ public class ContainerFocusOwnerFinder_focusOwnerOf_Test extends SequentialEDTSa
   }
 
   @Test
-  public void should_Return_Null_If_Container_Is_Not_Window() {
+  void should_Return_Null_If_Container_Is_Not_Window() {
     Container c = singletonContainerMock();
     assertThat(focusOwnerOf(c)).isNull();
   }
 
   @Test
-  public void should_Return_Null_If_Window_Is_Not_Showing() {
+  void should_Return_Null_If_Window_Is_Not_Showing() {
     assertThat(focusOwnerOf(window)).isNull();
   }
 
   @Test
-  public void should_Return_Focus_Owner_In_Window() {
+  void should_Return_Focus_Owner_In_Window() {
     window.display();
     JTextField focusOwner = window.textBox;
     giveFocusAndWaitTillIsFocused(focusOwner);
@@ -70,7 +70,7 @@ public class ContainerFocusOwnerFinder_focusOwnerOf_Test extends SequentialEDTSa
   }
 
   @Test
-  public void should_Return_Focus_Owner_In_Owned_Window_When_Top_Window_Does_Not_Have_Focus_Owner() {
+  void should_Return_Focus_Owner_In_Owned_Window_When_Top_Window_Does_Not_Have_Focus_Owner() {
     window.display();
     MyDialog dialog = MyDialog.createAndShow(window);
     JButton focusOwner = dialog.button;
@@ -79,7 +79,7 @@ public class ContainerFocusOwnerFinder_focusOwnerOf_Test extends SequentialEDTSa
   }
 
   @Test
-  public void should_Return_Null_If_Top_Window_Or_Owned_Windows_Do_Not_Have_Focus_Owner() {
+  void should_Return_Null_If_Top_Window_Or_Owned_Windows_Do_Not_Have_Focus_Owner() {
     window.display();
     MyWindow window2 = MyWindow.createNew();
     window2.display();

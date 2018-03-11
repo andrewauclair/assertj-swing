@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicComponentFinder#find(ComponentMatcher)}.
@@ -24,12 +24,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentFinder_findUsingComponentMatcher_Test extends BasicComponentFinder_TestCase {
+class BasicComponentFinder_findUsingComponentMatcher_Test extends BasicComponentFinder_TestCase {
   @Test
-  public void should_Throw_Error_If_More_Than_One_Component_Matched() {
-//    thrown.expect(ComponentLookupException.class, "Found:");
-//    thrown.expectMessageToContain("text='TextField 1'", "text='TextField 2'");
-//    finder.find(new TypeMatcher(JTextField.class));
+  void should_Throw_Error_If_More_Than_One_Component_Matched() {
     ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> finder.find(new TypeMatcher(JTextField.class)), "Found:", "text='TextField 1'", "text='TextField 2'");
   }
 }

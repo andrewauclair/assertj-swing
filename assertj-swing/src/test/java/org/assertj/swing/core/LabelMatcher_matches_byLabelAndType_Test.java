@@ -12,11 +12,11 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JButton;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link LabelMatcher#matches(java.awt.Component)}.
@@ -27,9 +27,9 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class LabelMatcher_matches_byLabelAndType_Test extends LabelMatcher_TestCase {
+class LabelMatcher_matches_byLabelAndType_Test extends LabelMatcher_TestCase {
   @Test
-  public void should_Return_True_If_Label_And_Type_Match() {
+  void should_Return_True_If_Label_And_Type_Match() {
     window.display();
     LabelMatcher matcher = new LabelMatcher(LABEL_TEXT, JButton.class);
     assertThat(matcher.matches(window.buttonLabel)).isTrue();

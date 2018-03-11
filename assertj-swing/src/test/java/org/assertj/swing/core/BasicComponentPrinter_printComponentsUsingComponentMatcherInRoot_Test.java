@@ -12,12 +12,13 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.format.Formatting.format;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JButton;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link BasicComponentPrinter#printComponents(java.io.PrintStream, ComponentMatcher, java.awt.Container)}.
@@ -25,21 +26,21 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentPrinter_printComponentsUsingComponentMatcherInRoot_Test extends
+class BasicComponentPrinter_printComponentsUsingComponentMatcherInRoot_Test extends
     BasicComponentPrinter_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_OutputStream_Is_Null() {
-    printer.printComponents(null, new NameMatcher("button1"), windowOne);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_ComponentMatcher_Is_Null() {
-    ComponentMatcher matcher = null;
-    printer.printComponents(out, matcher, windowOne);
+  @Test
+  void should_Throw_Error_If_OutputStream_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(null, new NameMatcher("button1"), windowOne));
   }
 
   @Test
-  public void should_Print_All_Components_Of_Given_Type_Under_Given_Root_Only() {
+  void should_Throw_Error_If_ComponentMatcher_Is_Null() {
+    ComponentMatcher matcher = null;
+    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(out, matcher, windowOne));
+  }
+
+  @Test
+  void should_Print_All_Components_Of_Given_Type_Under_Given_Root_Only() {
     printer.printComponents(out, new TypeMatcher(JButton.class), windowOne);
     assertThat(out.printed()).containsOnly(format(windowOne.button));
   }

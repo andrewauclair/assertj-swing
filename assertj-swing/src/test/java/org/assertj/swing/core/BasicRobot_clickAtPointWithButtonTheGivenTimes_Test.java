@@ -12,21 +12,17 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.core.util.Preconditions.checkNotNull;
-import static org.assertj.swing.core.ClickingDataProvider.clickingData;
-
-import java.awt.Point;
-import java.util.Collection;
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.annotation.Nonnull;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
 
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.core.ClickingDataProvider.clickingData;
 
 /**
  * Tests for {@link BasicRobot#click(java.awt.Component, java.awt.Point, MouseButton, int)}.
@@ -34,23 +30,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class BasicRobot_clickAtPointWithButtonTheGivenTimes_Test extends BasicRobot_ClickTestCase {
-  private final MouseButton button;
-  private final int times;
-
-  @Parameters
-  @Nonnull public static Collection<Object[]> buttons() {
+class BasicRobot_clickAtPointWithButtonTheGivenTimes_Test extends BasicRobot_ClickTestCase {
+  @Nonnull
+  private static Collection<Object[]> buttons() {
     return newArrayList(clickingData());
   }
 
-  public BasicRobot_clickAtPointWithButtonTheGivenTimes_Test(@Nonnull MouseButton button, int times) {
-    this.button = checkNotNull(button);
-    this.times = times;
-  }
-
-  @Test
-  public void should_Click_Component_With_Given_Mouse_Button_And_Given_Number_Of_Times_At_Given_Point() {
+  @ParameterizedTest
+  @MethodSource("buttons")
+  void should_Click_Component_With_Given_Mouse_Button_And_Given_Number_Of_Times_At_Given_Point(@Nonnull MouseButton button, int times) {
     JTextField textField = window().textField();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(textField);
     Point point = new Point(10, 10);

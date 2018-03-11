@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link LabelMatcher#matches(java.awt.Component)}.
@@ -24,34 +24,34 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class LabelMatcher_matches_byLabel_Test extends LabelMatcher_TestCase {
+class LabelMatcher_matches_byLabel_Test extends LabelMatcher_TestCase {
   @Test
-  public void should_Return_True_If_Label_Matches_And_Component_Is_Showing() {
+  void should_Return_True_If_Label_Matches_And_Component_Is_Showing() {
     window.display();
     LabelMatcher matcher = new LabelMatcher(LABEL_TEXT);
     assertThat(matcher.matches(window.buttonLabel)).isTrue();
   }
 
   @Test
-  public void should_Return_True_If_Label_Matches_And_Component_Is_Not_Showing() {
+  void should_Return_True_If_Label_Matches_And_Component_Is_Not_Showing() {
     LabelMatcher matcher = new LabelMatcher(LABEL_TEXT);
     assertThat(matcher.matches(window.buttonLabel)).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Label_Matches_But_JLabel_Is_Not_Attached_To_Any_Component() {
+  void should_Return_False_If_Label_Matches_But_JLabel_Is_Not_Attached_To_Any_Component() {
     LabelMatcher matcher = new LabelMatcher(LABEL_TEXT);
     assertThat(matcher.matches(window.label)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Label_Does_Not_Match() {
+  void should_Return_False_If_Label_Does_Not_Match() {
     LabelMatcher matcher = new LabelMatcher("Bye");
     assertThat(matcher.matches(window.buttonLabel)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Not_JLabel() {
+  void should_Return_False_If_Component_Is_Not_JLabel() {
     LabelMatcher matcher = new LabelMatcher("Hello");
     assertThat(matcher.matches(window.button)).isFalse();
   }

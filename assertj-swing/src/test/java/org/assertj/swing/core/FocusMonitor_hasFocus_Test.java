@@ -22,14 +22,14 @@ import javax.swing.JTextField;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FocusMonitor#hasFocus()}.
  *
  * @author Alex Ruiz
  */
-public class FocusMonitor_hasFocus_Test extends SequentialEDTSafeTestCase {
+class FocusMonitor_hasFocus_Test extends SequentialEDTSafeTestCase {
   private MyWindow window;
 
   @Override
@@ -44,21 +44,21 @@ public class FocusMonitor_hasFocus_Test extends SequentialEDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_True_If_Component_Gains_Focus() {
+  void should_Return_True_If_Component_Gains_Focus() {
     FocusMonitor monitor = FocusMonitor.attachTo(window.textBox);
     giveFocusAndWaitTillIsFocused(window.textBox);
     assertThat(monitor.hasFocus()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Component_Loses_Focus() {
+  void should_Return_False_If_Component_Loses_Focus() {
     FocusMonitor monitor = FocusMonitor.attachTo(window.button);
     giveFocusAndWaitTillIsFocused(window.textBox);
     assertThat(monitor.hasFocus()).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Not_Focus_Owner() {
+  void should_Return_False_If_Component_Is_Not_Focus_Owner() {
     giveFocusAndWaitTillIsFocused(window.textBox);
     FocusMonitor monitor = FocusMonitor.attachTo(window.button);
     assertThat(monitor.hasFocus()).isFalse();

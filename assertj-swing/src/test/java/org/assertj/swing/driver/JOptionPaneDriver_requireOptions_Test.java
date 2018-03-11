@@ -12,28 +12,28 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
 
 import javax.swing.JOptionPane;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JOptionPaneDriver#requireOptions(JOptionPane, Object[])}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_requireOptions_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_requireOptions_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Pass_If_Options_Are_Equal_To_Expected() {
+  void should_Pass_If_Options_Are_Equal_To_Expected() {
     JOptionPane optionPane = messageWithOptions("First", "Second");
     pack(optionPane, title());
     driver.requireOptions(optionPane, array("First", "Second"));
   }
 
   @Test
-  public void should_Fail_If_Options_Are_Not_Equal_To_Expected() {
+  void should_Fail_If_Options_Are_Not_Equal_To_Expected() {
     JOptionPane optionPane = messageWithOptions("First", "Second");
     pack(optionPane, title());
     thrown.expectAssertionError("options", array("[Thir]d"), array("[First", "Secon]d"));

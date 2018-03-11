@@ -25,16 +25,16 @@ import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=235">Bug 235</a>.
  *
  * @author Alex Ruiz
  */
-public class Bug235_findAllNotInSameOrder_Test extends RobotBasedTestCase {
+class Bug235_findAllNotInSameOrder_Test extends RobotBasedTestCase {
   @Test
-  public void should_Always_Return_All_Found_Components_In_Same_Order() {
+  void should_Always_Return_All_Found_Components_In_Same_Order() {
     MyWindow window = MyWindow.createNew();
     TypeMatcher matcher = new TypeMatcher(JTextField.class);
     List<Component> foundFirst = findAll(window, matcher);

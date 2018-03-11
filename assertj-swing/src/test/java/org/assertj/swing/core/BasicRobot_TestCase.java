@@ -12,6 +12,16 @@
  */
 package org.assertj.swing.core;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
@@ -19,19 +29,6 @@ import static org.assertj.swing.query.ComponentLocationOnScreenQuery.locationOnS
 import static org.assertj.swing.query.ComponentShowingQuery.isShowing;
 import static org.assertj.swing.test.task.ComponentRequestFocusAndWaitForFocusGainTask.giveFocusAndWaitTillIsFocused;
 import static org.assertj.swing.test.task.ComponentSetPopupMenuTask.createAndSetPopupMenu;
-
-import java.awt.Dimension;
-import java.awt.Point;
-
-import javax.annotation.Nonnull;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.Before;
 
 /**
  * Base case for tests for {@link BasicRobot}.
@@ -43,7 +40,7 @@ public abstract class BasicRobot_TestCase extends EDTSafeTestCase {
   private BasicRobot robot;
   private MyWindow window;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     robot = (BasicRobot) BasicRobot.robotWithCurrentAwtHierarchy();
     window = MyWindow.createAndShow(checkNotNull(getClass()));
@@ -56,7 +53,7 @@ public abstract class BasicRobot_TestCase extends EDTSafeTestCase {
   void beforeShowingWindow() {
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     try {
       window.destroy();

@@ -12,10 +12,11 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.format.Formatting.format;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link BasicComponentPrinter#printComponents(java.io.PrintStream, java.awt.Container)}.
@@ -23,14 +24,14 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicComponentPrinter_printComponentsInRoot_Test extends BasicComponentPrinter_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_OutputStream_Is_Null() {
-    printer.printComponents(null, windowOne);
+class BasicComponentPrinter_printComponentsInRoot_Test extends BasicComponentPrinter_TestCase {
+  @Test
+  void should_Throw_Error_If_OutputStream_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(null, windowOne));
   }
 
   @Test
-  public void should_Print_Components_In_Given_Root() {
+  void should_Print_Components_In_Given_Root() {
     printer.printComponents(out, windowOne);
     assertThat(out.printed()).contains(format(windowOne), format(windowOne.button)).doesNotContain(format(windowTwo),
         format(windowTwo.button));
