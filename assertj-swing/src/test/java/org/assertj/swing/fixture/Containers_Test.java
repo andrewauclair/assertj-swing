@@ -27,24 +27,24 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Containers}.
  * 
  * @author Alex Ruiz
  */
-public class Containers_Test {
+class Containers_Test {
   private MyPanel panel;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     panel = execute(() -> new MyPanel());
   }
 
   @Test
-  public void should_Show_Container_In_JFrame() {
+  void should_Show_Container_In_JFrame() {
     FrameFixture frameFixture = null;
     try {
       frameFixture = Containers.showInFrame(panel);
@@ -56,7 +56,7 @@ public class Containers_Test {
   }
 
   @Test
-  public void should_Place_Container_In_JFrame_Without_Showing() {
+  void should_Place_Container_In_JFrame_Without_Showing() {
     FrameFixture frameFixture = null;
     try {
       frameFixture = Containers.frameFixtureFor(panel);

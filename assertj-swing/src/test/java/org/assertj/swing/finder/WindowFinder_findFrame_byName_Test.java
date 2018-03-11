@@ -14,41 +14,42 @@ package org.assertj.swing.finder;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.test.swing.WindowLauncher.WindowToLaunch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowFinder#findFrame(String)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowFinder_findFrame_byName_Test extends WindowFinder_TestCase {
+class WindowFinder_findFrame_byName_Test extends WindowFinder_TestCase {
   @Test
-  public void should_Find_Frame() {
+  void should_Find_Frame() {
     clickLaunchFrameButton();
     FrameFixture found = WindowFinder.findFrame("frame").using(robot);
     assertThat(found.target()).isInstanceOf(WindowToLaunch.class);
   }
 
   @Test
-  public void should_Find_Frame_Before_Given_Timeout_Expires() {
+  void should_Find_Frame_Before_Given_Timeout_Expires() {
     clickLaunchFrameButton();
     FrameFixture found = WindowFinder.findFrame("frame").withTimeout(500, MILLISECONDS).using(robot);
     assertThat(found.target()).isInstanceOf(WindowToLaunch.class);
   }
 
   @Test
-  public void should_Find_Frame_Before_Given_Timeout_In_Ms_Expires() {
+  void should_Find_Frame_Before_Given_Timeout_In_Ms_Expires() {
     clickLaunchFrameButton();
     FrameFixture found = WindowFinder.findFrame("frame").withTimeout(500).using(robot);
     assertThat(found.target()).isInstanceOf(WindowToLaunch.class);
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Fail_If_Frame_Not_Found() {
-    WindowFinder.findFrame("frame").using(robot);
+  @Test
+  void should_Fail_If_Frame_Not_Found() {
+    assertThrows(WaitTimedOutError.class, () -> WindowFinder.findFrame("frame").using(robot));
   }
 }

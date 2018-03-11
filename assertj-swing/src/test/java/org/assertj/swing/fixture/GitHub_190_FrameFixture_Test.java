@@ -12,30 +12,21 @@
  */
 package org.assertj.swing.fixture;
 
-import java.awt.FlowLayout;
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.edt.GuiActionRunner;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 /** Test for <a href="https://github.com/joel-costigliola/assertj-swing/issues/190">github.com - assertj-swing #190</a> */
-@RunWith(Parameterized.class)
-public class GitHub_190_FrameFixture_Test extends RobotBasedTestCase {
-
-  @Parameters
-  public static Collection<Object[]> data() {
+class GitHub_190_FrameFixture_Test extends RobotBasedTestCase {
+  private static Collection<Object[]> data() {
     List<Object[]> list = new ArrayList<>();
     for (int i = 0; i < 100; i++) {
       list.add(new Object[] { i });
@@ -43,12 +34,9 @@ public class GitHub_190_FrameFixture_Test extends RobotBasedTestCase {
     return list;
   }
 
-  public GitHub_190_FrameFixture_Test(@SuppressWarnings("unused") int in) {
-    // just used to repeat the test
-  }
-
-  @Test
-  public void test() {
+  @ParameterizedTest
+  @MethodSource("data")
+  void test(int in) {
     setup(robot);
     FrameFixture fixture = new FrameFixture(robot, GuiActionRunner.execute(
                                                                   () -> new MainFrame()));
@@ -76,7 +64,7 @@ public class GitHub_190_FrameFixture_Test extends RobotBasedTestCase {
 
     public JTextField text;
 
-    public MainFrame() {
+    MainFrame() {
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       add(createContentPanel());
       setSize(200, 100);

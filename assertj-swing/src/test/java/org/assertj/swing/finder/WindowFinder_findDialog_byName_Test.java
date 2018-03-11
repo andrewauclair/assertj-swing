@@ -14,41 +14,42 @@ package org.assertj.swing.finder;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.fixture.DialogFixture;
 import org.assertj.swing.test.swing.WindowLauncher.DialogToLaunch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowFinder#findDialog(String)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowFinder_findDialog_byName_Test extends WindowFinder_TestCase {
+class WindowFinder_findDialog_byName_Test extends WindowFinder_TestCase {
   @Test
-  public void should_Find_Dialog() {
+  void should_Find_Dialog() {
     clickLaunchDialogButton();
     DialogFixture found = WindowFinder.findDialog("dialog").using(robot);
     assertThat(found.target()).isInstanceOf(DialogToLaunch.class);
   }
 
   @Test
-  public void should_Find_Dialog_Before_Given_Timeout_Expires() {
+  void should_Find_Dialog_Before_Given_Timeout_Expires() {
     clickLaunchDialogButton();
     DialogFixture found = WindowFinder.findDialog("dialog").withTimeout(500, MILLISECONDS).using(robot);
     assertThat(found.target()).isInstanceOf(DialogToLaunch.class);
   }
 
   @Test
-  public void should_Find_Dialog_Before_Given_Timeout_In_Ms_Expires() {
+  void should_Find_Dialog_Before_Given_Timeout_In_Ms_Expires() {
     clickLaunchDialogButton();
     DialogFixture found = WindowFinder.findDialog("dialog").withTimeout(500).using(robot);
     assertThat(found.target()).isInstanceOf(DialogToLaunch.class);
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Fail_If_Dialog_Not_Found() {
-    WindowFinder.findDialog("dialog").using(robot);
+  @Test
+  void should_Fail_If_Dialog_Not_Found() {
+    assertThrows(WaitTimedOutError.class, () -> WindowFinder.findDialog("dialog").using(robot));
   }
 }

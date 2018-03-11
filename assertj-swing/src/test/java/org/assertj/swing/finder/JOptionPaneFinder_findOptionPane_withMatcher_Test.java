@@ -14,6 +14,7 @@ package org.assertj.swing.finder;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.annotation.Nonnull;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.fixture.JOptionPaneFixture;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JOptionPaneFinder#findOptionPane()}.
@@ -29,7 +30,7 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JOptionPaneFinder_findOptionPane_withMatcher_Test extends JOptionPaneFinder_TestCase {
+class JOptionPaneFinder_findOptionPane_withMatcher_Test extends JOptionPaneFinder_TestCase {
   private GenericTypeMatcher<JOptionPane> matcher;
 
   @Override
@@ -38,14 +39,14 @@ public class JOptionPaneFinder_findOptionPane_withMatcher_Test extends JOptionPa
   }
 
   @Test
-  public void should_Find_JOptionPane() {
+  void should_Find_JOptionPane() {
     clickMessageButton();
     JOptionPaneFixture found = JOptionPaneFinder.findOptionPane(matcher).using(robot);
     assertThat(found.target()).isNotNull();
   }
 
   @Test
-  public void should_Find_JOptionPane_Before_Given_Timeout_Expires() {
+  void should_Find_JOptionPane_Before_Given_Timeout_Expires() {
     window.launchDelay(200);
     clickMessageButton();
     JOptionPaneFixture found = JOptionPaneFinder.findOptionPane(matcher).withTimeout(500, MILLISECONDS).using(robot);
@@ -53,16 +54,16 @@ public class JOptionPaneFinder_findOptionPane_withMatcher_Test extends JOptionPa
   }
 
   @Test
-  public void should_Find_JOptionPane_Before_Given_Timeout_In_Ms_Expires() {
+  void should_Find_JOptionPane_Before_Given_Timeout_In_Ms_Expires() {
     window.launchDelay(200);
     clickMessageButton();
     JOptionPaneFixture found = JOptionPaneFinder.findOptionPane(matcher).withTimeout(500).using(robot);
     assertThat(found.target()).isNotNull();
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Fail_If_JOptionPane_Not_Found() {
-    JOptionPaneFinder.findOptionPane(matcher).using(robot);
+  @Test
+  void should_Fail_If_JOptionPane_Not_Found() {
+    assertThrows(WaitTimedOutError.class, () -> JOptionPaneFinder.findOptionPane(matcher).using(robot));
   }
 
   private static class MyMatcher extends GenericTypeMatcher<JOptionPane> {

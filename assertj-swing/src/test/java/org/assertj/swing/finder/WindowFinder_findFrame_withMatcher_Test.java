@@ -15,6 +15,7 @@ package org.assertj.swing.finder;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.query.ComponentShowingQuery.isShowing;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.annotation.Nonnull;
 import javax.swing.JFrame;
@@ -23,14 +24,14 @@ import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.test.swing.WindowLauncher.WindowToLaunch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowFinder#findFrame(org.assertj.swing.core.GenericTypeMatcher)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowFinder_findFrame_withMatcher_Test extends WindowFinder_TestCase {
+class WindowFinder_findFrame_withMatcher_Test extends WindowFinder_TestCase {
   private MyMatcher matcher;
 
   @Override
@@ -39,29 +40,29 @@ public class WindowFinder_findFrame_withMatcher_Test extends WindowFinder_TestCa
   }
 
   @Test
-  public void should_Find_Frame() {
+  void should_Find_Frame() {
     clickLaunchFrameButton();
     FrameFixture found = WindowFinder.findFrame(matcher).using(robot);
     assertThat(found.target()).isInstanceOf(WindowToLaunch.class);
   }
 
   @Test
-  public void should_Find_Frame_Before_Given_Timeout_Expires() {
+  void should_Find_Frame_Before_Given_Timeout_Expires() {
     clickLaunchFrameButton();
     FrameFixture found = WindowFinder.findFrame(matcher).withTimeout(500, MILLISECONDS).using(robot);
     assertThat(found.target()).isInstanceOf(WindowToLaunch.class);
   }
 
   @Test
-  public void should_Find_Frame_Before_Given_Timeout_In_Ms_Expires() {
+  void should_Find_Frame_Before_Given_Timeout_In_Ms_Expires() {
     clickLaunchFrameButton();
     FrameFixture found = WindowFinder.findFrame(matcher).withTimeout(500).using(robot);
     assertThat(found.target()).isInstanceOf(WindowToLaunch.class);
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Fail_If_Frame_Not_Found() {
-    WindowFinder.findFrame(matcher).using(robot);
+  @Test
+  void should_Fail_If_Frame_Not_Found() {
+    assertThrows(WaitTimedOutError.class, () -> WindowFinder.findFrame(matcher).using(robot));
   }
 
   private static class MyMatcher extends GenericTypeMatcher<JFrame> {

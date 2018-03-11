@@ -15,6 +15,7 @@ package org.assertj.swing.finder;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.query.ComponentShowingQuery.isShowing;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.annotation.Nonnull;
 import javax.swing.JDialog;
@@ -23,14 +24,14 @@ import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.fixture.DialogFixture;
 import org.assertj.swing.test.swing.WindowLauncher.DialogToLaunch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowFinder#findDialog(org.assertj.swing.core.GenericTypeMatcher)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowFinder_findDialog_withMatcher_Test extends WindowFinder_TestCase {
+class WindowFinder_findDialog_withMatcher_Test extends WindowFinder_TestCase {
   private MyMatcher matcher;
 
   @Override
@@ -39,29 +40,29 @@ public class WindowFinder_findDialog_withMatcher_Test extends WindowFinder_TestC
   }
 
   @Test
-  public void should_Find_Dialog() {
+  void should_Find_Dialog() {
     clickLaunchDialogButton();
     DialogFixture found = WindowFinder.findDialog(matcher).using(robot);
     assertThat(found.target()).isInstanceOf(DialogToLaunch.class);
   }
 
   @Test
-  public void should_Find_Dialog_Before_Given_Timeout_Expires() {
+  void should_Find_Dialog_Before_Given_Timeout_Expires() {
     clickLaunchDialogButton();
     DialogFixture found = WindowFinder.findDialog(matcher).withTimeout(500, MILLISECONDS).using(robot);
     assertThat(found.target()).isInstanceOf(DialogToLaunch.class);
   }
 
   @Test
-  public void should_Find_Dialog_Before_Given_Timeout_In_Ms_Expires() {
+  void should_Find_Dialog_Before_Given_Timeout_In_Ms_Expires() {
     clickLaunchDialogButton();
     DialogFixture found = WindowFinder.findDialog(matcher).withTimeout(500).using(robot);
     assertThat(found.target()).isInstanceOf(DialogToLaunch.class);
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Fail_If_Dialog_Not_Found() {
-    WindowFinder.findDialog(matcher).using(robot);
+  @Test
+  void should_Fail_If_Dialog_Not_Found() {
+    assertThrows(WaitTimedOutError.class, () -> WindowFinder.findDialog(matcher).using(robot));
   }
 
   private static class MyMatcher extends GenericTypeMatcher<JDialog> {

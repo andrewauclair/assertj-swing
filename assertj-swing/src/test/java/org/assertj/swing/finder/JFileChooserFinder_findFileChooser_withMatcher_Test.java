@@ -14,6 +14,7 @@ package org.assertj.swing.finder;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.annotation.Nonnull;
 import javax.swing.JFileChooser;
@@ -21,14 +22,14 @@ import javax.swing.JFileChooser;
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.fixture.JFileChooserFixture;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JFileChooserFinder#findFileChooser(org.assertj.swing.core.GenericTypeMatcher)}.
  * 
  * @author Alex Ruiz
  */
-public class JFileChooserFinder_findFileChooser_withMatcher_Test extends JFileChooserFinder_TestCase {
+class JFileChooserFinder_findFileChooser_withMatcher_Test extends JFileChooserFinder_TestCase {
   private MyMatcher matcher;
 
   @Override
@@ -37,14 +38,14 @@ public class JFileChooserFinder_findFileChooser_withMatcher_Test extends JFileCh
   }
 
   @Test
-  public void should_Find_JFileChooser() {
+  void should_Find_JFileChooser() {
     clickBrowseButton();
     JFileChooserFixture found = JFileChooserFinder.findFileChooser(matcher).using(robot);
     assertThat(found.target()).isSameAs(window.fileChooser());
   }
 
   @Test
-  public void should_Find_JFileChooser_Before_Given_Timeout_Expires() {
+  void should_Find_JFileChooser_Before_Given_Timeout_Expires() {
     window.launchDelay(200);
     clickBrowseButton();
     JFileChooserFixture found = JFileChooserFinder.findFileChooser(matcher).withTimeout(500, MILLISECONDS).using(robot);
@@ -52,16 +53,16 @@ public class JFileChooserFinder_findFileChooser_withMatcher_Test extends JFileCh
   }
 
   @Test
-  public void should_Find_JFileChooser_Before_Given_Timeout_In_Ms_Expires() {
+  void should_Find_JFileChooser_Before_Given_Timeout_In_Ms_Expires() {
     window.launchDelay(200);
     clickBrowseButton();
     JFileChooserFixture found = JFileChooserFinder.findFileChooser(matcher).withTimeout(500).using(robot);
     assertThat(found.target()).isSameAs(window.fileChooser());
   }
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Fail_If_JFileChooser_Not_Found() {
-    JFileChooserFinder.findFileChooser(matcher).using(robot);
+  @Test
+  void should_Fail_If_JFileChooser_Not_Found() {
+    assertThrows(WaitTimedOutError.class, () -> JFileChooserFinder.findFileChooser(matcher).using(robot));
   }
 
   private static class MyMatcher extends GenericTypeMatcher<JFileChooser> {

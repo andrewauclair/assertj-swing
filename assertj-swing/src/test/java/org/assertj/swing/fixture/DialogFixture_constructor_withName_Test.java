@@ -31,8 +31,8 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class DialogFixture_constructor_withName_Test extends EDTSafeTestCase {
-  @Rule
-  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
+//  @Rule
+//  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
 
   private DialogFixture fixture;
 

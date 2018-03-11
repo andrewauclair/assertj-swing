@@ -23,7 +23,7 @@ import javax.swing.JFileChooser;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JFileChooserFormatter#format(java.awt.Component)}.
@@ -43,7 +43,7 @@ public class JFileChooserFormatter_format_Test extends SequentialEDTSafeTestCase
   }
 
   @Test
-  public void should_Format_JFileChooser() {
+  void should_Format_JFileChooser() {
     String formatted = formatter.format(fileChooser);
     assertThat(formatted).contains("javax.swing.JFileChooser").contains("name='fileChooser'")
                          .contains("dialogTitle='A file chooser'").contains("dialogType=OPEN_DIALOG")
@@ -53,7 +53,7 @@ public class JFileChooserFormatter_format_Test extends SequentialEDTSafeTestCase
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     fileChooser = execute(() -> new JFileChooser() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
@@ -62,7 +62,7 @@ public class JFileChooserFormatter_format_Test extends SequentialEDTSafeTestCase
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     fileChooser = execute(() -> new JFileChooser() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
