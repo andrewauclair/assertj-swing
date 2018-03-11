@@ -23,7 +23,7 @@ import javax.swing.JButton;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-249" target="_blank">FEST-249</a>
@@ -49,7 +49,7 @@ public class FEST249_shouldNotAllowExit extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Not_Exit() {
+  void should_Not_Exit() {
     frame.button().click();
     System.out.println("Test should reach this point");
   }

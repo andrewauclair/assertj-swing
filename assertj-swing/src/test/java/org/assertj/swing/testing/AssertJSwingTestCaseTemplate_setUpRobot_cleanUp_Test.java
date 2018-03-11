@@ -17,24 +17,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.assertj.swing.core.BasicRobot;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.hierarchy.ExistingHierarchy;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AssertJSwingTestCaseTemplate#setUpRobot()} and {@link AssertJSwingTestCaseTemplate#cleanUp()}.
  * 
  * @author Alex Ruiz
  */
-public class AssertJSwingTestCaseTemplate_setUpRobot_cleanUp_Test {
+class AssertJSwingTestCaseTemplate_setUpRobot_cleanUp_Test {
   private TestCase testCase;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     testCase = new TestCase();
   }
 
   @Test
-  public void should_Create_Robot_On_SetUp_And_Inactivate_It_On_CleanUp() {
+  void should_Create_Robot_On_SetUp_And_Inactivate_It_On_CleanUp() {
     testCase.setUpRobot();
     Robot robot = testCase.robot();
     assertThat(robot).isInstanceOf(BasicRobot.class);

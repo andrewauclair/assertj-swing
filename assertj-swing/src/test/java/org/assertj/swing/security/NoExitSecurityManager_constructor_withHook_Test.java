@@ -12,25 +12,17 @@
  */
 package org.assertj.swing.security;
 
-import static org.junit.rules.ExpectedException.none;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NoExitSecurityManager#NoExitSecurityManager(ExitCallHook)}.
  * 
  * @author Alex Ruiz
  */
-public class NoExitSecurityManager_constructor_withHook_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class NoExitSecurityManager_constructor_withHook_Test {
   @Test
-  public void should_Throw_Error_If_Hook_Is_Null() {
-    thrown.expect(NullPointerException.class);
-    thrown.expectMessage("The given ExitCallHook should not be null");
-    new NoExitSecurityManager(null);
+  void should_Throw_Error_If_Hook_Is_Null() {
+    ExpectedException.assertContainsMessage(NullPointerException.class, () -> new NoExitSecurityManager(null), "The given ExitCallHook should not be null");
   }
 }
