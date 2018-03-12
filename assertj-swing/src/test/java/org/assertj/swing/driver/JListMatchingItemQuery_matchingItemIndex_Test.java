@@ -18,16 +18,16 @@ import static org.mockito.Mockito.when;
 
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.util.TextMatcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListMatchingItemQuery#matchingItemIndex(JList, TextMatcher, JListCellReader)}.
  * 
  * @author Alex Ruiz
  */
-public class JListMatchingItemQuery_matchingItemIndex_Test extends JListMatchingItemQuery_TestCase {
+class JListMatchingItemQuery_matchingItemIndex_Test extends JListMatchingItemQuery_TestCase {
   @Test
-  public void should_Return_Index_Of_Matching_Item() {
+  void should_Return_Index_Of_Matching_Item() {
     TextMatcher matcher = mockTextMatcher();
     when(matcher.isMatching("Yoda")).thenReturn(false);
     when(matcher.isMatching("Luke")).thenReturn(true);
@@ -35,7 +35,7 @@ public class JListMatchingItemQuery_matchingItemIndex_Test extends JListMatching
   }
 
   @Test
-  public void should_Return_Negative_One_If_Matching_Item_Not_Found() {
+  void should_Return_Negative_One_If_Matching_Item_Not_Found() {
     TextMatcher matcher = mockTextMatcher();
     when(matcher.isMatching("Yoda")).thenReturn(false);
     when(matcher.isMatching("Luke")).thenReturn(false);

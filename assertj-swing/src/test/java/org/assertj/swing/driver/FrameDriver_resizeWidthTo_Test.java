@@ -16,16 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.awt.Dimension;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#resizeWidthTo(java.awt.Window, int)} to ensure it works with {@link FrameDriver}.
  * 
  * @author Alex Ruiz
  */
-public class FrameDriver_resizeWidthTo_Test extends FrameDriver_TestCase {
+class FrameDriver_resizeWidthTo_Test extends FrameDriver_TestCase {
   @Test
-  public void should_Resize_Frame() {
+  void should_Resize_Frame() {
     showWindow();
     Dimension newSize = windowSize().addToWidth(20);
     driver.resizeWidthTo(window, newSize.width);
@@ -33,22 +34,19 @@ public class FrameDriver_resizeWidthTo_Test extends FrameDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Disabled() {
+  void should_Throw_Error_If_Frame_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.resizeWidthTo(window, 100);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.resizeWidthTo(window, 100));
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.resizeWidthTo(window, 100);
+  void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.resizeWidthTo(window, 100));
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Not_Resizable() {
+  void should_Throw_Error_If_Frame_Is_Not_Resizable() {
     makeWindowNotResizable();
-    thrown.expectIllegalStateIsNotResizableComponent();
-    driver.resizeWidthTo(window, 100);
+    ExpectedException.assertIllegalStateIsNotResizableComponent(() -> driver.resizeWidthTo(window, 100));
   }
 }

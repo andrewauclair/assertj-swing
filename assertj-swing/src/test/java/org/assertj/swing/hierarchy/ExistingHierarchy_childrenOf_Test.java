@@ -22,8 +22,8 @@ import java.awt.Component;
 import java.util.Collection;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ExistingHierarchy#childrenOf(Component)}.
@@ -31,14 +31,14 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ExistingHierarchy_childrenOf_Test extends EDTSafeTestCase {
+class ExistingHierarchy_childrenOf_Test extends EDTSafeTestCase {
   private Component c;
   private Collection<Component> children;
   private ChildrenFinder childrenFinder;
   private ExistingHierarchy hierarchy;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     c = textField().createNew();
     childrenFinder = mock(ChildrenFinder.class);
     hierarchy = new ExistingHierarchy(new ParentFinder(), childrenFinder);
@@ -46,7 +46,7 @@ public class ExistingHierarchy_childrenOf_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_Children_Of_Component() {
+  void should_Return_Children_Of_Component() {
     when(childrenFinder.childrenOf(c)).thenReturn(children);
     assertThat(hierarchy.childrenOf(c)).isSameAs(children);
   }

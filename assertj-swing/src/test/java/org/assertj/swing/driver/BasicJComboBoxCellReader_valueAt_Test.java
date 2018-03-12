@@ -12,19 +12,17 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Arrays.array;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JToolBar;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.CustomCellRenderer;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Arrays.array;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link BasicJComboBoxCellReader#valueAt(JComboBox, int)}.
@@ -44,13 +42,13 @@ public class BasicJComboBoxCellReader_valueAt_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Text_From_JLabel_As_CellRenderer() {
+  void should_Return_Text_From_JLabel_As_CellRenderer() {
     String value = firstItemValue(reader, comboBox);
     assertThat(value).isEqualTo("First");
   }
 
   @Test
-  public void should_Return_Model_Value_ToString_If_CellRender_Not_Recognized() {
+  void should_Return_Model_Value_ToString_If_CellRender_Not_Recognized() {
     setModelValues(comboBox, array(new Jedi("Yoda")));
     setNotRecognizedRendererComponent(comboBox);
     robot.waitForIdle();
@@ -59,7 +57,7 @@ public class BasicJComboBoxCellReader_valueAt_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Null_If_CellRenderer_Not_Recognized_And_Model_Value_Is_Null() {
+  void should_Return_Null_If_CellRenderer_Not_Recognized_And_Model_Value_Is_Null() {
     setModelValues(comboBox, new Object[] { null });
     setNotRecognizedRendererComponent(comboBox);
     robot.waitForIdle();

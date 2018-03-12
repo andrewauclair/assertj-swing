@@ -18,23 +18,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JProgressBarIndeterminateQuery.isIndeterminate;
 import static org.assertj.swing.driver.JProgressBarMakeDeterminateAsyncTask.makeDeterminate;
 import static org.assertj.swing.timing.Timeout.timeout;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.exception.WaitTimedOutError;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JProgressBarDriver#waitUntilIsDeterminate(javax.swing.JProgressBar, Timeout)}.
  * 
  * @author Alex Ruiz
  */
-public class JProgressBarDriver_waitUntilIsDeterminate_withTimeout_Test extends JProgressBarDriver_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Null() {
-    driver.waitUntilIsDeterminate(progressBar, null);
+class JProgressBarDriver_waitUntilIsDeterminate_withTimeout_Test extends JProgressBarDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.waitUntilIsDeterminate(progressBar, null));
   }
 
   @Test
-  public void should_Wait_Until_Is_Determinate() {
+  void should_Wait_Until_Is_Determinate() {
     makeIndeterminate();
     JProgressBarMakeDeterminateAsyncTask task = makeDeterminate(progressBar).after(1, SECONDS).createTask(robot);
     try {
@@ -47,10 +49,8 @@ public class JProgressBarDriver_waitUntilIsDeterminate_withTimeout_Test extends 
   }
 
   @Test
-  public void should_Time_Out_If_Determinate_State_Never_Reached() {
+  void should_Time_Out_If_Determinate_State_Never_Reached() {
     makeIndeterminate();
-    thrown.expect(WaitTimedOutError.class, "Timed out waiting for");
-    thrown.expectMessageToContain("to be in determinate mode");
-    driver.waitUntilIsDeterminate(progressBar, timeout(1, MILLISECONDS));
+    ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> driver.waitUntilIsDeterminate(progressBar, timeout(1, MILLISECONDS)), "Timed out waiting for", "to be in determinate mode");
   }
 }

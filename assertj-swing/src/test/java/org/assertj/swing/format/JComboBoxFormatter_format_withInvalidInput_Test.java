@@ -13,9 +13,10 @@
 package org.assertj.swing.format;
 
 import static org.assertj.swing.test.builder.JTextFields.textField;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxFormatter#format(java.awt.Component)}.
@@ -23,9 +24,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JComboBoxFormatter_format_withInvalidInput_Test extends EDTSafeTestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Component_Is_Not_JComboBox() {
-    new JComboBoxFormatter().format(textField().createNew());
+class JComboBoxFormatter_format_withInvalidInput_Test extends EDTSafeTestCase {
+  @Test
+  void should_Throw_Error_If_Component_Is_Not_JComboBox() {
+    assertThrows(IllegalArgumentException.class, () -> new JComboBoxFormatter().format(textField().createNew()));
   }
 }

@@ -28,8 +28,8 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JMenuChildrenFinder#nonExplicitChildrenOf(Container)}.
@@ -37,27 +37,27 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JMenuChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestCase {
+class JMenuChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestCase {
   private JMenuChildrenFinder finder;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     finder = new JMenuChildrenFinder();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Not_JMenu() {
+  void should_Return_Empty_Collection_If_Component_Is_Not_JMenu() {
     Container container = textField().createNew();
     assertThat(finder.nonExplicitChildrenOf(container)).isEmpty();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Null() {
+  void should_Return_Empty_Collection_If_Component_Is_Null() {
     assertThat(finder.nonExplicitChildrenOf(new Container())).isEmpty();
   }
 
   @Test
-  public void should_Return_JPopupMenu_If_Component_Is_JMenu() {
+  void should_Return_JPopupMenu_If_Component_Is_JMenu() {
     ScreenLock.instance().acquire(this);
     final MyWindow window = MyWindow.createNew();
     Collection<Component> children = execute(() -> finder.nonExplicitChildrenOf(window.menu));

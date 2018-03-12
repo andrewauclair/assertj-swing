@@ -12,20 +12,20 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static java.awt.Frame.ICONIFIED;
 import static java.awt.Frame.NORMAL;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link FrameDriver#iconify(java.awt.Frame)} and {@link FrameDriver#deiconify(java.awt.Frame)}.
  * 
  * @author Alex Ruiz
  */
-public class FrameDriver_iconify_deiconify_Test extends FrameDriver_TestCase {
+class FrameDriver_iconify_deiconify_Test extends FrameDriver_TestCase {
   @Test
-  public void shouldIconifyAndDeiconifyFrame() {
+  void shouldIconifyAndDeiconifyFrame() {
     showWindow();
     driver.iconify(window);
     assertThat(frameState()).isEqualTo(ICONIFIED);

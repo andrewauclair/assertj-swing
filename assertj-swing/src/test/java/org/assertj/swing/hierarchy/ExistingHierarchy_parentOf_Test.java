@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ExistingHierarchy#parentOf(java.awt.Component)}.
@@ -49,7 +49,7 @@ public class ExistingHierarchy_parentOf_Test extends SequentialEDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_Parent_Of_Component() {
+  void should_Return_Parent_Of_Component() {
     when(parentFinder.parentOf(textField)).thenReturn(window);
     assertThat(hierarchy.parentOf(textField)).isSameAs(window);
   }

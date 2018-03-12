@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
@@ -35,7 +36,6 @@ class JOptionPaneDriver_requireErrorMessage_Test extends JOptionPaneDriver_TestC
   void should_Fail_If_Error_Type_Is_Not_Equal_To_Expected() {
     JOptionPane optionPane = informationMessage();
     pack(optionPane, title());
-    thrown.expectAssertionError("messageType", "[Error] Message", "[Information] Message");
-    driver.requireErrorMessage(optionPane);
+    ExpectedException.assertAssertionError(() -> driver.requireErrorMessage(optionPane), "messageType", "[Error] Message", "[Information] Message");
   }
 }

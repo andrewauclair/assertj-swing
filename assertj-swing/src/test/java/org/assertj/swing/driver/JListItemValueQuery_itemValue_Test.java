@@ -12,47 +12,33 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Arrays.array;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Dimension;
-import java.util.Collection;
-
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.cell.JListCellReader;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Arrays.array;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JListItemValueQuery#itemValue(JList, int, JListCellReader)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
 public class JListItemValueQuery_itemValue_Test extends RobotBasedTestCase {
   private JList list;
   private JListCellReader cellReader;
 
-  private final int index;
-  private final String expectedValue;
-
-  @Parameters
-  public static Collection<Object[]> items() {
+  private static Collection<Object[]> items() {
     return newArrayList(new Object[][] { { 0, "Yoda" }, { 1, "Luke" } });
-  }
-
-  public JListItemValueQuery_itemValue_Test(int index, String expectedValue) {
-    this.index = index;
-    this.expectedValue = expectedValue;
   }
 
   @Override
@@ -62,8 +48,9 @@ public class JListItemValueQuery_itemValue_Test extends RobotBasedTestCase {
     cellReader = new BasicJListCellReader();
   }
 
-  @Test()
-  public void should_Return_Item_Value_As_Text() {
+  @ParameterizedTest
+  @MethodSource("items")
+  void should_Return_Item_Value_As_Text(int index, String expectedValue) {
     String actualValue = itemValue(list, index, cellReader);
     assertThat(actualValue).isEqualTo(expectedValue);
   }

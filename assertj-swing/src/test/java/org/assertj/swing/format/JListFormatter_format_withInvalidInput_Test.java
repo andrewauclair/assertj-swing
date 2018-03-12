@@ -13,9 +13,10 @@
 package org.assertj.swing.format;
 
 import static org.assertj.swing.test.builder.JTextFields.textField;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListFormatter#format(java.awt.Component)}.
@@ -23,9 +24,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JListFormatter_format_withInvalidInput_Test extends EDTSafeTestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Component_Is_Not_JList() {
-    new JListFormatter().format(textField().createNew());
+class JListFormatter_format_withInvalidInput_Test extends EDTSafeTestCase {
+  @Test
+  void should_Throw_Error_If_Component_Is_Not_JList() {
+    assertThrows(IllegalArgumentException.class, () -> new JListFormatter().format(textField().createNew()));
   }
 }

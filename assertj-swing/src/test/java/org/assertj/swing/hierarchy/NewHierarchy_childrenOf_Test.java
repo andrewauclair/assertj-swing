@@ -12,10 +12,10 @@
  */
 package org.assertj.swing.hierarchy;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.hierarchy.JFrameContentPaneQuery.contentPaneOf;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link NewHierarchy#childrenOf(java.awt.Component)}.
@@ -23,15 +23,15 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class NewHierarchy_childrenOf_Test extends NewHierarchy_TestCase {
+class NewHierarchy_childrenOf_Test extends NewHierarchy_TestCase {
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Ignored() {
+  void should_Return_Empty_Collection_If_Component_Is_Ignored() {
     NewHierarchy hierarchy = new NewHierarchy(toolkit, filter, true);
     assertThat(hierarchy.childrenOf(window)).isEmpty();
   }
 
   @Test
-  public void should_Return_Children_Of_Component() {
+  void should_Return_Children_Of_Component() {
     NewHierarchy hierarchy = new NewHierarchy(toolkit, filter, false);
     filter.ignore(window.textField);
     assertThat(hierarchy.childrenOf(contentPaneOf(window))).containsOnly(window.comboBox);

@@ -12,7 +12,7 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#requireDisabled(java.awt.Component)}.
@@ -20,15 +20,15 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_requireDisabled_Test extends ComponentDriver_TestCase {
+class ComponentDriver_requireDisabled_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_Component_Is_Not_Enabled() {
+  void should_Pass_If_Component_Is_Not_Enabled() {
     disableButton();
     driver.requireDisabled(window.button);
   }
 
   @Test
-  public void should_Fail_If_Component_Is_Enabled() {
+  void should_Fail_If_Component_Is_Enabled() {
     thrown.expectAssertionError("property:'enabled'");
     thrown.expectMessageToContain("expected:<[fals]e> but was:<[tru]e>");
     driver.requireDisabled(window.button);

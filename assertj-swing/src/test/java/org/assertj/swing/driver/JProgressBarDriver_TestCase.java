@@ -36,9 +36,6 @@ public abstract class JProgressBarDriver_TestCase extends RobotBasedTestCase {
   JProgressBar progressBar;
   JProgressBarDriver driver;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected final void onSetUp() {
     driver = new JProgressBarDriver(robot);

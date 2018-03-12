@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link AbstractButtonDriver#textOf(javax.swing.AbstractButton)}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractButtonDriver_textOf_Test extends AbstractButtonDriver_TestCase {
+class AbstractButtonDriver_textOf_Test extends AbstractButtonDriver_TestCase {
   @Test
-  public void should_Return_Text_Of_Button() {
+  void should_Return_Text_Of_Button() {
     assertThat(driver.textOf(checkBox)).isEqualTo("Hello");
   }
 }

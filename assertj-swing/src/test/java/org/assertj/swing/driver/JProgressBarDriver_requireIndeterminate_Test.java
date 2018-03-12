@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.Test;
 
 /**
@@ -28,8 +29,6 @@ public class JProgressBarDriver_requireIndeterminate_Test extends JProgressBarDr
 
   @Test
   public void should_Fail_If_JProgressBar_Is_Not_Indeterminate() {
-    thrown.expectAssertionError("property:'indeterminate'");
-    thrown.expectMessageToContain("expected:<[tru]e> but was:<[fals]e>");
-    driver.requireIndeterminate(progressBar);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireIndeterminate(progressBar), "property:'indeterminate'", "expected:<[tru]e> but was:<[fals]e>");
   }
 }

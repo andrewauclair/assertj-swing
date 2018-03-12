@@ -20,43 +20,43 @@ import static org.assertj.swing.test.builder.JButtons.button;
 import javax.swing.JButton;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link IntrospectionComponentFormatter#format(java.awt.Component)}.
  *
  * @author Alex Ruiz
  */
-public class IntrospectionComponentFormatter_format_Test extends EDTSafeTestCase {
+class IntrospectionComponentFormatter_format_Test extends EDTSafeTestCase {
   private JButton button;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     button = button().withName("button").withText("Click Me").createNew();
   }
 
   @Test
-  public void should_Format_Component() {
+  void should_Format_Component() {
     IntrospectionComponentFormatter formatter = new IntrospectionComponentFormatter(JButton.class, "name", "text");
     assertThat(formatter.format(button)).isEqualTo("javax.swing.JButton[name='button', text='Click Me']");
   }
 
   @Test
-  public void should_Format_Even_With_Invalid_Property_Names() {
+  void should_Format_Even_With_Invalid_Property_Names() {
     IntrospectionComponentFormatter formatter = new IntrospectionComponentFormatter(JButton.class, "lastName", "text");
     String formatted = formatter.format(button);
     assertThat(formatted).contains("lastName=<Unable to read property").contains("text='Click Me'");
   }
 
   @Test
-  public void should_Format_Property_Showing() {
+  void should_Format_Property_Showing() {
     IntrospectionComponentFormatter formatter = new IntrospectionComponentFormatter(JButton.class, "showing");
     assertThat(formatter.format(button)).isEqualTo("javax.swing.JButton[showing=false]");
   }
 
   @Test
-  public void should_Format_One_Dimensional_Array_Properties() {
+  void should_Format_One_Dimensional_Array_Properties() {
     MyButton myButton = MyButton.newButton(array("Luke", "Leia"));
     IntrospectionComponentFormatter formatter = new IntrospectionComponentFormatter(MyButton.class, "names", "text");
     String formatted = formatter.format(myButton);
@@ -64,7 +64,7 @@ public class IntrospectionComponentFormatter_format_Test extends EDTSafeTestCase
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     IntrospectionComponentFormatter formatter = new IntrospectionComponentFormatter(JButton.class, "text");
     button = execute(() -> new JButton() {
       /** Generated serial version UID. */
@@ -74,7 +74,7 @@ public class IntrospectionComponentFormatter_format_Test extends EDTSafeTestCase
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     IntrospectionComponentFormatter formatter = new IntrospectionComponentFormatter(JButton.class, "text");
     button = execute(() -> new JButton() {
       /** Generated serial version UID. */

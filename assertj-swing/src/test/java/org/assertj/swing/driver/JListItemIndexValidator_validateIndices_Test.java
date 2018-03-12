@@ -17,29 +17,28 @@ import static org.assertj.swing.edt.GuiActionRunner.execute;
 import javax.swing.JList;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListItemPreconditions#checkIndexInBounds(JList, int)}.
  * 
  * @author Alex Ruiz
  */
-public class JListItemIndexValidator_validateIndices_Test extends JListItemIndexValidator_TestCase {
+class JListItemIndexValidator_validateIndices_Test extends JListItemIndexValidator_TestCase {
   @Test
-  public void should_Pass_If_Indices_Are_Valid() {
+  void should_Pass_If_Indices_Are_Valid() {
     validateIndices(0, 1, 2);
   }
 
   @Test
-  public void should_Throw_Error_If_Index_Is_Negative() {
-    thrown.expectIndexOutOfBoundsException("Item index (-1) should be between [0] and [2] (inclusive)");
-    validateIndices(-1, 0, 1);
+  void should_Throw_Error_If_Index_Is_Negative() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> validateIndices(-1, 0, 1), "Item index (-1) should be between [0] and [2] (inclusive)");
   }
 
   @Test
-  public void should_Throw_Error_If_Index_Is_Greater_Than_Index_Of_Last_Item() {
-    thrown.expectIndexOutOfBoundsException("Item index (3) should be between [0] and [2] (inclusive)");
-    validateIndices(0, 1, 3);
+  void should_Throw_Error_If_Index_Is_Greater_Than_Index_Of_Last_Item() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> validateIndices(0, 1, 3), "Item index (3) should be between [0] and [2] (inclusive)");
   }
 
   @RunsInEDT

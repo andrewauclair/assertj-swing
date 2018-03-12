@@ -18,7 +18,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ExistingHierarchy#dispose(java.awt.Window)}.
@@ -42,7 +42,7 @@ public class ExistingHierarchy_dispose_Test extends SequentialEDTSafeTestCase {
   }
 
   @Test
-  public void should_Dispose_Window() {
+  void should_Dispose_Window() {
     window.startRecording();
     hierarchy.dispose(window);
     window.requireInvoked("dispose");

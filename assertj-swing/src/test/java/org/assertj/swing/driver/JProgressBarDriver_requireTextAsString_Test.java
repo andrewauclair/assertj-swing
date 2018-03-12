@@ -12,29 +12,29 @@
  */
 package org.assertj.swing.driver;
 
-import java.util.regex.Pattern;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import java.util.regex.Pattern;
 
 /**
  * Tests for {@link JProgressBarDriver#requireText(JProgressBar, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JProgressBarDriver_requireTextAsString_Test extends JProgressBarDriver_TestCase {
+class JProgressBarDriver_requireTextAsString_Test extends JProgressBarDriver_TestCase {
   @Test
-  public void should_Pass_If_Text_Is_Equal_To_Expected() {
+  void should_Pass_If_Text_Is_Equal_To_Expected() {
     driver.requireText(progressBar, "60%");
   }
 
   @Test
-  public void should_Pass_If_Text_Matches_Expected_Pattern() {
+  void should_Pass_If_Text_Matches_Expected_Pattern() {
     driver.requireText(progressBar, "60.*");
   }
 
   @Test
-  public void should_Fail_If_Text_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("string", "60%", Pattern.compile("50%"));
-    driver.requireText(progressBar, "50%");
+  void should_Fail_If_Text_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertAssertionError(() -> driver.requireText(progressBar, "50%"), "string", "60%", Pattern.compile("50%"));
   }
 }

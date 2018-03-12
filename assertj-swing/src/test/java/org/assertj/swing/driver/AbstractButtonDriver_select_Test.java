@@ -12,19 +12,20 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.AbstractButtonSelectedQuery.isSelected;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link AbstractButtonDriver#select(javax.swing.AbstractButton)}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractButtonDriver_select_Test extends AbstractButtonDriver_TestCase {
+class AbstractButtonDriver_select_Test extends AbstractButtonDriver_TestCase {
   @Test
-  public void should_Not_Do_Anything_If_Button_Is_Already_Selected() {
+  void should_Not_Do_Anything_If_Button_Is_Already_Selected() {
     showWindow();
     selectCheckBox();
     driver.select(checkBox);
@@ -32,7 +33,7 @@ public class AbstractButtonDriver_select_Test extends AbstractButtonDriver_TestC
   }
 
   @Test
-  public void should_Select_Button() {
+  void should_Select_Button() {
     showWindow();
     unselectCheckBox();
     driver.select(checkBox);
@@ -44,15 +45,13 @@ public class AbstractButtonDriver_select_Test extends AbstractButtonDriver_TestC
   }
 
   @Test
-  public void should_Throw_Error_If_AbstractButton_Disabled() {
+  void should_Throw_Error_If_AbstractButton_Disabled() {
     disableCheckBox();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.select(checkBox);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.select(checkBox));
   }
 
   @Test
-  public void should_Throw_Error_If_AbstractButton_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.select(checkBox);
+  void should_Throw_Error_If_AbstractButton_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.select(checkBox));
   }
 }

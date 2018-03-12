@@ -58,8 +58,8 @@ public class ExpectedException implements TestRule {
     expectAssertionErrorForProperty(property, doubleQuote(expected), doubleQuote(actual));
   }
 
-  public void assertAssertionError(Executable executable, String property, String expected, String actual) {
-
+  public static void assertAssertionError(Executable executable, String property, String expected, String actual) {
+    assertAssertionErrorForProperty(executable, property, doubleQuote(expected), doubleQuote(actual));
   }
   public void expectAssertionError(String property, int expected, int actual) {
     expectAssertionErrorForProperty(property, quote(expected), quote(actual));
@@ -69,7 +69,7 @@ public class ExpectedException implements TestRule {
     return "[" + actual + "]";
   }
 
-  private String doubleQuote(String string) {
+  private static String doubleQuote(String string) {
     return "\"" + string + "\"";
   }
 
@@ -77,7 +77,7 @@ public class ExpectedException implements TestRule {
     expectAssertionErrorForProperty(property, buildStringForMessage(expected), buildStringForMessage(actual));
   }
 
-  public void assertAssertionError(Executable executable, String property, String[] expected, String[] actual) {
+  public static void assertAssertionError(Executable executable, String property, String[] expected, String[] actual) {
     assertAssertionErrorForProperty(executable, property, buildStringForMessage(expected), buildStringForMessage(actual));
   }
 
@@ -88,8 +88,8 @@ public class ExpectedException implements TestRule {
     expectMessageToContain("but was:<" + actual + ">");
   }
 
-  private void assertAssertionErrorForProperty(Executable executable, String property, String expected, String actual) {
-    assertContainsMessage(AssertionError.class, executable, "property:;" + property + "'", "expected:<" + expected + ">", "but was:<" + actual + ">");
+  private static void assertAssertionErrorForProperty(Executable executable, String property, String expected, String actual) {
+    assertContainsMessage(AssertionError.class, executable, "property:" + property + "'", "expected:<" + expected + ">", "but was:<" + actual + ">");
   }
 
   public void expectAssertionError(String property, String content, Pattern pattern) {
@@ -104,7 +104,7 @@ public class ExpectedException implements TestRule {
     assertTrue(exception.getMessage().contains("\nExpecting:\n \"" + content + "\"\nto match pattern:\n \"" + pattern.pattern() + "\""));
   }
 
-  private String buildStringForMessage(String[] array) {
+  private static String buildStringForMessage(String[] array) {
     StringBuilder sb = new StringBuilder();
     sb.append("[");
     for (int i = 0; i < array.length; ++i) {

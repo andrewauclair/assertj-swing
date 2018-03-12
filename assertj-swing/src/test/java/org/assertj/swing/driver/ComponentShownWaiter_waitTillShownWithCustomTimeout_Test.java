@@ -12,18 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
-import static org.assertj.swing.timing.Pause.pause;
-
 import org.assertj.swing.exception.WaitTimedOutError;
-import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
+import static org.assertj.swing.timing.Pause.pause;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link ComponentShownWaiter#waitTillShown(java.awt.Component, long)}.
@@ -31,9 +29,6 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class ComponentShownWaiter_waitTillShownWithCustomTimeout_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private TestWindow window;
 
   @Override
@@ -42,12 +37,11 @@ public class ComponentShownWaiter_waitTillShownWithCustomTimeout_Test extends Ro
   }
 
   @Test
-  public void should_Timeout_If_Component_Never_Shown() {
+  void should_Timeout_If_Component_Never_Shown() {
     StopWatch stopWatch = startNewStopWatch();
     int timeout = 500;
-    thrown.expect(WaitTimedOutError.class);
     try {
-      ComponentShownWaiter.waitTillShown(window, timeout);
+      assertThrows(WaitTimedOutError.class, () -> ComponentShownWaiter.waitTillShown(window, timeout));
     } finally {
       stopWatch.stop();
       assertThat(stopWatch.ellapsedTime()).isGreaterThanOrEqualTo(timeout);
@@ -55,7 +49,7 @@ public class ComponentShownWaiter_waitTillShownWithCustomTimeout_Test extends Ro
   }
 
   @Test
-  public void should_Wait_Till_Component_Is_Shown() {
+  void should_Wait_Till_Component_Is_Shown() {
     StopWatch stopWatch = startNewStopWatch();
     int timeout = 10000;
     new Thread() {
@@ -71,7 +65,7 @@ public class ComponentShownWaiter_waitTillShownWithCustomTimeout_Test extends Ro
   }
 
   @Test
-  public void should_Not_Wait_If_Component_Is_Already_Shown() {
+  void should_Not_Wait_If_Component_Is_Already_Shown() {
     robot.showWindow(window);
     StopWatch stopWatch = startNewStopWatch();
     ComponentShownWaiter.waitTillShown(window, 10000);

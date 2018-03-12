@@ -31,7 +31,6 @@ class AbstractButtonDriver_requireTextAsPattern_Test extends AbstractButtonDrive
   @Test
   void should_Fail_If_Text_Does_Not_Match_Regex_Pattern() {
     Pattern pattern = Pattern.compile("Bye.");
-//    thrown.expectAssertionError("text", "Hello", pattern);
     ExpectedException.assertAssertionError(() -> driver.requireText(checkBox, pattern), "text", "Hello", pattern);
   }
 }

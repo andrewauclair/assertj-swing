@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.exception.ComponentLookupException;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.builder.JDialogs.dialog;
-
-import java.awt.Dialog;
-
-import org.assertj.swing.exception.ComponentLookupException;
-import org.assertj.swing.test.ScreenLockReleaser;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Rule;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link DialogFixture#DialogFixture(String)}.
@@ -30,29 +29,26 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class DialogFixture_constructor_withName_Test extends EDTSafeTestCase {
-//  @Rule
-//  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
-
+class DialogFixture_constructor_withName_Test extends EDTSafeTestCase {
   private DialogFixture fixture;
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     if (fixture != null) {
       fixture.cleanUp();
     }
   }
 
   @Test
-  public void should_Lookup_Showing_Dialog_By_Name_Using_New_Robot() {
+  void should_Lookup_Showing_Dialog_By_Name_Using_New_Robot() {
     Dialog target = dialog().withName("dialog").withTitle(getClass().getSimpleName()).createAndShow();
     fixture = new DialogFixture("dialog");
     assertThat(fixture.robot()).isNotNull();
     assertThat(fixture.target()).isSameAs(target);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_Dialog_With_Matching_Name_Is_Not_Found() {
-    fixture = new DialogFixture("dialog");
+  @Test
+  void should_Throw_Error_If_Dialog_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> fixture = new DialogFixture("dialog"));
   }
 }

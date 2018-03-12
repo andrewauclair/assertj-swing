@@ -16,16 +16,17 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import static java.awt.Frame.NORMAL;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameDriver#normalize(java.awt.Frame)}.
  * 
  * @author Alex Ruiz
  */
-public class FrameDriver_normalize_Test extends FrameDriver_TestCase {
+class FrameDriver_normalize_Test extends FrameDriver_TestCase {
   @Test
-  public void should_Normalize_Frame() {
+  void should_Normalize_Frame() {
     showWindow();
     window.setExtendedState(MAXIMIZED_BOTH);
     robot.waitForIdle();
@@ -35,15 +36,13 @@ public class FrameDriver_normalize_Test extends FrameDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Disabled() {
+  void should_Throw_Error_If_Frame_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.normalize(window);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.normalize(window));
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.normalize(window);
+  void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.normalize(window));
   }
 }

@@ -12,21 +12,21 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
 
 import javax.swing.JOptionPane;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JOptionPaneDriver#title(JOptionPane)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneDriver_title_Test extends JOptionPaneDriver_TestCase {
+class JOptionPaneDriver_title_Test extends JOptionPaneDriver_TestCase {
   @Test
-  public void should_Return_Title() {
+  void should_Return_Title() {
     JOptionPane optionPane = informationMessage();
     pack(optionPane, title());
     assertThat(driver.title(optionPane)).isEqualTo(title());

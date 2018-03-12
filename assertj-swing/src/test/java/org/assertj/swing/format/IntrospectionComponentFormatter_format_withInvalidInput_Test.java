@@ -13,33 +13,34 @@
 package org.assertj.swing.format;
 
 import static org.assertj.swing.test.builder.JComboBoxes.comboBox;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JButton;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link IntrospectionComponentFormatter#format(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-public class IntrospectionComponentFormatter_format_withInvalidInput_Test extends EDTSafeTestCase {
+class IntrospectionComponentFormatter_format_withInvalidInput_Test extends EDTSafeTestCase {
   private IntrospectionComponentFormatter formatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     formatter = new IntrospectionComponentFormatter(JButton.class, "name", "text");
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Component_Belongs_To_Unsupported_Type() {
-    formatter.format(comboBox().createNew());
+  @Test
+  void should_Throw_Error_If_Component_Belongs_To_Unsupported_Type() {
+    assertThrows(IllegalArgumentException.class, () -> formatter.format(comboBox().createNew()));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Component_Is_Null() {
-    formatter.format(null);
+  @Test
+  void should_Throw_Error_If_Component_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> formatter.format(null));
   }
 }

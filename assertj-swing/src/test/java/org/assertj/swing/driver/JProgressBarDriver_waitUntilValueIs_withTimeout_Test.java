@@ -17,35 +17,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JProgressBarIncrementValueAsyncTask.with;
 import static org.assertj.swing.driver.JProgressBarValueQuery.valueOf;
 import static org.assertj.swing.timing.Timeout.timeout;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.exception.WaitTimedOutError;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JProgressBarDriver#waitUntilValueIs(JProgressBar, int, Timeout)}.
  * 
  * @author Alex Ruiz
  */
-public class JProgressBarDriver_waitUntilValueIs_withTimeout_Test extends JProgressBarDriver_TestCase {
+class JProgressBarDriver_waitUntilValueIs_withTimeout_Test extends JProgressBarDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_Expected_Value_Is_Less_Than_Minimum() {
-    thrown.expectIllegalArgumentException("Value <-1> should be between <[0, 100]>");
-    driver.waitUntilValueIs(progressBar, -1, timeout(2, SECONDS));
+  void should_Throw_Error_If_Expected_Value_Is_Less_Than_Minimum() {
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.waitUntilValueIs(progressBar, -1, timeout(2, SECONDS)), "Value <-1> should be between <[0, 100]>");
   }
 
   @Test
-  public void should_Throw_Error_If_Expected_Value_Is_Greater_Than_Maximum() {
-    thrown.expectIllegalArgumentException("Value <200> should be between <[0, 100]>");
-    driver.waitUntilValueIs(progressBar, 200, timeout(2, SECONDS));
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Null() {
-    driver.waitUntilValueIs(progressBar, 10, null);
+  void should_Throw_Error_If_Expected_Value_Is_Greater_Than_Maximum() {
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.waitUntilValueIs(progressBar, 200, timeout(2, SECONDS)), "Value <200> should be between <[0, 100]>");
   }
 
   @Test
-  public void should_Wait_Until_Value_Is_Equal_To_Expected() {
+  void should_Throw_Error_If_Timeout_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.waitUntilValueIs(progressBar, 10, null));
+  }
+
+  @Test
+  void should_Wait_Until_Value_Is_Equal_To_Expected() {
     updateValueTo(10);
     JProgressBarIncrementValueAsyncTask task = with(progressBar).increment(20).every(1, SECONDS).createTask(robot);
     try {
@@ -58,9 +58,7 @@ public class JProgressBarDriver_waitUntilValueIs_withTimeout_Test extends JProgr
   }
 
   @Test
-  public void should_Time_Out_If_Expected_Value_Never_Reached() {
-    thrown.expect(WaitTimedOutError.class, "Timed out waiting for value");
-    thrown.expectMessageToContain("to be equal to 100");
-    driver.waitUntilValueIs(progressBar, 100, timeout(1, SECONDS));
+  void should_Time_Out_If_Expected_Value_Never_Reached() {
+    ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> driver.waitUntilValueIs(progressBar, 100, timeout(1, SECONDS)), "Timed out waiting for value", "to be equal to 100");
   }
 }

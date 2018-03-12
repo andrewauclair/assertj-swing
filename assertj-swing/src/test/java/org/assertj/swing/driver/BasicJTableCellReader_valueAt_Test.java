@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.swing.CustomCellRenderer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicJTableCellReader#valueAt(JTable, int, int)}.
@@ -35,9 +35,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class BasicJTableCellReader_valueAt_Test extends BasicJTableCellReader_TestCase {
+class BasicJTableCellReader_valueAt_Test extends BasicJTableCellReader_TestCase {
   @Test
-  public void should_Return_ToString_From_Model_If_CellRenderer_Is_Not_Recognized() {
+  void should_Return_ToString_From_Model_If_CellRenderer_Is_Not_Recognized() {
     setModelData(table, new Object[][] { array(new Jedi("Yoda")) }, array("Names"));
     setNotRecognizedCellRendererTo(table);
     robot.waitForIdle();
@@ -59,14 +59,14 @@ public class BasicJTableCellReader_valueAt_Test extends BasicJTableCellReader_Te
   }
 
   @Test
-  public void should_Return_Text_From_CellRenderer_If_It_Is_JLabel() {
+  void should_Return_Text_From_CellRenderer_If_It_Is_JLabel() {
     setJLabelAsCellRenderer();
     String value = valueAt(reader, table, 0, 0);
     assertThat(value).isEqualTo("Hello");
   }
 
   @Test
-  public void should_Return_Selection_From_CellRenderer_If_It_Is_JComboBox() {
+  void should_Return_Selection_From_CellRenderer_If_It_Is_JComboBox() {
     setJComboBoxAsCellRendererWithSelection(1);
     robot.waitForIdle();
     String value = valueAt(reader, table, 0, 0);
@@ -74,7 +74,7 @@ public class BasicJTableCellReader_valueAt_Test extends BasicJTableCellReader_Te
   }
 
   @Test
-  public void should_Return_Null_If_CellRenderer_Is_JComboBox_Without_Selection() {
+  void should_Return_Null_If_CellRenderer_Is_JComboBox_Without_Selection() {
     setJComboBoxAsCellRendererWithSelection(-1);
     robot.waitForIdle();
     String value = valueAt(reader, table, 0, 0);
@@ -82,7 +82,7 @@ public class BasicJTableCellReader_valueAt_Test extends BasicJTableCellReader_Te
   }
 
   @RunsInEDT
-  void setJComboBoxAsCellRendererWithSelection(int itemIndex) {
+  private void setJComboBoxAsCellRendererWithSelection(int itemIndex) {
     setJComboBoxAsCellRenderer(table, itemIndex);
     robot.waitForIdle();
   }
@@ -97,7 +97,7 @@ public class BasicJTableCellReader_valueAt_Test extends BasicJTableCellReader_Te
   }
 
   @Test
-  public void should_Return_Selection_From_CellRenderer_If_It_Is_JCheckBox() {
+  void should_Return_Selection_From_CellRenderer_If_It_Is_JCheckBox() {
     setJCheckBoxAsCellRenderer(table, "Hello", true);
     robot.waitForIdle();
     String value = valueAt(reader, table, 0, 0);

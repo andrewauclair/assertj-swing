@@ -16,16 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.awt.Point;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#moveTo(java.awt.Window, java.awt.Point)} to ensure it works with {@link FrameDriver}.
  * 
  * @author Alex Ruiz
  */
-public class FrameDriver_moveTo_Test extends FrameDriver_TestCase {
+class FrameDriver_moveTo_Test extends FrameDriver_TestCase {
   @Test
-  public void should_Move_Frame() {
+  void should_Move_Frame() {
     showWindow();
     Point newLocation = windowLocationOnScreen().addToX(10).addToY(10);
     driver.moveTo(window, newLocation);
@@ -33,15 +34,13 @@ public class FrameDriver_moveTo_Test extends FrameDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Disabled() {
+  void should_Throw_Error_If_Frame_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.moveTo(window, new Point(10, 10));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.moveTo(window, new Point(10, 10)));
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.moveTo(window, new Point(10, 10));
+  void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.moveTo(window, new Point(10, 10)));
   }
 }

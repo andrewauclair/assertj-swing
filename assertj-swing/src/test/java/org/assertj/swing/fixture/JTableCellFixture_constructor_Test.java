@@ -12,24 +12,25 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.swing.data.TableCell.row;
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.swing.data.TableCell.row;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 
 /**
  * Tests for {@link JTableCellFixture#JTableCellFixture(JTableFixture, org.assertj.swing.data.TableCell)}.
  * 
  * @author Alex Ruiz
  */
-public class JTableCellFixture_constructor_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_JTableFixture_Is_Null() {
-    new JTableCellFixture(null, row(6).column(8));
+class JTableCellFixture_constructor_Test {
+  @Test
+  void should_Throw_Error_If_JTableFixture_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new JTableCellFixture(null, row(6).column(8)));
   }
 
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_TableCell_Is_Null() {
-    new JTableCellFixture(mock(JTableFixture.class), null);
+  @Test
+  void should_Throw_Error_If_TableCell_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new JTableCellFixture(mock(JTableFixture.class), null));
   }
 }

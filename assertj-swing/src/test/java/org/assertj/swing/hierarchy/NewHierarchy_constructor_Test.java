@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.assertj.swing.listener.WeakEventListener;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NewHierarchy#NewHierarchy(java.awt.Toolkit, WindowFilter, boolean)}.
@@ -25,16 +25,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class NewHierarchy_constructor_Test extends NewHierarchy_TestCase {
+class NewHierarchy_constructor_Test extends NewHierarchy_TestCase {
   @Test
-  public void should_Ignore_Existing_Components_And_AddTransientWindowListener_To_Toolkit() {
+  void should_Ignore_Existing_Components_And_AddTransientWindowListener_To_Toolkit() {
     new NewHierarchy(toolkit, filter, true);
     assertThat(filter.isIgnored(window)).isTrue();
     assertThatTransientWindowListenerWasAddedToToolkit();
   }
 
   @Test
-  public void should_Not_Ignore_Existing_Components_And_AddTransientWindowListener_To_Toolkit() {
+  void should_Not_Ignore_Existing_Components_And_AddTransientWindowListener_To_Toolkit() {
     new NewHierarchy(toolkit, filter, false);
     assertThat(filter.isIgnored(window)).isFalse();
     assertThatTransientWindowListenerWasAddedToToolkit();

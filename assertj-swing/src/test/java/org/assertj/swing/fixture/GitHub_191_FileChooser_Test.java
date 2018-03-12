@@ -25,14 +25,13 @@ import javax.swing.JTextField;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.finder.JFileChooserFinder;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 /** Test for <a href="https://github.com/joel-costigliola/assertj-swing/issues/191">github.com - assertj-swing #191</a> */
 public class GitHub_191_FileChooser_Test extends RobotBasedTestCase {
-  @Rule
-  public TemporaryFolder temporaryFolder = new TemporaryFolder();
+//  @Rule
+private TemporaryFolder temporaryFolder = new TemporaryFolder();
 
   protected FrameFixture window;
 
@@ -45,12 +44,12 @@ public class GitHub_191_FileChooser_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void openFileChooser() throws IOException {
+  void openFileChooser() throws IOException {
     selectFile();
   }
 
   @Test
-  public void openFileChooserAgain() throws IOException {
+  void openFileChooserAgain() throws IOException {
     selectFile();
   }
 
@@ -72,7 +71,7 @@ public class GitHub_191_FileChooser_Test extends RobotBasedTestCase {
 
     private static final long serialVersionUID = 1L;
 
-    public FileChooserFrame() {
+    FileChooserFrame() {
       setSize(200, 100);
       setTitle(getClass().getCanonicalName());
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

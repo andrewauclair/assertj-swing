@@ -18,16 +18,17 @@ import static org.assertj.swing.driver.JProgressBarIndeterminateQuery.isIndeterm
 import static org.assertj.swing.driver.JProgressBarMakeDeterminateAsyncTask.makeDeterminate;
 
 import org.assertj.swing.exception.WaitTimedOutError;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JProgressBarDriver#waitUntilIsDeterminate(javax.swing.JProgressBar)}.
  * 
  * @author Alex Ruiz
  */
-public class JProgressBarDriver_waitUntilIsDeterminate_Test extends JProgressBarDriver_TestCase {
+class JProgressBarDriver_waitUntilIsDeterminate_Test extends JProgressBarDriver_TestCase {
   @Test
-  public void should_Wait_Until_Is_Determinate() {
+  void should_Wait_Until_Is_Determinate() {
     makeIndeterminate();
     JProgressBarMakeDeterminateAsyncTask task = makeDeterminate(progressBar).after(1, SECONDS).createTask(robot);
     try {
@@ -40,10 +41,8 @@ public class JProgressBarDriver_waitUntilIsDeterminate_Test extends JProgressBar
   }
 
   @Test
-  public void should_Time_Out_If_Determinate_State_Never_Reached() {
+  void should_Time_Out_If_Determinate_State_Never_Reached() {
     makeIndeterminate();
-    thrown.expect(WaitTimedOutError.class, "Timed out waiting for");
-    thrown.expectMessageToContain("to be in determinate mode");
-    driver.waitUntilIsDeterminate(progressBar);
+    ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> driver.waitUntilIsDeterminate(progressBar), "Timed out waiting for", "to be in determinate mode");
   }
 }

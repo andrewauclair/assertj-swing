@@ -39,8 +39,6 @@ public abstract class AbstractButtonDriver_TestCase extends RobotBasedTestCase {
   AbstractButtonDriver driver;
   MyWindow window;
   JCheckBox checkBox;
-  @Rule
-  public ExpectedException thrown = none();
 
   @Override
   protected final void onSetUp() {

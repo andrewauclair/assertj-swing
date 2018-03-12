@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.swing.test.swing.JOptionPaneLauncher.pack;
@@ -44,7 +45,6 @@ class JOptionPaneDriver_requireTitleAsText_Test extends JOptionPaneDriver_TestCa
   void should_Fail_If_Title_Is_Not_Equal_To_Expected() {
     JOptionPane optionPane = informationMessage();
     pack(optionPane, title());
-    thrown.expectAssertionError("title", title(), Pattern.compile("Yoda"));
-    driver.requireTitle(optionPane, "Yoda");
+    ExpectedException.assertAssertionError(() -> driver.requireTitle(optionPane, "Yoda"), "title", title(), Pattern.compile("Yoda"));
   }
 }

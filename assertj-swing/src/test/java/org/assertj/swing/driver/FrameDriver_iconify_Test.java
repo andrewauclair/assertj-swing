@@ -12,24 +12,23 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameDriver#iconify(java.awt.Frame)}.
  * 
  * @author Alex Ruiz
  */
-public class FrameDriver_iconify_Test extends FrameDriver_TestCase {
+class FrameDriver_iconify_Test extends FrameDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_Frame_Is_Disabled() {
+  void should_Throw_Error_If_Frame_Is_Disabled() {
     disableWindow();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.iconify(window);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.iconify(window));
   }
 
   @Test
-  public void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.iconify(window);
+  void should_Throw_Error_If_Frame_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.iconify(window));
   }
 }

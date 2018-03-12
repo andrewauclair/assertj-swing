@@ -12,35 +12,34 @@
  */
 package org.assertj.swing.driver;
 
-import java.util.regex.Pattern;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import java.util.regex.Pattern;
 
 /**
  * Tests for {@link AbstractButtonDriver#requireText(javax.swing.AbstractButton, String)}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractButtonDriver_requireTextAsString_Test extends AbstractButtonDriver_TestCase {
+class AbstractButtonDriver_requireTextAsString_Test extends AbstractButtonDriver_TestCase {
   @Test
-  public void should_Pass_If_Text_Is_Equal_To_Given_String() {
+  void should_Pass_If_Text_Is_Equal_To_Given_String() {
     driver.requireText(checkBox, "Hello");
   }
 
   @Test
-  public void should_Pass_If_Text_Matches_Regex_Pattern_In_Given_String() {
+  void should_Pass_If_Text_Matches_Regex_Pattern_In_Given_String() {
     driver.requireText(checkBox, "Hell.");
   }
 
   @Test
-  public void should_Fail_If_Text_Is_Not_Equal_To_Given_String() {
-    thrown.expectAssertionError("text", "Hello", Pattern.compile("Bye"));
-    driver.requireText(checkBox, "Bye");
+  void should_Fail_If_Text_Is_Not_Equal_To_Given_String() {
+    ExpectedException.assertAssertionError(() -> driver.requireText(checkBox, "Bye"), "text", "Hello", Pattern.compile("Bye"));
   }
 
   @Test
-  public void should_Fail_If_Text_Does_Not_Match_Regex_Pattern_In_Given_String() {
-    thrown.expectAssertionError("text", "Hello", Pattern.compile("Bye."));
-    driver.requireText(checkBox, "Bye.");
+  void should_Fail_If_Text_Does_Not_Match_Regex_Pattern_In_Given_String() {
+    ExpectedException.assertAssertionError(() -> driver.requireText(checkBox, "Bye."), "text", "Hello", Pattern.compile("Bye."));
   }
 }

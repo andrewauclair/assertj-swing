@@ -21,8 +21,8 @@ import static org.assertj.swing.test.builder.JOptionPanes.optionPane;
 import javax.swing.JOptionPane;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JOptionPaneFormatter#format(java.awt.Component)}.
@@ -30,19 +30,19 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JOptionPaneFormatter_format_Test extends EDTSafeTestCase {
+class JOptionPaneFormatter_format_Test extends EDTSafeTestCase {
   private JOptionPane optionPane;
   private JOptionPaneFormatter formatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     optionPane = optionPane().withMessage("A message").withMessageType(ERROR_MESSAGE).withOptionType(DEFAULT_OPTION)
                              .createNew();
     formatter = new JOptionPaneFormatter();
   }
 
   @Test
-  public void should_Format_JOptionPane() {
+  void should_Format_JOptionPane() {
     String formatted = formatter.format(optionPane);
     assertThat(formatted).contains("javax.swing.JOptionPane").contains("message='A message'")
                          .contains("messageType=ERROR_MESSAGE").contains("optionType=DEFAULT_OPTION")
@@ -51,7 +51,7 @@ public class JOptionPaneFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     optionPane = execute(() -> new JOptionPane() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
@@ -60,7 +60,7 @@ public class JOptionPaneFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     optionPane = execute(() -> new JOptionPane() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;

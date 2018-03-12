@@ -12,29 +12,23 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
-
-import java.awt.Dimension;
-import java.util.Collection;
-
-import javax.swing.JList;
-import javax.swing.JSplitPane;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JSplitPaneDriver#moveDividerTo(JSplitPane, int)}.
@@ -42,22 +36,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
 public class JSplitPaneDriver_moveDividerTo_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private JSplitPaneDriver driver;
 
-  private final int orientation;
-
-  @Parameters
-  public static Collection<Object[]> orientations() {
+  private static Collection<Object[]> orientations() {
     return newArrayList(new Object[][] { { VERTICAL_SPLIT }, { HORIZONTAL_SPLIT } });
-  }
-
-  public JSplitPaneDriver_moveDividerTo_Test(int orientation) {
-    this.orientation = orientation;
   }
 
   @Override
@@ -65,37 +48,38 @@ public class JSplitPaneDriver_moveDividerTo_Test extends RobotBasedTestCase {
     driver = new JSplitPaneDriver(robot);
   }
 
-  @Test
-  public void should_Move_Divider_To_Given_Location() {
-    MyWindow window = createAndShowWindow();
+  @ParameterizedTest
+  @MethodSource("orientations")
+  void should_Move_Divider_To_Given_Location(int orientation) {
+    MyWindow window = createAndShowWindow(orientation);
     int newLocation = window.splitPane.getDividerLocation() + 100;
     driver.moveDividerTo(window.splitPane, newLocation);
     assertThat(window.splitPane.getDividerLocation()).isEqualTo(newLocation);
   }
 
-  @Test
-  public void should_Throw_Error_If_JSplitPane_Is_Disabled() {
-    MyWindow window = createWindow();
+  @ParameterizedTest
+  @MethodSource("orientations")
+  void should_Throw_Error_If_JSplitPane_Is_Disabled(int orientation) {
+    MyWindow window = createWindow(orientation);
     disable(window.splitPane);
     robot.waitForIdle();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.moveDividerTo(window.splitPane, 100);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.moveDividerTo(window.splitPane, 100));
   }
 
-  @Test
-  public void should_Throw_Error_If_JSplitPane_Is_Not_Showing_On_The_Screen() {
-    MyWindow window = createWindow();
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.moveDividerTo(window.splitPane, 100);
+  @ParameterizedTest
+  @MethodSource("orientations")
+  void should_Throw_Error_If_JSplitPane_Is_Not_Showing_On_The_Screen(int orientation) {
+    MyWindow window = createWindow(orientation);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.moveDividerTo(window.splitPane, 100));
   }
 
-  private MyWindow createAndShowWindow() {
-    MyWindow window = createWindow();
+  private MyWindow createAndShowWindow(int orientation) {
+    MyWindow window = createWindow(orientation);
     robot.showWindow(window);
     return window;
   }
 
-  private MyWindow createWindow() {
+  private MyWindow createWindow(int orientation) {
     return MyWindow.createNew(orientation, getClass());
   }
 
