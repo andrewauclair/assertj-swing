@@ -21,7 +21,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentTextQuery#textOf(javax.swing.text.JTextComponent)}.
@@ -40,7 +40,7 @@ public class JTextComponentTextQuery_textOf_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Text_Of_JTextComponent() {
+  void should_Return_Text_Of_JTextComponent() {
     textField.startRecording();
     assertThat(JTextComponentTextQuery.textOf(textField)).isEqualTo(TEXT);
     textField.requireInvoked("getText");

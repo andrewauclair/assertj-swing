@@ -15,7 +15,8 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#indexOf(javax.swing.JList, String)}.
@@ -23,25 +24,24 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_indexOfValueAsString_Test extends JListDriver_TestCase {
+class JListDriver_indexOfValueAsString_Test extends JListDriver_TestCase {
   @Test
-  public void should_Return_Index_Of_Item_With_Given_Value() {
+  void should_Return_Index_Of_Item_With_Given_Value() {
     int index = driver.indexOf(list, "three");
     assertThat(index).isEqualTo(2);
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Return_Index_Of_Item_Matching_Pattern() {
+  void should_Return_Index_Of_Item_Matching_Pattern() {
     int index = driver.indexOf(list, "thr.*");
     assertThat(index).isEqualTo(2);
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Throw_Error_If_Item_Matching_Given_Value_Was_Not_Found() {
-    thrown.expect(LocationUnavailableException.class,
+  void should_Throw_Error_If_Item_Matching_Given_Value_Was_Not_Found() {
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.indexOf(list, "four"),
         "Unable to find item matching the value 'four' among the JList contents [\"one\", \"two\", \"three\"]");
-    driver.indexOf(list, "four");
   }
 }

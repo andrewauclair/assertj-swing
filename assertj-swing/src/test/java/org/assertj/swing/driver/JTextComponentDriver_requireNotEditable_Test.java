@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#requireNotEditable(javax.swing.text.JTextComponent)}.
@@ -20,18 +21,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_requireNotEditable_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_requireNotEditable_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_JTextComponent_Is_Not_Editable() {
+  void should_Pass_If_JTextComponent_Is_Not_Editable() {
     makeTextFieldNotEditable();
     driver.requireNotEditable(textField);
   }
 
   @Test
-  public void should_Fail_If_JTextComponent_Is_Editable() {
+  void should_Fail_If_JTextComponent_Is_Editable() {
     makeTextFieldEditable();
-    thrown.expectAssertionError("property:'editable'");
-    thrown.expectMessageToContain("expected:<[fals]e> but was:<[tru]e>");
-    driver.requireNotEditable(textField);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireNotEditable(textField), "property:'editable'", "expected:<[fals]e> but was:<[tru]e>");
   }
 }

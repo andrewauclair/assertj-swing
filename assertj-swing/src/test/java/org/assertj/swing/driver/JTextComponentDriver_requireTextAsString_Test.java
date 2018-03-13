@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.Test;
 
 /**
@@ -38,7 +39,6 @@ public class JTextComponentDriver_requireTextAsString_Test extends JTextComponen
   @Test
   public void should_Fail_If_Does_Not_Have_Expected_Text() {
     setTextFieldText("Hi");
-    thrown.expectAssertionError("text", "Hi", Pattern.compile("Bye"));
-    driver.requireText(textField, "Bye");
+    ExpectedException.assertAssertionError(() -> driver.requireText(textField, "Bye"), "text", "Hi", Pattern.compile("Bye"));
   }
 }

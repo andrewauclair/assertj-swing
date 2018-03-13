@@ -14,15 +14,16 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Point;
 import java.util.regex.Pattern;
 
 import org.assertj.swing.exception.LocationUnavailableException;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for
@@ -32,11 +33,10 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class JListDriver_clickItemByPattern_Test extends JListDriver_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Click_Item_With_Text_Matching_Given_Pattern() {
+  void should_Click_Item_With_Text_Matching_Given_Pattern() {
     clearSelection();
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(list);
@@ -47,21 +47,19 @@ public class JListDriver_clickItemByPattern_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.clickItem(list, Pattern.compile("two"), RIGHT_BUTTON, 2);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.clickItem(list, Pattern.compile("two"), RIGHT_BUTTON, 2));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.clickItem(list, Pattern.compile("two"), RIGHT_BUTTON, 2);
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.clickItem(list, Pattern.compile("two"), RIGHT_BUTTON, 2));
   }
 
-  @Test(expected = LocationUnavailableException.class)
-  public void should_Throw_Error_If_Item_To_Click_Was_Not_Found() {
+  @Test
+  void should_Throw_Error_If_Item_To_Click_Was_Not_Found() {
     showWindow();
-    driver.clickItem(list, Pattern.compile("hello"), RIGHT_BUTTON, 2);
+    assertThrows(LocationUnavailableException.class, () -> driver.clickItem(list, Pattern.compile("hello"), RIGHT_BUTTON, 2));
   }
 }

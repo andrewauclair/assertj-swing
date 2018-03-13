@@ -12,24 +12,21 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
+import java.awt.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.driver.JTextComponentSelectedTextQuery.selectedTextOf;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Dimension;
-import java.util.Collection;
-
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JTextComponentSelectTextTask#selectTextInRange(JTextComponent, int, int)}.
@@ -37,23 +34,13 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
 public class JTextComponentSelectTextTask_selectTextInRange_Test extends RobotBasedTestCase {
   static final String TEXTBOX_TEXT = "Hello World";
 
   private JTextComponent textBox;
 
-  private final int start;
-  private final int end;
-
-  @Parameters
-  public static Collection<Object[]> ranges() {
+  private static Collection<Object[]> ranges() {
     return newArrayList(new Object[][] { { 0, 5 }, { 1, 9 }, { 6, 8 } });
-  }
-
-  public JTextComponentSelectTextTask_selectTextInRange_Test(int start, int end) {
-    this.start = start;
-    this.end = end;
   }
 
   @Override
@@ -63,8 +50,9 @@ public class JTextComponentSelectTextTask_selectTextInRange_Test extends RobotBa
     robot.showWindow(window);
   }
 
-  @Test
-  public void should_Select_Text() {
+  @ParameterizedTest
+  @MethodSource("ranges")
+  void should_Select_Text(int start, int end) {
     selectTextInRange(textBox, start, end);
     robot.waitForIdle();
     String selection = selectedTextOf(textBox);

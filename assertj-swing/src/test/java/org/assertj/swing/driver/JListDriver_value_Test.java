@@ -14,7 +14,8 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#value(javax.swing.JList, int)}.
@@ -22,17 +23,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_value_Test extends JListDriver_TestCase {
+class JListDriver_value_Test extends JListDriver_TestCase {
   @Test
-  public void should_Return_Text_Of_Item() {
+  void should_Return_Text_Of_Item() {
     Object text = driver.value(list, 0);
     assertThat(text).isEqualTo("one");
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
-    thrown.expectIndexOutOfBoundsException("Item index (6) should be between [0] and [2] (inclusive)");
-    driver.value(list, 6);
+  void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.value(list, 6), "Item index (6) should be between [0] and [2] (inclusive)");
   }
 }

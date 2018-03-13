@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#setText(javax.swing.text.JTextComponent, String)}.
@@ -20,9 +21,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_setText_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_setText_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Set_Text() {
+  void should_Set_Text() {
     showWindow();
     clearTextField();
     driver.setText(textField, "Entering text");
@@ -30,15 +31,13 @@ public class JTextComponentDriver_setText_Test extends JTextComponentDriver_Test
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.setText(textField, "Entering text");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.setText(textField, "Entering text"));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.setText(textField, "Entering text");
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.setText(textField, "Entering text"));
   }
 }

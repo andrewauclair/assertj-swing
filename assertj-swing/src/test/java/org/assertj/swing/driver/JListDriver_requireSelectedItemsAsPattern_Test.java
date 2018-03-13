@@ -14,7 +14,8 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#requireSelectedItems(javax.swing.JList, java.util.regex.Pattern...)}.
@@ -22,39 +23,35 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_requireSelectedItemsAsPattern_Test extends JListDriver_TestCase {
+class JListDriver_requireSelectedItemsAsPattern_Test extends JListDriver_TestCase {
   @Test
-  public void should_Fail_If_There_Is_No_Selection() {
+  void should_Fail_If_There_Is_No_Selection() {
     clearSelection();
-    thrown.expect(AssertionError.class);
-    thrown.expectMessageToContain("property:'selectedIndices'", "expected:<[[\"one\", \"two\"]]> but was:<[[]]>");
-    driver.requireSelectedItems(list, Pattern.compile("one"), Pattern.compile("two"));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelectedItems(list, Pattern.compile("one"), Pattern.compile("two")), "property:'selectedIndices'", "expected:<[[\"one\", \"two\"]]> but was:<[[]]>");
   }
 
   @Test
-  public void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
     select(2);
-    thrown.expect(AssertionError.class);
-    thrown.expectMessageToContain("property:'selectedIndices'", "expected:<[\"[on]e\"]> but was:<[\"[thre]e\"]>");
-    driver.requireSelectedItems(list, Pattern.compile("one"));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelectedItems(list, Pattern.compile("one")), "property:'selectedIndices'", "expected:<[\"[on]e\"]> but was:<[\"[thre]e\"]>");
   }
 
   @Test
-  public void should_Pass_If_Selection_Is_Equal_To_Expected() {
+  void should_Pass_If_Selection_Is_Equal_To_Expected() {
     select(0, 1);
     driver.requireSelectedItems(list, Pattern.compile("two"), Pattern.compile("one"));
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Pass_If_Selection_Matches_Pattern() {
+  void should_Pass_If_Selection_Matches_Pattern() {
     select(1, 2);
     driver.requireSelectedItems(list, Pattern.compile("t.*"));
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Pass_If_Selection_Matches_Patterns() {
+  void should_Pass_If_Selection_Matches_Patterns() {
     select(0, 1);
     driver.requireSelectedItems(list, Pattern.compile("tw.*"), Pattern.compile("o.*"));
     assertThatCellReaderWasCalled();

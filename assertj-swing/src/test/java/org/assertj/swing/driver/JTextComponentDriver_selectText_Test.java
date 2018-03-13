@@ -26,7 +26,8 @@ import javax.swing.JTextField;
 import javax.swing.JViewport;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#selectText(javax.swing.text.JTextComponent, String)}.
@@ -34,7 +35,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_selectText_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_selectText_Test extends JTextComponentDriver_TestCase {
   private JTextField scrollToViewTextField;
 
   @RunsInEDT
@@ -52,7 +53,7 @@ public class JTextComponentDriver_selectText_Test extends JTextComponentDriver_T
   }
 
   @Test
-  public void should_Select_Given_Text() {
+  void should_Select_Given_Text() {
     showWindow();
     setTextFieldText("Hello World");
     driver.selectText(textField, "llo W");
@@ -60,7 +61,7 @@ public class JTextComponentDriver_selectText_Test extends JTextComponentDriver_T
   }
 
   @Test
-  public void should_Scroll_To_Text_To_Select() {
+  void should_Scroll_To_Text_To_Select() {
     showWindow();
     updateTextTo(scrollToViewTextField, "one two three four five six seven eight nine ten");
     driver.selectText(scrollToViewTextField, "ten");
@@ -68,21 +69,19 @@ public class JTextComponentDriver_selectText_Test extends JTextComponentDriver_T
   }
 
   @RunsInEDT
-  final void updateTextTo(JTextField f, String text) {
+  private final void updateTextTo(JTextField f, String text) {
     setText(f, text);
     robot.waitForIdle();
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectText(textField, "llo W");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectText(textField, "llo W"));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectText(textField, "llo W");
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectText(textField, "llo W"));
   }
 }

@@ -12,18 +12,15 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import java.awt.Window;
-
-import javax.swing.JToolBar;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JToolBarDriver#makeFloat(JToolBar)}.
@@ -32,14 +29,10 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class JToolBarDriver_makeFloat_Test extends JToolBarDriver_TestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   @Test
-  public void should_Throw_Error_If_JToolBar_Is_Not_Floatable() {
+  void should_Throw_Error_If_JToolBar_Is_Not_Floatable() {
     makeNotFloatable();
-    thrown.expect(IllegalStateException.class, "is not floatable");
-    driver.makeFloat(toolBar);
+    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> driver.makeFloat(toolBar), "is not floatable");
   }
 
   @RunsInEDT

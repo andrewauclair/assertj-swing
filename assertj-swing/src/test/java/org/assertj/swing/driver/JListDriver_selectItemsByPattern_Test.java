@@ -18,7 +18,8 @@ import static org.assertj.core.util.Arrays.array;
 import java.util.regex.Pattern;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#selectItems(javax.swing.JList, java.util.regex.Pattern[])}.
@@ -26,17 +27,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase {
+class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
+  void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class,
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.selectItems(list, array(Pattern.compile("ten"))),
         "Unable to find item matching the pattern 'ten' among the JList contents [\"one\", \"two\", \"three\"]");
-    driver.selectItems(list, array(Pattern.compile("ten")));
   }
 
   @Test
-  public void should_Select_Items_Even_If_Already_Selected() {
+  void should_Select_Items_Even_If_Already_Selected() {
     select(1, 2);
     showWindow();
     driver.selectItems(list, array(Pattern.compile("two"), Pattern.compile("three")));
@@ -44,7 +44,7 @@ public class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase 
   }
 
   @Test
-  public void should_Select_Items_Matching_Pattern() {
+  void should_Select_Items_Matching_Pattern() {
     showWindow();
     driver.selectItems(list, array(Pattern.compile("t.*")));
     assertThat(selectedValues()).isEqualTo(array("two", "three"));
@@ -52,7 +52,7 @@ public class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase 
   }
 
   @Test
-  public void should_Select_Items_Matching_Patterns() {
+  void should_Select_Items_Matching_Patterns() {
     showWindow();
     driver.selectItems(list, array(Pattern.compile("tw.*"), Pattern.compile("thr.*")));
     assertThat(selectedValues()).isEqualTo(array("two", "three"));
@@ -60,15 +60,13 @@ public class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase 
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectItems(list, array(Pattern.compile("two"), Pattern.compile("three")));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectItems(list, array(Pattern.compile("two"), Pattern.compile("three"))));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectItems(list, array(Pattern.compile("two"), Pattern.compile("three")));
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectItems(list, array(Pattern.compile("two"), Pattern.compile("three"))));
   }
 }

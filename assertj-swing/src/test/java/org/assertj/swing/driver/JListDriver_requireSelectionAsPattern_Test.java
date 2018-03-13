@@ -14,7 +14,8 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#requireSelection(javax.swing.JList, java.util.regex.Pattern)}.
@@ -22,26 +23,23 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_requireSelectionAsPattern_Test extends JListDriver_TestCase {
+class JListDriver_requireSelectionAsPattern_Test extends JListDriver_TestCase {
   @Test
-  public void should_Pass_If_Selection_Matches_Pattern() {
+  void should_Pass_If_Selection_Matches_Pattern() {
     selectFirstItem();
     driver.requireSelection(list, Pattern.compile("on.*"));
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Fail_If_There_Is_No_Selection() {
+  void should_Fail_If_There_Is_No_Selection() {
     clearSelection();
-    thrown.expectAssertionError("property:'selectedIndex'");
-    thrown.expectMessageToContain("No selection");
-    driver.requireSelection(list, Pattern.compile("one"));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelection(list, Pattern.compile("one")), "property:'selectedIndex'", "No selection");
   }
 
   @Test
-  public void should_Fail_If_Selection_Does_Not_Match_Pattern() {
+  void should_Fail_If_Selection_Does_Not_Match_Pattern() {
     select(1);
-    thrown.expectAssertionError("selectedIndex", "two", Pattern.compile("one"));
-    driver.requireSelection(list, Pattern.compile("one"));
+    ExpectedException.assertAssertionError(() -> driver.requireSelection(list, Pattern.compile("one")), "selectedIndex", "two", Pattern.compile("one"));
   }
 }

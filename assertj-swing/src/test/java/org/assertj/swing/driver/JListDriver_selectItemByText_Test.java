@@ -15,7 +15,8 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#selectItem(javax.swing.JList, String)}.
@@ -23,17 +24,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_selectItemByText_Test extends JListDriver_TestCase {
+class JListDriver_selectItemByText_Test extends JListDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
+  void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class,
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.selectItem(list, "ten"),
         "Unable to find item matching the value 'ten' among the JList contents [\"one\", \"two\", \"three\"]");
-    driver.selectItem(list, "ten");
   }
 
   @Test
-  public void should_Select_Item() {
+  void should_Select_Item() {
     showWindow();
     driver.selectItem(list, "two");
     assertThat(selectedValue()).isEqualTo("two");
@@ -41,7 +41,7 @@ public class JListDriver_selectItemByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Not_Select_Item_If_Already_Selected() {
+  void should_Not_Select_Item_If_Already_Selected() {
     select(1);
     showWindow();
     driver.selectItem(list, "two");
@@ -49,7 +49,7 @@ public class JListDriver_selectItemByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Select_Item_Matching_Pattern() {
+  void should_Select_Item_Matching_Pattern() {
     showWindow();
     driver.selectItem(list, "tw.*");
     assertThat(selectedValue()).isEqualTo("two");
@@ -57,14 +57,13 @@ public class JListDriver_selectItemByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.assertIllegalStateIsDisabledComponent(() -> driver.selectItem(list, "two"));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectItem(list, "two"));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectItem(list, "two");
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectItem(list, "two"));
   }
 }

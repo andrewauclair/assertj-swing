@@ -12,16 +12,15 @@
  */
 package org.assertj.swing.driver;
 
-import static java.lang.String.valueOf;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.core.util.Strings.concat;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static java.lang.String.valueOf;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.core.util.Strings.concat;
 
 /**
  * Tests for {@link JListDriver#selectItem(javax.swing.JList, int)}.
@@ -29,24 +28,16 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
 public class JListDriver_selectItemByIndex_withInvalidIndex_Test extends JListDriver_TestCase {
-  private final int index;
-
-  @Parameters
   public static Collection<Object[]> indices() {
     return newArrayList(indicesOutOfBounds());
   }
 
-  public JListDriver_selectItemByIndex_withInvalidIndex_Test(int index) {
-    this.index = index;
-  }
-
-  @Test
-  public void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Throw_Error_If_Index_Is_Out_Of_Bounds(int index) {
     showWindow();
-    thrown.expectIndexOutOfBoundsException(concat("Item index (", valueOf(index),
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.selectItem(list, index), concat("Item index (", valueOf(index),
         ") should be between [0] and [2] (inclusive)"));
-    driver.selectItem(list, index);
   }
 }

@@ -41,9 +41,6 @@ public abstract class JTextComponentDriver_TestCase extends RobotBasedTestCase {
   JTextField textField;
   JTextComponentDriver driver;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected final void onSetUp() {
     driver = new JTextComponentDriver(robot);

@@ -16,7 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#selectItems(javax.swing.JList, String[])}.
@@ -24,17 +25,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
+class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
+  void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class,
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.selectItems(list, array("ten")),
         "Unable to find item matching the value 'ten' among the JList contents [\"one\", \"two\", \"three\"]");
-    driver.selectItems(list, array("ten"));
   }
 
   @Test
-  public void should_Select_Items() {
+  void should_Select_Items() {
     showWindow();
     driver.selectItems(list, array("two", "three"));
     assertThat(selectedValues()).isEqualTo(array("two", "three"));
@@ -42,7 +42,7 @@ public class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Select_Items_Even_If_Already_Selected() {
+  void should_Select_Items_Even_If_Already_Selected() {
     select(1, 2);
     showWindow();
     driver.selectItems(list, array("two", "three"));
@@ -50,7 +50,7 @@ public class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Select_Items_Matching_Pattern() {
+  void should_Select_Items_Matching_Pattern() {
     showWindow();
     driver.selectItems(list, array("t.*"));
     assertThat(selectedValues()).isEqualTo(array("two", "three"));
@@ -58,7 +58,7 @@ public class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Select_Items_Matching_Patterns() {
+  void should_Select_Items_Matching_Patterns() {
     showWindow();
     driver.selectItems(list, array("tw.*", "thr.*"));
     assertThat(selectedValues()).isEqualTo(array("two", "three"));
@@ -66,15 +66,13 @@ public class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectItems(list, array("two", "three"));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectItems(list, array("two", "three")));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectItems(list, array("two", "three"));
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectItems(list, array("two", "three")));
   }
 }

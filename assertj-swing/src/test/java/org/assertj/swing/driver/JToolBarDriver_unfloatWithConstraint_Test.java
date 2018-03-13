@@ -24,6 +24,8 @@ import java.awt.Window;
 import java.util.Collection;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -34,21 +36,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JToolBarDriver_unfloatWithConstraint_Test extends JToolBarDriver_TestCase {
-  private final String constraint;
-
-  @Parameters
-  public static Collection<Object[]> unfloatConstraints() {
+class JToolBarDriver_unfloatWithConstraint_Test extends JToolBarDriver_TestCase {
+  private static Collection<Object[]> unfloatConstraints() {
     return newArrayList(new Object[][] { { NORTH }, { EAST }, { SOUTH }, { WEST } });
   }
 
-  public JToolBarDriver_unfloatWithConstraint_Test(String constraint) {
-    this.constraint = constraint;
-  }
-
-  @Test
-  public void should_Unfloat_JToolbar() {
+  @ParameterizedTest
+  @MethodSource("unfloatConstraints")
+  void should_Unfloat_JToolbar(String constraint) {
     showWindow();
     Window originalAncestor = toolBarAncestor();
     Point where = whereToFloatTo();

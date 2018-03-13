@@ -17,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.regex.Pattern;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#selectItem(javax.swing.JList, java.util.regex.Pattern)}.
@@ -25,17 +26,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_selectItemByPattern_Test extends JListDriver_TestCase {
+class JListDriver_selectItemByPattern_Test extends JListDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
+  void should_Throw_Error_If_A_Matching_Item_Was_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class,
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.selectItem(list, Pattern.compile("ten")),
         "Unable to find item matching the pattern 'ten' among the JList contents [\"one\", \"two\", \"three\"]");
-    driver.selectItem(list, Pattern.compile("ten"));
   }
 
   @Test
-  public void should_Not_Select_Item_If_Already_Selected() {
+  void should_Not_Select_Item_If_Already_Selected() {
     select(1);
     showWindow();
     driver.selectItem(list, Pattern.compile("tw.*"));
@@ -43,7 +43,7 @@ public class JListDriver_selectItemByPattern_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Select_Item_Matching_Pattern() {
+  void should_Select_Item_Matching_Pattern() {
     showWindow();
     driver.selectItem(list, Pattern.compile("tw.*"));
     assertThat(selectedValue()).isEqualTo("two");
@@ -51,15 +51,13 @@ public class JListDriver_selectItemByPattern_Test extends JListDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectItem(list, Pattern.compile("tw.*"));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectItem(list, Pattern.compile("tw.*")));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectItem(list, Pattern.compile("tw.*"));
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectItem(list, Pattern.compile("tw.*")));
   }
 }

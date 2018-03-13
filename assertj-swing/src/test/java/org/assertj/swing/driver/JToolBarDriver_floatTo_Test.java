@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.ComponentLocationQuery.locationOf;
 
 import java.awt.Point;
 import java.awt.Window;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JToolBarDriver#floatTo(JToolBar, int, int)}.
@@ -26,9 +26,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JToolBarDriver_floatTo_Test extends JToolBarDriver_TestCase {
+class JToolBarDriver_floatTo_Test extends JToolBarDriver_TestCase {
   @Test
-  public void should_Float_JToolBar() {
+  void should_Float_JToolBar() {
     showWindow();
     Window oldAncestor = toolBarAncestor();
     Point where = whereToFloatTo();

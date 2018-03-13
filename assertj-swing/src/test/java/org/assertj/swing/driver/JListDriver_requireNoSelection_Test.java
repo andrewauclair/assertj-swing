@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#pointAt(javax.swing.JList, String)}.
@@ -20,18 +21,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_requireNoSelection_Test extends JListDriver_TestCase {
+class JListDriver_requireNoSelection_Test extends JListDriver_TestCase {
   @Test
-  public void should_Pass_If_JList_Does_Not_Have_Selection() {
+  void should_Pass_If_JList_Does_Not_Have_Selection() {
     clearSelection();
     driver.requireNoSelection(list);
   }
 
   @Test
-  public void should_Fail_If_JList_Has_Selection() {
+  void should_Fail_If_JList_Has_Selection() {
     selectFirstItem();
-    thrown.expectAssertionError("property:'selectedIndex'");
-    thrown.expectMessageToContain("expected:<[-1]> but was:<[0]>");
-    driver.requireNoSelection(list);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireNoSelection(list), "property:'selectedIndex'", "expected:<[-1]> but was:<[0]>");
   }
 }

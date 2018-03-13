@@ -23,7 +23,7 @@ import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.MethodInvocations.Args;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentSetTextTask#setTextIn(javax.swing.text.JTextComponent, String)}.
@@ -31,7 +31,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class JTextComponentSetTextTask_textOf_Test extends RobotBasedTestCase {
-  static final String TEXTBOX_TEXT = "Hello World";
+  private static final String TEXTBOX_TEXT = "Hello World";
 
   private MyTextField textField;
 
@@ -42,7 +42,7 @@ public class JTextComponentSetTextTask_textOf_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Set_Text_In_JTextComponent() {
+  void should_Set_Text_In_JTextComponent() {
     textField.startRecording();
     JTextComponentSetTextTask.setTextIn(textField, TEXTBOX_TEXT);
     robot.waitForIdle();

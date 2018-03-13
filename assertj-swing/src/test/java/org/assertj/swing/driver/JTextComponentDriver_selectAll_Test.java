@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#selectAll(javax.swing.text.JTextComponent)}.
@@ -20,9 +21,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_selectAll_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_selectAll_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Select_All_Text() {
+  void should_Select_All_Text() {
     showWindow();
     setTextFieldText("Hello");
     driver.selectAll(textField);
@@ -30,15 +31,13 @@ public class JTextComponentDriver_selectAll_Test extends JTextComponentDriver_Te
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Disabled() {
+  void should_Throw_Error_If_JTextComponent_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectAll(textField);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectAll(textField));
   }
 
   @Test
-  public void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectAll(textField);
+  void should_Throw_Error_If_JTextComponent_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectAll(textField));
   }
 }

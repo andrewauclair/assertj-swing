@@ -12,18 +12,17 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
 import static java.lang.String.valueOf;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.core.util.Strings.concat;
 import static org.assertj.swing.util.Range.from;
 import static org.assertj.swing.util.Range.to;
-
-import java.util.Collection;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for
@@ -33,32 +32,24 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
 public class JListDriver_selectItemsByFluentRange_withInvalidIndex_Test extends JListDriver_TestCase {
-  private final int index;
-
-  @Parameters
   public static Collection<Object[]> indices() {
     return newArrayList(indicesOutOfBounds());
   }
 
-  public JListDriver_selectItemsByFluentRange_withInvalidIndex_Test(int index) {
-    this.index = index;
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Throw_Error_If_Starting_Index_Is_Out_Of_Bounds(int index) {
+    showWindow();
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.selectItems(list, from(index), to(1)), concat("Item index (", valueOf(index),
+        ") should be between [0] and [2] (inclusive)"));
   }
 
-  @Test
-  public void should_Throw_Error_If_Starting_Index_Is_Out_Of_Bounds() {
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Throw_Error_If_Ending_Index_Is_Out_Of_Bounds(int index) {
     showWindow();
-    thrown.expectIndexOutOfBoundsException(concat("Item index (", valueOf(index),
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.selectItems(list, from(0), to(index)), concat("Item index (", valueOf(index),
         ") should be between [0] and [2] (inclusive)"));
-    driver.selectItems(list, from(index), to(1));
-  }
-
-  @Test
-  public void should_Throw_Error_If_Ending_Index_Is_Out_Of_Bounds() {
-    showWindow();
-    thrown.expectIndexOutOfBoundsException(concat("Item index (", valueOf(index),
-        ") should be between [0] and [2] (inclusive)"));
-    driver.selectItems(list, from(0), to(index));
   }
 }
