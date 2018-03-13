@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link JAppletDriver#appletResize(javax.swing.JApplet, int, int)}.
  * 
  * @author Alex Ruiz
  */
-public class JAppletDriver_appletResize_Test extends JAppletDriver_TestCase {
+class JAppletDriver_appletResize_Test extends JAppletDriver_TestCase {
   @Test
-  public void should_Resize_JApplet() {
+  void should_Resize_JApplet() {
     int w = 10;
     int h = 20;
     driver().appletResize(applet(), w, h);

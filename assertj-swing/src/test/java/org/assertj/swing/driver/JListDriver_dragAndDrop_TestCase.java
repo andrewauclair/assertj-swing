@@ -21,7 +21,7 @@ import org.assertj.swing.test.swing.TestList;
  *
  * @author Alex Ruiz
  */
-public abstract class JListDriver_dragAndDrop_TestCase extends JListDriver_TestCase {
+abstract class JListDriver_dragAndDrop_TestCase extends JListDriver_TestCase {
   TestList dropList;
 
   @Override

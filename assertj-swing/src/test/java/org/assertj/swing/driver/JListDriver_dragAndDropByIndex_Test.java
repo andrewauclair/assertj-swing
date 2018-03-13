@@ -12,7 +12,7 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#drag(javax.swing.JList, int)} and {@link JListDriver#drop(javax.swing.JList, int)}.
@@ -20,9 +20,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_dragAndDropByIndex_Test extends JListDriver_dragAndDrop_TestCase {
+class JListDriver_dragAndDropByIndex_Test extends JListDriver_dragAndDrop_TestCase {
   @Test
-  public void should_Drag_And_Drop() {
+  void should_Drag_And_Drop() {
     showWindow();
     driver.drag(list, 2);
     driver.drop(dropList, 2);

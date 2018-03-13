@@ -25,7 +25,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.cell.JListCellReader;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListContentQuery#contents(JList, JListCellReader)}.
@@ -44,7 +44,7 @@ public class JListContentQuery_contents_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Contents_Of_JList_As_Text() {
+  void should_Return_Contents_Of_JList_As_Text() {
     String[] contents = JListContentQuery.contents(list, cellReader);
     assertThat(contents).containsOnly("Yoda", "Luke");
   }

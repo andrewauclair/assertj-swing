@@ -14,22 +14,22 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JLabelDriver#requireText(JLabel, java.util.regex.Pattern)}.
  * 
  * @author Yvonne Wang
  */
-public class JLabelDriver_requireTextAsPattern_Test extends JLabelDriver_TestCase {
+class JLabelDriver_requireTextAsPattern_Test extends JLabelDriver_TestCase {
   @Test
-  public void should_Pass_If_Text_Matches_Pattern() {
+  void should_Pass_If_Text_Matches_Pattern() {
     driver.requireText(label, Pattern.compile("H.*"));
   }
 
   @Test
-  public void should_Fail_If_Text_Does_Not_Match_Pattern() {
-    thrown.expectAssertionError("text", "Hi", Pattern.compile("Bye"));
-    driver.requireText(label, Pattern.compile("Bye"));
+  void should_Fail_If_Text_Does_Not_Match_Pattern() {
+    ExpectedException.assertAssertionError(() -> driver.requireText(label, Pattern.compile("Bye")), "text", "Hi", Pattern.compile("Bye"));
   }
 }

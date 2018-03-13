@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#drag(javax.swing.JList, String)} and {@link JListDriver#drop(javax.swing.JList, String)}
@@ -24,9 +24,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_drop_Test extends JListDriver_dragAndDrop_TestCase {
+class JListDriver_drop_Test extends JListDriver_dragAndDrop_TestCase {
   @Test
-  public void should_Drop() {
+  void should_Drop() {
     showWindow();
     driver.drag(list, "two");
     driver.drop(dropList);
@@ -35,13 +35,13 @@ public class JListDriver_drop_Test extends JListDriver_dragAndDrop_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
     ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.drop(list));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
     ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.drop(dropList));
   }
 }

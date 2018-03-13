@@ -12,11 +12,11 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.awt.Point;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JListDriver#pointAt(javax.swing.JList, String)}.
@@ -24,9 +24,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_pointAt_Test extends JListDriver_TestCase {
+class JListDriver_pointAt_Test extends JListDriver_TestCase {
   @Test
-  public void should_Return_Location_For_Value() {
+  void should_Return_Location_For_Value() {
     showWindow();
     Point p = driver.pointAt(list, "two");
     int index = locationToIndex(p);

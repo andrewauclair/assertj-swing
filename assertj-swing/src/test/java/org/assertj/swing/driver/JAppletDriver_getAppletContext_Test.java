@@ -12,21 +12,21 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.awt.TestAppletContexts.singletonAppletContextMock;
 
 import java.applet.AppletContext;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JAppletDriver#getAppletContext(javax.swing.JApplet)}.
  * 
  * @author Alex Ruiz
  */
-public class JAppletDriver_getAppletContext_Test extends JAppletDriver_TestCase {
+class JAppletDriver_getAppletContext_Test extends JAppletDriver_TestCase {
   @Test
-  public void should_Return_AppletContext() {
+  void should_Return_AppletContext() {
     AppletContext context = singletonAppletContextMock();
     applet().updateAppletContext(context);
     AppletContext result = driver().getAppletContext(applet());

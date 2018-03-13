@@ -12,37 +12,28 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.assertj.swing.test.data.BooleanProvider;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.assertj.swing.test.data.BooleanProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JAppletDriver#isActive(JApplet)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JAppletDriver_isActive_Test extends JAppletDriver_TestCase {
-  private final boolean active;
-
-  @Parameters
-  public static Collection<Object[]> booleans() {
+class JAppletDriver_isActive_Test extends JAppletDriver_TestCase {
+  static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
   }
 
-  public JAppletDriver_isActive_Test(boolean active) {
-    this.active = active;
-  }
-
-  @Test
-  public void should_Return_Is_Active() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Return_Is_Active(boolean active) {
     applet().setActive(active);
     boolean result = driver().isActive(applet());
     assertThat(result).isEqualTo(active);

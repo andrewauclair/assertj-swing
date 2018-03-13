@@ -12,23 +12,15 @@
  */
 package org.assertj.swing.driver;
 
-import static java.awt.BorderLayout.EAST;
-import static java.awt.BorderLayout.NORTH;
-import static java.awt.BorderLayout.SOUTH;
-import static java.awt.BorderLayout.WEST;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-
-import java.awt.Point;
-import java.awt.Window;
-import java.util.Collection;
-
-import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+
+import java.awt.*;
+import java.util.Collection;
+
+import static java.awt.BorderLayout.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JToolBarDriver#unfloat(javax.swing.JToolBar, String)}.

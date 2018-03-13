@@ -12,10 +12,10 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JListSelectedIndexQuery.selectedIndexOf;
-
-import org.junit.Test;
 
 /**
  * Tests for {@link JListDriver#clearSelection(javax.swing.JList)}.
@@ -23,9 +23,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_clearSelection_Test extends JListDriver_TestCase {
+class JListDriver_clearSelection_Test extends JListDriver_TestCase {
   @Test
-  public void should_Return_Contents_Of_JList() {
+  void should_Return_Contents_Of_JList() {
     select(1);
     driver.clearSelection(list);
     assertThat(selectedIndexOf(list)).isEqualTo(-1);

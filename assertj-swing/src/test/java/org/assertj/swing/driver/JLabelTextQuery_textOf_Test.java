@@ -21,7 +21,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JLabelTextQuery#textOf(JLabel)}.
@@ -41,7 +41,7 @@ public class JLabelTextQuery_textOf_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Text_Of_JLabel() {
+  void should_Return_Text_Of_JLabel() {
     label.startRecording();
     assertThat(JLabelTextQuery.textOf(label)).isEqualTo(TEXT);
     label.requireInvoked("getText");

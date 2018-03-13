@@ -12,23 +12,22 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInCurrentThread;
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+
+import javax.swing.*;
+import java.applet.AppletContext;
+import java.net.URL;
+import java.util.Map;
+
 import static javax.swing.SwingUtilities.isEventDispatchThread;
 import static org.assertj.core.util.Strings.concat;
 import static org.assertj.core.util.Strings.quote;
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.util.Maps.newHashMap;
-
-import java.applet.AppletContext;
-import java.net.URL;
-import java.util.Map;
-
-import javax.swing.JApplet;
-
-import org.assertj.swing.annotation.RunsInCurrentThread;
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
 
 /**
  * Base test case for {@link JAppletDriver}.
@@ -39,7 +38,7 @@ public class JAppletDriver_TestCase extends EDTSafeTestCase {
   private JAppletStub applet;
   private JAppletDriver driver;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     applet = JAppletStub.createNew();
     driver = new JAppletDriver(singletonRobotMock());

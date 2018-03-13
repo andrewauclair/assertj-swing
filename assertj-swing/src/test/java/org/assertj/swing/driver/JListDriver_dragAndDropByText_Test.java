@@ -12,7 +12,7 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#drag(javax.swing.JList, String)} and {@link JListDriver#drop(javax.swing.JList, String)}
@@ -21,9 +21,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_dragAndDropByText_Test extends JListDriver_dragAndDrop_TestCase {
+class JListDriver_dragAndDropByText_Test extends JListDriver_dragAndDrop_TestCase {
   @Test
-  public void should_Drag_And_Drop() {
+  void should_Drag_And_Drop() {
     showWindow();
     driver.drag(list, "two");
     driver.drop(dropList, "six");
@@ -33,7 +33,7 @@ public class JListDriver_dragAndDropByText_Test extends JListDriver_dragAndDrop_
   }
 
   @Test
-  public void should_Drag_And_Drop_Matching_Given_Patterns() {
+  void should_Drag_And_Drop_Matching_Given_Patterns() {
     showWindow();
     driver.drag(list, "tw.*");
     driver.drop(dropList, "s.*");

@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import java.util.regex.Pattern;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import java.util.regex.Pattern;
 
 /**
  * Tests for {@link JListDriver#drag(javax.swing.JList, Pattern)} and
@@ -23,9 +23,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_dragAndDropByPattern_Test extends JListDriver_dragAndDrop_TestCase {
+class JListDriver_dragAndDropByPattern_Test extends JListDriver_dragAndDrop_TestCase {
   @Test
-  public void should_Drag_And_Drop() {
+  void should_Drag_And_Drop() {
     showWindow();
     driver.drag(list, Pattern.compile("tw.*"));
     driver.drop(dropList, Pattern.compile("s.*"));

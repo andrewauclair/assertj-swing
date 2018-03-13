@@ -12,19 +12,17 @@
  */
 package org.assertj.swing.assertions.image;
 
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.mockito.MockitoAnnotations.initMocks;
+import org.assertj.swing.assertions.ImageAssert;
+import org.assertj.swing.assertions.ImageAssertBaseTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
-import org.assertj.swing.assertions.ImageAssert;
-import org.assertj.swing.assertions.ImageAssertBaseTest;
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.mockito.Mock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Tests for <code>{@link ImageAssert#usingComparator(java.util.Comparator)}</code>.
@@ -32,24 +30,19 @@ import org.mockito.Mock;
  * @author Joel Costigliola
  */
 public class ImageAssert_usingComparator_Test extends ImageAssertBaseTest {
-
-  @Rule
-  public ExpectedException thrown = none();
-
   @Mock
   private Comparator<BufferedImage> comparator;
 
-  @Before
-  public void before() {
+  @BeforeEach
+  void before() {
     initMocks(this);
   }
 
   @Override
   @Test
   public void should_Have_Internal_Effects() {
-    thrown.expect(UnsupportedOperationException.class);
     // in that, we don't care of the comparator, the point to check is that we can't use a comparator
-    assertions.usingComparator(comparator);
+    assertThrows(UnsupportedOperationException.class, () -> assertions.usingComparator(comparator));
   }
 
   @Override

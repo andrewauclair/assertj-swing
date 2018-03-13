@@ -17,8 +17,8 @@ import static org.mockito.Mockito.mock;
 
 import org.assertj.core.internal.Conditions;
 import org.assertj.core.internal.Objects;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Template to write tests for {@link AbstractAssert} implementations.
@@ -49,7 +49,7 @@ public abstract class BaseTestTemplate<S extends AbstractAssert<S, A>, A> {
   protected Objects objects;
   protected Conditions conditions;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     assertions = create_assertions();
     inject_internal_objects();

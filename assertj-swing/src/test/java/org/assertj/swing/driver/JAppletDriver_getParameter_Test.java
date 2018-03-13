@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link JAppletDriver#getParameter(javax.swing.JApplet, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JAppletDriver_getParameter_Test extends JAppletDriver_TestCase {
+class JAppletDriver_getParameter_Test extends JAppletDriver_TestCase {
   @Test
-  public void should_Retrieve_Parameter_Value() {
+  void should_Retrieve_Parameter_Value() {
     applet().addParameter("firstName", "Luke");
     String value = driver().getParameter(applet(), "firstName");
     assertThat(value).isEqualTo("Luke");

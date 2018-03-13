@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JListDriver#replaceCellReader(org.assertj.swing.cell.JListCellReader)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_cellReader_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_CellReader_Is_Null() {
-    driver.replaceCellReader(null);
+class JListDriver_cellReader_Test extends JListDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_CellReader_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.replaceCellReader(null));
   }
 }
