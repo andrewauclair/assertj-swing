@@ -13,7 +13,9 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.data.TableCell;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableDriver#selectCells(JTable, TableCell[])}.
@@ -21,16 +23,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_selectCells_withInvalidInput_Test extends JTableDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowErrorIfArrayOfCellsToSelectIsNull() {
+class JTableDriver_selectCells_withInvalidInput_Test extends JTableDriver_withMocks_TestCase {
+  @Test
+  void shouldThrowErrorIfArrayOfCellsToSelectIsNull() {
     TableCell[] cells = null;
-    driver.selectCells(table, cells);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectCells(table, cells));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowErrorIfArrayOfCellsToSelectIsEmpty() {
+  @Test
+  void shouldThrowErrorIfArrayOfCellsToSelectIsEmpty() {
     TableCell[] cells = new TableCell[0];
-    driver.selectCells(table, cells);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectCells(table, cells));
   }
 }

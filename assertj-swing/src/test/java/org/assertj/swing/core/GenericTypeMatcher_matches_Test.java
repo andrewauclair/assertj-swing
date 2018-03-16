@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import javax.swing.JButton;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link GenericTypeMatcher#matches(java.awt.Component)}.

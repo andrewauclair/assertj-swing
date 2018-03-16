@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 import java.awt.EventQueue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Context#eventQueueFor(java.awt.Component)}.

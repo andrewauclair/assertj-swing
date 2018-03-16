@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JFileChooserDriver#selectFile(JFileChooser, java.io.File)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JFileChooserDriver_selectFile_withInvalidInput_Test extends JFileChooserDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Is_Null() {
-    driver.selectFile(fileChooser, null);
+class JFileChooserDriver_selectFile_withInvalidInput_Test extends JFileChooserDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_File_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.selectFile(fileChooser, null));
   }
 }

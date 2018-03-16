@@ -19,7 +19,7 @@ import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.recorder.ToolkitClickRecorder;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#showPopupMenu(javax.swing.JList, String)}.

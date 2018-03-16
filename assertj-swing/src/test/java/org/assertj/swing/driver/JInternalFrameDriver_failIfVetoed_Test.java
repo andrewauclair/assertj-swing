@@ -18,7 +18,8 @@ import java.beans.PropertyVetoException;
 
 import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.exception.UnexpectedException;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for
@@ -27,18 +28,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JInternalFrameDriver_failIfVetoed_Test extends JInternalFrameDriver_TestCase {
+class JInternalFrameDriver_failIfVetoed_Test extends JInternalFrameDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_SetProperty_Is_Vetoed() {
+  void should_Throw_Error_If_SetProperty_Is_Vetoed() {
     final PropertyVetoException vetoed = new PropertyVetoException("Test", null);
     JInternalFrameAction action = MAXIMIZE;
-    thrown.expect(ActionFailedException.class, action.name);
-    thrown.expectMessageToContain("was vetoed: <Test>");
-    driver.failIfVetoed(internalFrame, action, new UnexpectedException(vetoed));
+    ExpectedException.assertContainsMessage(ActionFailedException.class, () -> driver.failIfVetoed(internalFrame, action, new UnexpectedException(vetoed)), action.name, "was vetoed: <Test>");
   }
 
   @Test
-  public void should_Not_Throw_Error_If_SetProperty_Is_Not_Vetoed() {
+  void should_Not_Throw_Error_If_SetProperty_Is_Not_Vetoed() {
     driver.failIfVetoed(internalFrame, MAXIMIZE, new UnexpectedException(new Exception()));
   }
 }

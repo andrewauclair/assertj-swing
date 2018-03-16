@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JComboBoxDriver#selectItem(javax.swing.JComboBox, int)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JComboBoxDriver_selectItemByIndex_Test extends JComboBoxDriver_TestCase {
+class JComboBoxDriver_selectItemByIndex_Test extends JComboBoxDriver_TestCase {
   @Test
-  public void should_Select_Item() {
+  void should_Select_Item() {
     clearSelection();
     showWindow();
     driver.selectItem(comboBox, 2);
@@ -30,7 +32,7 @@ public class JComboBoxDriver_selectItemByIndex_Test extends JComboBoxDriver_Test
   }
 
   @Test
-  public void should_Not_Do_Anything_If_Item_Already_Selected() {
+  void should_Not_Do_Anything_If_Item_Already_Selected() {
     showWindow();
     select(2);
     driver.selectItem(comboBox, 2);
@@ -38,27 +40,27 @@ public class JComboBoxDriver_selectItemByIndex_Test extends JComboBoxDriver_Test
   }
 
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Disabled() {
+  void should_Throw_Error_If_JComboBox_Is_Disabled() {
     disableComboBox();
     thrown.expectIllegalStateIsDisabledComponent();
     driver.selectItem(comboBox, 0);
   }
 
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.selectItem(comboBox, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Index_Negative() {
+  @Test
+  void should_Throw_Error_If_Index_Negative() {
     showWindow();
-    driver.selectItem(comboBox, -1);
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.selectItem(comboBox, -1));
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
+  @Test
+  void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
     showWindow();
-    driver.selectItem(comboBox, 100);
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.selectItem(comboBox, 100));
   }
 }

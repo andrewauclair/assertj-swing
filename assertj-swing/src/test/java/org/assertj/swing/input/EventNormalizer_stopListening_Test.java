@@ -16,7 +16,7 @@ import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 
 import org.assertj.swing.test.awt.ToolkitStub;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EventNormalizer#stopListening()}.

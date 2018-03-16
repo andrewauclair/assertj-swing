@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#selectRow(javax.swing.JTree, int)}.

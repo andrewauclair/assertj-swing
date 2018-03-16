@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.awt.Window;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowEventQueueMapping#addQueueFor(java.awt.Toolkit)}.

@@ -19,7 +19,7 @@ import java.awt.EventQueue;
 import java.awt.Window;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowEventQueueMapping#removeMappingFor(java.awt.Component)}.

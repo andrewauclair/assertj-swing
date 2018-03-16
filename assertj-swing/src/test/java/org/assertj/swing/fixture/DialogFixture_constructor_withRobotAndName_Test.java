@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.builder.JDialogs.dialog;
-
-import java.awt.Dialog;
-
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ScreenLockReleaser;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.builder.JDialogs.dialog;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link DialogFixture#DialogFixture(org.assertj.swing.core.Robot, String)}.
@@ -29,27 +29,25 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class DialogFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase {
-  @Rule
-  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
+class DialogFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase {
 
   @Test
-  public void should_Lookup_Showing_Dialog_By_Name() {
+  void should_Lookup_Showing_Dialog_By_Name() {
     Dialog target = dialog().withName("dialog").withTitle(getClass().getSimpleName()).createAndShow();
     DialogFixture fixture = new DialogFixture(robot, "dialog");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(target);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_Dialog_With_Matching_Name_Is_Not_Showing() {
+  @Test
+  void should_Throw_Error_If_Dialog_With_Matching_Name_Is_Not_Showing() {
     dialog().withName("dialog").createNew();
-    new DialogFixture(robot, "dialog");
+    assertThrows(ComponentLookupException.class, () -> new DialogFixture(robot, "dialog"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_Dialog_With_Matching_Name_Is_Not_Found() {
+  @Test
+  void should_Throw_Error_If_A_Dialog_With_Matching_Name_Is_Not_Found() {
     dialog().withName("a dialog").createNew();
-    new DialogFixture(robot, "dialog");
+    assertThrows(ComponentLookupException.class, () -> new DialogFixture(robot, "dialog"));
   }
 }

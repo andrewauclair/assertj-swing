@@ -18,7 +18,7 @@ import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
 
 import java.awt.Dimension;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#show(java.awt.Window)}.

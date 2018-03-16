@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 import org.assertj.swing.test.awt.ToolkitStub;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DragAwareEventNormalizer#stopListening()}.

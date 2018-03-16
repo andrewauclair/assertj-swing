@@ -22,7 +22,7 @@ import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.test.util.StopWatch;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentShownWaiter#waitTillShown(java.awt.Component)}.

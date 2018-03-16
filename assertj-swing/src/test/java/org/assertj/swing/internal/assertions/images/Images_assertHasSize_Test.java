@@ -23,7 +23,7 @@ import java.awt.Dimension;
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.swing.internal.assertions.ImagesBaseTest;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Images#assertHasSize(AssertionInfo, BufferedImage, Dimension)}</code>.

@@ -20,7 +20,7 @@ import javax.swing.JComboBox;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxItemIndexPreconditions#checkItemIndexInBounds(JComboBox, int)}.

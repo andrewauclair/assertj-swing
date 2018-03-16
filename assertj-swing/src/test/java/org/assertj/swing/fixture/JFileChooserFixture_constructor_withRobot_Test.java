@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JFileChooser;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JFileChooserFixture#JFileChooserFixture(org.assertj.swing.core.Robot)}.
@@ -37,16 +38,16 @@ public class JFileChooserFixture_constructor_withRobot_Test extends RobotBasedTe
   }
 
   @Test
-  public void should_Lookup_Showing_JFileChooser_By_Type() {
+  void should_Lookup_Showing_JFileChooser_By_Type() {
     robot.showWindow(window);
     JFileChooserFixture fixture = new JFileChooserFixture(robot);
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.fileChooser);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JFileChooser_With_Matching_Type_Is_Not_Showing() {
-    new JFileChooserFixture(robot);
+  @Test
+  void should_Throw_Error_If_JFileChooser_With_Matching_Type_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JFileChooserFixture(robot));
   }
 
   private static class MyWindow extends TestWindow {

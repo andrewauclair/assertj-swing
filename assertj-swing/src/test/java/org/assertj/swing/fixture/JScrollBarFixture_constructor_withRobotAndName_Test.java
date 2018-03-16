@@ -15,13 +15,14 @@ package org.assertj.swing.fixture;
 import static java.awt.Adjustable.VERTICAL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JScrollBar;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JScrollBarFixture#JScrollBarFixture(org.assertj.swing.core.Robot, String)}.
@@ -38,21 +39,21 @@ public class JScrollBarFixture_constructor_withRobotAndName_Test extends RobotBa
   }
 
   @Test
-  public void should_Lookup_Showing_JScrollBar_By_Name() {
+  void should_Lookup_Showing_JScrollBar_By_Name() {
     robot.showWindow(window);
     JScrollBarFixture fixture = new JScrollBarFixture(robot, "scrollBar");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.scrollBar);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JScrollBar_With_Matching_Name_Is_Not_Showing() {
-    new JScrollBarFixture(robot, "scrollBar");
+  @Test
+  void should_Throw_Error_If_JScrollBar_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> assertThrows(ComponentLookupException.class, () -> new JScrollBarFixture(robot, "scrollBar")));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JScrollBar_With_Matching_Name_Is_Not_Found() {
-    new JScrollBarFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JScrollBar_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> assertThrows(ComponentLookupException.class, () -> new JScrollBarFixture(robot, "other")));
   }
 
   private static class MyWindow extends TestWindow {

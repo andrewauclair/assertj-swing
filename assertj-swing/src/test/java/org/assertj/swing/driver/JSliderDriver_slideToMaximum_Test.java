@@ -20,7 +20,7 @@ import java.util.Collection;
 import javax.swing.JSlider;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 /**

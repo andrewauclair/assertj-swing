@@ -16,7 +16,7 @@ import static org.assertj.swing.data.TableCell.row;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#requireCellValue(javax.swing.JTable, org.assertj.swing.data.TableCell, Pattern)}.

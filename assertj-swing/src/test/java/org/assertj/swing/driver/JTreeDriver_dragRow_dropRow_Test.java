@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#drag(javax.swing.JTree, int)} and {@link JTreeDriver#drop(javax.swing.JTree, int)}.

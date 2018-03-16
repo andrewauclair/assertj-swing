@@ -14,7 +14,7 @@ package org.assertj.swing.driver;
 
 import static java.awt.event.KeyEvent.VK_A;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#pressKey(java.awt.Component, int)} and

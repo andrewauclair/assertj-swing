@@ -19,7 +19,7 @@ import static org.assertj.core.util.Objects.hashCodeFor;
 
 import javax.swing.JLabel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Base test case for {@link NamedComponentMatcherTemplate}.

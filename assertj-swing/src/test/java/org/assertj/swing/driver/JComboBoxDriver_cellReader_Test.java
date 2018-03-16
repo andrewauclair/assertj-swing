@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JComboBoxDriver#replaceCellReader(org.assertj.swing.cell.JComboBoxCellReader)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JComboBoxDriver_cellReader_Test extends JComboBoxDriver_TestCase {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_CellReader_Is_Null() {
-    driver.replaceCellReader(null);
+class JComboBoxDriver_cellReader_Test extends JComboBoxDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_CellReader_Is_Null() {
+    assertThrows(NullPointerException.class, () -> driver.replaceCellReader(null));
   }
 }

@@ -19,7 +19,7 @@ import java.awt.Dimension;
 
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.awt.FluentDimension;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameDriver#resizeTo(javax.swing.JInternalFrame, java.awt.Dimension)}.

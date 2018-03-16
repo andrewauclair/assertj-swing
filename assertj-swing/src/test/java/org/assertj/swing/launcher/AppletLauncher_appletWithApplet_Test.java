@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.launcher;
 
-import java.applet.Applet;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link AppletLauncher#launcherFor(java.applet.Applet)}.
  * 
  * @author Yvonne Wang
  */
-public class AppletLauncher_appletWithApplet_Test extends AppletLauncher_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Applet_To_Launch_Is_Null() {
-    AppletLauncher.launcherFor((Applet) null);
+class AppletLauncher_appletWithApplet_Test extends AppletLauncher_TestCase {
+  @Test
+  void should_Throw_Error_If_Applet_To_Launch_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> AppletLauncher.launcherFor(null));
   }
 }

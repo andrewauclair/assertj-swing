@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import java.awt.EventQueue;
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Context#allEventQueues()}.

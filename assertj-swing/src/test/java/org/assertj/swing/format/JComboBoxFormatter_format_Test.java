@@ -20,7 +20,7 @@ import javax.swing.JComboBox;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxFormatter#format(java.awt.Component)}.

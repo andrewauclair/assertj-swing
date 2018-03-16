@@ -21,7 +21,7 @@ import javax.swing.JTable;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableFormatter#format(java.awt.Component)}.

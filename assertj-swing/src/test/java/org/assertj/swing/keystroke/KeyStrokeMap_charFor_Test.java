@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 import javax.swing.KeyStroke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyStrokeMap#charFor(javax.swing.KeyStroke)}.

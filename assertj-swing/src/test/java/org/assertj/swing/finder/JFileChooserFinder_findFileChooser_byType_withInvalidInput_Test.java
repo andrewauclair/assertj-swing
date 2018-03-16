@@ -12,21 +12,23 @@
  */
 package org.assertj.swing.finder;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JFileChooserFinder#findFileChooser()}.
  * 
  * @author Alex Ruiz
  */
-public class JFileChooserFinder_findFileChooser_byType_withInvalidInput_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Negative() {
-    JFileChooserFinder.findFileChooser().withTimeout(-20);
+class JFileChooserFinder_findFileChooser_byType_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Negative() {
+    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser().withTimeout(-20));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Time_Unit_Is_Null() {
-    JFileChooserFinder.findFileChooser().withTimeout(10, null);
+  @Test
+  void should_Throw_Error_If_Time_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser().withTimeout(10, null));
   }
 }

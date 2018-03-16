@@ -18,7 +18,7 @@ import static org.assertj.swing.test.builder.JDialogs.dialog;
 import javax.swing.JDialog;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DialogMatcher#matches(java.awt.Component)}.

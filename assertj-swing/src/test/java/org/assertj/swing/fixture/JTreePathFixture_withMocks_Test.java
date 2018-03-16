@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 import org.assertj.swing.core.MouseClickInfo;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreePathFixture}.

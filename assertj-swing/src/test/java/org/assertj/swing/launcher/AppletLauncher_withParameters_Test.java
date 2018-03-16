@@ -14,32 +14,33 @@ package org.assertj.swing.launcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.launcher.AppletParameter.name;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.test.swing.TestApplet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AppletLauncher#withParameters(AppletParameter...)}.
  * 
  * @author Yvonne Wang
  */
-public class AppletLauncher_withParameters_Test extends AppletLauncher_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Parameter_Array_Is_Null() {
+class AppletLauncher_withParameters_Test extends AppletLauncher_TestCase {
+  @Test
+  void should_Throw_Error_If_Parameter_Array_Is_Null() {
     AppletParameter[] parameters = null;
-    AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters);
-  }
-
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Parameter__In_Array_Is_Null() {
-    AppletParameter[] parameters = new AppletParameter[2];
-    parameters[0] = name("bgcolor").value("blue");
-    parameters[1] = null;
-    AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters);
+    assertThrows(IllegalArgumentException.class, () -> AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters));
   }
 
   @Test
-  public void should_Set_Given_Parameters() {
+  void should_Throw_Error_If_Parameter__In_Array_Is_Null() {
+    AppletParameter[] parameters = new AppletParameter[2];
+    parameters[0] = name("bgcolor").value("blue");
+    parameters[1] = null;
+    assertThrows(NullPointerException.class, () -> AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters));
+  }
+
+  @Test
+  void should_Set_Given_Parameters() {
     applet = TestApplet.createNew();
     viewer = AppletLauncher.launcherFor(applet)
         .withParameters(name("bgcolor").value("blue"), name("color").value("red")).start();

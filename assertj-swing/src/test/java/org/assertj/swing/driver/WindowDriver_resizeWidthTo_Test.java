@@ -14,20 +14,21 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
 import org.assertj.swing.test.awt.FluentDimension;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#resizeWidthTo(java.awt.Window, int)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowDriver_resizeWidthTo_Test extends WindowDriver_TestCase {
+class WindowDriver_resizeWidthTo_Test extends WindowDriver_TestCase {
   @Test
-  public void should_Resize_Width() {
+  void should_Resize_Width() {
     showWindow();
     Dimension newSize = new FluentDimension(sizeOf(window)).addToWidth(200);
     driver.resizeWidthTo(window, newSize.width);
@@ -35,22 +36,22 @@ public class WindowDriver_resizeWidthTo_Test extends WindowDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Disabled() {
+  void should_Throw_Error_If_Window_Is_Disabled() {
     disableWindow();
     thrown.expectIllegalStateIsDisabledComponent();
     driver.resizeWidthTo(window, 10);
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Window_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.resizeWidthTo(window, 10);
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void should_Throw_Error_If_Window_Is_Not_Resizable() {
+  @Test
+  void should_Throw_Error_If_Window_Is_Not_Resizable() {
     makeWindowNotResizable();
     showWindow();
-    driver.resizeWidthTo(window, 10);
+    assertThrows(IllegalStateException.class, () -> driver.resizeWidthTo(window, 10));
   }
 }

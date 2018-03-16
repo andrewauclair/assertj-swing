@@ -19,7 +19,7 @@ import java.awt.Point;
 
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.awt.FluentPoint;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameDriver#move(javax.swing.JInternalFrame, java.awt.Point)}.

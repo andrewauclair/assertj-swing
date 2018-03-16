@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link ImageReader#readImageFrom(String)}</code>.

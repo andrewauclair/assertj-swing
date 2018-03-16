@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.core.Settings;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#settings()}.

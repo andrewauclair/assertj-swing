@@ -17,7 +17,7 @@ import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
 import java.util.concurrent.CountDownLatch;
 
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#focusAndWaitForFocusGain(java.awt.Component)}.

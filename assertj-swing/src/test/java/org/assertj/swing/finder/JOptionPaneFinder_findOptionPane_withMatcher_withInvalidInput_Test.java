@@ -13,11 +13,12 @@
 package org.assertj.swing.finder;
 
 import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JOptionPane;
 
 import org.assertj.swing.core.GenericTypeMatcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JOptionPaneFinder#findOptionPane()}.
@@ -25,20 +26,20 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JOptionPaneFinder_findOptionPane_withMatcher_withInvalidInput_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Matcher_Is_Null() {
+class JOptionPaneFinder_findOptionPane_withMatcher_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JOptionPane> matcher = null;
-    JOptionPaneFinder.findOptionPane(matcher);
+    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane(matcher));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Negative() {
-    JOptionPaneFinder.findOptionPane(neverMatches(JOptionPane.class)).withTimeout(-20);
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Negative() {
+    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane(neverMatches(JOptionPane.class)).withTimeout(-20));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Time_Unit_Is_Null() {
-    JOptionPaneFinder.findOptionPane(neverMatches(JOptionPane.class)).withTimeout(10, null);
+  @Test
+  void should_Throw_Error_If_Time_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane(neverMatches(JOptionPane.class)).withTimeout(10, null));
   }
 }

@@ -13,21 +13,23 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTreeDriver#checkPathExists(JTree, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_validatePath_Test extends JTreeDriver_TestCase {
+class JTreeDriver_validatePath_Test extends JTreeDriver_TestCase {
   @Test
-  public void should_Return_Node_By_Path() {
+  void should_Return_Node_By_Path() {
     driver.checkPathExists(tree, "root/branch1/branch1.1");
   }
 
-  @Test(expected = LocationUnavailableException.class)
-  public void should_Throw_Error_If_Path_Does_Not_Exist() {
-    driver.checkPathExists(tree, "hello!");
+  @Test
+  void should_Throw_Error_If_Path_Does_Not_Exist() {
+    assertThrows(LocationUnavailableException.class, () -> driver.checkPathExists(tree, "hello!"));
   }
 }

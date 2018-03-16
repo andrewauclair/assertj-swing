@@ -16,7 +16,7 @@ import static java.awt.event.InputEvent.ALT_MASK;
 import static java.awt.event.InputEvent.SHIFT_MASK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link InputModifiers#isShiftDown(int)}.

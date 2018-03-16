@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.fixture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link ColorFixture#ColorFixture(java.awt.Color)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ColorFixture_constructor_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Color_Is_Null() {
-    new ColorFixture(null);
+class ColorFixture_constructor_Test {
+  @Test
+  void should_Throw_Error_If_Color_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new ColorFixture(null));
   }
 }

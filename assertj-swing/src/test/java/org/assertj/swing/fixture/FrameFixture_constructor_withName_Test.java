@@ -19,7 +19,7 @@ import java.awt.Frame;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameFixture#FrameFixture(String)}.

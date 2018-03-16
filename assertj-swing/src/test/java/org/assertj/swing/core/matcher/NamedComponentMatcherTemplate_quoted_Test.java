@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import javax.swing.JLabel;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NamedComponentMatcherTemplate#quoted(Object)}.

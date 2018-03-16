@@ -23,7 +23,7 @@ import java.awt.AWTEvent;
 import java.awt.event.AWTEventListener;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EventNormalizer#eventDispatched(AWTEvent)}.

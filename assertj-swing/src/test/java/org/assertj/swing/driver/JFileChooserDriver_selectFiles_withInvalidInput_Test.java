@@ -13,10 +13,11 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.util.Arrays.array;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JFileChooserDriver#selectFiles(JFileChooser, java.io.File[])}.
@@ -24,19 +25,19 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JFileChooserDriver_selectFiles_withInvalidInput_Test extends JFileChooserDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Files_Is_Null() {
-    driver.selectFiles(fileChooser, null);
+class JFileChooserDriver_selectFiles_withInvalidInput_Test extends JFileChooserDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Files_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.selectFiles(fileChooser, null));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Files_Is_Empty() {
-    driver.selectFiles(fileChooser, new File[0]);
+  @Test
+  void should_Throw_Error_If_Array_Of_Files_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> driver.selectFiles(fileChooser, new File[0]));
   }
 
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Any_File_Is_Null() {
-    driver.selectFiles(fileChooser, array(new File("fake"), null));
+  @Test
+  void should_Throw_Error_If_Any_File_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.selectFiles(fileChooser, array(new File("fake"), null)));
   }
 }

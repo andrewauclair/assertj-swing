@@ -24,7 +24,7 @@ import java.awt.Point;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.util.RobotFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowStatus#checkIfReady(Window)}.

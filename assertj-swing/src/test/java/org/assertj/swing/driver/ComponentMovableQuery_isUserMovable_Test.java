@@ -19,7 +19,7 @@ import static org.assertj.swing.test.builder.JFrames.frame;
 import static org.assertj.swing.test.builder.JInternalFrames.internalFrame;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentMovableQuery#isUserMovable(java.awt.Component)}.

@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.swing.driver.JTreeSetEditableTask.setEditable;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#requireEditable(javax.swing.JTree)}.

@@ -14,20 +14,21 @@ package org.assertj.swing.timing;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.concurrent.TimeUnit;
 
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Pause#pause(long, java.util.concurrent.TimeUnit)}.
  * 
  * @author Alex Ruiz
  */
-public class Pause_pauseWithTimeoutInTimeUnit_Test {
+class Pause_pauseWithTimeoutInTimeUnit_Test {
   @Test
-  public void should_Pause_For_The_Given_Amount_Of_Time() {
+  void should_Pause_For_The_Given_Amount_Of_Time() {
     StopWatch watch = startNewStopWatch();
     long delay = 2000;
     Pause.pause(2, TimeUnit.SECONDS);
@@ -35,8 +36,8 @@ public class Pause_pauseWithTimeoutInTimeUnit_Test {
     assertThat(watch.ellapsedTime() >= delay).isTrue();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Unit_Is_Null() {
-    Pause.pause(2, null);
+  @Test
+  void should_Throw_Error_If_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause(2, null));
   }
 }

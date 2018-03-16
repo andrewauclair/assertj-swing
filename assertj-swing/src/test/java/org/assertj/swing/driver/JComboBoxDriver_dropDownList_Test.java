@@ -20,7 +20,7 @@ import javax.swing.JList;
 import javax.swing.ListModel;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxDriver#dropDownList()}.

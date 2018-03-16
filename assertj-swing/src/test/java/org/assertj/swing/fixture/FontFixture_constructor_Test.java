@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.fixture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link FontFixture#FontFixture(Font)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class FontFixture_constructor_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Font_Is_Null() {
-    new FontFixture(null);
+class FontFixture_constructor_Test {
+  @Test
+  void should_Throw_Error_If_Font_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new FontFixture(null));
   }
 }

@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TextAssert#matches(java.util.regex.Pattern)}.

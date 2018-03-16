@@ -31,7 +31,7 @@ import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-297" target="_blank">FEST-297</a>.

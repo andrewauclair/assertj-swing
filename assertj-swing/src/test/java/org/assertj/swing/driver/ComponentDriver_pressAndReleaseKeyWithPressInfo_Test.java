@@ -15,8 +15,9 @@ package org.assertj.swing.driver;
 import static java.awt.Event.SHIFT_MASK;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.assertj.swing.core.KeyPressInfo.keyCode;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#pressAndReleaseKey(java.awt.Component, org.assertj.swing.core.KeyPressInfo)}.
@@ -24,14 +25,14 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriver_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_KeyPressInfo_Is_Null() {
-    driver.pressAndReleaseKey(window.button, null);
+class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_KeyPressInfo_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.pressAndReleaseKey(window.button, null));
   }
 
   @Test
-  public void should_Press_And_Release_Key_In_Given_KeyPressInfo() {
+  void should_Press_And_Release_Key_In_Given_KeyPressInfo() {
     showWindow();
     assertThatTextFieldIsEmpty();
     driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK));
@@ -39,7 +40,7 @@ public class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends Compon
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled() {
+  void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
     thrown.expectIllegalStateIsDisabledComponent();
     try {
@@ -50,7 +51,7 @@ public class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends Compon
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     try {
       driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK));

@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.builder.JDialogs.dialog;
-
-import java.awt.Dialog;
-
 import org.assertj.swing.test.ScreenLockReleaser;
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.builder.JDialogs.dialog;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link DialogFixture#DialogFixture(Dialog)}.
@@ -30,28 +30,27 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class DialogFixture_constructor_withDialog_Test extends EDTSafeTestCase {
-  @Rule
   public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
 
   private DialogFixture fixture;
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     if (fixture != null) {
       fixture.cleanUp();
     }
   }
 
   @Test
-  public void should_Create_New_Robot_And_Use_Given_Dialog_As_Target() {
+  void should_Create_New_Robot_And_Use_Given_Dialog_As_Target() {
     Dialog target = dialog().createNew();
     fixture = new DialogFixture(target);
     assertThat(fixture.robot()).isNotNull();
     assertThat(fixture.target()).isSameAs(target);
   }
 
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Dialog_Is_Null() {
-    fixture = new DialogFixture((Dialog) null);
+  @Test
+  void should_Throw_Error_If_Dialog_Is_Null() {
+    assertThrows(NullPointerException.class, () -> fixture = new DialogFixture((Dialog) null));
   }
 }

@@ -16,7 +16,7 @@ import static javax.swing.SwingUtilities.isEventDispatchThread;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link GuiQuery#executeInEDT()}.

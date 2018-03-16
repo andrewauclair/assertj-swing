@@ -17,7 +17,7 @@ import static org.assertj.swing.test.builder.JTextFields.textField;
 
 import java.awt.Component;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ExistingHierarchy#contains(java.awt.Component)}.

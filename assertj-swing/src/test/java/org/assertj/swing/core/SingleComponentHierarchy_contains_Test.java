@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 import javax.swing.JButton;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SingleComponentHierarchy#contains(java.awt.Component)}.

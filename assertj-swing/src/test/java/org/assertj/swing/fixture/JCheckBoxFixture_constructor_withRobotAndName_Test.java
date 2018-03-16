@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JCheckBox;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JCheckBoxFixture#JCheckBoxFixture(org.assertj.swing.core.Robot, String)}.
@@ -37,21 +38,21 @@ public class JCheckBoxFixture_constructor_withRobotAndName_Test extends RobotBas
   }
 
   @Test
-  public void should_Lookup_Showing_JCheckBox_By_Name() {
+  void should_Lookup_Showing_JCheckBox_By_Name() {
     robot.showWindow(window);
     JCheckBoxFixture fixture = new JCheckBoxFixture(robot, "checkBox");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.checkBox);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JCheckBox_With_Matching_Name_Is_Not_Showing() {
-    new JCheckBoxFixture(robot, "checkBox");
+  @Test
+  void should_Throw_Error_If_JCheckBox_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JCheckBoxFixture(robot, "checkBox"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JCheckBox_With_Matching_Name_Is_Not_Found() {
-    new JCheckBoxFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JCheckBox_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JCheckBoxFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

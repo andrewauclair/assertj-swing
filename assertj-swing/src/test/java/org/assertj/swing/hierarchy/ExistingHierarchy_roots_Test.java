@@ -18,7 +18,7 @@ import java.awt.Window;
 import java.util.Collection;
 
 import org.assertj.swing.monitor.WindowMonitor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ExistingHierarchy#roots()}.

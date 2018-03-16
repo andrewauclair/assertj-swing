@@ -28,7 +28,7 @@ import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.util.Pair;
 import org.assertj.swing.util.TextMatcher;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableHeaderLocation#pointAt(JTableHeader, TextMatcher)}.

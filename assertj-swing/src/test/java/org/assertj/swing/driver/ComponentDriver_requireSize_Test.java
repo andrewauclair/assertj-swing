@@ -16,7 +16,7 @@ import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
 
 import java.awt.Dimension;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#requireSize(java.awt.Component, java.awt.Dimension)}.

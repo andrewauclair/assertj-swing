@@ -14,7 +14,7 @@ package org.assertj.swing.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link LabelMatcher#toString()}.

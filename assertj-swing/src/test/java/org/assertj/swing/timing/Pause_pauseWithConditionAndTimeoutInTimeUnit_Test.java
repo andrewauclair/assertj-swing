@@ -15,33 +15,36 @@ package org.assertj.swing.timing;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
 import static org.assertj.swing.timing.Timeout.timeout;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Pause#pause(Condition, Timeout)}.
  * 
  * @author Alex Ruiz
  */
-public class Pause_pauseWithConditionAndTimeoutInTimeUnit_Test {
+class Pause_pauseWithConditionAndTimeoutInTimeUnit_Test {
   private static final int TIMEOUT = 1000;
 
-  @Test(expected = WaitTimedOutError.class)
-  public void should_Timeout_If_Condition_Is_Never_Satisfied() {
-    Pause.pause(new NeverSatisfiedCondition(), timeout(TIMEOUT));
-  }
-
-  @Test(expected = WaitTimedOutError.class, timeout = 1100)
-  public void should_Timeout_If_Condition_Runs_Longer_Than_Timeout() {
-    Pause.pause(new SatisfiedCondition(10000), timeout(1, TimeUnit.SECONDS));
+  @Test
+  void should_Timeout_If_Condition_Is_Never_Satisfied() {
+    assertThrows(WaitTimedOutError.class, () -> Pause.pause(new NeverSatisfiedCondition(), timeout(TIMEOUT)));
   }
 
   @Test
-  public void should_Wait_Till_Condition_Is_Satisfied() {
+  void should_Timeout_If_Condition_Runs_Longer_Than_Timeout() {
+    assertTimeoutPreemptively(Duration.ofMillis(1100), () -> assertThrows(WaitTimedOutError.class, () -> Pause.pause(new SatisfiedCondition(10000), timeout(1, TimeUnit.SECONDS))));
+  }
+
+  @Test
+  void should_Wait_Till_Condition_Is_Satisfied() {
     int timeToWaitTillSatisfied = TIMEOUT - 50;
     SatisfiedCondition condition = new SatisfiedCondition(timeToWaitTillSatisfied);
 
@@ -53,18 +56,18 @@ public class Pause_pauseWithConditionAndTimeoutInTimeUnit_Test {
     assertThat(condition.satisfied).isTrue();
   }
 
-  @Test(expected = NumberFormatException.class)
-  public void should_Throw_Error_If_Condition_Throws_Any() {
-    Pause.pause(new RuntimeExceptionCondition(new NumberFormatException("expected")), timeout(TIMEOUT));
+  @Test
+  void should_Throw_Error_If_Condition_Throws_Any() {
+    assertThrows(NumberFormatException.class, () -> Pause.pause(new RuntimeExceptionCondition(new NumberFormatException("expected")), timeout(TIMEOUT)));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Condition_Is_Null() {
-    Pause.pause((Condition) null, timeout(TIMEOUT));
+  @Test
+  void should_Throw_Error_If_Condition_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause((Condition) null, timeout(TIMEOUT)));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Null() {
-    Pause.pause(new NeverSatisfiedCondition(), null);
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause(new NeverSatisfiedCondition(), null));
   }
 }

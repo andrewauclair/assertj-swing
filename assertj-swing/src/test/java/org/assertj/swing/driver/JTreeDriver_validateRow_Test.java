@@ -12,21 +12,23 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTreeDriver#checkRowInBounds(JTree, int)}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_validateRow_Test extends JTreeDriver_TestCase {
+class JTreeDriver_validateRow_Test extends JTreeDriver_TestCase {
   @Test
-  public void should_Pass_If_Index_Is_Valid() {
+  void should_Pass_If_Index_Is_Valid() {
     driver.checkRowInBounds(tree, 1);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
-    driver.checkRowInBounds(tree, -1);
+  @Test
+  void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.checkRowInBounds(tree, -1));
   }
 }

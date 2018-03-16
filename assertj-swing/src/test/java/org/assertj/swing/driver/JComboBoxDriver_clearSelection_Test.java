@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JComboBoxSelectedIndexQuery.selectedIndexOf;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxDriver#clearSelection(javax.swing.JComboBox)}.

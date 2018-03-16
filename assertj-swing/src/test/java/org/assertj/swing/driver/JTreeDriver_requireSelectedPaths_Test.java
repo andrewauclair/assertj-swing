@@ -13,28 +13,29 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.util.Arrays.array;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#requireSelection(javax.swing.JTree, String[])}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCell_TestCase {
+class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCell_TestCase {
   @Test
-  public void should_Pass_If_Single_Cell_Is_Selected() {
+  void should_Pass_If_Single_Cell_Is_Selected() {
     selectFirstChildOfRoot();
     driver.requireSelection(tree, array("root/branch1"));
   }
 
   @Test
-  public void should_Pass_If_Cells_Are_Selected() {
+  void should_Pass_If_Cells_Are_Selected() {
     selectBranch1AndBranch1_1();
     driver.requireSelection(tree, array("root/branch1", "root/branch1/branch1.1"));
   }
@@ -48,13 +49,13 @@ public class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCel
     select(root_branch1, root_branch1_Branch1_1);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Expected_Array_Of_Paths_Is_Null() {
-    driver.requireSelection(tree, (String[]) null);
+  @Test
+  void should_Throw_Error_If_Expected_Array_Of_Paths_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.requireSelection(tree, (String[]) null));
   }
 
   @Test
-  public void should_Fail_If_JTree_Does_Not_Have_Selection() {
+  void should_Fail_If_JTree_Does_Not_Have_Selection() {
     clearTreeSelection();
     thrown.expectAssertionError("property:'selection'");
     thrown.expectMessageToContain("No selection");
@@ -62,7 +63,7 @@ public class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCel
   }
 
   @Test
-  public void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
     selectFirstChildOfRoot();
     thrown.expectAssertionError("property:'selection'");
     thrown.expectMessageToContain("expecting selection:<[\"root/branch2\"]> but was:<[[root, branch1]]>");

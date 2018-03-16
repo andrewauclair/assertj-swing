@@ -21,7 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.text.JTextComponent;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxDriver#selectAllText(javax.swing.JComboBox)}.

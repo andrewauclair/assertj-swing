@@ -13,12 +13,14 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 import javax.swing.text.JTextComponent;
 
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#replaceText(javax.swing.text.JTextComponent, String)}.
@@ -26,18 +28,18 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_replaceText_withInvalidInput_Test {
+class JTextComponentDriver_replaceText_withInvalidInput_Test {
   private static JTextComponentDriver driver;
   private static JTextComponent textField;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     driver = new JTextComponentDriver(singletonRobotMock());
     textField = mock(JTextComponent.class);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Replacement_Text_Is_Null() {
-    driver.replaceText(textField, null);
+  @Test
+  void should_Throw_Error_If_Replacement_Text_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.replaceText(textField, null));
   }
 }

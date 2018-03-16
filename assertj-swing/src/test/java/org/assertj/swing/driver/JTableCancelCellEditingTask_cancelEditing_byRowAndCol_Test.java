@@ -17,7 +17,7 @@ import static org.assertj.swing.test.ExpectedException.none;
 
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableCancelCellEditingTask#cancelEditing(javax.swing.JTable, int, int)}.

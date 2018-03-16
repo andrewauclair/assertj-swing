@@ -14,7 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.driver.JTreeSetEditableTask.setEditable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#requireNotEditable(javax.swing.JTree)}.

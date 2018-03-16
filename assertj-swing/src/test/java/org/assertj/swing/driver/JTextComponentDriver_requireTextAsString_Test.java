@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import java.util.regex.Pattern;
 
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#requireText(javax.swing.text.JTextComponent, String)}.

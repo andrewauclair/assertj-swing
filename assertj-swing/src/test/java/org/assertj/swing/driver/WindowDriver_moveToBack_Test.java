@@ -13,41 +13,45 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowDriver#moveToBack(java.awt.Window)}.
  * 
  * @author Alex Ruiz
  */
-public class WindowDriver_moveToBack_Test extends WindowDriver_TestCase {
+class WindowDriver_moveToBack_Test extends WindowDriver_TestCase {
 
   private final CountDownLatch latch = new CountDownLatch(1);
 
   /** Timeout is important - to fail if the window is never activated! */
-  @Test(timeout = 5000)
-  public void should_Move_Window_To_Back() throws InterruptedException {
+  @Test
+  void should_Move_Window_To_Back() throws InterruptedException {
     // TODO(alruiz): Test on Windows
-    showWindow();
+    assertTimeoutPreemptively(Duration.ofSeconds(5), () -> {
+      showWindow();
 
-    TestWindow window2 = TestWindow.createAndShowNewWindow(getClass());
-    registerDeactivationLatch(window2);
-    // wait for idle, since some OSs may take a while
-    driver.robot.waitForIdle();
+      TestWindow window2 = TestWindow.createAndShowNewWindow(getClass());
+      registerDeactivationLatch(window2);
+      // wait for idle, since some OSs may take a while
+      driver.robot.waitForIdle();
 
-    assertThat(isActive(window2)).isTrue();
-    driver.moveToBack(window2);
+      assertThat(isActive(window2)).isTrue();
+      driver.moveToBack(window2);
 
-    // see Window#toBack: no guarantees about changes to the focused and active Windows can be made.
-    // we have to wait for the window to be deactivated
-    latch.await();
-    assertThat(isActive(window2)).isFalse();
+      // see Window#toBack: no guarantees about changes to the focused and active Windows can be made.
+      // we have to wait for the window to be deactivated
+      latch.await();
+      assertThat(isActive(window2)).isFalse();
+    });
   }
 
   private void registerDeactivationLatch(TestWindow window2) {

@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.finder;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link WindowFinder#findDialog(String)}.
@@ -20,25 +22,25 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class WindowFinder_findDialog_byName_withInvalidInput_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Name_Is_Null() {
+class WindowFinder_findDialog_byName_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Name_Is_Null() {
     String name = null;
-    WindowFinder.findDialog(name);
+    assertThrows(NullPointerException.class, () -> WindowFinder.findDialog(name));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Name_Is_Empty() {
-    WindowFinder.findDialog("");
+  @Test
+  void should_Throw_Error_If_Name_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog(""));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Negative() {
-    WindowFinder.findDialog("dialog").withTimeout(-20);
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Negative() {
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog("dialog").withTimeout(-20));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Time_Unit_Is_Null() {
-    WindowFinder.findDialog("dialog").withTimeout(10, null);
+  @Test
+  void should_Throw_Error_If_Time_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog("dialog").withTimeout(10, null));
   }
 }

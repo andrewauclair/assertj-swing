@@ -23,7 +23,7 @@ import static org.assertj.swing.test.swing.TestTable.columnNames;
 import static org.assertj.swing.test.swing.TestTable.createCellValueFrom;
 
 import org.assertj.swing.test.swing.TestTable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#drag(javax.swing.JTable, org.assertj.swing.data.TableCell)} and

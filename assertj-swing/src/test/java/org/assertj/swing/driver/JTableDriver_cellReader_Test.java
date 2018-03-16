@@ -13,9 +13,11 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#replaceCellReader(org.assertj.swing.cell.JTableCellReader)}.
@@ -23,16 +25,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_cellReader_Test {
+class JTableDriver_cellReader_Test {
   private JTableDriver driver;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     driver = new JTableDriver(singletonRobotMock());
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_CellReader_Is_Null() {
-    driver.replaceCellReader(null);
+  @Test
+  void should_Throw_Error_If_CellReader_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.replaceCellReader(null));
   }
 }

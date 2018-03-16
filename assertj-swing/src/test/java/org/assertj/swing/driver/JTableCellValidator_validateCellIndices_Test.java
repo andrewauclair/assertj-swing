@@ -13,43 +13,44 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.swing.test.builder.JTables.table;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.data.TableCell;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableCellPreconditions#checkCellIndicesInBounds(javax.swing.JTable, TableCell)}.
  * 
  * @author Alex Ruiz
  */
-public class JTableCellValidator_validateCellIndices_Test {
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_JTable_Is_Empty() {
+class JTableCellValidator_validateCellIndices_Test {
+  @Test
+  void should_Throw_Error_If_JTable_Is_Empty() {
     TableCell cell = TableCell.row(2).column(3);
-    JTableCellPreconditions.checkCellIndicesInBounds(table().createNew(), cell);
+    assertThrows(IndexOutOfBoundsException.class, () -> JTableCellPreconditions.checkCellIndicesInBounds(table().createNew(), cell));
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Row_Is_Negative() {
+  @Test
+  void should_Throw_Error_If_Row_Is_Negative() {
     TableCell cell = TableCell.row(-2).column(3);
-    JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell);
+    assertThrows(IndexOutOfBoundsException.class, () -> JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell));
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Column_Is_Negative() {
+  @Test
+  void should_Throw_Error_If_Column_Is_Negative() {
     TableCell cell = TableCell.row(2).column(-3);
-    JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell);
+    assertThrows(IndexOutOfBoundsException.class, () -> JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell));
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Row_Is_Out_Of_Bounds() {
+  @Test
+  void should_Throw_Error_If_Row_Is_Out_Of_Bounds() {
     TableCell cell = TableCell.row(4).column(2);
-    JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell);
+    assertThrows(IndexOutOfBoundsException.class, () -> JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell));
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Column_Is_Out_Of_Bounds() {
+  @Test
+  void should_Throw_Error_If_Column_Is_Out_Of_Bounds() {
     TableCell cell = TableCell.row(0).column(3);
-    JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell);
+    assertThrows(IndexOutOfBoundsException.class, () -> JTableCellPreconditions.checkCellIndicesInBounds(table().withRowCount(4).withColumnCount(3).createNew(), cell));
   }
 }

@@ -17,7 +17,7 @@ import static org.assertj.swing.timing.Timeout.timeout;
 
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.test.util.StopWatch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#requireEnabled(java.awt.Component, org.assertj.swing.timing.Timeout)}.

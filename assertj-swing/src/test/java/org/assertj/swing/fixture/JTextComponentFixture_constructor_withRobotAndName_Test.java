@@ -14,6 +14,7 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
@@ -21,7 +22,7 @@ import javax.swing.text.JTextComponent;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentFixture#JTextComponentFixture(org.assertj.swing.core.Robot, String)}.
@@ -38,21 +39,21 @@ public class JTextComponentFixture_constructor_withRobotAndName_Test extends Rob
   }
 
   @Test
-  public void should_Lookup_Showing_JTextComponent_By_Name() {
+  void should_Lookup_Showing_JTextComponent_By_Name() {
     robot.showWindow(window);
     JTextComponentFixture fixture = new JTextComponentFixture(robot, "textField");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.textField);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JTextComponent_With_Matching_Name_Is_Not_Showing() {
-    new JTextComponentFixture(robot, "textField");
+  @Test
+  void should_Throw_Error_If_JTextComponent_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JTextComponentFixture(robot, "textField"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JTextComponent_With_Matching_Name_Is_Not_Found() {
-    new JTextComponentFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JTextComponent_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JTextComponentFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

@@ -15,22 +15,24 @@ package org.assertj.swing.launcher;
 import java.applet.Applet;
 
 import org.assertj.swing.exception.UnexpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link AppletLauncher#applet(Class)}.
  * 
  * @author Yvonne Wang
  */
-public class AppletLauncher_appletWithType_Test extends AppletLauncher_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Applet_TypeIsNull() {
+class AppletLauncher_appletWithType_Test extends AppletLauncher_TestCase {
+  @Test
+  void should_Throw_Error_If_Applet_TypeIsNull() {
     Class<? extends Applet> type = null;
-    AppletLauncher.applet(type);
+    assertThrows(IllegalArgumentException.class, () -> AppletLauncher.applet(type));
   }
 
   @Test
-  public void should_Throw_Error_If_Applet_Cannot_Be_Instantiated() {
+  void should_Throw_Error_If_Applet_Cannot_Be_Instantiated() {
     thrown.expect(UnexpectedException.class, "Unable to create a new instance");
     AppletLauncher.applet(AnApplet.class);
   }

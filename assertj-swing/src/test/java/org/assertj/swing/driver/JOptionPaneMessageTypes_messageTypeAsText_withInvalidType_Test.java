@@ -13,16 +13,18 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JOptionPaneMessageTypes#messageTypeAsText(int)}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneMessageTypes_messageTypeAsText_withInvalidType_Test {
-  @Test(expected = ActionFailedException.class)
-  public void should_Throw_Error_If_Message_Type_Value_Is_Invalid() {
-    JOptionPaneMessageTypes.messageTypeAsText(Integer.MIN_VALUE);
+class JOptionPaneMessageTypes_messageTypeAsText_withInvalidType_Test {
+  @Test
+  void should_Throw_Error_If_Message_Type_Value_Is_Invalid() {
+    assertThrows(ActionFailedException.class, () -> JOptionPaneMessageTypes.messageTypeAsText(Integer.MIN_VALUE));
   }
 }

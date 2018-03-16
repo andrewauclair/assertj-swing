@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.data.TableCell.row;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#selectCells(javax.swing.JTable, org.assertj.swing.data.TableCell[])}.

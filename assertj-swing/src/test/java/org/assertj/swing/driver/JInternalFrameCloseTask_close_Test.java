@@ -18,7 +18,7 @@ import javax.swing.JInternalFrame;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestMdiWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameCloseTask#close(JInternalFrame)}.

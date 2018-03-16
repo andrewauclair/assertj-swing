@@ -12,21 +12,23 @@
  */
 package org.assertj.swing.finder;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JOptionPaneFinder#findOptionPane()}.
  * 
  * @author Alex Ruiz
  */
-public class JOptionPaneFinder_findOptionPane_byType_withInvalidInput_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Negative() {
-    JOptionPaneFinder.findOptionPane().withTimeout(-20);
+class JOptionPaneFinder_findOptionPane_byType_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Negative() {
+    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane().withTimeout(-20));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Time_Unit_Is_Null() {
-    JOptionPaneFinder.findOptionPane().withTimeout(10, null);
+  @Test
+  void should_Throw_Error_If_Time_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane().withTimeout(10, null));
   }
 }

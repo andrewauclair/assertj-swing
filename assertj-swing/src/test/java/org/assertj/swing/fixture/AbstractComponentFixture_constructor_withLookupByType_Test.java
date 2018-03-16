@@ -14,6 +14,7 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.ComponentLookupScope.SHOWING_ONLY;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,40 +28,40 @@ import org.assertj.swing.core.Robot;
 import org.assertj.swing.core.Settings;
 import org.assertj.swing.driver.ComponentDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractComponentFixture#AbstractComponentFixture(Class, Robot, Class)}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractComponentFixture_constructor_withLookupByType_Test {
+class AbstractComponentFixture_constructor_withLookupByType_Test {
   private Robot robot;
   private Class<Frame> type;
 
   @Before
-  public void setUp() {
+  void setUp() {
     robot = mock(Robot.class);
     type = Frame.class;
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_SelfType_Is_Null() {
-    new ComponentFixture(null, robot, type);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Robot_Is_Null() {
-    new ComponentFixture(ComponentFixture.class, null, type);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Class_Is_Null() {
-    new ComponentFixture(ComponentFixture.class, robot, null);
+  @Test
+  void should_Throw_Error_If_SelfType_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new ComponentFixture(null, robot, type));
   }
 
   @Test
-  public void should_Lookup_Component_By_Name_And_Type() {
+  void should_Throw_Error_If_Robot_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new ComponentFixture(ComponentFixture.class, null, type));
+  }
+
+  @Test
+  void should_Throw_Error_If_Class_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new ComponentFixture(ComponentFixture.class, robot, null));
+  }
+
+  @Test
+  void should_Lookup_Component_By_Name_And_Type() {
     Frame frame = mock(type);
     Settings settings = mock(Settings.class);
     when(robot.settings()).thenReturn(settings);

@@ -28,7 +28,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <a href="http://code.google.com/p/fest/issues/detail?id=200" target="_blank">Bug 200</a>.

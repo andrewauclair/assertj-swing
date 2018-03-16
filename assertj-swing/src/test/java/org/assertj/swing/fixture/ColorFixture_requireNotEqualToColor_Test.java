@@ -15,10 +15,11 @@ package org.assertj.swing.fixture;
 import static java.awt.Color.BLUE;
 import static java.awt.Color.RED;
 import static org.assertj.swing.test.ExpectedException.none;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ColorFixture#requireNotEqualTo(java.awt.Color)}.
@@ -26,26 +27,22 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ColorFixture_requireNotEqualToColor_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class ColorFixture_requireNotEqualToColor_Test {
   @Test
-  public void should_Pass_If_Colors_Are_Not_Equal() {
+  void should_Pass_If_Colors_Are_Not_Equal() {
     ColorFixture fixture = new ColorFixture(BLUE);
     fixture.requireNotEqualTo(RED);
   }
 
-  @Test(expected = AssertionError.class)
-  public void should_Fail_If_Colors_Are_Equal() {
+  @Test
+  void should_Fail_If_Colors_Are_Equal() {
     ColorFixture fixture = new ColorFixture(BLUE);
-    fixture.requireNotEqualTo(BLUE);
+    assertThrows(AssertionError.class, () -> fixture.requireNotEqualTo(BLUE));
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Colors_Are_Equal() {
+  void should_Fail_Showing_Description_If_Colors_Are_Equal() {
     ColorFixture fixture = new ColorFixture(BLUE, "test");
-    thrown.expectAssertionError("test");
-    fixture.requireNotEqualTo(BLUE);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> fixture.requireNotEqualTo(BLUE), "test");
   }
 }

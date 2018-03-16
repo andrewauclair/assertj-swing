@@ -15,8 +15,9 @@ package org.assertj.swing.driver;
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_C;
 import static java.awt.event.KeyEvent.VK_E;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#pressAndReleaseKeys(java.awt.Component, int...)}.
@@ -24,15 +25,15 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Keys_Is_Null() {
+class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Keys_Is_Null() {
     int[] keyCodes = null;
-    driver.pressAndReleaseKeys(window.button, keyCodes);
+    assertThrows(IllegalArgumentException.class, () -> driver.pressAndReleaseKeys(window.button, keyCodes));
   }
 
   @Test
-  public void should_Press_And_Release_Keys() {
+  void should_Press_And_Release_Keys() {
     showWindow();
     assertThatTextFieldIsEmpty();
     int[] keyCodes = { VK_A, VK_C, VK_E };
@@ -41,7 +42,7 @@ public class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_Te
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled() {
+  void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
     thrown.expectIllegalStateIsDisabledComponent();
     try {
@@ -52,7 +53,7 @@ public class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_Te
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     try {
       driver.pressAndReleaseKeys(window.textField, VK_A);

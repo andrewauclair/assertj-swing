@@ -13,16 +13,18 @@
 package org.assertj.swing.format;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link IntrospectionComponentFormatter#IntrospectionComponentFormatter(Class, String...)}.
  * 
  * @author Alex Ruiz
  */
-public class IntrospectionComponentFormatter_constructor_withInvalidInput_Test extends EDTSafeTestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Target_Type_Is_Null() {
-    new IntrospectionComponentFormatter(null, "name", "text");
+class IntrospectionComponentFormatter_constructor_withInvalidInput_Test extends EDTSafeTestCase {
+  @Test
+  void should_Throw_Error_If_Target_Type_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new IntrospectionComponentFormatter(null, "name", "text"));
   }
 }

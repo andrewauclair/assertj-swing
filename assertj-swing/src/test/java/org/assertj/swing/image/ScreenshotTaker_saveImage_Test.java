@@ -25,7 +25,7 @@ import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.util.RobotFactory;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScreenshotTaker#saveImage(BufferedImage, String)}.

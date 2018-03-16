@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxDriver#requireSelection(javax.swing.JComboBox, String)}.

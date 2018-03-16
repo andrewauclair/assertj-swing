@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.mockito.Mockito.mock;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#pressKeyWhileRunning(java.awt.Component, int, Runnable)}.

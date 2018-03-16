@@ -17,7 +17,7 @@ import static java.awt.event.KeyEvent.VK_A;
 import static javax.swing.KeyStroke.getKeyStroke;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyStrokeMapping#mapping(char, int, int)}.

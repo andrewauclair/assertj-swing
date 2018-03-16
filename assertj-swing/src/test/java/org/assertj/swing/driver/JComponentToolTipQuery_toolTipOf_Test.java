@@ -19,7 +19,7 @@ import javax.swing.JButton;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComponentToolTipQuery#toolTipOf(javax.swing.JComponent)}.

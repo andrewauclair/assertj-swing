@@ -13,23 +13,24 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#nodeValue(javax.swing.JTree, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_nodeValueAtRow_Test extends JTreeDriver_TestCase {
+class JTreeDriver_nodeValueAtRow_Test extends JTreeDriver_TestCase {
   @Test
-  public void should_Return_Node_Text() {
+  void should_Return_Node_Text() {
     String value = driver.nodeValue(tree, 1);
     assertThat(value).isEqualTo("branch1");
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Row_Is_Out_Of_Bounds() {
-    driver.nodeValue(tree, 100);
+  @Test
+  void should_Throw_Error_If_Row_Is_Out_Of_Bounds() {
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.nodeValue(tree, 100));
   }
 }

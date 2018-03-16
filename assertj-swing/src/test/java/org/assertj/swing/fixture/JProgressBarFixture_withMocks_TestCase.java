@@ -25,7 +25,7 @@ import javax.swing.JProgressBar;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.JProgressBarDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for {@link JProgressBarFixture}.

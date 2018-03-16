@@ -14,6 +14,7 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
@@ -23,7 +24,7 @@ import javax.swing.JTabbedPane;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTabbedPaneFixture#JTabbedPaneFixture(org.assertj.swing.core.Robot, String)}.
@@ -40,21 +41,21 @@ public class JTabbedPaneFixture_constructor_withRobotAndName_Test extends RobotB
   }
 
   @Test
-  public void should_Lookup_Showing_JTabbedPane_By_Name() {
+  void should_Lookup_Showing_JTabbedPane_By_Name() {
     robot.showWindow(window);
     JTabbedPaneFixture fixture = new JTabbedPaneFixture(robot, "tabbedPane");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.tabbedPane);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JTabbedPane_With_Matching_Name_Is_Not_Showing() {
-    new JTabbedPaneFixture(robot, "tabbedPane");
+  @Test
+  void should_Throw_Error_If_JTabbedPane_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JTabbedPaneFixture(robot, "tabbedPane"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JTabbedPane_With_Matching_Name_Is_Not_Found() {
-    new JTabbedPaneFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JTabbedPane_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JTabbedPaneFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

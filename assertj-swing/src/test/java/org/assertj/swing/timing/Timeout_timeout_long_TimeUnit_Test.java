@@ -13,10 +13,11 @@
 package org.assertj.swing.timing;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Timeout#timeout(long, TimeUnit)}.
@@ -24,21 +25,21 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class Timeout_timeout_long_TimeUnit_Test {
+class Timeout_timeout_long_TimeUnit_Test {
   @Test
-  public void shouldReturnDurationInMillisecondsWhenCreatedWithSeconds() {
+  void shouldReturnDurationInMillisecondsWhenCreatedWithSeconds() {
     Timeout timeout = Timeout.timeout(3, TimeUnit.SECONDS);
     assertThat(timeout.duration()).isEqualTo(3000);
   }
 
   @Test
-  public void shouldReturnDurationInMillisecondsWhenCreatedWithMilliSeconds() {
+  void shouldReturnDurationInMillisecondsWhenCreatedWithMilliSeconds() {
     Timeout timeout = Timeout.timeout(3, TimeUnit.MILLISECONDS);
     assertThat(timeout.duration()).isEqualTo(3);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowExceptionIfTimeUnitIsNull() {
-    Timeout.timeout(0, null);
+  @Test
+  void shouldThrowExceptionIfTimeUnitIsNull() {
+    assertThrows(IllegalArgumentException.class, () -> Timeout.timeout(0, null));
   }
 }

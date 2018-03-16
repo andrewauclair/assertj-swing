@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JListDriver#selectItems(javax.swing.JList, String[])}.
@@ -20,17 +22,17 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_selectItemsByText_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Values_Is_Null() {
+class JListDriver_selectItemsByText_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Values_Is_Null() {
     String[] values = null;
-    driver.selectItems(list, values);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectItems(list, values));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Values_Is_Empty() {
+  @Test
+  void should_Throw_Error_If_Array_Of_Values_Is_Empty() {
     String[] values = new String[0];
-    driver.selectItems(list, values);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectItems(list, values));
   }
 
 }

@@ -14,7 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.driver.JTableDriver_TestCase.MyWindow.COLUMN_COUNT;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#requireColumnCount(javax.swing.JTable, int)}.

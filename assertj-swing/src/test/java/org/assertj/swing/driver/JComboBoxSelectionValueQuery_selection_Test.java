@@ -26,7 +26,7 @@ import org.assertj.swing.cell.JComboBoxCellReader;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.util.Pair;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxSelectionValueQuery#selection(JComboBox, JComboBoxCellReader)}.

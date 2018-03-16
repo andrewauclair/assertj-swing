@@ -26,7 +26,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-254" target="_blank">FEST-254</a>

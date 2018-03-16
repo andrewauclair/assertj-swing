@@ -44,9 +44,6 @@ public abstract class JInternalFrameDriver_TestCase extends RobotBasedTestCase {
   JDesktopPane desktopPane;
   JInternalFrameDriver driver;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected final void onSetUp() {
     driver = new JInternalFrameDriver(robot);

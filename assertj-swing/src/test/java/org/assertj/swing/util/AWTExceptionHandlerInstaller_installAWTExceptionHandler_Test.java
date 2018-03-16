@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AWTExceptionHandlerInstaller#installAWTExceptionHandler(Class, SystemPropertyWriter)}.

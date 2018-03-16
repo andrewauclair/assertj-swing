@@ -27,7 +27,7 @@ import javax.swing.JPopupMenu;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.WindowDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractWindowFixture}.

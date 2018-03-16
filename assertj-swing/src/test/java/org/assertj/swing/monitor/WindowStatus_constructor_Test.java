@@ -21,7 +21,7 @@ import java.awt.AWTException;
 
 import org.assertj.swing.util.RobotFactory;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowStatus#WindowStatus(Windows, org.assertj.swing.util.RobotFactory)}.

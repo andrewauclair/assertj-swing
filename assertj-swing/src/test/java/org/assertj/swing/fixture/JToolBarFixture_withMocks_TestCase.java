@@ -24,7 +24,7 @@ import javax.swing.JToolBar;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.JToolBarDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JToolBarFixture}.

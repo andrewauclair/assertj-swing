@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JProgressBar;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JProgressBarFixture#JProgressBarFixture(org.assertj.swing.core.Robot, String)}.
@@ -36,21 +37,21 @@ public class JProgressBarFixture_constructor_withRobotAndName_Test extends Robot
   }
 
   @Test
-  public void should_Lookup_Showing_JProgressBar_By_Name() {
+  void should_Lookup_Showing_JProgressBar_By_Name() {
     robot.showWindow(window);
     JProgressBarFixture fixture = new JProgressBarFixture(robot, "progressBar");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.progressBar);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JProgressBar_With_Matching_Name_Is_Not_Showing() {
-    new JProgressBarFixture(robot, "progressBar");
+  @Test
+  void should_Throw_Error_If_JProgressBar_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JProgressBarFixture(robot, "progressBar"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JProgressBar_With_Matching_Name_Is_Not_Found() {
-    new JProgressBarFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JProgressBar_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JProgressBarFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

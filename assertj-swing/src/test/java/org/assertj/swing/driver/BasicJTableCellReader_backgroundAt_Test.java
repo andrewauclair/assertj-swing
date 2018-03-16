@@ -24,7 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicJTableCellReader#backgroundAt(JTable, int, int)}.

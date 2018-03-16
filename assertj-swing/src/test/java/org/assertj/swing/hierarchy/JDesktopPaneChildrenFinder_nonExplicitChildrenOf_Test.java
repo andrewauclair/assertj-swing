@@ -26,7 +26,7 @@ import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestMdiWindow;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JDesktopPaneChildrenFinder#nonExplicitChildrenOf(Container)}.

@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 import java.awt.event.WindowEvent;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TransientWindowListener#eventDispatched(AWTEvent)}.

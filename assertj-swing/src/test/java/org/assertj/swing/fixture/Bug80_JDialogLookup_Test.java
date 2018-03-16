@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for <a href="http://code.google.com/p/fest/issues/detail?id=80">Bug 80</a>.

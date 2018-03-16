@@ -14,12 +14,13 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.data.TableCell.row;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.data.TableCellFinder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#cell(javax.swing.JTable, org.assertj.swing.data.TableCellFinder)}.
@@ -27,7 +28,7 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_cellWithTableCellFinder_Test extends JTableDriver_TestCase {
+class JTableDriver_cellWithTableCellFinder_Test extends JTableDriver_TestCase {
   private TableCellFinder cellFinder;
 
   @Override
@@ -36,17 +37,17 @@ public class JTableDriver_cellWithTableCellFinder_Test extends JTableDriver_Test
   }
 
   @Test
-  public void should_Use_TableCellFinder_To_Find_A_Cell() {
+  void should_Use_TableCellFinder_To_Find_A_Cell() {
     TableCell cell = row(0).column(0);
     when(cellFinder.findCell(table, driver.cellReader())).thenReturn(cell);
     TableCell found = driver.cell(table, cellFinder);
     assertThat(found).isSameAs(cell);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Indices_In_Found_Cell_Are_Out_Of_Bounds() {
+  @Test
+  void should_Throw_Error_If_Indices_In_Found_Cell_Are_Out_Of_Bounds() {
     TableCell cell = row(-1).column(0);
     when(cellFinder.findCell(table, driver.cellReader())).thenReturn(cell);
-    driver.cell(table, cellFinder);
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.cell(table, cellFinder));
   }
 }

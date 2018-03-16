@@ -12,28 +12,29 @@
  */
 package org.assertj.swing.launcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.util.Maps.newHashMap;
+import org.assertj.swing.test.swing.TestApplet;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import org.assertj.swing.test.swing.TestApplet;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.util.Maps.newHashMap;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link AppletLauncher#withParameters(Map)}.
  *
  * @author Yvonne Wang
  */
-public class AppletLauncher_withParametersAsMap_Test extends AppletLauncher_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Parameter_Map_Is_Null() {
+class AppletLauncher_withParametersAsMap_Test extends AppletLauncher_TestCase {
+  @Test
+  void should_Throw_Error_If_Parameter_Map_Is_Null() {
     Map<String, String> parameters = null;
-    AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters);
+    assertThrows(IllegalArgumentException.class, () -> AppletLauncher.launcherFor(TestApplet.createNew()).withParameters(parameters));
   }
 
   @Test
-  public void should_Set_Parameters_In_Given_Map() {
+  void should_Set_Parameters_In_Given_Map() {
     Map<String, String> parameters = newHashMap();
     parameters.put("bgcolor", "blue");
     parameters.put("color", "red");

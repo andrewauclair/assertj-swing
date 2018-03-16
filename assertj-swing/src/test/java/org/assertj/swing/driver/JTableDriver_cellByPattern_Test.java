@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#cell(javax.swing.JTable, Pattern)}.

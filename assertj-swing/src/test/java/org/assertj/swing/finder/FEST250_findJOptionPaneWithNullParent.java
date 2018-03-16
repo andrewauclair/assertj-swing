@@ -24,7 +24,7 @@ import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.JOptionPaneLauncher;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-250" target="_blank">FEST-250</a>

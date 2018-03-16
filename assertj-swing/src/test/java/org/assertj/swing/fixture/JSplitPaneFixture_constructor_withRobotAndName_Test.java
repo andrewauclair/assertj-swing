@@ -14,6 +14,7 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
@@ -22,7 +23,7 @@ import javax.swing.JSplitPane;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSplitPaneFixture#JSplitPaneFixture(org.assertj.swing.core.Robot, String)}.
@@ -39,21 +40,21 @@ public class JSplitPaneFixture_constructor_withRobotAndName_Test extends RobotBa
   }
 
   @Test
-  public void should_Lookup_Showing_JSplitPane_By_Name() {
+  void should_Lookup_Showing_JSplitPane_By_Name() {
     robot.showWindow(window);
     JSplitPaneFixture fixture = new JSplitPaneFixture(robot, "splitPane");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.splitPane);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JSplitPane_With_Matching_Name_Is_Not_Showing() {
-    new JSplitPaneFixture(robot, "splitPane");
+  @Test
+  void should_Throw_Error_If_JSplitPane_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JSplitPaneFixture(robot, "splitPane"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JSplitPane_With_Matching_Name_Is_Not_Found() {
-    new JSplitPaneFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JSplitPane_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JSplitPaneFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

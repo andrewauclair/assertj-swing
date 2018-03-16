@@ -22,7 +22,7 @@ import javax.swing.JTable;
 
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.ComponentDriver;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractComponentFixture#targetCastedTo(Class)}.

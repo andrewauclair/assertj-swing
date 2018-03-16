@@ -27,6 +27,7 @@ import static org.assertj.swing.keystroke.KeyStrokeMapping.mapping;
 import static org.assertj.swing.keystroke.KeyStrokeMappingProvider.NO_MASK;
 import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.util.Platform.isWindows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,7 +40,8 @@ import org.assertj.swing.exception.ParsingException;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyStrokeMappingsParser#parse(String)}.
@@ -52,24 +54,24 @@ public class KeyStrokeMappingProvider_parse_Test {
   @Rule
   public ExpectedException thrown = none();
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     parser = new KeyStrokeMappingsParser();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Name_Is_Null() {
+  @Test
+  void should_Throw_Error_If_File_Name_Is_Null() {
     String file = null;
-    parser.parse(file);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Name_Is_Empty() {
-    parser.parse("");
+    assertThrows(IllegalArgumentException.class, () -> parser.parse(file));
   }
 
   @Test
-  public void should_Parse_File_In_Classpath() {
+  void should_Throw_Error_If_File_Name_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> parser.parse(""));
+  }
+
+  @Test
+  void should_Parse_File_In_Classpath() {
     KeyStrokeMappingProvider mappingProvider = parser.parse("keyboard-mapping.txt");
     assertThatContainsDefaultMappings(mappingProvider);
     Collection<KeyStrokeMapping> mappings = mappingProvider.keyStrokeMappings();
@@ -78,24 +80,24 @@ public class KeyStrokeMappingProvider_parse_Test {
   }
 
   @Test
-  public void should_Throw_Error_If_File_Not_Found() {
+  void should_Throw_Error_If_File_Not_Found() {
     thrown.expect(ParsingException.class, "Unable to open file abc.txt");
     parser.parse("abc.txt");
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Is_Null() {
+  @Test
+  void should_Throw_Error_If_File_Is_Null() {
     File file = null;
-    parser.parse(file);
-  }
-
-  @Test(expected = AssertionError.class)
-  public void should_Throw_Error_If_File_Does_Not_Exist() {
-    parser.parse(new File("abc.xyz"));
+    assertThrows(IllegalArgumentException.class, () -> parser.parse(file));
   }
 
   @Test
-  public void should_Parse_File() throws Exception {
+  void should_Throw_Error_If_File_Does_Not_Exist() {
+    assertThrows(AssertionError.class, () -> parser.parse(new File("abc.xyz")));
+  }
+
+  @Test
+  void should_Parse_File() throws Exception {
     File f = null;
     try {
       f = createMappingFile("a, A, NO_MASK");

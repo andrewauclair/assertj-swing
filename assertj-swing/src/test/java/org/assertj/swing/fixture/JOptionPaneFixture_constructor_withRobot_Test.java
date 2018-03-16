@@ -19,7 +19,7 @@ import static org.assertj.swing.test.swing.JOptionPaneLauncher.launch;
 import javax.swing.JOptionPane;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JOptionPaneFixture#JOptionPaneFixture(org.assertj.swing.core.Robot)}.

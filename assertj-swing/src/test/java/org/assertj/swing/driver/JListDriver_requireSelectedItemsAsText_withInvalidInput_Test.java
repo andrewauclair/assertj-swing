@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JListDriver#requireSelectedItems(javax.swing.JList, String...)}.
@@ -20,16 +22,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_requireSelectedItemsAsText_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Values_Is_Null() {
+class JListDriver_requireSelectedItemsAsText_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Values_Is_Null() {
     String[] values = null;
-    driver.requireSelectedItems(list, values);
+    assertThrows(IllegalArgumentException.class, () -> driver.requireSelectedItems(list, values));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Values_Is_Empty() {
+  @Test
+  void should_Throw_Error_If_Array_Of_Values_Is_Empty() {
     String[] values = new String[0];
-    driver.requireSelectedItems(list, values);
+    assertThrows(IllegalArgumentException.class, () -> driver.requireSelectedItems(list, values));
   }
 }

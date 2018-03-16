@@ -32,7 +32,7 @@ import java.awt.image.BufferedImage;
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.swing.internal.assertions.ImagesBaseTest;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Images#assertEqual(AssertionInfo, BufferedImage, BufferedImage, Offset)}</code>.

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Fail.fail;
 import static org.assertj.core.util.Strings.concat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <a href="http://code.google.com/p/fest/issues/detail?id=247" target="_blank">Bug 247</a>.

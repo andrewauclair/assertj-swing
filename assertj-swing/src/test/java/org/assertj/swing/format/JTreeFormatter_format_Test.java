@@ -26,7 +26,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.builder.JTrees;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Base test case for {@link JTreeFormatter#format(java.awt.Component)}.

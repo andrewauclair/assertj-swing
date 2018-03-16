@@ -15,6 +15,7 @@ package org.assertj.swing.launcher;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.ExpectedException.none;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Frame;
 import java.util.List;
@@ -29,7 +30,7 @@ import org.assertj.swing.launcher.JavaApp.ArgumentObserver;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ApplicationLauncher#start()}.
@@ -41,25 +42,25 @@ public class ApplicationLauncher_start_Test extends RobotBasedTestCase {
   public ExpectedException thrown = none();
 
   @Test
-  public void should_Throw_Error_If_Application_Class_Name_Is_Invalid() {
+  void should_Throw_Error_If_Application_Class_Name_Is_Invalid() {
     thrown.expect(UnexpectedException.class, "Unable to load class 'Hello'");
     ApplicationLauncher.application("Hello").start();
   }
 
   @Test
-  public void should_Launch_Application_Without_Arguments() {
+  void should_Launch_Application_Without_Arguments() {
     ApplicationLauncher.application(JavaApp.class).start();
     assertFrameIsShowing();
   }
 
   @Test
-  public void should_Launch_Application_Without_Arguments_Using_FQCN() {
+  void should_Launch_Application_Without_Arguments_Using_FQCN() {
     ApplicationLauncher.application(JavaApp.class.getName()).start();
     assertFrameIsShowing();
   }
 
   @Test
-  public void should_Launch_Application_Using_Arguments() {
+  void should_Launch_Application_Using_Arguments() {
     final List<String> arguments = newArrayList();
     ArgumentObserver observer = new ArgumentObserver() {
       @Override
@@ -73,10 +74,10 @@ public class ApplicationLauncher_start_Test extends RobotBasedTestCase {
     assertThat(arguments).containsOnly("arg1", "arg2");
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Argument_Array_Is_Null() {
+  @Test
+  void should_Throw_Error_If_Argument_Array_Is_Null() {
     String[] args = null;
-    ApplicationLauncher.application(JavaApp.class).withArgs(args).start();
+    assertThrows(IllegalArgumentException.class, () -> ApplicationLauncher.application(JavaApp.class).withArgs(args).start());
   }
 
   private void assertFrameIsShowing() {

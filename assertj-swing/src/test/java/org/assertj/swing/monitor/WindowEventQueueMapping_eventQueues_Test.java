@@ -19,7 +19,7 @@ import java.awt.EventQueue;
 import java.util.Collection;
 
 import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowEventQueueMapping#eventQueues()}.

@@ -15,7 +15,7 @@ package org.assertj.swing.core.matcher;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameMatcher#toString()}.

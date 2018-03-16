@@ -21,7 +21,7 @@ import javax.swing.JSlider;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.JSliderDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSliderFixture}.

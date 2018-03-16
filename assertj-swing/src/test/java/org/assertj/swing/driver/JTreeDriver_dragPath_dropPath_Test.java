@@ -20,7 +20,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#drag(javax.swing.JTree, String)} and {@link JTreeDriver#drop(javax.swing.JTree, String)}

@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableDriver#replaceCellWriter(org.assertj.swing.cell.JTableCellWriter)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_cellWriter_Test extends JTableDriver_withMocks_TestCase {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_CellWriter_Is_Null() {
-    driver.replaceCellWriter(null);
+class JTableDriver_cellWriter_Test extends JTableDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_CellWriter_Is_Null() {
+    assertThrows(NullPointerException.class, () -> driver.replaceCellWriter(null));
   }
 }

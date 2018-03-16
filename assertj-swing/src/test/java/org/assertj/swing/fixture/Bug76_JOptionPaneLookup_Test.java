@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.finder.JOptionPaneFinder;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for <a href="http://code.google.com/p/fest/issues/detail?id=76">Bug 76</a>.

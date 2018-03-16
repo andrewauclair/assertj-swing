@@ -12,23 +12,25 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JListDriver#unselectItems(JList, int[])}.
  *
  * @author Christian Rösch
  */
-public class JListDriver_unselectItemsByIndex_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
+class JListDriver_unselectItemsByIndex_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
     int[] indices = null;
-    driver.unselectItems(list, indices);
+    assertThrows(IllegalArgumentException.class, () -> driver.unselectItems(list, indices));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Indices_Is_Empty() {
+  @Test
+  void should_Throw_Error_If_Array_Of_Indices_Is_Empty() {
     int[] indices = new int[0];
-    driver.unselectItems(list, indices);
+    assertThrows(IllegalArgumentException.class, () -> driver.unselectItems(list, indices));
   }
 }

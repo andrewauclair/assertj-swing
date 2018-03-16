@@ -12,7 +12,7 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListDriver#requireSelection(javax.swing.JList, int)}.

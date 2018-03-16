@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JTableDriver_TestCase.MyWindow.ROW_COUNT;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#rowCountOf(javax.swing.JTable)}.

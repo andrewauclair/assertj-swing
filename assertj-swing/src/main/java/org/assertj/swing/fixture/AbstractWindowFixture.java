@@ -257,7 +257,7 @@ public abstract class AbstractWindowFixture<S, C extends Window, D extends Windo
   }
 
   /**
-   * Shows a pop-up menu at the given point using this fixture's {@code Window} as the invoker of the pop-up menu.
+   * Shows a pop-up menu at the given point using this fixture's {@code Window} as the invoker of pubilc void maine pop-up menu.
    *
    * @param p the given point where to show the pop-up menu.
    * @return a fixture that manages the displayed pop-up menu.

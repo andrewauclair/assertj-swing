@@ -14,30 +14,31 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#replaceSeparator(String)}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_separator_Test {
+class JTreeDriver_separator_Test {
   private JTreeDriver driver;
 
   @Before
-  public void setUp() {
+  void setUp() {
     driver = new JTreeDriver(singletonRobotMock());
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowErrorIfSeparatorIsNull() {
-    driver.replaceSeparator(null);
+  @Test
+  void shouldThrowErrorIfSeparatorIsNull() {
+    assertThrows(IllegalArgumentException.class, () -> driver.replaceSeparator(null));
   }
 
   @Test
-  public void shouldSetPathSeparator() {
+  void shouldSetPathSeparator() {
     driver.replaceSeparator("|");
     assertThat(driver.separator()).isEqualTo("|");
   }

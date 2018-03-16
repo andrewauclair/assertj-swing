@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.data.TableCellInRowByValue.rowWithValue;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
@@ -25,7 +26,7 @@ import javax.swing.JTable;
 import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-293" target="_blank">FEST-293</a>.
@@ -42,14 +43,14 @@ public class FEST293_TableCellInRowByValueMatchesAnything_Test extends RobotBase
   }
 
   @Test
-  public void should_Return_Matching_Cell() {
+  void should_Return_Matching_Cell() {
     JTableCellFixture cell = frame.table().cell(rowWithValue("billy", "willy", "alone").column(2));
     assertThat(cell.row()).isEqualTo(1);
   }
 
-  @Test(expected = ActionFailedException.class)
-  public void should_Throw_Error_If_Matching_Cell_Not_Found() {
-    frame.table().cell(rowWithValue("billy", "billy", "billy").column(2));
+  @Test
+  void should_Throw_Error_If_Matching_Cell_Not_Found() {
+    assertThrows(ActionFailedException.class, () -> frame.table().cell(rowWithValue("billy", "billy", "billy").column(2)));
   }
 
   private static class MyWindow extends TestWindow {

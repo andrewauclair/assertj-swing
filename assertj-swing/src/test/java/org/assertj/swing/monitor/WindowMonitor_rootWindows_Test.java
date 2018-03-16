@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import java.awt.Window;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowMonitor#rootWindows()}.

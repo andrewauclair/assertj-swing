@@ -12,16 +12,18 @@
  */
 package org.assertj.swing.core;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link TypeMatcher#TypeMatcher(Class)}.
  * 
  * @author Alex Ruiz
  */
-public class TypeMatcher_constructorWithType_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Type_Is_Null() {
-    new TypeMatcher(null);
+class TypeMatcher_constructorWithType_Test {
+  @Test
+  void should_Throw_Error_If_Type_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new TypeMatcher(null));
   }
 }

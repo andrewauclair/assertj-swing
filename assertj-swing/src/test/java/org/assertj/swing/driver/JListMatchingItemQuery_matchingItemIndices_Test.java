@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import org.assertj.swing.util.TextMatcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListMatchingItemQuery#matchingItemIndices(JList, TextMatcher, JListCellReader)}.

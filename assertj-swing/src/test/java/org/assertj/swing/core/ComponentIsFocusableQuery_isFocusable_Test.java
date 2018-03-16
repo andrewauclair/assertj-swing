@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

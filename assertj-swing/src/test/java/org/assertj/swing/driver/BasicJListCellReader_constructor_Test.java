@@ -12,16 +12,18 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link BasicJListCellReader#BasicJListCellReader(CellRendererReader)}.
  * 
  * @author Alex Ruiz
  */
-public class BasicJListCellReader_constructor_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_CellRendererReader_Is_Null() {
-    new BasicJComboBoxCellReader(null);
+class BasicJListCellReader_constructor_Test {
+  @Test
+  void should_Throw_Error_If_CellRendererReader_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new BasicJComboBoxCellReader(null));
   }
 }

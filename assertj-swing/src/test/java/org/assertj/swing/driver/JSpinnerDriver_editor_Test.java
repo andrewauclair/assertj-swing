@@ -13,18 +13,20 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.ComponentLookupException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JSpinnerDriver#editor(javax.swing.JSpinner)}.
  * 
  * @author Alex Ruiz
  */
-public class JSpinnerDriver_editor_Test extends JSpinnerDriver_TestCase {
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JTextComponentEditor_Not_Found() {
+class JSpinnerDriver_editor_Test extends JSpinnerDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_JTextComponentEditor_Not_Found() {
     setJLabelAsEditor();
     showWindow();
-    driver.editor(spinner);
+    assertThrows(ComponentLookupException.class, () -> driver.editor(spinner));
   }
 }

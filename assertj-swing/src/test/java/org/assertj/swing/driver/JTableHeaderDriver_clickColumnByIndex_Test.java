@@ -12,33 +12,35 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableHeaderDriver#clickColumn(javax.swing.table.JTableHeader, int)}.
  * 
  * @author Yvonne Wang
  */
-public class JTableHeaderDriver_clickColumnByIndex_Test extends JTableHeaderDriver_TestCase {
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Index_Is_Negative() {
-    driver.clickColumn(tableHeader, -1);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
-    driver.clickColumn(tableHeader, 2);
+class JTableHeaderDriver_clickColumnByIndex_Test extends JTableHeaderDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_Index_Is_Negative() {
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.clickColumn(tableHeader, -1));
   }
 
   @Test
-  public void should_Throw_Error_If_JTableHeader_Is_Disabled() {
+  void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.clickColumn(tableHeader, 2));
+  }
+
+  @Test
+  void should_Throw_Error_If_JTableHeader_Is_Disabled() {
     disableTableHeader();
     thrown.expectIllegalStateIsDisabledComponent();
     driver.clickColumn(tableHeader, 0);
   }
 
   @Test
-  public void should_Throw_Error_If_JTableHeader_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JTableHeader_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.clickColumn(tableHeader, 0);
   }

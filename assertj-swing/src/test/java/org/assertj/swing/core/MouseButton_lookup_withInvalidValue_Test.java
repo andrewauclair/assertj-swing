@@ -12,16 +12,18 @@
  */
 package org.assertj.swing.core;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link MouseButton#lookup(int)} with illegal arguments.
  * 
  * @author Alex Ruiz
  */
-public class MouseButton_lookup_withInvalidValue_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowErrorInLookupIfMaskIsInvalid() {
-    MouseButton.lookup(Integer.MIN_VALUE);
+class MouseButton_lookup_withInvalidValue_Test {
+  @Test
+  void shouldThrowErrorInLookupIfMaskIsInvalid() {
+    assertThrows(IllegalArgumentException.class, () -> MouseButton.lookup(Integer.MIN_VALUE));
   }
 }

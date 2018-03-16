@@ -13,10 +13,12 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.util.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -27,21 +29,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableHeaderLocation_pointAtColumnByIndex_withInvalidIndex_Test extends JTableHeaderLocation_TestCase {
-  private final int index;
-
-  @Parameters
-  public static Collection<Object[]> indices() {
+class JTableHeaderLocation_pointAtColumnByIndex_withInvalidIndex_Test extends JTableHeaderLocation_TestCase {
+  private static Collection<Object[]> indices() {
     return newArrayList(new Object[][] { { -1 }, { 2 } });
   }
 
-  public JTableHeaderLocation_pointAtColumnByIndex_withInvalidIndex_Test(int index) {
-    this.index = index;
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void shouldThrowErrorIfColumnIndexOutOfBounds() {
-    pointAt(index);
+  @Test
+  @MethodSource("indices")
+  void shouldThrowErrorIfColumnIndexOutOfBounds(int index) {
+    assertThrows(IndexOutOfBoundsException.class, () -> pointAt(index));
   }
 }

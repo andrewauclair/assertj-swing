@@ -14,7 +14,9 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JListDriver#selectItems(JList, java.util.regex.Pattern[])}.
@@ -22,22 +24,22 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_selectItemsByPattern_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Patterns_Is_Null() {
+class JListDriver_selectItemsByPattern_withInvalidInput_Test extends JListDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Patterns_Is_Null() {
     Pattern[] patterns = null;
-    driver.selectItems(list, patterns);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectItems(list, patterns));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Patterns_Is_Empty() {
+  @Test
+  void should_Throw_Error_If_Array_Of_Patterns_Is_Empty() {
     Pattern[] patterns = new Pattern[0];
-    driver.selectItems(list, patterns);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectItems(list, patterns));
   }
 
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Any_Pattern_In_Array_Is_Null() {
+  @Test
+  void should_Throw_Error_If_Any_Pattern_In_Array_Is_Null() {
     Pattern[] patterns = { Pattern.compile("hello"), null };
-    driver.selectItems(list, patterns);
+    assertThrows(NullPointerException.class, () -> driver.selectItems(list, patterns));
   }
 }

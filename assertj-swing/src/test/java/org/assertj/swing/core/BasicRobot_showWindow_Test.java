@@ -27,7 +27,7 @@ import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicRobot#showWindow(java.awt.Window)}.

@@ -15,7 +15,7 @@ package org.assertj.swing.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link IntEnum#get(int)}.

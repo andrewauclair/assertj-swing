@@ -17,7 +17,7 @@ import static org.assertj.swing.test.builder.JButtons.button;
 import static org.assertj.swing.test.builder.JTextFields.textField;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JButtonMatcher#matches(java.awt.Component)}.

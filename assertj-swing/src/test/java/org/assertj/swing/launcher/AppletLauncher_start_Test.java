@@ -15,7 +15,7 @@ package org.assertj.swing.launcher;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.test.swing.TestApplet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AppletLauncher#start()}.

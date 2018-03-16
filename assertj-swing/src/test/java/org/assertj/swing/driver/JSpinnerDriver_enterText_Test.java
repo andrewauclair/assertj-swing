@@ -14,27 +14,28 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JTextComponentTextQuery.textOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.text.JTextComponent;
 
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSpinnerDriver#enterText(javax.swing.JSpinner, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JSpinnerDriver_enterText_Test extends JSpinnerDriver_TestCase {
-  @Test(expected = ActionFailedException.class)
-  public void should_Throw_Error_If_JTextComponentEditor_Not_Found() {
+class JSpinnerDriver_enterText_Test extends JSpinnerDriver_TestCase {
+  @Test
+  void should_Throw_Error_If_JTextComponentEditor_Not_Found() {
     setJLabelAsEditor();
     showWindow();
-    driver.enterText(spinner, "hello");
+    assertThrows(ActionFailedException.class, () -> driver.enterText(spinner, "hello"));
   }
 
   @Test
-  public void should_Enter_Text() {
+  void should_Enter_Text() {
     showWindow();
     updateValue("Frodo");
     driver.enterText(spinner, "Gandalf");
@@ -44,14 +45,14 @@ public class JSpinnerDriver_enterText_Test extends JSpinnerDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Disabled() {
+  void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disableSpinner();
     thrown.expectIllegalStateIsDisabledComponent();
     driver.enterText(spinner, "Gandalf");
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.enterText(spinner, "Gandalf");
   }

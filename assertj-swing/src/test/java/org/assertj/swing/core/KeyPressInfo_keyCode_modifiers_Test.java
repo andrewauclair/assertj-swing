@@ -16,8 +16,9 @@ import static java.awt.event.InputEvent.CTRL_MASK;
 import static java.awt.event.InputEvent.SHIFT_MASK;
 import static java.awt.event.KeyEvent.VK_C;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyPressInfo#keyCode(int)}, {@link KeyPressInfo#modifiers(int...)} {@link KeyPressInfo#keyCode()}
@@ -25,17 +26,17 @@ import org.junit.Test;
  * 
  * @author Alex Ruiz
  */
-public class KeyPressInfo_keyCode_modifiers_Test {
+class KeyPressInfo_keyCode_modifiers_Test {
   @Test
-  public void should_Create_KeyPressInfo_With_Given_Key_And_Modifiers() {
+  void should_Create_KeyPressInfo_With_Given_Key_And_Modifiers() {
     KeyPressInfo keyPressInfo = KeyPressInfo.keyCode(VK_C).modifiers(SHIFT_MASK, CTRL_MASK);
     assertThat(keyPressInfo.keyCode()).isEqualTo(VK_C);
     assertThat(keyPressInfo.modifiers()).containsOnly(SHIFT_MASK, CTRL_MASK);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Modifier_Array_Is_Null() {
+  @Test
+  void should_Throw_Error_If_Modifier_Array_Is_Null() {
     int[] modifiers = null;
-    KeyPressInfo.keyCode(VK_C).modifiers(modifiers);
+    assertThrows(IllegalArgumentException.class, () -> KeyPressInfo.keyCode(VK_C).modifiers(modifiers));
   }
 }

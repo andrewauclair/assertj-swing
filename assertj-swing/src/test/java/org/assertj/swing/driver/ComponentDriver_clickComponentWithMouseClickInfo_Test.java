@@ -14,12 +14,13 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.awt.AWT.centerOf;
 import static org.assertj.swing.core.MouseClickInfo.leftButton;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.core.MouseClickInfo;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#click(java.awt.Component, org.assertj.swing.core.MouseClickInfo)}.
@@ -27,17 +28,16 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_clickComponentWithMouseClickInfo_Test extends ComponentDriver_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class ComponentDriver_clickComponentWithMouseClickInfo_Test extends ComponentDriver_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_MouseClickInfo_Is_Null() {
-    driver.click(window.button, (MouseClickInfo) null);
+  @Test
+  void should_Throw_Error_If_MouseClickInfo_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.click(window.button, (MouseClickInfo) null));
   }
 
   @Test
-  public void should_Click_Component_With_Given_MouseClickInfo() {
+  void should_Click_Component_With_Given_MouseClickInfo() {
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     MouseClickInfo mouseClickInfo = leftButton().times(3);
@@ -47,7 +47,7 @@ public class ComponentDriver_clickComponentWithMouseClickInfo_Test extends Compo
   }
 
   @Test
-  public void should_Click_Disabled_Component() {
+  void should_Click_Disabled_Component() {
     showWindow();
     disableButton();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
@@ -58,7 +58,7 @@ public class ComponentDriver_clickComponentWithMouseClickInfo_Test extends Compo
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
+  void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
     robot.settings().clickOnDisabledComponentsAllowed(false);
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     disableButton();
@@ -71,7 +71,7 @@ public class ComponentDriver_clickComponentWithMouseClickInfo_Test extends Compo
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     thrown.expectIllegalStateIsNotShowingComponent();
     try {

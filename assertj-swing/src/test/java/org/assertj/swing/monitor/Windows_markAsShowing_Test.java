@@ -20,7 +20,7 @@ import static org.assertj.swing.timing.Pause.pause;
 
 import java.util.logging.Logger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Windows#markAsShowing(java.awt.Window)}.

@@ -24,7 +24,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DisposedWindowMonitor#isDuplicateDispose(AWTEvent)}.

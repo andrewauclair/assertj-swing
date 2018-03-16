@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import org.assertj.swing.exception.EdtViolationException;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FailOnThreadViolationRepaintManager#install()}.

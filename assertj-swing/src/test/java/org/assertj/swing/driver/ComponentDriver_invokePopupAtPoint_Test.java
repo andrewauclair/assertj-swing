@@ -13,6 +13,7 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Point;
 
@@ -21,19 +22,18 @@ import javax.swing.JPopupMenu;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.recorder.ToolkitClickRecorder;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link ComponentDriver#invokePopupMenu(java.awt.Component, java.awt.Point)}.
  *
  * @author Alex Ruiz
  */
-public class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopup_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopup_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Show_JPopupMenu() {
+  void should_Show_JPopupMenu() {
     showWindow();
     Point p = new Point(8, 6);
     ToolkitClickRecorder recorder = clickRecorder.attachToToolkitFor(window.textField);
@@ -43,7 +43,7 @@ public class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_inv
   }
 
   @Test
-  public void should_Show_JPopupMenu_On_Disabled_Component() {
+  void should_Show_JPopupMenu_On_Disabled_Component() {
     disableTextField();
     showWindow();
     Point p = new Point(8, 6);
@@ -53,13 +53,13 @@ public class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_inv
     recorder.wasRightClicked().timesClicked(1).clickedAt(p);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Point_Is_Null() {
-    driver.invokePopupMenu(window.textField, null);
+  @Test
+  void should_Throw_Error_If_Point_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.invokePopupMenu(window.textField, null));
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
+  void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
     robot.settings().clickOnDisabledComponentsAllowed(false);
     disableTextField();
     thrown.expectIllegalStateIsDisabledComponent();
@@ -71,7 +71,7 @@ public class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_inv
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     try {
       driver.invokePopupMenu(window.textField, new Point(8, 6));

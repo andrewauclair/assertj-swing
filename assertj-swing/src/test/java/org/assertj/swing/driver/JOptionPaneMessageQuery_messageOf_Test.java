@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JOptionPaneMessageQuery#messageOf(JOptionPane)}.

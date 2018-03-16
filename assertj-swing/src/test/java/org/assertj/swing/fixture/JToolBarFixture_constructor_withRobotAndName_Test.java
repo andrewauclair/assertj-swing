@@ -15,6 +15,7 @@ package org.assertj.swing.fixture;
 import static java.awt.BorderLayout.NORTH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,7 +26,7 @@ import javax.swing.JToolBar;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JToolBarFixture#JToolBarFixture(org.assertj.swing.core.Robot, String)}.
@@ -42,21 +43,21 @@ public class JToolBarFixture_constructor_withRobotAndName_Test extends RobotBase
   }
 
   @Test
-  public void should_Lookup_Showing_JToolBar_By_Name() {
+  void should_Lookup_Showing_JToolBar_By_Name() {
     robot.showWindow(window);
     JToolBarFixture fixture = new JToolBarFixture(robot, "toolBar");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.toolBar);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JToolBar_With_Matching_Name_Is_Not_Showing() {
-    new JToolBarFixture(robot, "toolBar");
+  @Test
+  void should_Throw_Error_If_JToolBar_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JToolBarFixture(robot, "toolBar"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JToolBar_With_Matching_Name_Is_Not_Found() {
-    new JToolBarFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JToolBar_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JToolBarFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

@@ -13,7 +13,7 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#drop(javax.swing.JTree, String)}.

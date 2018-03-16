@@ -21,7 +21,7 @@ import java.awt.Component;
 import javax.swing.JDialog;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowFilter#recognize(Component)}.

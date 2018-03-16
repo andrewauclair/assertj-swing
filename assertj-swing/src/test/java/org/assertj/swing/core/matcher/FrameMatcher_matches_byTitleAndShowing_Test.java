@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameMatcher#matches(java.awt.Component)}.

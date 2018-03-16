@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JLabel;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JLabelFixture#JLabelFixture(org.assertj.swing.core.Robot, String)}.
@@ -37,21 +38,21 @@ public class JLabelFixture_constructor_withRobotAndName_Test extends RobotBasedT
   }
 
   @Test
-  public void should_Lookup_Showing_JLabel_By_Name() {
+  void should_Lookup_Showing_JLabel_By_Name() {
     robot.showWindow(window);
     JLabelFixture fixture = new JLabelFixture(robot, "label");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.label);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JLabel_With_Matching_Name_Is_Not_Showing() {
-    new JLabelFixture(robot, "label");
+  @Test
+  void should_Throw_Error_If_JLabel_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JLabelFixture(robot, "label"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JLabel_With_Matching_Name_Is_Not_Found() {
-    new JLabelFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JLabel_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JLabelFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

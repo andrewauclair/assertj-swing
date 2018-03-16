@@ -13,16 +13,18 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link WaitForComponentToShowCondition#test()}.
  * 
  * @author Yvonne Wang
  */
-public class WaitForComponentToShowCondition_untilIsShowing_Test extends EDTSafeTestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowError_If_Component_Is_Null() {
-    WaitForComponentToShowCondition.untilIsShowing(null);
+class WaitForComponentToShowCondition_untilIsShowing_Test extends EDTSafeTestCase {
+  @Test
+  void shouldThrowError_If_Component_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> WaitForComponentToShowCondition.untilIsShowing(null));
   }
 }

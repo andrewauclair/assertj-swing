@@ -12,58 +12,57 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.ComponentLookupScope.SHOWING_ONLY;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.awt.Frame;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.assertj.swing.core.ComponentFinder;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.core.Settings;
 import org.assertj.swing.driver.ComponentDriver;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.ComponentLookupScope.SHOWING_ONLY;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link AbstractComponentFixture#AbstractComponentFixture(Class, Robot, String, Class)}.
  * 
  * @author Alex Ruiz
  */
-public class AbstractComponentFixture_constructor_withLookupByNameAndType_Test {
+class AbstractComponentFixture_constructor_withLookupByNameAndType_Test {
   private Robot robot;
   private String name;
   private Class<Frame> type;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robot = mock(Robot.class);
     name = "frame";
     type = Frame.class;
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_SelfType_Is_Null() {
-    new ComponentFixture(null, robot, name, type);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Robot_Is_Null() {
-    new ComponentFixture(ComponentFixture.class, null, name, type);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Class_Is_Null() {
-    new ComponentFixture(ComponentFixture.class, robot, name, null);
+  @Test
+  void should_Throw_Error_If_SelfType_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new ComponentFixture(null, robot, name, type));
   }
 
   @Test
-  public void should_Lookup_Component_By_Name_And_Type() {
+  void should_Throw_Error_If_Robot_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new ComponentFixture(ComponentFixture.class, null, name, type));
+  }
+
+  @Test
+  void should_Throw_Error_If_Class_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new ComponentFixture(ComponentFixture.class, robot, name, null));
+  }
+
+  @Test
+  void should_Lookup_Component_By_Name_And_Type() {
     Frame frame = mock(type);
     Settings settings = mock(Settings.class);
     when(robot.settings()).thenReturn(settings);
@@ -77,8 +76,8 @@ public class AbstractComponentFixture_constructor_withLookupByNameAndType_Test {
   }
 
   private static class ComponentFixture extends AbstractComponentFixture<ComponentFixture, Component, ComponentDriver> {
-    public ComponentFixture(@Nonnull Class<ComponentFixture> selfType, @Nonnull Robot robot, @Nullable String name,
-        @Nonnull Class<? extends Component> type) {
+    ComponentFixture(@Nonnull Class<ComponentFixture> selfType, @Nonnull Robot robot, @Nullable String name,
+                     @Nonnull Class<? extends Component> type) {
       super(selfType, robot, name, type);
     }
 

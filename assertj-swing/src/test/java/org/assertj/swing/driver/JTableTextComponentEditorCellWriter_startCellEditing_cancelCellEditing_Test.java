@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.cell.JTableCellWriter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableTextComponentEditorCellWriter#startCellEditing(javax.swing.JTable, int, int)} and

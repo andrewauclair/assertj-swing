@@ -15,6 +15,7 @@ package org.assertj.swing.fixture;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
@@ -23,7 +24,7 @@ import javax.swing.JList;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListFixture#JListFixture(org.assertj.swing.core.Robot, String)}.
@@ -40,21 +41,21 @@ public class JListFixture_constructor_withRobotAndName_Test extends RobotBasedTe
   }
 
   @Test
-  public void should_Lookup_Showing_JList_By_Name() {
+  void should_Lookup_Showing_JList_By_Name() {
     robot.showWindow(window);
     JListFixture fixture = new JListFixture(robot, "list");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.list);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JList_With_Matching_Name_Is_Not_Showing() {
-    new JListFixture(robot, "list");
+  @Test
+  void should_Throw_Error_If_JList_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JListFixture(robot, "list"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JList_With_Matching_Name_Is_Not_Found() {
-    new JListFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JList_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JListFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

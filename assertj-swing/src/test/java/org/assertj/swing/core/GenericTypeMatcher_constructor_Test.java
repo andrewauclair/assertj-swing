@@ -15,21 +15,23 @@ package org.assertj.swing.core;
 import javax.annotation.Nonnull;
 import javax.swing.JButton;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link GenericTypeMatcher#GenericTypeMatcher(Class)}.
  * 
  * @author Alex Ruiz
  */
-public class GenericTypeMatcher_constructor_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Supported_Type_Is_Null() {
-    new GenericTypeMatcher<JButton>(null) {
+class GenericTypeMatcher_constructor_Test {
+  @Test
+  void should_Throw_Error_If_Supported_Type_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new GenericTypeMatcher<JButton>(null) {
       @Override
       protected boolean isMatching(@Nonnull JButton component) {
         return true;
       }
-    };
+    });
   }
 }

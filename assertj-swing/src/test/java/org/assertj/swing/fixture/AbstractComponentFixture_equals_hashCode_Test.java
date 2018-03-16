@@ -31,7 +31,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.ComponentDriver;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractComponentFixture#equals(Object)} and {@link AbstractComponentFixture#hashCode()}.

@@ -22,7 +22,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SingleComponentHierarchy#parentOf(java.awt.Component)}.

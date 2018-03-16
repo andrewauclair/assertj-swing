@@ -12,23 +12,25 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTreeDriver#selectPaths(javax.swing.JTree, String[])}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_selectPaths_withInvalidInput_Test extends JTreeDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Is_Null() {
+class JTreeDriver_selectPaths_withInvalidInput_Test extends JTreeDriver_withMocks_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Is_Null() {
     String[] paths = null;
-    driver.selectPaths(tree, paths);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectPaths(tree, paths));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Is_Empty() {
+  @Test
+  void should_Throw_Error_If_Array_Is_Empty() {
     String[] paths = new String[0];
-    driver.selectPaths(tree, paths);
+    assertThrows(IllegalArgumentException.class, () -> driver.selectPaths(tree, paths));
   }
 }

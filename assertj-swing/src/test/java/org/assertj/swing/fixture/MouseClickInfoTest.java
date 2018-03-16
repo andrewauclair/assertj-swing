@@ -16,9 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
 import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
 import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.core.MouseClickInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link MouseClickInfo}.
@@ -26,35 +27,35 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class MouseClickInfoTest {
-  @Test(expected = NullPointerException.class)
-  public void shouldThrowErrorIfMouseButtonIsNull() {
-    MouseClickInfo.button(null);
+class MouseClickInfoTest {
+  @Test
+  void shouldThrowErrorIfMouseButtonIsNull() {
+    assertThrows(NullPointerException.class, () -> MouseClickInfo.button(null));
   }
 
   @Test
-  public void shouldCreateLeftButtonClickOneTime() {
+  void shouldCreateLeftButtonClickOneTime() {
     MouseClickInfo button = MouseClickInfo.leftButton();
     assertThat(button.button()).isEqualTo(LEFT_BUTTON);
     assertThat(button.times()).isEqualTo(1);
   }
 
   @Test
-  public void shouldCreateMiddleButtonClickOneTime() {
+  void shouldCreateMiddleButtonClickOneTime() {
     MouseClickInfo button = MouseClickInfo.middleButton();
     assertThat(button.button()).isEqualTo(MIDDLE_BUTTON);
     assertThat(button.times()).isEqualTo(1);
   }
 
   @Test
-  public void shouldCreateRightButtonClickOneTime() {
+  void shouldCreateRightButtonClickOneTime() {
     MouseClickInfo button = MouseClickInfo.rightButton();
     assertThat(button.button()).isEqualTo(RIGHT_BUTTON);
     assertThat(button.times()).isEqualTo(1);
   }
 
   @Test
-  public void shouldIncludeButtonAndTimesPressedInToString() {
+  void shouldIncludeButtonAndTimesPressedInToString() {
     MouseClickInfo button = MouseClickInfo.rightButton();
     assertThat(button.toString()).contains("button=RIGHT_BUTTON").contains("times=1");
   }

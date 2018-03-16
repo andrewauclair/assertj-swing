@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JToggleButton;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JToggleButtonFixture#JToggleButtonFixture(org.assertj.swing.core.Robot, String)}.
@@ -37,21 +38,21 @@ public class JToggleButtonFixture_constructor_withRobotAndName_Test extends Robo
   }
 
   @Test
-  public void should_Lookup_Showing_JToggleButton_By_Name() {
+  void should_Lookup_Showing_JToggleButton_By_Name() {
     robot.showWindow(window);
     JToggleButtonFixture fixture = new JToggleButtonFixture(robot, "toggleButton");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.toggleButton);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JToggleButton_With_Matching_Name_Is_Not_Showing() {
-    new JToggleButtonFixture(robot, "toggleButton");
+  @Test
+  void should_Throw_Error_If_JToggleButton_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JToggleButtonFixture(robot, "toggleButton"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JToggleButton_With_Matching_Name_Is_Not_Found() {
-    new JToggleButtonFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JToggleButton_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JToggleButtonFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

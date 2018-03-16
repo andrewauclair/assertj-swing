@@ -25,7 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SingleComponentHierarchy#childrenOf(Component)}.

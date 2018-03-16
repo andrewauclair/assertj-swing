@@ -29,7 +29,7 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Containers#frameFixtureFor(org.assertj.swing.core.Robot, java.awt.Container)}.

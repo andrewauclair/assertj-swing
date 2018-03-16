@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 import org.assertj.swing.exception.EdtViolationException;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;

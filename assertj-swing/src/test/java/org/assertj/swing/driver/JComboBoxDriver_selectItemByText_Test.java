@@ -13,7 +13,9 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JComboBoxDriver#selectItem(javax.swing.JComboBox, String)}.
@@ -21,9 +23,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JComboBoxDriver_selectItemByText_Test extends JComboBoxDriver_TestCase {
+class JComboBoxDriver_selectItemByText_Test extends JComboBoxDriver_TestCase {
   @Test
-  public void should_Select_Item() {
+  void should_Select_Item() {
     clearSelection();
     showWindow();
     driver.selectItem(comboBox, "third");
@@ -31,7 +33,7 @@ public class JComboBoxDriver_selectItemByText_Test extends JComboBoxDriver_TestC
   }
 
   @Test
-  public void should_Select_Matching_Item() {
+  void should_Select_Matching_Item() {
     clearSelection();
     showWindow();
     driver.selectItem(comboBox, "thi.*");
@@ -39,7 +41,7 @@ public class JComboBoxDriver_selectItemByText_Test extends JComboBoxDriver_TestC
   }
 
   @Test
-  public void should_Not_Do_Anything_If_Item_Already_Selected() {
+  void should_Not_Do_Anything_If_Item_Already_Selected() {
     showWindow();
     select(2);
     driver.selectItem(comboBox, "third");
@@ -47,21 +49,21 @@ public class JComboBoxDriver_selectItemByText_Test extends JComboBoxDriver_TestC
   }
 
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Disabled() {
+  void should_Throw_Error_If_JComboBox_Is_Disabled() {
     disableComboBox();
     thrown.expectIllegalStateIsDisabledComponent();
     driver.selectItem(comboBox, "first");
   }
 
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.selectItem(comboBox, "first");
   }
 
-  @Test(expected = LocationUnavailableException.class)
-  public void should_Throw_Error_If_Item_Does_Not_Exist() {
+  @Test
+  void should_Throw_Error_If_Item_Does_Not_Exist() {
     showWindow();
-    driver.selectItem(comboBox, "hundred");
+    assertThrows(LocationUnavailableException.class, () -> driver.selectItem(comboBox, "hundred"));
   }
 }

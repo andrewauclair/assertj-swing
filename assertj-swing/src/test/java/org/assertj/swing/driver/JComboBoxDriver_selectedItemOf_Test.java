@@ -17,7 +17,7 @@ import static org.assertj.swing.driver.JComboBoxMakeEditableAndSelectItemTask.ma
 import static org.assertj.swing.driver.JComboBoxMakeEditableAndSelectItemTask.makeEditableAndSelectItem;
 import static org.assertj.swing.driver.JComboBoxSetSelectedIndexTask.setSelectedIndex;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxDriver#selectedItemOf(javax.swing.JComboBox)}.

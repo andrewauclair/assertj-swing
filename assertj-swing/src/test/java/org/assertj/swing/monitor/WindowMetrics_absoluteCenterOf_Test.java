@@ -22,7 +22,7 @@ import java.awt.Window;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowMetrics#absoluteCenterOf(Window)}.

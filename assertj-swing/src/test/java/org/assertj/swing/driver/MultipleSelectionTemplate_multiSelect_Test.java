@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 import org.assertj.swing.core.Robot;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link MultipleSelectionTemplate#multiSelect()}.

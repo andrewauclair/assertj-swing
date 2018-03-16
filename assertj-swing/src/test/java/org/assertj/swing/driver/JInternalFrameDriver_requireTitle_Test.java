@@ -12,25 +12,24 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameDriver#requireTitle(JInternalFrame, String)}.
  *
  * @author Christian Rösch
  */
-public class JInternalFrameDriver_requireTitle_Test extends JInternalFrameDriver_TestCase {
+class JInternalFrameDriver_requireTitle_Test extends JInternalFrameDriver_TestCase {
 
   @Test
-  public void should_Fail_If_Frame_Does_Not_Have_Expected_Title() {
-    thrown.expectAssertionError("property:'title'");
+  void should_Fail_If_Frame_Does_Not_Have_Expected_Title() {
     String correctTitle = internalFrame.getTitle();
-    thrown.expectMessageToContain("expected:<\"[incorrect title]\"> but was:<\"[" + correctTitle + "]\">");
-    driver.requireTitle(internalFrame, "incorrect title");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireTitle(internalFrame, "incorrect title"), "property:'title'", "expected:<\"[incorrect title]\"> but was:<\"[" + correctTitle + "]\">");
   }
 
   @Test
-  public void should_Pass_If_Frame_Has_Expected_Title() {
+  void should_Pass_If_Frame_Has_Expected_Title() {
     driver.requireTitle(internalFrame, internalFrame.getTitle());
   }
 }

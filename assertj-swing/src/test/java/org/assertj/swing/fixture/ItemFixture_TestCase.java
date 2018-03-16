@@ -12,7 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Base test case for implementations of {@link ItemFixture}.

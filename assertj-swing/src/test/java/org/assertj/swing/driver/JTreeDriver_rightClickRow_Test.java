@@ -18,7 +18,7 @@ import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#rightClickRow(JTree, int)}.

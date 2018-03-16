@@ -22,7 +22,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.util.StringTextMatcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTabbedPaneTabIndexQuery#indexOfTab(JTabbedPane, org.assertj.swing.util.TextMatcher)}.

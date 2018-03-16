@@ -15,7 +15,9 @@ package org.assertj.swing.finder;
 import javax.swing.JFrame;
 
 import org.assertj.swing.test.swing.WindowLauncher.WindowToLaunch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link WindowFinder#findFrame(Class)}.
@@ -23,20 +25,20 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class WindowFinder_findFrame_byType_withInvalidInput_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Type_Is_Null() {
+class WindowFinder_findFrame_byType_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Type_Is_Null() {
     Class<WindowToLaunch> type = null;
-    WindowFinder.findFrame(type);
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(type));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Negative() {
-    WindowFinder.findFrame(JFrame.class).withTimeout(-20);
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Negative() {
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(JFrame.class).withTimeout(-20));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Time_Unit_Is_Null() {
-    WindowFinder.findFrame(JFrame.class).withTimeout(10, null);
+  @Test
+  void should_Throw_Error_If_Time_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(JFrame.class).withTimeout(10, null));
   }
 }

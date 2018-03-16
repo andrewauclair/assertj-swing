@@ -20,7 +20,7 @@ import java.awt.Component;
 import java.util.List;
 
 import org.assertj.core.util.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentLookupException#found()}.

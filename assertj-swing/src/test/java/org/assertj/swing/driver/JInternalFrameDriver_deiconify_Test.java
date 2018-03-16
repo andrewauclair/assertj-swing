@@ -18,7 +18,8 @@ import static org.assertj.swing.driver.JInternalFrameIconQuery.isIconified;
 import static org.assertj.swing.driver.JInternalFrameSetIconTask.setIcon;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameDriver#deiconify(JInternalFrame)}.
@@ -26,9 +27,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JInternalFrameDriver_deiconify_Test extends JInternalFrameDriver_TestCase {
+class JInternalFrameDriver_deiconify_Test extends JInternalFrameDriver_TestCase {
   @Test
-  public void should_Not_Deiconify_Already_Iconified_JInternalFrame() {
+  void should_Not_Deiconify_Already_Iconified_JInternalFrame() {
     showWindow();
     deiconify();
     driver.deiconify(internalFrame);
@@ -42,8 +43,7 @@ public class JInternalFrameDriver_deiconify_Test extends JInternalFrameDriver_Te
   }
 
   @Test
-  public void should_Throw_Error_If_JInternalFrame_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.deiconify(internalFrame);
+  void should_Throw_Error_If_JInternalFrame_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.deiconify(internalFrame));
   }
 }

@@ -12,21 +12,23 @@
  */
 package org.assertj.swing.core;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link LabelMatcher#LabelMatcher(String)}.
  * 
  * @author Alex Ruiz
  */
-public class LabelMatcher_constructorWithLabel_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Label_Is_Null() {
-    new LabelMatcher(null);
+class LabelMatcher_constructorWithLabel_Test {
+  @Test
+  void should_Throw_Error_If_Label_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new LabelMatcher(null));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Label_Is_Empty() {
-    new LabelMatcher("");
+  @Test
+  void should_Throw_Error_If_Label_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> new LabelMatcher(""));
   }
 }

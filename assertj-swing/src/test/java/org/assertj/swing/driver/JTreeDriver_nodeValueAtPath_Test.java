@@ -13,24 +13,25 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.exception.LocationUnavailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#nodeValue(javax.swing.JTree, String)}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_nodeValueAtPath_Test extends JTreeDriver_TestCase {
+class JTreeDriver_nodeValueAtPath_Test extends JTreeDriver_TestCase {
   @Test
-  public void should_Return_Node_Text() {
+  void should_Return_Node_Text() {
     String value = driver.nodeValue(tree, "root/branch1/branch1.1");
     assertThat(value).isEqualTo("branch1.1");
   }
 
-  @Test(expected = LocationUnavailableException.class)
-  public void should_Throw_Error_If_Path_Does_Not_Exist() {
-    driver.nodeValue(tree, "hello");
+  @Test
+  void should_Throw_Error_If_Path_Does_Not_Exist() {
+    assertThrows(LocationUnavailableException.class, () -> driver.nodeValue(tree, "hello"));
   }
 }

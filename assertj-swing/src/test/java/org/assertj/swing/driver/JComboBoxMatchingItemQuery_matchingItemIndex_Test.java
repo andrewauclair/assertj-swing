@@ -25,7 +25,7 @@ import org.assertj.swing.cell.JComboBoxCellReader;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.util.TextMatcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxMatchingItemQuery#matchingItemIndex(JComboBox, TextMatcher, JComboBoxCellReader)}.

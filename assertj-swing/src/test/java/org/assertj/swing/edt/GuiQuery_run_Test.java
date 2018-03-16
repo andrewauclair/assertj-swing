@@ -13,7 +13,9 @@
 package org.assertj.swing.edt;
 
 import org.assertj.swing.exception.ActionFailedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link GuiQuery#run()}.
@@ -21,14 +23,14 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class GuiQuery_run_Test {
-  @Test(expected = ActionFailedException.class)
-  public void should_Throw_Error_If_Not_Called_In_EDT() {
-    new GuiQuery<Integer>() {
+class GuiQuery_run_Test {
+  @Test
+  void should_Throw_Error_If_Not_Called_In_EDT() {
+    assertThrows(ActionFailedException.class, () -> new GuiQuery<Integer>() {
       @Override
-      protected Integer executeInEDT() throws Throwable {
+      protected Integer executeInEDT() {
         return null;
       }
-    }.run();
+    }.run());
   }
 }

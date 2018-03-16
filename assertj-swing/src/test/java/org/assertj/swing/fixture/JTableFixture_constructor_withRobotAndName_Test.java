@@ -14,6 +14,7 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -25,7 +26,7 @@ import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableFixture#JTableFixture(org.assertj.swing.core.Robot, String)}.
@@ -42,21 +43,21 @@ public class JTableFixture_constructor_withRobotAndName_Test extends RobotBasedT
   }
 
   @Test
-  public void should_Lookup_Showing_JTable_By_Name() {
+  void should_Lookup_Showing_JTable_By_Name() {
     robot.showWindow(window);
     JTableFixture fixture = new JTableFixture(robot, "table");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.table);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JTable_With_Matching_Name_Is_Not_Showing() {
-    new JTableFixture(robot, "table");
+  @Test
+  void should_Throw_Error_If_JTable_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JTableFixture(robot, "table"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JTable_With_Matching_Name_Is_Not_Found() {
-    new JTableFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JTable_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JTableFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

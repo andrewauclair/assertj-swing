@@ -18,7 +18,7 @@ import static org.assertj.swing.query.ComponentShowingQuery.isShowing;
 import javax.swing.JComboBox;
 
 import org.assertj.swing.cell.JTableCellWriter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableComboBoxEditorCellWriter#startCellEditing(javax.swing.JTable, int, int)} and

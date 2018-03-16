@@ -16,7 +16,7 @@ import static org.assertj.swing.data.Index.atIndex;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for

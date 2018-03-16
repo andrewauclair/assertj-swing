@@ -23,7 +23,7 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.test.swing.TestWindow;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DisposalMonitor#componentShown(ComponentEvent)}.

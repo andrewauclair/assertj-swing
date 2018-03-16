@@ -16,7 +16,7 @@ import static org.assertj.swing.query.ComponentHasFocusQuery.hasFocus;
 import static org.assertj.swing.timing.Pause.pause;
 
 import org.assertj.swing.timing.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#focus(java.awt.Component)}.

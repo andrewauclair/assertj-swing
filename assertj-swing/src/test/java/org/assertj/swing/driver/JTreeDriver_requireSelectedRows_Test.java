@@ -12,28 +12,30 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTreeDriver#requireSelection(javax.swing.JTree, int[])}.
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_requireSelectedRows_Test extends JTreeDriver_selectCell_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
-    driver.requireSelection(tree, (int[]) null);
+class JTreeDriver_requireSelectedRows_Test extends JTreeDriver_selectCell_TestCase {
+  @Test
+  void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.requireSelection(tree, (int[]) null));
   }
 
   @Test
-  public void should_Pass_If_Single_Cell_Is_Selected() {
+  void should_Pass_If_Single_Cell_Is_Selected() {
     selectFirstChildOfRoot();
     int[] rowsToSelect = new int[] { 1 };
     driver.requireSelection(tree, rowsToSelect);
   }
 
   @Test
-  public void should_Fail_If_JTree_Does_Not_Have_Selection() {
+  void should_Fail_If_JTree_Does_Not_Have_Selection() {
     clearTreeSelection();
     thrown.expectAssertionError("property:'selection'");
     thrown.expectMessageToContain("No selection");
@@ -41,7 +43,7 @@ public class JTreeDriver_requireSelectedRows_Test extends JTreeDriver_selectCell
   }
 
   @Test
-  public void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
     selectFirstChildOfRoot();
     thrown.expectAssertionError("property:'selection'");
     thrown.expectMessageToContain("expecting selection:<[5]> but was:<[1]>");

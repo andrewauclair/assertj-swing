@@ -21,7 +21,7 @@ import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.data.TableCellByColumnId;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Fix for <a href="http://code.google.com/p/fest/issues/detail?id=232" target="_blank">issue 232</a>.

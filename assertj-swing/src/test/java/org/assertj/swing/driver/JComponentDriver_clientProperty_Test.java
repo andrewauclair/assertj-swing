@@ -14,32 +14,33 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JComponent;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComponentDriver#clientProperty(JComponent, Object)}.
  * 
  * @author Alex Ruiz
  */
-public class JComponentDriver_clientProperty_Test extends JComponentDriver_TestCase {
+class JComponentDriver_clientProperty_Test extends JComponentDriver_TestCase {
   @Test
-  public void should_Return_Client_Property_Under_Given_Key() {
+  void should_Return_Client_Property_Under_Given_Key() {
     putClientProperty(button, "name", "Leia");
     assertThat(driver.clientProperty(button, "name")).isEqualTo("Leia");
   }
 
   @Test
-  public void should_Return_Null_If_Client_Property_Not_Found() {
+  void should_Return_Null_If_Client_Property_Not_Found() {
     assertThat(driver.clientProperty(button, "name")).isNull();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Key_Is_Null() {
-    driver.clientProperty(button, null);
+  @Test
+  void should_Throw_Error_If_Key_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> driver.clientProperty(button, null));
   }
 
   @RunsInEDT

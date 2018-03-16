@@ -13,10 +13,13 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.util.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -26,22 +29,15 @@ import org.junit.runners.Parameterized.Parameters;
  *
  * @author Christian Rösch
  */
-@RunWith(Parameterized.class)
-public class JTreeDriver_unselectRows_withInvalidIndices_Test extends JTreeDriver_TestCase {
-  private final int invalidRow;
-
-  @Parameters
-  public static Collection<Object[]> invalidRows() {
+class JTreeDriver_unselectRows_withInvalidIndices_Test extends JTreeDriver_TestCase {
+  private static Collection<Object[]> invalidRows() {
     return newArrayList(outOfBoundRowIndices());
   }
 
-  public JTreeDriver_unselectRows_withInvalidIndices_Test(int invalidRow) {
-    this.invalidRow = invalidRow;
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class)
-  public void should_Throw_Error_If_Given_Row_Indices_Is_Out_Of_Bounds() {
+  @ParameterizedTest
+  @MethodSource("invalidRows")
+  void should_Throw_Error_If_Given_Row_Indices_Is_Out_Of_Bounds(int invalidRow) {
     showWindow();
-    driver.unselectRows(tree, new int[] { invalidRow });
+    assertThrows(IndexOutOfBoundsException.class, () -> driver.unselectRows(tree, new int[] { invalidRow }));
   }
 }

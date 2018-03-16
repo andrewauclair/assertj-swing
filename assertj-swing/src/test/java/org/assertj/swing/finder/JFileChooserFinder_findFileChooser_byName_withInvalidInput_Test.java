@@ -12,32 +12,34 @@
  */
 package org.assertj.swing.finder;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JFileChooserFinder#findFileChooser(String)}.
  * 
  * @author Alex Ruiz
  */
-public class JFileChooserFinder_findFileChooser_byName_withInvalidInput_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Name_Is_Null() {
+class JFileChooserFinder_findFileChooser_byName_withInvalidInput_Test {
+  @Test
+  void should_Throw_Error_If_Name_Is_Null() {
     String name = null;
-    JFileChooserFinder.findFileChooser(name);
+    assertThrows(NullPointerException.class, () -> JFileChooserFinder.findFileChooser(name));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Name_Is_Empty() {
-    JFileChooserFinder.findFileChooser("");
+  @Test
+  void should_Throw_Error_If_Name_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser(""));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Timeout_Is_Negative() {
-    JFileChooserFinder.findFileChooser("fileChooser").withTimeout(-20);
+  @Test
+  void should_Throw_Error_If_Timeout_Is_Negative() {
+    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser("fileChooser").withTimeout(-20));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Time_Unit_Is_Null() {
-    JFileChooserFinder.findFileChooser("fileChooser").withTimeout(10, null);
+  @Test
+  void should_Throw_Error_If_Time_Unit_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser("fileChooser").withTimeout(10, null));
   }
 }

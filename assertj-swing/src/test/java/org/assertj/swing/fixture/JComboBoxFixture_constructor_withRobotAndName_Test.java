@@ -15,13 +15,14 @@ package org.assertj.swing.fixture;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JComboBox;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxFixture#JComboBoxFixture(org.assertj.swing.core.Robot, String)}.
@@ -38,21 +39,21 @@ public class JComboBoxFixture_constructor_withRobotAndName_Test extends RobotBas
   }
 
   @Test
-  public void should_Lookup_Showing_JComboBox_By_Name() {
+  void should_Lookup_Showing_JComboBox_By_Name() {
     robot.showWindow(window);
     JComboBoxFixture fixture = new JComboBoxFixture(robot, "comboBox");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.comboBox);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JComboBox_With_Matching_Name_Is_Not_Showing() {
-    new JComboBoxFixture(robot, "comboBox");
+  @Test
+  void should_Throw_Error_If_JComboBox_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JComboBoxFixture(robot, "comboBox"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JComboBox_With_Matching_Name_Is_Not_Found() {
-    new JComboBoxFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JComboBox_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JComboBoxFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

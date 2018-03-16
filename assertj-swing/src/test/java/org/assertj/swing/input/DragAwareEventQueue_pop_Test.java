@@ -15,21 +15,23 @@ package org.assertj.swing.input;
 import java.awt.EventQueue;
 import java.util.EmptyStackException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link DragAwareEventQueue#pop()}.
  * 
  * @author Alex Ruiz
  */
-public class DragAwareEventQueue_pop_Test extends DragAwareEventQueue_TestCase {
-  @Test(expected = EmptyStackException.class)
-  public void should_Pop_If_SystemEventQueue_Is_Same_As_Queue_Under_Test() {
-    queue.pop();
+class DragAwareEventQueue_pop_Test extends DragAwareEventQueue_TestCase {
+  @Test
+  void should_Pop_If_SystemEventQueue_Is_Same_As_Queue_Under_Test() {
+    assertThrows(EmptyStackException.class, () -> queue.pop());
   }
 
   @Test
-  public void should_Not_Pop_If_SystemEventQueue_Is_Not_Same_As_Queue_Under_Test() {
+  void should_Not_Pop_If_SystemEventQueue_Is_Not_Same_As_Queue_Under_Test() {
     toolkit.eventQueue(new EventQueue());
     queue.pop(); // if really pops should throw an EmptyStackException
   }

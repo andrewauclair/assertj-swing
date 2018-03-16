@@ -14,27 +14,29 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JComponentDriver#requireToolTip(JComponent, java.util.regex.Pattern)}.
  * 
  * @author Alex Ruiz
  */
-public class JComponentDriver_requireToolTipAsPattern_Test extends JComponentDriver_TestCase {
+class JComponentDriver_requireToolTipAsPattern_Test extends JComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_ToolTip_Matches_Pattern() {
+  void should_Pass_If_ToolTip_Matches_Pattern() {
     driver.requireToolTip(button, Pattern.compile("A Tool.*"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Pattern_Is_Null() {
+  @Test
+  void should_Throw_Error_If_Pattern_Is_Null() {
     Pattern p = null;
-    driver.requireToolTip(button, p);
+    assertThrows(IllegalArgumentException.class, () -> driver.requireToolTip(button, p));
   }
 
   @Test
-  public void should_Fail_If_ToolTip_Does_Not_Match_Pattern() {
+  void should_Fail_If_ToolTip_Does_Not_Match_Pattern() {
     thrown.expectAssertionError("toolTipText", "A ToolTip", Pattern.compile("Hello"));
     driver.requireToolTip(button, Pattern.compile("Hello"));
   }

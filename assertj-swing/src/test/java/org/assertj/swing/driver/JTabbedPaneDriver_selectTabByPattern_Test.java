@@ -14,7 +14,7 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTabbedPaneDriver#selectTab(javax.swing.JTabbedPane, java.util.regex.Pattern)}.

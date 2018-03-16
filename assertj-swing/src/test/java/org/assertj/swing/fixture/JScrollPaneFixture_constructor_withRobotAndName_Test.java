@@ -15,6 +15,7 @@ package org.assertj.swing.fixture;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.Dimension;
 
@@ -24,7 +25,7 @@ import javax.swing.JScrollPane;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JScrollPaneFixture#JScrollPaneFixture(org.assertj.swing.core.Robot, String)}.
@@ -41,21 +42,21 @@ public class JScrollPaneFixture_constructor_withRobotAndName_Test extends RobotB
   }
 
   @Test
-  public void should_Lookup_Showing_JScrollPane_By_Name() {
+  void should_Lookup_Showing_JScrollPane_By_Name() {
     robot.showWindow(window);
     JScrollPaneFixture fixture = new JScrollPaneFixture(robot, "scrollPane");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.scrollPane);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JScrollPane_With_Matching_Name_Is_Not_Showing() {
-    new JScrollPaneFixture(robot, "scrollPane");
+  @Test
+  void should_Throw_Error_If_JScrollPane_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JScrollPaneFixture(robot, "scrollPane"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JScrollPane_With_Matching_Name_Is_Not_Found() {
-    new JScrollPaneFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JScrollPane_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JScrollPaneFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

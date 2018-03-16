@@ -14,7 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.driver.JTableDriver_TestCase.MyWindow.ROW_COUNT;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#requireRowCount(javax.swing.JTable, int)}.

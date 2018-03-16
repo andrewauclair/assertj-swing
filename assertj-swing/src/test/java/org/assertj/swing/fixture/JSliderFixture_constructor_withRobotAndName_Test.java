@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JSlider;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSliderFixture#JSliderFixture(org.assertj.swing.core.Robot, String)}.
@@ -37,21 +38,21 @@ public class JSliderFixture_constructor_withRobotAndName_Test extends RobotBased
   }
 
   @Test
-  public void should_Lookup_Showing_JSlider_By_Name() {
+  void should_Lookup_Showing_JSlider_By_Name() {
     robot.showWindow(window);
     JSliderFixture fixture = new JSliderFixture(robot, "slider");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.slider);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JSlider_With_Matching_Name_Is_Not_Showing() {
-    new JSliderFixture(robot, "slider");
+  @Test
+  void should_Throw_Error_If_JSlider_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JSliderFixture(robot, "slider"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JSlider_With_Matching_Name_Is_Not_Found() {
-    new JSliderFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JSlider_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JSliderFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

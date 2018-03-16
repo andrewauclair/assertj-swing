@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 import java.awt.Font;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#font(JTable, TableCell)}.

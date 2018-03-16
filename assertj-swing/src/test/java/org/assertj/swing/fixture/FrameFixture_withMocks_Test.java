@@ -21,7 +21,7 @@ import java.awt.Frame;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.FrameDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameFixture}.

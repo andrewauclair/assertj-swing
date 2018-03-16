@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 
 import javax.swing.JFrame;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SingleComponentHierarchy#dispose(java.awt.Window)}.

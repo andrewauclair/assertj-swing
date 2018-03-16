@@ -14,13 +14,14 @@ package org.assertj.swing.fixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JButton;
 
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JButtonFixture#JButtonFixture(org.assertj.swing.core.Robot, String)}.
@@ -37,21 +38,21 @@ public class JButtonFixture_constructor_withRobotAndName_Test extends RobotBased
   }
 
   @Test
-  public void should_Lookup_Showing_JButton_By_Name() {
+  void should_Lookup_Showing_JButton_By_Name() {
     robot.showWindow(window);
     JButtonFixture fixture = new JButtonFixture(robot, "button");
     assertThat(fixture.robot()).isSameAs(robot);
     assertThat(fixture.target()).isSameAs(window.button);
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_JButton_With_Matching_Name_Is_Not_Showing() {
-    new JButtonFixture(robot, "button");
+  @Test
+  void should_Throw_Error_If_JButton_With_Matching_Name_Is_Not_Showing() {
+    assertThrows(ComponentLookupException.class, () -> new JButtonFixture(robot, "button"));
   }
 
-  @Test(expected = ComponentLookupException.class)
-  public void should_Throw_Error_If_A_JButton_With_Matching_Name_Is_Not_Found() {
-    new JButtonFixture(robot, "other");
+  @Test
+  void should_Throw_Error_If_A_JButton_With_Matching_Name_Is_Not_Found() {
+    assertThrows(ComponentLookupException.class, () -> new JButtonFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

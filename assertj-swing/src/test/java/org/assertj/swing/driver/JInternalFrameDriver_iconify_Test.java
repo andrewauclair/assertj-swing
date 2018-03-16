@@ -19,7 +19,8 @@ import static org.assertj.swing.edt.GuiActionRunner.execute;
 import javax.swing.JInternalFrame;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameDriver#iconify(JInternalFrame)}.
@@ -27,9 +28,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JInternalFrameDriver_iconify_Test extends JInternalFrameDriver_TestCase {
+class JInternalFrameDriver_iconify_Test extends JInternalFrameDriver_TestCase {
   @Test
-  public void should_Not_Iconify_Already_Iconified_JInternalFrame() {
+  void should_Not_Iconify_Already_Iconified_JInternalFrame() {
     showWindow();
     iconify();
     driver.iconify(internalFrame);
@@ -37,18 +38,15 @@ public class JInternalFrameDriver_iconify_Test extends JInternalFrameDriver_Test
   }
 
   @Test
-  public void should_Throw_Error_If_JInternalFrame_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.iconify(internalFrame);
+  void should_Throw_Error_If_JInternalFrame_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.iconify(internalFrame));
   }
 
   @Test
-  public void should_Throw_Error_When_Iconifying_Not_Iconfiable_JInternalFrame() {
+  void should_Throw_Error_When_Iconifying_Not_Iconfiable_JInternalFrame() {
     makeNotIconfiable();
     showWindow();
-    thrown.expect(IllegalStateException.class, "The JInternalFrame <");
-    thrown.expectMessageToContain("> is not iconifiable");
-    driver.iconify(internalFrame);
+    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> driver.iconify(internalFrame), "The JInternalFrame <", "> is not iconifiable");
   }
 
   @RunsInEDT

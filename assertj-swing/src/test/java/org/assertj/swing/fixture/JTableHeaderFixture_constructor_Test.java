@@ -13,11 +13,13 @@
 package org.assertj.swing.fixture;
 
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 import javax.swing.table.JTableHeader;
 
-import org.junit.Test;
+import org.assertj.swing.exception.ComponentLookupException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableHeaderFixture#JTableHeaderFixture(org.assertj.swing.core.Robot, JTableHeader)}.
@@ -25,14 +27,14 @@ import org.junit.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JTableHeaderFixture_constructor_Test {
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Robot_Is_Null() {
-    new JTableHeaderFixture(null, mock(JTableHeader.class));
+class JTableHeaderFixture_constructor_Test {
+  @Test
+  void should_Throw_Error_If_Robot_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new JTableHeaderFixture(null, mock(JTableHeader.class)));
   }
 
-  @Test(expected = NullPointerException.class)
-  public void should_Throw_Error_If_Target_Is_Null() {
-    new JTableHeaderFixture(singletonRobotMock(), null);
+  @Test
+  void should_Throw_Error_If_Target_Is_Null() {
+    assertThrows(NullPointerException.class, () -> new JTableHeaderFixture(singletonRobotMock(), null));
   }
 }

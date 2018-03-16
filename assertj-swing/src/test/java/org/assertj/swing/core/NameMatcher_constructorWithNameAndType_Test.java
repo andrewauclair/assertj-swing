@@ -12,16 +12,18 @@
  */
 package org.assertj.swing.core;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link NameMatcher#NameMatcher(String, Class)}.
  * 
  * @author Alex Ruiz
  */
-public class NameMatcher_constructorWithNameAndType_Test {
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_Type_Is_Null() {
-    new NameMatcher("label", null);
+class NameMatcher_constructorWithNameAndType_Test {
+  @Test
+  void should_Throw_Error_If_Type_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> new NameMatcher("label", null));
   }
 }

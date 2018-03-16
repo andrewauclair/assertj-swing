@@ -14,7 +14,7 @@ package org.assertj.swing.core;
 
 import static org.mockito.Mockito.verify;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link RobotEventGenerator#moveMouse(int, int)}.

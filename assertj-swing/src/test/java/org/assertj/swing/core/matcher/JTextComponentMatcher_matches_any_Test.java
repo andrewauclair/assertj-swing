@@ -17,7 +17,7 @@ import static org.assertj.swing.test.builder.JDialogs.dialog;
 import static org.assertj.swing.test.builder.JTextFields.textField;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentMatcher#matches(java.awt.Component)}.

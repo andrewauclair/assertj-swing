@@ -13,7 +13,7 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentDriver#requireEditable(javax.swing.text.JTextComponent)}.

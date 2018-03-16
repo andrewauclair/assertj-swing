@@ -15,7 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.swing.data.TableCell.row;
 import static org.mockito.Mockito.verify;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableDriver#stopCellEditing(JTable, TableCell)}.

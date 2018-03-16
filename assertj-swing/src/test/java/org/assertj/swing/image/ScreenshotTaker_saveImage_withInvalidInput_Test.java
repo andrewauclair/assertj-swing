@@ -15,7 +15,10 @@ package org.assertj.swing.image;
 import java.awt.image.BufferedImage;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link ScreenshotTaker#saveImage(BufferedImage, String)}.
@@ -23,27 +26,27 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ScreenshotTaker_saveImage_withInvalidInput_Test {
+class ScreenshotTaker_saveImage_withInvalidInput_Test {
   private static final BufferedImage NO_IMAGE = null;
   private ScreenshotTaker taker;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     taker = new ScreenshotTaker();
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Path_Is_Null() {
-    taker.saveImage(NO_IMAGE, null);
+  @Test
+  void should_Throw_Error_If_File_Path_Is_Null() {
+    assertThrows(IllegalArgumentException.class, () -> taker.saveImage(NO_IMAGE, null));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Path_Is_Empty_String() {
-    taker.saveImage(NO_IMAGE, "");
+  @Test
+  void should_Throw_Error_If_File_Path_Is_Empty_String() {
+    assertThrows(IllegalArgumentException.class, () -> taker.saveImage(NO_IMAGE, ""));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void should_Throw_Error_If_File_Path_Does_Not_End_With_Png() {
-    taker.saveImage(NO_IMAGE, "somePathWithoutPng");
+  @Test
+  void should_Throw_Error_If_File_Path_Does_Not_End_With_Png() {
+    assertThrows(IllegalArgumentException.class, () -> taker.saveImage(NO_IMAGE, "somePathWithoutPng"));
   }
 }

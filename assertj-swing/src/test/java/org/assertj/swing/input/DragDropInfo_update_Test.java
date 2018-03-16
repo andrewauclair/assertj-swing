@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JComboBox;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DragDropInfo#update(java.awt.event.MouseEvent)}.

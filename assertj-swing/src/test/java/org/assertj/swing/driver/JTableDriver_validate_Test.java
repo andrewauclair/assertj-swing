@@ -12,7 +12,9 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableDriver#checkCellIndicesInBounds(javax.swing.JTable, org.assertj.swing.data.TableCell)}.
@@ -20,9 +22,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_validate_Test extends JTableDriver_withMocks_TestCase {
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowErrorIfCellToValidateIsNull() {
-    driver.checkCellIndicesInBounds(table, null);
+class JTableDriver_validate_Test extends JTableDriver_withMocks_TestCase {
+  @Test
+  void shouldThrowErrorIfCellToValidateIsNull() {
+    assertThrows(IllegalArgumentException.class, () -> driver.checkCellIndicesInBounds(table, null));
   }
 }

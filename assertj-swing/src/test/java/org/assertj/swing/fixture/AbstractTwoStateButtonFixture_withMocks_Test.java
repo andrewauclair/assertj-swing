@@ -22,7 +22,7 @@ import javax.swing.AbstractButton;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.AbstractButtonDriver;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractTwoStateButtonFixture}.

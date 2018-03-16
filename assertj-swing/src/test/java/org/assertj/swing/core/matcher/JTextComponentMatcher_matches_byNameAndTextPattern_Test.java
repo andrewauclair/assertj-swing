@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import javax.swing.JTextField;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTextComponentMatcher#matches(java.awt.Component)}.

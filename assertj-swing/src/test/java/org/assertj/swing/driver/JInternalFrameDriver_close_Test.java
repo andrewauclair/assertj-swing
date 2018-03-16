@@ -18,7 +18,8 @@ import static org.assertj.swing.edt.GuiActionRunner.execute;
 import javax.swing.JInternalFrame;
 
 import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.Test;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JInternalFrameDriver#close(javax.swing.JInternalFrame)}.
@@ -26,9 +27,9 @@ import org.junit.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JInternalFrameDriver_close_Test extends JInternalFrameDriver_TestCase {
+class JInternalFrameDriver_close_Test extends JInternalFrameDriver_TestCase {
   @Test
-  public void should_Close_JInternalFrame() {
+  void should_Close_JInternalFrame() {
     showWindow();
     driver.close(internalFrame);
     assertThat(isClosed(internalFrame)).isTrue();
@@ -36,16 +37,14 @@ public class JInternalFrameDriver_close_Test extends JInternalFrameDriver_TestCa
 
   @RunsInEDT
   private static boolean isClosed(final JInternalFrame internalFrame) {
-    return execute(() -> internalFrame.isClosed());
+    return execute(internalFrame::isClosed);
   }
 
   @Test
-  public void should_Throw_Error_If_JInternalFrame_Is_Not_Closable() {
+  void should_Throw_Error_If_JInternalFrame_Is_Not_Closable() {
     makeNotCloseable();
     showWindow();
-    thrown.expect(IllegalStateException.class, "The JInternalFrame <");
-    thrown.expectMessageToContain("> is not closable");
-    driver.close(internalFrame);
+    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> driver.close(internalFrame), "The JInternalFrame <", "> is not closable");
   }
 
   @RunsInEDT
