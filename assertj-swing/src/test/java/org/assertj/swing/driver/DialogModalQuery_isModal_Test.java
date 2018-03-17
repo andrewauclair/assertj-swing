@@ -27,6 +27,8 @@ import org.assertj.swing.test.data.BooleanProvider;
 import org.assertj.swing.test.swing.TestDialog;
 import org.assertj.swing.test.swing.TestWindow;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -37,19 +39,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class DialogModalQuery_isModal_Test extends RobotBasedTestCase {
+class DialogModalQuery_isModal_Test extends RobotBasedTestCase {
   private MyDialog dialog;
 
-  private final boolean modal;
-
-  @Parameters
-  public static Collection<Object[]> booleans() {
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
-  }
-
-  public DialogModalQuery_isModal_Test(boolean modal) {
-    this.modal = modal;
   }
 
   @Override
@@ -57,8 +51,9 @@ public class DialogModalQuery_isModal_Test extends RobotBasedTestCase {
     dialog = MyDialog.createNew();
   }
 
-  @Test
-  public void should_Indicate_If_Dialog_Is_Modal() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Indicate_If_Dialog_Is_Modal(boolean modal) {
     makeModal(dialog, modal);
     robot.waitForIdle();
     dialog.startRecording();

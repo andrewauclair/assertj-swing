@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 public class JTableDriver_showPopupMenuAt_Test extends JTableDriver_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private JPopupMenu popupMenu;
@@ -43,7 +42,7 @@ public class JTableDriver_showPopupMenuAt_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Show_Popup_Menu() {
+  void should_Show_Popup_Menu() {
     showWindow();
     driver.click(table);
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(table);
@@ -55,7 +54,7 @@ public class JTableDriver_showPopupMenuAt_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Disabled() {
+  void should_Throw_Error_If_JTable_Is_Disabled() {
     disableTable();
     thrown.expectIllegalStateIsDisabledComponent();
     robot.settings().clickOnDisabledComponentsAllowed(false);
@@ -63,7 +62,7 @@ public class JTableDriver_showPopupMenuAt_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.showPopupMenuAt(table, row(0).column(0));
   }

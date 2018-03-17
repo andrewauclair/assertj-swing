@@ -91,6 +91,7 @@ public class TestWindow extends JFrame {
   protected TestWindow(@Nonnull Class<?> testClass) {
     setTitle(testClass.getSimpleName());
     setLayout(new FlowLayout());
+    setPreferredSize(new Dimension(200, 200));
     chooseLookAndFeel();
   }
 

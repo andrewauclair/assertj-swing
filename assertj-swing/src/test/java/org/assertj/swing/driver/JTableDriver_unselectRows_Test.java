@@ -19,23 +19,23 @@ import org.junit.jupiter.api.Test;
  *
  * @author Christian Rösch
  */
-public class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
+class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_Index_Is_Negative() {
+  void should_Throw_Error_If_Index_Is_Negative() {
     showWindow();
     thrown.expect(IndexOutOfBoundsException.class, "row <-1> should be between <0> and <9>");
     driver.unselectRows(table, -1);
   }
 
   @Test
-  public void should_Throw_Error_If_Index_Is_Equal_To_The_Number_Of_Rows() {
+  void should_Throw_Error_If_Index_Is_Equal_To_The_Number_Of_Rows() {
     showWindow();
     thrown.expect(IndexOutOfBoundsException.class, "row <10> should be between <0> and <9>");
     driver.unselectRows(table, 10);
   }
 
   @Test
-  public void should_Unselect_Rows() {
+  void should_Unselect_Rows() {
     enableMultipleSelection();
     showWindow();
     driver.selectRows(table, 0, 2);
@@ -47,7 +47,7 @@ public class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Unselect_Row() {
+  void should_Unselect_Row() {
     enableMultipleSelection();
     showWindow();
     driver.selectRows(table, 0, 2);
@@ -59,7 +59,7 @@ public class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Disabled() {
+  void should_Throw_Error_If_JTable_Is_Disabled() {
     disableTable();
     thrown.expectIllegalStateIsDisabledComponent();
     robot.settings().clickOnDisabledComponentsAllowed(false);
@@ -67,7 +67,7 @@ public class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.unselectRows(table, 0, 2);
   }

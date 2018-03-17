@@ -18,6 +18,8 @@ import static org.assertj.swing.data.TableCell.row;
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -27,23 +29,14 @@ import org.junit.runners.Parameterized.Parameters;
  *
  * @author Christian Rösch
  */
-@RunWith(Parameterized.class)
-public class JTableDriver_unselectCell_withManyCells_Test extends JTableDriver_TestCase {
-  private final int row;
-  private final int column;
-
-  @Parameters
-  public static Collection<Object[]> cells() {
+class JTableDriver_unselectCell_withManyCells_Test extends JTableDriver_TestCase {
+  private static Collection<Object[]> cells() {
     return newArrayList(tableCells());
   }
 
-  public JTableDriver_unselectCell_withManyCells_Test(int row, int column) {
-    this.row = row;
-    this.column = column;
-  }
-
-  @Test
-  public void should_Unselect_Cell() {
+  @ParameterizedTest
+  @MethodSource("cells")
+  void should_Unselect_Cell(int row, int column) {
     showWindow();
     driver.selectCell(table, row(row).column(column));
     requireCellSelected(row, column);

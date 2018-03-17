@@ -27,11 +27,10 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 public class JTableHeaderDriver_showPopupMenuByName_Test extends JTableHeaderDriver_showPopupMenu_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Show_Popup_Menu() {
+  void should_Show_Popup_Menu() {
     showWindow();
     driver.click(tableHeader);
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tableHeader);
@@ -42,7 +41,7 @@ public class JTableHeaderDriver_showPopupMenuByName_Test extends JTableHeaderDri
   }
 
   @Test
-  public void should_Show_Popup_Menu_If_Column_Name_Matches_Pattern() {
+  void should_Show_Popup_Menu_If_Column_Name_Matches_Pattern() {
     showWindow();
     driver.click(tableHeader);
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tableHeader);

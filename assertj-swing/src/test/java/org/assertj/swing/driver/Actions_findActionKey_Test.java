@@ -24,6 +24,7 @@ import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,34 +33,33 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class Actions_findActionKey_Test {
-  @Rule
   public ExpectedException thrown = ExpectedException.none();
 
   private ActionMap map;
   private Action action;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     map = new ActionMap();
     action = mock(Action.class);
     map.put("key", action);
   }
 
   @Test
-  public void should_Return_Given_Name_If_Equal_To_Key() {
+  void should_Return_Given_Name_If_Equal_To_Key() {
     Object found = Actions.findActionKey("key", map);
     assertThat(found).isEqualTo("key");
   }
 
   @Test
-  public void should_Return_Key_If_Action_Name_Is_Equal_To_Given_Name() {
+  void should_Return_Key_If_Action_Name_Is_Equal_To_Given_Name() {
     when(action.getValue(NAME)).thenReturn("name");
     Object found = Actions.findActionKey("name", map);
     assertThat(found).isEqualTo("key");
   }
 
   @Test
-  public void should_Throw_Error_If_Key_Not_Found() {
+  void should_Throw_Error_If_Key_Not_Found() {
     when(action.getValue(NAME)).thenReturn("name");
     thrown.expect(ActionFailedException.class, "The action 'someName' is not available, available actions:['key']");
     Object found = Actions.findActionKey("someName", map);

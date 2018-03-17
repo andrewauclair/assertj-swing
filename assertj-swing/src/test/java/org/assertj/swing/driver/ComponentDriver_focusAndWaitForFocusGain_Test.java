@@ -16,6 +16,7 @@ import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.util.StopWatch;
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +26,9 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_focusAndWaitForFocusGain_Test extends ComponentDriver_TestCase {
+class ComponentDriver_focusAndWaitForFocusGain_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Give_Focus_To_Component_And_Wait_Till_It_Is_Focused() {
+  void should_Give_Focus_To_Component_And_Wait_Till_It_Is_Focused() {
     showWindow();
     assertThatButtonDoesNotHaveFocus();
     window.button.waitToRequestFocus();
@@ -51,15 +52,13 @@ public class ComponentDriver_focusAndWaitForFocusGain_Test extends ComponentDriv
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled() {
+  void should_Throw_Error_If_Component_Is_Disabled() {
     disableButton();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.focusAndWaitForFocusGain(window.button);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.focusAndWaitForFocusGain(window.button));
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.focusAndWaitForFocusGain(window.button);
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.focusAndWaitForFocusGain(window.button));
   }
 }

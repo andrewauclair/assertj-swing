@@ -25,6 +25,8 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -35,25 +37,13 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class AbstractJTableCellWriter_editorForCell_Test extends RobotBasedTestCase {
+class AbstractJTableCellWriter_editorForCell_Test extends RobotBasedTestCase {
   private TableDialogEditDemoWindow frame;
   private AbstractJTableCellWriter writer;
 
-  private final int row;
-  private final int column;
-  private final Class<Component> editorType;
-
-  @Parameters
-  public static Collection<Object[]> cellEditors() {
+  private static Collection<Object[]> cellEditors() {
     return newArrayList(new Object[][] { { 0, 2, JComboBox.class }, { 0, 3, JTextField.class },
         { 0, 4, JCheckBox.class } });
-  }
-
-  public AbstractJTableCellWriter_editorForCell_Test(int row, int column, Class<Component> editorType) {
-    this.row = row;
-    this.column = column;
-    this.editorType = editorType;
   }
 
   @Override
@@ -63,8 +53,9 @@ public class AbstractJTableCellWriter_editorForCell_Test extends RobotBasedTestC
     robot.showWindow(frame, new Dimension(500, 100));
   }
 
-  @Test
-  public void shouldReturnEditorForCell() {
+  @ParameterizedTest
+  @MethodSource("cellEditors")
+  void shouldReturnEditorForCell(int row, int column, Class<Component> editorType) {
     Component editor = writer.editorForCell(frame.table, row, column);
     assertThat(editor).isNotNull().isInstanceOf(editorType);
   }

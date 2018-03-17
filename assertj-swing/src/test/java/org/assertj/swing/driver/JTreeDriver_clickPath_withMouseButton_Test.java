@@ -50,8 +50,7 @@ class JTreeDriver_clickPath_withMouseButton_Test extends JTreeDriver_clickCell_T
   @Test
   void should_Throw_Error_If_Path_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class, "Unable to find path 'another'");
-    driver.clickPath(tree, "another", RIGHT_BUTTON);
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.clickPath(tree, "another", RIGHT_BUTTON), "Unable to find path 'another'");
   }
 
   @Test

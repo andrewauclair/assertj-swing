@@ -22,7 +22,7 @@ import javax.swing.JPopupMenu;
  *
  * @author Yvonne Wang
  */
-public abstract class JTableHeaderDriver_showPopupMenu_TestCase extends JTableHeaderDriver_TestCase {
+abstract class JTableHeaderDriver_showPopupMenu_TestCase extends JTableHeaderDriver_TestCase {
   JPopupMenu popupMenu;
 
   @Override

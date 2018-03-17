@@ -28,7 +28,7 @@ import org.assertj.swing.test.recorder.ClickRecorder;
  *
  * @author Yvonne Wang
  */
-public abstract class JTableHeaderDriver_TestCase extends JTableHeaderBasedTestCase {
+abstract class JTableHeaderDriver_TestCase extends JTableHeaderBasedTestCase {
   JTableHeaderDriver driver;
 
   @Override

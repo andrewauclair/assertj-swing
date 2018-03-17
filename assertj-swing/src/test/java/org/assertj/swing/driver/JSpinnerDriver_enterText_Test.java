@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import javax.swing.text.JTextComponent;
 
 import org.assertj.swing.exception.ActionFailedException;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -47,13 +48,11 @@ class JSpinnerDriver_enterText_Test extends JSpinnerDriver_TestCase {
   @Test
   void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disableSpinner();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.enterText(spinner, "Gandalf");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.enterText(spinner, "Gandalf"));
   }
 
   @Test
   void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.enterText(spinner, "Gandalf");
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.enterText(spinner, "Gandalf"));
   }
 }
