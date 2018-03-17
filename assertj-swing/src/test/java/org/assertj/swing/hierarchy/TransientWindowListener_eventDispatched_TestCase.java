@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.hierarchy;
 
-import static org.mockito.Mockito.mock;
-
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestDialog;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * Base test case for {@link TransientWindowListener}.
@@ -31,7 +31,7 @@ public class TransientWindowListener_eventDispatched_TestCase extends EDTSafeTes
   TestDialog eventSource;
   TestWindow parent;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     windowFilter = mock(WindowFilter.class);
     listener = new TransientWindowListener(windowFilter);
@@ -43,7 +43,7 @@ public class TransientWindowListener_eventDispatched_TestCase extends EDTSafeTes
   void onSetUp() {
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     try {
       eventSource.destroy();

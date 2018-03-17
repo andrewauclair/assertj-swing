@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.JSplitPaneDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import javax.swing.JSplitPane;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.JSplitPaneDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSplitPaneFixture}.
@@ -29,17 +29,17 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JSplitPaneFixture_withMocks_Test {
+class JSplitPaneFixture_withMocks_Test {
   private JSplitPaneFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JSplitPaneFixture(mock(Robot.class), mock(JSplitPane.class));
     fixture.replaceDriverWith(mock(JSplitPaneDriver.class));
   }
 
   @Test
-  public void should_Call_MoveDividerTo_In_Driver_And_Return_Self() {
+  void should_Call_MoveDividerTo_In_Driver_And_Return_Self() {
     assertThat(fixture.moveDividerTo(6)).isSameAs(fixture);
     verify(fixture.driver()).moveDividerTo(fixture.target(), 6);
   }

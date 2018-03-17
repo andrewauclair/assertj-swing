@@ -44,9 +44,6 @@ public abstract class JSliderDriver_TestCase extends RobotBasedTestCase {
   JSlider slider;
   JSliderDriver driver;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   final int orientation;
 
   public JSliderDriver_TestCase(int orientation) {

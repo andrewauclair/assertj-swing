@@ -12,17 +12,15 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.data.TableCell.row;
 import static org.assertj.swing.test.swing.TestTable.createCellValueFrom;
-
-import java.util.Collection;
-
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JTableDriver#value(javax.swing.JTable, org.assertj.swing.data.TableCell)}.
@@ -30,23 +28,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableDriver_valueOfCell_Test extends JTableDriver_TestCase {
-  private final int row;
-  private final int column;
-
-  @Parameters
-  public static Collection<Object[]> cells() {
+class JTableDriver_valueOfCell_Test extends JTableDriver_TestCase {
+  private static Collection<Object[]> cells() {
     return newArrayList(tableCells());
   }
 
-  public JTableDriver_valueOfCell_Test(int row, int column) {
-    this.row = row;
-    this.column = column;
-  }
-
-  @Test
-  public void should_Return_Cell_Value() {
+  @ParameterizedTest
+  @MethodSource("cells")
+  void should_Return_Cell_Value(int row, int column) {
     String value = driver.value(table, row(row).column(column));
     assertThat(value).isEqualTo(createCellValueFrom(row, column));
     assertThatCellReaderWasCalled();

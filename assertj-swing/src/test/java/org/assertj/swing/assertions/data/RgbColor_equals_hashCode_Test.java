@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.assertions.data;
 
-import static junit.framework.Assert.assertFalse;
 import static org.assertj.swing.assertions.data.RgbColor.color;
 import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsReflexive;
 import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsSymmetric;
 import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsTransitive;
 import static org.fest.test.EqualsHashCodeContractAssert.assertMaintainsEqualsAndHashCodeContract;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

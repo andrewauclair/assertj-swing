@@ -12,18 +12,18 @@
  */
 package org.assertj.swing.image;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.io.File;
+
 import static org.assertj.core.util.Files.temporaryFolderPath;
 import static org.assertj.core.util.Strings.concat;
 import static org.assertj.swing.assertions.Assertions.assertThat;
 import static org.assertj.swing.image.RandomFileNameCreator.randomFileName;
 import static org.assertj.swing.util.ImageReader.readImageFrom;
-
-import java.awt.Toolkit;
-import java.io.File;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScreenshotTaker#saveDesktopAsPng(String)}.
@@ -31,18 +31,18 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ScreenshotTaker_saveDesktopAsPng_Test {
+class ScreenshotTaker_saveDesktopAsPng_Test {
   private ScreenshotTaker taker;
   private String imagePath;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     imagePath = concat(temporaryFolderPath(), randomFileName());
     taker = new ScreenshotTaker();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     File file = new File(imagePath);
     if (file.isFile()) {
       file.delete();
@@ -50,7 +50,7 @@ public class ScreenshotTaker_saveDesktopAsPng_Test {
   }
 
   @Test
-  public void should_Take_Screenshot_Of_Desktop_And_Save_It_In_Given_Path() throws Exception {
+  void should_Take_Screenshot_Of_Desktop_And_Save_It_In_Given_Path() throws Exception {
     taker.saveDesktopAsPng(imagePath);
     assertThat(readImageFrom(imagePath)).hasSize(Toolkit.getDefaultToolkit().getScreenSize());
   }

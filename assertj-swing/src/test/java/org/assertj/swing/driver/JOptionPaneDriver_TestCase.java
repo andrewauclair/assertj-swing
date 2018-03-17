@@ -12,29 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
-import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+
+import javax.swing.*;
+
+import static javax.swing.JOptionPane.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Objects.HASH_CODE_PRIME;
-import static org.assertj.core.util.Objects.areEqual;
-import static org.assertj.core.util.Objects.hashCodeFor;
+import static org.assertj.core.util.Objects.*;
 import static org.assertj.swing.driver.AbstractButtonTextQuery.textOf;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Rule;
 
 /**
  * Base test case for {@link JOptionPaneDriver}.
@@ -44,9 +31,6 @@ import org.junit.Rule;
 public abstract class JOptionPaneDriver_TestCase extends RobotBasedTestCase {
   private static final Icon ICON = null;
   private static final String MESSAGE = "Message";
-
-  @Rule
-  public ExpectedException thrown = none();
 
   JOptionPaneDriver driver;
 

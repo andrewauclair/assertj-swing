@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,9 +20,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_expandRow_Test extends JTreeDriver_toggleCell_TestCase {
+class JTreeDriver_expandRow_Test extends JTreeDriver_toggleCell_TestCase {
   @Test
-  public void should_Expand_Cell() {
+  void should_Expand_Cell() {
     showWindow();
     requireRowCollapsed(5);
     driver.expandRow(tree, 5);
@@ -29,7 +30,7 @@ public class JTreeDriver_expandRow_Test extends JTreeDriver_toggleCell_TestCase 
   }
 
   @Test
-  public void should_Not_Do_Anything_If_Cell_Already_Expanded() {
+  void should_Not_Do_Anything_If_Cell_Already_Expanded() {
     showWindow();
     requireRowExpanded(0);
     driver.expandRow(tree, 0);
@@ -37,15 +38,13 @@ public class JTreeDriver_expandRow_Test extends JTreeDriver_toggleCell_TestCase 
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.expandRow(tree, 0);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.expandRow(tree, 0));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.expandRow(tree, 0);
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.expandRow(tree, 0));
   }
 }

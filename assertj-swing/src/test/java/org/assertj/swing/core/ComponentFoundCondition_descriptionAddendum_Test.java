@@ -29,6 +29,7 @@ import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.timing.Condition;
 import org.junit.BeforeClass;
 import org.junit.Rule;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,38 +37,34 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class ComponentFoundCondition_descriptionAddendum_Test {
+class ComponentFoundCondition_descriptionAddendum_Test {
   private static ComponentFinder finder;
   private static MyWindow window;
-  @Rule
-  public ExpectedException thrown = none();
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     finder = finderWithNewAwtHierarchy();
     window = MyWindow.createNew();
   }
 
   @Test
-  public void should_Append_Component_Hierarchy_To_Exception_Message_If_Component_Was_Not_Found() {
+  void should_Append_Component_Hierarchy_To_Exception_Message_If_Component_Was_Not_Found() {
     Condition condition = new ComponentFoundCondition("JButton to be found", finder, byType(JButton.class));
-    thrown.expect(WaitTimedOutError.class);
-    thrown.expectMessageToContain("Timed out waiting for JButton to be found",
-                                  "Unable to find component using matcher", "MyWindow[name='myWindow'",
-                                  "javax.swing.JLabel[name=null, text='Hello'");
-    pause(condition, 1000);
+
+    ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> pause(condition, 1000),
+            "Timed out waiting for JButton to be found",
+            "Unable to find component using matcher", "MyWindow[name='myWindow'",
+            "javax.swing.JLabel[name=null, text='Hello'");
   }
 
   @Test
-  public void should_Append_Found_Components_To_Exception_Message_If_Multiple_Components_Were_Found() {
+  void should_Append_Found_Components_To_Exception_Message_If_Multiple_Components_Were_Found() {
     ComponentFoundCondition condition = new ComponentFoundCondition("JLabel to be found", finder, byType(JLabel.class));
-    thrown.expect(WaitTimedOutError.class);
-    thrown.expectMessageToContain("Timed out waiting for JLabel to be found",
-                                  "Found more than one component using matcher",
-                                  "javax.swing.JLabel[name=null, text='Hello'",
-                                  "javax.swing.JLabel[name=null, text='World'");
     try {
-      pause(condition, 1000);
+      ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> pause(condition, 1000), "Timed out waiting for JLabel to be found",
+              "Found more than one component using matcher",
+              "javax.swing.JLabel[name=null, text='Hello'",
+              "javax.swing.JLabel[name=null, text='World'");
     } finally {
       assertThat(condition.duplicatesFound()).containsOnly(window.helloLabel, window.worldLabel);
     }

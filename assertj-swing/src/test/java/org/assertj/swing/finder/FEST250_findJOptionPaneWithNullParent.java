@@ -12,42 +12,42 @@
  */
 package org.assertj.swing.finder;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.finder.JOptionPaneFinder.findOptionPane;
-
-import javax.swing.JOptionPane;
-
 import org.assertj.swing.core.BasicRobot;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.fixture.JOptionPaneFixture;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.JOptionPaneLauncher;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.finder.JOptionPaneFinder.findOptionPane;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-250" target="_blank">FEST-250</a>
  * 
  * @author Alex Ruiz
  */
-public class FEST250_findJOptionPaneWithNullParent extends EDTSafeTestCase {
+class FEST250_findJOptionPaneWithNullParent extends EDTSafeTestCase {
   private Robot robot;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     JOptionPane optionPane = execute(() -> new JOptionPane("Hello World!"));
     JOptionPaneLauncher.launch(optionPane);
     robot = BasicRobot.robotWithCurrentAwtHierarchy();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     robot.cleanUp();
   }
 
   @Test
-  public void should_Find_JOptionPane() {
+  void should_Find_JOptionPane() {
     JOptionPaneFixture optionPane = findOptionPane().using(robot);
     optionPane.requireMessage("Hello World!");
   }

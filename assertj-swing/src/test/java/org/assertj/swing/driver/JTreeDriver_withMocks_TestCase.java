@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.driver;
 
-import static org.mockito.Mockito.mock;
-
-import javax.swing.JTree;
-
 import org.assertj.swing.core.TestRobots;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+
+import javax.swing.*;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * Base test case for {@link JTreeDriver} that uses mocks as part of its fixture.
@@ -28,7 +28,7 @@ public class JTreeDriver_withMocks_TestCase {
   protected static JTree tree;
   protected static JTreeDriver driver;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     tree = mock(JTree.class);
     driver = new JTreeDriver(TestRobots.newRobotMock());

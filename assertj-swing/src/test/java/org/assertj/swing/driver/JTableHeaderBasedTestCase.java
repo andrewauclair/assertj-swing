@@ -12,22 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import java.awt.Component;
-import java.awt.Dimension;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.JTableHeader;
-
 import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestTable;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
+
+import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Base test case for classes that handle {@code JTableHeader}s.
@@ -38,9 +32,6 @@ import org.junit.Rule;
 public abstract class JTableHeaderBasedTestCase extends RobotBasedTestCase {
   MyWindow window;
   JTableHeader tableHeader;
-
-  @Rule
-  public ExpectedException thrown = none();
 
   @Override
   protected final void onSetUp() {

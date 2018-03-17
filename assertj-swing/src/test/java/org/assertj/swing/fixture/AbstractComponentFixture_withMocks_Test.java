@@ -34,6 +34,7 @@ import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.ComponentDriver;
 import org.assertj.swing.timing.Timeout;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -41,123 +42,123 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class AbstractComponentFixture_withMocks_Test {
+class AbstractComponentFixture_withMocks_Test {
   private ComponentFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new ComponentFixture();
   }
 
   @Test
-  public void should_Call_Click_In_Driver_And_Return_Self() {
+  void should_Call_Click_In_Driver_And_Return_Self() {
     assertThat(fixture.click()).isSameAs(fixture);
     verify(fixture.driver()).click(fixture.target());
   }
 
   @Test
-  public void should_Call_Click_With_MouseButton_In_Driver_And_Return_Self() {
+  void should_Call_Click_With_MouseButton_In_Driver_And_Return_Self() {
     assertThat(fixture.click(LEFT_BUTTON)).isSameAs(fixture);
     verify(fixture.driver()).click(fixture.target(), LEFT_BUTTON);
   }
 
   @Test
-  public void should_Call_Click_With_MouseClickInfo_In_Driver_And_Return_Self() {
+  void should_Call_Click_With_MouseClickInfo_In_Driver_And_Return_Self() {
     MouseClickInfo clickInfo = leftButton().times(2);
     assertThat(fixture.click(clickInfo)).isSameAs(fixture);
     verify(fixture.driver()).click(fixture.target(), clickInfo);
   }
 
   @Test
-  public void should_Call_DoubleClick_In_Driver_And_Return_Self() {
+  void should_Call_DoubleClick_In_Driver_And_Return_Self() {
     assertThat(fixture.doubleClick()).isSameAs(fixture);
     verify(fixture.driver()).doubleClick(fixture.target());
   }
 
   @Test
-  public void should_Call_RightClick_In_Driver_And_Return_Self() {
+  void should_Call_RightClick_In_Driver_And_Return_Self() {
     assertThat(fixture.rightClick()).isSameAs(fixture);
     verify(fixture.driver()).rightClick(fixture.target());
   }
 
   @Test
-  public void should_Call_Focus_In_Driver_And_Return_Self() {
+  void should_Call_Focus_In_Driver_And_Return_Self() {
     assertThat(fixture.focus()).isSameAs(fixture);
     verify(fixture.driver()).focus(fixture.target());
   }
 
   @Test
-  public void should_Call_PressAndReleaseKey_In_Driver_And_Return_Self() {
+  void should_Call_PressAndReleaseKey_In_Driver_And_Return_Self() {
     KeyPressInfo info = keyCode(VK_C);
     assertThat(fixture.pressAndReleaseKey(info)).isSameAs(fixture);
     verify(fixture.driver()).pressAndReleaseKey(fixture.target(), info);
   }
 
   @Test
-  public void should_Call_PressAndReleaseKeys_In_Driver_And_Return_Self() {
+  void should_Call_PressAndReleaseKeys_In_Driver_And_Return_Self() {
     int[] keyCodes = { VK_C };
     assertThat(fixture.pressAndReleaseKeys(keyCodes)).isSameAs(fixture);
     verify(fixture.driver()).pressAndReleaseKeys(fixture.target(), keyCodes);
   }
 
   @Test
-  public void should_Call_PressKey_In_Driver_And_Return_Self() {
+  void should_Call_PressKey_In_Driver_And_Return_Self() {
     assertThat(fixture.pressKey(VK_C)).isSameAs(fixture);
     verify(fixture.driver()).pressKey(fixture.target(), VK_C);
   }
 
   @Test
-  public void should_Call_PressKeyWhileRunning_In_Driver_And_Return_Self() {
+  void should_Call_PressKeyWhileRunning_In_Driver_And_Return_Self() {
     Runnable runnable = mock(Runnable.class);
     assertThat(fixture.pressKeyWhileRunning(VK_C, runnable)).isSameAs(fixture);
     verify(fixture.driver()).pressKeyWhileRunning(fixture.target(), VK_C, runnable);
   }
 
   @Test
-  public void should_Call_ReleaseKey_In_Driver_And_Return_Self() {
+  void should_Call_ReleaseKey_In_Driver_And_Return_Self() {
     assertThat(fixture.releaseKey(VK_C)).isSameAs(fixture);
     verify(fixture.driver()).releaseKey(fixture.target(), VK_C);
   }
 
   @Test
-  public void should_Call_RequireFocused_In_Driver_And_Return_Self() {
+  void should_Call_RequireFocused_In_Driver_And_Return_Self() {
     assertThat(fixture.requireFocused()).isSameAs(fixture);
     verify(fixture.driver()).requireFocused(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireEnabled_In_Driver_And_Return_Self() {
+  void should_Call_RequireEnabled_In_Driver_And_Return_Self() {
     assertThat(fixture.requireEnabled()).isSameAs(fixture);
     verify(fixture.driver()).requireEnabled(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireEnabled_With_Timeout_In_Driver_And_Return_Self() {
+  void should_Call_RequireEnabled_With_Timeout_In_Driver_And_Return_Self() {
     Timeout timeout = timeout(100);
     assertThat(fixture.requireEnabled(timeout)).isSameAs(fixture);
     verify(fixture.driver()).requireEnabled(fixture.target(), timeout);
   }
 
   @Test
-  public void should_Call_RequireDisabled_In_Driver_And_Return_Self() {
+  void should_Call_RequireDisabled_In_Driver_And_Return_Self() {
     assertThat(fixture.requireDisabled()).isSameAs(fixture);
     verify(fixture.driver()).requireDisabled(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireVisible_In_Driver_And_Return_Self() {
+  void should_Call_RequireVisible_In_Driver_And_Return_Self() {
     assertThat(fixture.requireVisible()).isSameAs(fixture);
     verify(fixture.driver()).requireVisible(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireNotVisible_In_Driver_And_Return_Self() {
+  void should_Call_RequireNotVisible_In_Driver_And_Return_Self() {
     assertThat(fixture.requireNotVisible()).isSameAs(fixture);
     verify(fixture.driver()).requireNotVisible(fixture.target());
   }
 
   @Test
-  public void should_Delegate_To_FontOf_In_Driver() {
+  void should_Delegate_To_FontOf_In_Driver() {
     Font font = mock(Font.class);
     ComponentDriver driver = fixture.driver();
     Component component = fixture.target();
@@ -167,7 +168,7 @@ public class AbstractComponentFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Delegate_To_BackgroundOf_In_Driver() {
+  void should_Delegate_To_BackgroundOf_In_Driver() {
     ComponentDriver driver = fixture.driver();
     Component component = fixture.target();
     when(driver.backgroundOf(component)).thenReturn(BLUE);
@@ -176,7 +177,7 @@ public class AbstractComponentFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Delegate_To_ForegroundOf_In_Driver() {
+  void should_Delegate_To_ForegroundOf_In_Driver() {
     ComponentDriver driver = fixture.driver();
     Component component = fixture.target();
     when(driver.foregroundOf(component)).thenReturn(BLUE);

@@ -12,38 +12,37 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.builder.JButtons.button;
 import static org.assertj.swing.test.builder.JLabels.label;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BasicCellRendererReader#valueFrom(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-public class BasicCellRendererComponentReader_valueFrom_Test extends EDTSafeTestCase {
+class BasicCellRendererComponentReader_valueFrom_Test extends EDTSafeTestCase {
   private BasicCellRendererReader reader;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     reader = new BasicCellRendererReader();
   }
 
   @Test
-  public void should_Return_Value_From_JLabel() {
+  void should_Return_Value_From_JLabel() {
     JLabel label = label().withText("Hello").createNew();
     assertThat(reader.valueFrom(label)).isEqualTo("Hello");
   }
 
   @Test
-  public void should_Return_Null_If_Component_Is_Not_JLabel() {
+  void should_Return_Null_If_Component_Is_Not_JLabel() {
     JButton button = button().withText("Hello").createNew();
     assertThat(reader.valueFrom(button)).isNull();
   }

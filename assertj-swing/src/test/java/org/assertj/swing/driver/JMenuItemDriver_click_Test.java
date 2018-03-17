@@ -12,21 +12,17 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Dimension;
-
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JMenuItemDriver}.
@@ -35,7 +31,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class JMenuItemDriver_click_Test extends RobotBasedTestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private JMenuItem menuItem;
@@ -50,7 +45,7 @@ public class JMenuItemDriver_click_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Click_Menu() {
+  void should_Click_Menu() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(menuItem);
     driver.click(menuItem);
     recorder.wasClicked();
@@ -62,7 +57,7 @@ public class JMenuItemDriver_click_Test extends RobotBasedTestCase {
 
     @RunsInEDT
     static MyWindow createNew() {
-      return execute(() -> new MyWindow());
+      return execute(MyWindow::new);
     }
 
     private MyWindow() {
@@ -70,7 +65,7 @@ public class JMenuItemDriver_click_Test extends RobotBasedTestCase {
       setJMenuBar(new JMenuBar());
       menuFile.add(menuNew);
       getJMenuBar().add(menuFile);
-      setPreferredSize(new Dimension(80, 60));
+      setPreferredSize(new Dimension(100, 100));
     }
   }
 }

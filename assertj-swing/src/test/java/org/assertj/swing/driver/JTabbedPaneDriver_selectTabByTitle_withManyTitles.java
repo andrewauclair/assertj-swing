@@ -12,14 +12,12 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JTabbedPaneDriver#selectTab(javax.swing.JTabbedPane, String)}.
@@ -27,23 +25,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTabbedPaneDriver_selectTabByTitle_withManyTitles extends JTabbedPaneDriver_TestCase {
-  private final String title;
-  private final int index;
-
-  @Parameters
-  public static Collection<Object[]> indices() {
+class JTabbedPaneDriver_selectTabByTitle_withManyTitles extends JTabbedPaneDriver_TestCase {
+  private static Collection<Object[]> indices() {
     return newArrayList(new Object[][] { { "One", 0 }, { "Two", 1 } });
   }
 
-  public JTabbedPaneDriver_selectTabByTitle_withManyTitles(String title, int index) {
-    this.title = title;
-    this.index = index;
-  }
-
-  @Test
-  public void should_Select_Tab_With_Equal_Title() {
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Select_Tab_With_Equal_Title(String title, int index) {
     showWindow();
     driver.selectTab(tabbedPane, title);
     assertThatSelectedTabIndexIs(index);

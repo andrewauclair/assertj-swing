@@ -12,14 +12,14 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.core.Settings;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.TestRobots.newRobotMock;
 import static org.mockito.Mockito.when;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.core.Settings;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#settings()}.
@@ -27,18 +27,18 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_settings_Test {
+class ComponentDriver_settings_Test {
   private Robot robot;
   private ComponentDriver driver;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robot = newRobotMock();
     driver = new ComponentDriver(robot);
   }
 
   @Test
-  public void should_Return_Settings_From_Robot() {
+  void should_Return_Settings_From_Robot() {
     Settings settings = new Settings();
     when(robot.settings()).thenReturn(settings);
     assertThat(driver.settings()).isSameAs(settings);

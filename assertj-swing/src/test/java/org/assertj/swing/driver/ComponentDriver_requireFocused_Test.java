@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,16 +21,14 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_requireFocused_Test extends ComponentDriver_TestCase {
+class ComponentDriver_requireFocused_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Fail_If_Component_Does_Not_Have_Focus() {
-    thrown.expectAssertionError("Expected component");
-    thrown.expectMessageToContain("to have input focus");
-    driver.requireFocused(window.button);
+  void should_Fail_If_Component_Does_Not_Have_Focus() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireFocused(window.button), "Expected component", "to have input focus");
   }
 
   @Test
-  public void should_Pass_If_Component_Has_Focus() {
+  void should_Pass_If_Component_Has_Focus() {
     showWindow();
     driver.requireFocused(window.textField);
   }

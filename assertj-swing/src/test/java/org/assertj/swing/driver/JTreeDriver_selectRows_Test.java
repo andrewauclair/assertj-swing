@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,9 +20,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_selectRows_Test extends JTreeDriver_selectCell_TestCase {
+class JTreeDriver_selectRows_Test extends JTreeDriver_selectCell_TestCase {
   @Test
-  public void should_Select_Cells() {
+  void should_Select_Cells() {
     showWindow();
     clearTreeSelection();
     updateTreeWithDefaultSelectionModel();
@@ -32,17 +33,15 @@ public class JTreeDriver_selectRows_Test extends JTreeDriver_selectCell_TestCase
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
     int[] rows = { 0, 1, 2 };
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectRows(tree, rows);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectRows(tree, rows));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
     int[] rows = { 0, 1, 2 };
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectRows(tree, rows);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectRows(tree, rows));
   }
 }

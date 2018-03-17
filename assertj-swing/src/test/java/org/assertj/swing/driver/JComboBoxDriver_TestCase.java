@@ -12,29 +12,26 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
+import org.assertj.swing.test.core.MethodInvocations;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.function.Executable;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.driver.JComboBoxMakeEditableAndSelectItemTask.makeEditableAndSelectItem;
 import static org.assertj.swing.driver.JComboBoxSetEditableTask.setEditable;
 import static org.assertj.swing.driver.JComboBoxSetSelectedIndexTask.setSelectedIndex;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.test.query.JComboBoxSelectedItemQuery.selectedItemOf;
 import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
-
-import java.awt.Component;
-
-import javax.annotation.Nonnull;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.text.JTextComponent;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.MethodInvocations;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 
 /**
  * Base test case for {@link JComboBoxDriver}.
@@ -47,9 +44,6 @@ public abstract class JComboBoxDriver_TestCase extends RobotBasedTestCase {
   JComboBox comboBox;
   JComboBoxDriver driver;
   MyWindow window;
-
-  @Rule
-  public ExpectedException thrown = none();
 
   @Override
   protected final void onSetUp() {
@@ -99,9 +93,8 @@ public abstract class JComboBoxDriver_TestCase extends RobotBasedTestCase {
     robot.waitForIdle();
   }
 
-  final void assertThatIllegalStateExceptionCauseIsNotEditableComboBox() {
-    thrown.expect(IllegalStateException.class, "Expecting component");
-    thrown.expectMessageToContain("to be editable");
+  final void assertThatIllegalStateExceptionCauseIsNotEditableComboBox(Executable executable) {
+    ExpectedException.assertContainsMessage(IllegalStateException.class, executable, "Expecting component", "to be editable");
   }
 
   @RunsInEDT

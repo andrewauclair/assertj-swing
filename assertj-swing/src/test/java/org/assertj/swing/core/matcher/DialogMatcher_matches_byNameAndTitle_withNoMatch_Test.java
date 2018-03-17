@@ -12,19 +12,16 @@
  */
 package org.assertj.swing.core.matcher;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.builder.JDialogs.dialog;
-
-import java.util.Collection;
-
-import javax.swing.JDialog;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link DialogMatcher#matches(java.awt.Component)}.
@@ -32,23 +29,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class DialogMatcher_matches_byNameAndTitle_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final String title;
-
-  @Parameters
-  public static Collection<Object[]> namesAndTitles() {
+class DialogMatcher_matches_byNameAndTitle_withNoMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndTitles() {
     return newArrayList(new Object[][] { { "someName", "title" }, { "name", "someTitle" }, { "name", "title" } });
   }
 
-  public DialogMatcher_matches_byNameAndTitle_withNoMatch_Test(String name, String title) {
-    this.name = name;
-    this.title = title;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Or_Title_Are_Not_Equal_To_Expected() {
+  @ParameterizedTest
+  @MethodSource("namesAndTitles")
+  void should_Return_False_If_Name_Or_Title_Are_Not_Equal_To_Expected(String name, String title) {
     DialogMatcher matcher = DialogMatcher.withName(name).andTitle(title);
     JDialog dialog = dialog().withName("someName").withTitle("someTitle").createNew();
     assertThat(matcher.matches(dialog)).isFalse();

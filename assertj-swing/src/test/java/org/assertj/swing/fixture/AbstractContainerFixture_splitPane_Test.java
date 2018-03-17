@@ -12,26 +12,21 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.GenericTypeMatcher;
+import org.assertj.swing.exception.ComponentLookupException;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import java.awt.*;
+
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
-
-import java.awt.Dimension;
-
-import javax.annotation.Nonnull;
-import javax.swing.JList;
-import javax.swing.JSplitPane;
-
-import org.assertj.swing.core.GenericTypeMatcher;
-import org.assertj.swing.exception.ComponentLookupException;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests lookups of {@code JSplitPane}s in {@link AbstractContainerFixture}.
@@ -39,9 +34,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private ContainerFixture fixture;
   private MyWindow window;
 
@@ -52,14 +44,14 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
   }
 
   @Test
-  public void should_Find_Visible_JButton_By_Name() {
+  void should_Find_Visible_JButton_By_Name() {
     robot.showWindow(window);
     JSplitPaneFixture splitPane = fixture.splitPane("slideMeSplitPane");
     assertThat(splitPane.target()).isSameAs(window.splitPane);
   }
 
   @Test
-  public void should_Fail_If_Visible_JButton_Not_Found_By_Name() {
+  void should_Fail_If_Visible_JButton_Not_Found_By_Name() {
     thrown.expect(ComponentLookupException.class);
     thrown.expectMessageToContain("Unable to find component using matcher",
         "name='mySplitPane', type=javax.swing.JSplitPane, requireShowing=true");
@@ -67,14 +59,14 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
   }
 
   @Test
-  public void should_Find_Visible_JButton_By_Type() {
+  void should_Find_Visible_JButton_By_Type() {
     robot.showWindow(window);
     JSplitPaneFixture splitPane = fixture.splitPane();
     assertThat(splitPane.target()).isSameAs(window.splitPane);
   }
 
   @Test
-  public void should_Fail_If_Visible_JButton_Not_Found_By_Type() {
+  void should_Fail_If_Visible_JButton_Not_Found_By_Type() {
     thrown.expect(ComponentLookupException.class);
     thrown.expectMessageToContain("Unable to find component using matcher",
         "type=javax.swing.JSplitPane, requireShowing=true");
@@ -82,7 +74,7 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
   }
 
   @Test
-  public void should_Find_Visible_JButton_By_Matcher() {
+  void should_Find_Visible_JButton_By_Matcher() {
     robot.showWindow(window);
     JSplitPaneFixture splitPane = fixture.splitPane(new GenericTypeMatcher<JSplitPane>(JSplitPane.class) {
       @Override
@@ -94,7 +86,7 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
   }
 
   @Test
-  public void should_Fail_If_Visible_JButton_Not_Found_By_Matcher() {
+  void should_Fail_If_Visible_JButton_Not_Found_By_Matcher() {
     thrown.expect(ComponentLookupException.class);
     thrown.expectMessageToContain("Unable to find component using matcher");
     fixture.splitPane(neverMatches(JSplitPane.class));

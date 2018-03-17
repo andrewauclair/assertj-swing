@@ -12,17 +12,11 @@
  */
 package org.assertj.swing.test;
 
-import java.util.Arrays;
+import org.junit.jupiter.api.function.Executable;
+
 import java.util.regex.Pattern;
 
-import org.junit.internal.matchers.TypeSafeMatcher;
-import org.junit.jupiter.api.function.Executable;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * @author Alex Ruiz
  */
-public class ExpectedException implements TestRule {
-  private final org.junit.rules.ExpectedException delegate = org.junit.rules.ExpectedException.none();
+public class ExpectedException {//implements TestRule {
+//  private final org.junit.rules.ExpectedException delegate = org.junit.rules.ExpectedException.none();
 
   public static ExpectedException none() {
     return new ExpectedException();
@@ -41,10 +35,10 @@ public class ExpectedException implements TestRule {
   private ExpectedException() {
   }
 
-  @Override
-  public Statement apply(Statement base, Description description) {
-    return delegate.apply(base, description);
-  }
+//  @Override
+//  public Statement apply(Statement base, Description description) {
+//    return delegate.apply(base, description);
+//  }
 
   public void expectAssertionError(String message) {
     expect(AssertionError.class, message);
@@ -65,7 +59,11 @@ public class ExpectedException implements TestRule {
     expectAssertionErrorForProperty(property, quote(expected), quote(actual));
   }
 
-  private String quote(int actual) {
+  public static void assertAssertionError(Executable executable, String property, int expected, int actual) {
+    assertAssertionErrorForProperty(executable, property, quote(expected), quote(actual));
+  }
+
+  private static String quote(int actual) {
     return "[" + actual + "]";
   }
 
@@ -144,65 +142,65 @@ public class ExpectedException implements TestRule {
   }
 
   public void expect(Class<? extends Throwable> type) {
-    delegate.expect(type);
+//    delegate.expect(type);
   }
 
   public void expectMessage(String message) {
-    delegate.expectMessage(message);
+//    delegate.expectMessage(message);
   }
 
   public void expectMessageToContain(final String... strings) {
-    delegate.expectMessage(new TypeSafeMatcher<String>() {
-      @Override
-      public void describeTo(org.hamcrest.Description description) {
-        description.appendText("containing: " + Arrays.toString(strings));
-      }
-
-      @Override
-      public boolean matchesSafely(String item) {
-        for (String s : strings) {
-          if (!item.contains(s)) {
-            return false;
-          }
-        }
-        return true;
-      }
-    });
+//    delegate.expectMessage(new TypeSafeMatcher<String>() {
+//      @Override
+//      public void describeTo(org.hamcrest.Description description) {
+//        description.appendText("containing: " + Arrays.toString(strings));
+//      }
+//
+//      @Override
+//      public boolean matchesSafely(String item) {
+//        for (String s : strings) {
+//          if (!item.contains(s)) {
+//            return false;
+//          }
+//        }
+//        return true;
+//      }
+//    });
   }
 
   public void expectMessageNotToContain(final String... strings) {
-    delegate.expectMessage(new TypeSafeMatcher<String>() {
-      @Override
-      public void describeTo(org.hamcrest.Description description) {
-        description.appendText("not containing: " + Arrays.toString(strings));
-      }
-
-      @Override
-      public boolean matchesSafely(String item) {
-        for (String s : strings) {
-          if (item.contains(s)) {
-            return false;
-          }
-        }
-        return true;
-      }
-    });
+//    delegate.expectMessage(new TypeSafeMatcher<String>() {
+//      @Override
+//      public void describeTo(org.hamcrest.Description description) {
+//        description.appendText("not containing: " + Arrays.toString(strings));
+//      }
+//
+//      @Override
+//      public boolean matchesSafely(String item) {
+//        for (String s : strings) {
+//          if (item.contains(s)) {
+//            return false;
+//          }
+//        }
+//        return true;
+//      }
+//    });
   }
 
   public void expectWrappingException(Class<? extends Throwable> type, final Throwable wrapped) {
-    expect(type);
-    delegate.expect(new TypeSafeMatcher<Throwable>() {
-
-      @Override
-      public void describeTo(org.hamcrest.Description description) {
-        description.appendText("cause is: " + wrapped);
-      }
-
-      @Override
-      public boolean matchesSafely(Throwable item) {
-        return item.getCause() == wrapped;
-      }
-    });
+//    expect(type);
+//    delegate.expect(new TypeSafeMatcher<Throwable>() {
+//
+//      @Override
+//      public void describeTo(org.hamcrest.Description description) {
+//        description.appendText("cause is: " + wrapped);
+//      }
+//
+//      @Override
+//      public boolean matchesSafely(Throwable item) {
+//        return item.getCause() == wrapped;
+//      }
+//    });
   }
 
   public void expectIllegalStateIsNotShowingComponent() {

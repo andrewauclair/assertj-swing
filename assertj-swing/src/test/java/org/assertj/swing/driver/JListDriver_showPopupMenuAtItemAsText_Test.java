@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
 import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
 
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.recorder.ToolkitClickRecorder;
 import org.junit.Rule;
@@ -27,12 +28,11 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_showPopupMenuAtItemAsText_Test extends JListDriver_showPopupMenu_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class JListDriver_showPopupMenuAtItemAsText_Test extends JListDriver_showPopupMenu_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Show_Popup_Menu_At_Item_With_Given_Value() {
+  void should_Show_Popup_Menu_At_Item_With_Given_Value() {
     showWindow();
     driver.click(list);
     ToolkitClickRecorder recorder = clickRecorder.attachToToolkitFor(list);
@@ -44,7 +44,7 @@ public class JListDriver_showPopupMenuAtItemAsText_Test extends JListDriver_show
   }
 
   @Test
-  public void should_Show_Popup_Menu_At_Item_Matching_Pattern() {
+  void should_Show_Popup_Menu_At_Item_Matching_Pattern() {
     showWindow();
     driver.click(list);
     ToolkitClickRecorder recorder = clickRecorder.attachToToolkitFor(list);
@@ -56,15 +56,13 @@ public class JListDriver_showPopupMenuAtItemAsText_Test extends JListDriver_show
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Disabled() {
+  void should_Throw_Error_If_JList_Is_Disabled() {
     disableList();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.showPopupMenu(list, "o.*");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.showPopupMenu(list, "o.*"));
   }
 
   @Test
-  public void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.showPopupMenu(list, "o.*");
+  void should_Throw_Error_If_JList_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.showPopupMenu(list, "o.*"));
   }
 }

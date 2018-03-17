@@ -12,27 +12,27 @@
  */
 package org.assertj.swing.keystroke;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.assertj.swing.exception.ParsingException;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link KeyStrokeMappingsParser#mappingFrom(String)}.
  * 
  * @author Alex Ruiz
  */
-public class KeyStrokeMappingsParser_mappingFrom_withInvalidInput_Test {
+class KeyStrokeMappingsParser_mappingFrom_withInvalidInput_Test {
   private KeyStrokeMappingsParser parser;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     parser = new KeyStrokeMappingsParser();
   }
 
   @Test
-  public void should_Throw_Error_If_Line_Does_Not_Conform_With_Pattern() {
+  void should_Throw_Error_If_Line_Does_Not_Conform_With_Pattern() {
     try {
       parser.mappingFrom("Hello World!");
     } catch (ParsingException e) {
@@ -42,7 +42,7 @@ public class KeyStrokeMappingsParser_mappingFrom_withInvalidInput_Test {
   }
 
   @Test
-  public void should_Throw_Error_If_Char_Cannot_Be_Obtained() {
+  void should_Throw_Error_If_Char_Cannot_Be_Obtained() {
     try {
       parser.mappingFrom(", COMMA, NO_MASK");
     } catch (ParsingException e) {
@@ -51,7 +51,7 @@ public class KeyStrokeMappingsParser_mappingFrom_withInvalidInput_Test {
   }
 
   @Test
-  public void should_Throw_Error_If_Key_Code_Cannot_Be_Obtained() {
+  void should_Throw_Error_If_Key_Code_Cannot_Be_Obtained() {
     try {
       parser.mappingFrom("A, SOME_KEY, NO_MASK");
     } catch (ParsingException e) {
@@ -60,7 +60,7 @@ public class KeyStrokeMappingsParser_mappingFrom_withInvalidInput_Test {
   }
 
   @Test
-  public void should_Throw_Error_If_Modifiers_Cannot_Be_Obtained() {
+  void should_Throw_Error_If_Modifiers_Cannot_Be_Obtained() {
     try {
       parser.mappingFrom("A, A, SHIFT");
     } catch (ParsingException e) {

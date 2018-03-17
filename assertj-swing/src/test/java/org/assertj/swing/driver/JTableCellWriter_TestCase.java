@@ -12,20 +12,17 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.driver.JTableCellValueQuery.cellValueOf;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import java.awt.Dimension;
-
-import javax.swing.JTable;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.cell.JTableCellWriter;
 import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Rule;
 import org.junit.jupiter.api.function.Executable;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.swing.driver.JTableCellValueQuery.cellValueOf;
 
 /**
  * Test case for implementations of {@link JTableCellWriter}.
@@ -37,9 +34,6 @@ public abstract class JTableCellWriter_TestCase extends RobotBasedTestCase {
   TableDialogEditDemoWindow window;
   JTable table;
   JTableCellWriter writer;
-
-  @Rule
-  public ExpectedException thrown = none();
 
   @Override
   protected final void onSetUp() {

@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
@@ -23,20 +24,19 @@ import static org.assertj.swing.data.Index.atIndex;
  * 
  * @author William Bakker
  */
-public class JTabbedPaneDriver_requireTabToolTipTextAsText_Test extends JTabbedPaneDriver_TestCase {
+class JTabbedPaneDriver_requireTabToolTipTextAsText_Test extends JTabbedPaneDriver_TestCase {
   @Test
-  public void should_Fail_If_ToolTipText_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("toolTipTextAt", "tip1", Pattern.compile("Hello"));
-    driver.requireTabToolTipText(tabbedPane, "Hello", atIndex(0));
+  void should_Fail_If_ToolTipText_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertAssertionError(() -> driver.requireTabToolTipText(tabbedPane, "Hello", atIndex(0)), "toolTipTextAt", "tip1", Pattern.compile("Hello"));
   }
 
   @Test
-  public void should_Pass_If_ToolTipText_Is_Equal_To_Expected() {
+  void should_Pass_If_ToolTipText_Is_Equal_To_Expected() {
     driver.requireTabToolTipText(tabbedPane, "tip1", atIndex(0));
   }
 
   @Test
-  public void should_Pass_If_ToolTipText_Matches_Pattern() {
+  void should_Pass_If_ToolTipText_Matches_Pattern() {
     driver.requireTabToolTipText(tabbedPane, "t.*", atIndex(0));
   }
 }

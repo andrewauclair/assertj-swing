@@ -15,6 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.swing.driver.JTreeSetEditableTask.setEditable;
 
 import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,20 +23,18 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_requireEditable_Test extends JTreeDriver_TestCase {
+class JTreeDriver_requireEditable_Test extends JTreeDriver_TestCase {
   @Test
-  public void should_Pass_If_JTree_Is_Editable() {
+  void should_Pass_If_JTree_Is_Editable() {
     setJTreeEditable(true);
     robot.waitForIdle();
     driver.requireEditable(tree);
   }
 
   @Test
-  public void should_Fail_If_JTree_Is_Not_Editable() {
+  void should_Fail_If_JTree_Is_Not_Editable() {
     setJTreeEditable(false);
-    thrown.expectAssertionError("property:'editable'");
-    thrown.expectMessageToContain("expected:<[tru]e> but was:<[fals]e>");
-    driver.requireEditable(tree);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireEditable(tree), "property:'editable'", "expected:<[tru]e> but was:<[fals]e>");
   }
 
   @RunsInEDT

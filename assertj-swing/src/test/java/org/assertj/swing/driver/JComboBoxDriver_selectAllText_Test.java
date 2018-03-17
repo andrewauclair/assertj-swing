@@ -29,29 +29,28 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JComboBoxDriver_selectAllText_Test extends JComboBoxDriver_TestCase {
+class JComboBoxDriver_selectAllText_Test extends JComboBoxDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Disabled() {
+  void should_Throw_Error_If_JComboBox_Is_Disabled() {
     disableComboBox();
     thrown.expectIllegalStateIsDisabledComponent();
     driver.selectAllText(comboBox);
   }
 
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
     thrown.expectIllegalStateIsNotShowingComponent();
     driver.selectAllText(comboBox);
   }
 
   @Test
-  public void should_Throw_Error_If_JComboBox_Is_Not_Editable() {
+  void should_Throw_Error_If_JComboBox_Is_Not_Editable() {
     showWindow();
-    assertThatIllegalStateExceptionCauseIsNotEditableComboBox();
-    driver.selectAllText(comboBox);
+    assertThatIllegalStateExceptionCauseIsNotEditableComboBox(() -> driver.selectAllText(comboBox));
   }
 
   @Test
-  public void should_Select_All_Text() {
+  void should_Select_All_Text() {
     showWindow();
     makeEditableAndSelectFirstItem();
     robot.waitForIdle();

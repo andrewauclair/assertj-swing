@@ -30,16 +30,16 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class WindowFilter_isIgnored_Test extends WindowFilter_TestCase {
+class WindowFilter_isIgnored_Test extends WindowFilter_TestCase {
   @Test
-  public void should_Return_True_If_Component_Is_Ignored() {
+  void should_Return_True_If_Component_Is_Ignored() {
     Component c = button().createNew();
     addToIgnoredMap(c);
     assertThat(isComponentIgnored(filter, c)).isTrue();
   }
 
   @Test
-  public void should_Return_True_If_Window_Parent_Is_Ignored() {
+  void should_Return_True_If_Window_Parent_Is_Ignored() {
     MyWindow window = MyWindow.createNew();
     Component c = window.button;
     addToIgnoredMap(window);
@@ -47,7 +47,7 @@ public class WindowFilter_isIgnored_Test extends WindowFilter_TestCase {
   }
 
   @Test
-  public void should_Return_True_If_Parent_Of_Window_Is_Ignored() {
+  void should_Return_True_If_Parent_Of_Window_Is_Ignored() {
     TestWindow window = TestWindow.createNewWindow(getClass());
     TestDialog dialog = TestDialog.createNewDialog(window);
     addToIgnoredMap(window);
@@ -55,7 +55,7 @@ public class WindowFilter_isIgnored_Test extends WindowFilter_TestCase {
   }
 
   @Test
-  public void should_Return_False_If_Given_Component_Is_Null() {
+  void should_Return_False_If_Given_Component_Is_Null() {
     assertThat(isComponentIgnored(filter, null)).isFalse();
   }
 

@@ -12,16 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableHeaderLocation#pointAt(javax.swing.table.JTableHeader, int)}.
@@ -34,7 +31,7 @@ class JTableHeaderLocation_pointAtColumnByIndex_withInvalidIndex_Test extends JT
     return newArrayList(new Object[][] { { -1 }, { 2 } });
   }
 
-  @Test
+  @ParameterizedTest
   @MethodSource("indices")
   void shouldThrowErrorIfColumnIndexOutOfBounds(int index) {
     assertThrows(IndexOutOfBoundsException.class, () -> pointAt(index));

@@ -12,20 +12,16 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
 import static org.assertj.swing.data.TableCell.row;
 import static org.assertj.swing.test.data.ZeroAndNegativeProvider.zeroAndNegative;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Collection;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for

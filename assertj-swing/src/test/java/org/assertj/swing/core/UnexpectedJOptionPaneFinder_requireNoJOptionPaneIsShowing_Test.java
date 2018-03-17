@@ -33,31 +33,28 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class UnexpectedJOptionPaneFinder_requireNoJOptionPaneIsShowing_Test extends EDTSafeTestCase {
+class UnexpectedJOptionPaneFinder_requireNoJOptionPaneIsShowing_Test extends EDTSafeTestCase {
   private ComponentFinder delegate;
   private UnexpectedJOptionPaneFinder finder;
-  @Rule
-  public ExpectedException thrown = none();
 
   @Before
-  public void setUp() {
+  void setUp() {
     delegate = mock(ComponentFinder.class);
     finder = new UnexpectedJOptionPaneFinder(delegate);
   }
 
   @Test
-  public void should_Pass_If_There_Are_Not_Any_JOptionPanes_Showing() {
+  void should_Pass_If_There_Are_Not_Any_JOptionPanes_Showing() {
     List<Component> components = newArrayList();
     when(delegate.findAll(OPTION_PANE_MATCHER)).thenReturn(components);
     finder.requireNoJOptionPaneIsShowing();
   }
 
   @Test
-  public void should_Fail_If_There_Is_A_JOptionPane_Showing() {
+  void should_Fail_If_There_Is_A_JOptionPane_Showing() {
     List<Component> found = newArrayList();
     found.add(optionPane().createNew());
     when(delegate.findAll(OPTION_PANE_MATCHER)).thenReturn(found);
-    thrown.expectAssertionError("Expecting no JOptionPane to be showing");
-    finder.requireNoJOptionPaneIsShowing();
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> finder.requireNoJOptionPaneIsShowing(), "Expecting no JOptionPane to be showing");
   }
 }

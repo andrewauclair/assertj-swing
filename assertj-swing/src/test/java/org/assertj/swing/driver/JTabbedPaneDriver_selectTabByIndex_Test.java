@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,17 +20,15 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTabbedPaneDriver_selectTabByIndex_Test extends JTabbedPaneDriver_TestCase {
+class JTabbedPaneDriver_selectTabByIndex_Test extends JTabbedPaneDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_JTabbedPane_Is_Disabled() {
+  void should_Throw_Error_If_JTabbedPane_Is_Disabled() {
     disableTabbedPane();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectTab(tabbedPane, 1);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectTab(tabbedPane, 1));
   }
 
   @Test
-  public void should_Throw_Error_If_JTabbedPane_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectTab(tabbedPane, 1);
+  void should_Throw_Error_If_JTabbedPane_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectTab(tabbedPane, 1));
   }
 }

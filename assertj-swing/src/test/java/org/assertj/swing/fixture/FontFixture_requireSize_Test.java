@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,24 +21,20 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class FontFixture_requireSize_Test extends FontFixture_TestCase {
+class FontFixture_requireSize_Test extends FontFixture_TestCase {
   @Test
-  public void should_Pass_If_Size_Is_Equal_To_Expected() {
+  void should_Pass_If_Size_Is_Equal_To_Expected() {
     fixture().requireSize(8);
   }
 
   @Test
-  public void should_Fail_If_Size_Is_Not_Equal_To_Expected() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[size] expected:<[6]> but was:<[8]>");
-    fixture().requireSize(6);
+  void should_Fail_If_Size_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> fixture().requireSize(6), "[size] expected:<[6]> but was:<[8]>");
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Size_Is_Not_Equal_To_Expected() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[test - size] expected:<[6]> but was:<[8]>");
+  void should_Fail_Showing_Description_If_Size_Is_Not_Equal_To_Expected() {
     FontFixture fixture = new FontFixture(font(), "test");
-    fixture.requireSize(6);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> fixture.requireSize(6), "[test - size] expected:<[6]> but was:<[8]>");
   }
 }

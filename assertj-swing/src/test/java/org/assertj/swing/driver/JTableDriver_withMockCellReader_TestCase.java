@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.cell.JTableCellReader;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+
+import javax.swing.*;
+
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
 import static org.assertj.swing.test.builder.JTables.table;
 import static org.mockito.Mockito.mock;
-
-import javax.swing.JTable;
-
-import org.assertj.swing.cell.JTableCellReader;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.BeforeClass;
 
 /**
  * Base test case that uses a mock implementation of {@link JTableCellReader}.
@@ -34,12 +34,12 @@ public abstract class JTableDriver_withMockCellReader_TestCase extends EDTSafeTe
   JTableCellReader cellReader;
   static JTable table;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpTable() {
     table = table().withRowCount(1).withColumnCount(6).createNew();
   }
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     driver = new JTableDriver(singletonRobotMock());
     cellReader = mock(JTableCellReader.class);

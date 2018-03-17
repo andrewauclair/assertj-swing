@@ -12,22 +12,19 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.util.Strings.concat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import java.util.logging.Logger;
-
-import javax.swing.JFrame;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.util.logging.Logger;
+
+import static org.assertj.core.util.Strings.concat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link BasicRobot#showWindow(java.awt.Window)}.
@@ -35,30 +32,26 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class BasicRobot_showWindow_Test extends EDTSafeTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
+class BasicRobot_showWindow_Test extends EDTSafeTestCase {
   private static final Logger LOGGER = Logger.getAnonymousLogger();
 
   private BasicRobot robot;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robot = (BasicRobot) BasicRobot.robotWithNewAwtHierarchy();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     robot.cleanUp();
   }
 
   @Test
-  public void should_Throw_Error_If_Window_Never_Shown() {
+  void should_Throw_Error_If_Window_Never_Shown() {
     AlwaysInvisibleFrame window = AlwaysInvisibleFrame.createNew();
     LOGGER.info(concat("Waiting for ", AlwaysInvisibleFrame.class.getSimpleName(), " to show up"));
-    thrown.expect(WaitTimedOutError.class, "Timed out waiting for Window to open");
-    robot.showWindow(window);
+    ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> robot.showWindow(window), "Timed out waiting for Window to open");
   }
 
   private static class AlwaysInvisibleFrame extends JFrame {

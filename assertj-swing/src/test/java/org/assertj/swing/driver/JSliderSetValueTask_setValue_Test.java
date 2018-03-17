@@ -12,41 +12,30 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.driver.JSliderValueQuery.valueOf;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JSlider;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JSliderSetValueTask#setValue(JSlider, int)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JSliderSetValueTask_setValue_Test extends RobotBasedTestCase {
+class JSliderSetValueTask_setValue_Test extends RobotBasedTestCase {
   private JSlider slider;
 
-  private final int value;
-
-  @Parameters
-  public static Collection<Object[]> values() {
+  private static Collection<Object[]> values() {
     return newArrayList(new Object[][] { { 8 }, { 10 }, { 28 }, { 68 }, { 80 } });
-  }
-
-  public JSliderSetValueTask_setValue_Test(int value) {
-    this.value = value;
   }
 
   @Override
@@ -55,8 +44,9 @@ public class JSliderSetValueTask_setValue_Test extends RobotBasedTestCase {
     slider = window.slider;
   }
 
-  @Test
-  public void shouldReturnValueOfJSlider() {
+  @ParameterizedTest
+  @MethodSource("values")
+  void shouldReturnValueOfJSlider(int value) {
     JSliderSetValueTask.setValue(slider, value);
     robot.waitForIdle();
     assertThat(valueOf(slider)).isEqualTo(value);

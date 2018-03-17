@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.hierarchy;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
 
-import java.awt.Component;
+import java.awt.*;
 import java.util.Set;
 
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Base test case for {@link WindowFilter}.
@@ -28,7 +28,7 @@ import org.junit.Before;
 public abstract class WindowFilter_TestCase extends EDTSafeTestCase {
   WindowFilter filter;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     filter = new WindowFilter(new ParentFinder(), new ChildrenFinder());
     filter.ignored.clear();

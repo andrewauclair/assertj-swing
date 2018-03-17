@@ -12,19 +12,16 @@
  */
 package org.assertj.swing.core.matcher;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.builder.JButtons.button;
-
-import java.util.Collection;
-
-import javax.swing.JButton;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JButtonMatcher#matches(java.awt.Component)}.
@@ -32,23 +29,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JButtonMatcher_matches_byNameAndText_withNotMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final String text;
-
-  @Parameters
-  public static Collection<Object[]> namesAndText() {
+class JButtonMatcher_matches_byNameAndText_withNotMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndText() {
     return newArrayList(new Object[][] { { "someName", "text" }, { "name", "someText" }, { "name", "text" } });
   }
 
-  public JButtonMatcher_matches_byNameAndText_withNotMatch_Test(String name, String text) {
-    this.name = name;
-    this.text = text;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Or_Text_Are_Not_Equal_To_Expected() {
+  @ParameterizedTest
+  @MethodSource("namesAndText")
+  void should_Return_False_If_Name_Or_Text_Are_Not_Equal_To_Expected(String name, String text) {
     JButtonMatcher matcher = JButtonMatcher.withName(name).andText(text);
     JButton button = button().withName("someName").withText("someText").createNew();
     assertThat(matcher.matches(button)).isFalse();

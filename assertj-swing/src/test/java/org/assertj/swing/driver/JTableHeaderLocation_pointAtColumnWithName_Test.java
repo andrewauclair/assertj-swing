@@ -36,10 +36,7 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableHeaderLocation_pointAtColumnWithName_Test extends JTableHeaderLocation_TestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
+class JTableHeaderLocation_pointAtColumnWithName_Test extends JTableHeaderLocation_TestCase {
   private TextMatcher matcher;
 
   @Override
@@ -48,7 +45,7 @@ public class JTableHeaderLocation_pointAtColumnWithName_Test extends JTableHeade
   }
 
   @Test
-  public void should_Return_Point_At_Column() {
+  void should_Return_Point_At_Column() {
     when(matcher.isMatching("0")).thenReturn(false);
     when(matcher.isMatching("1")).thenReturn(true);
     Pair<Integer, Point> pair = matchingIndexAndPoint();
@@ -59,7 +56,7 @@ public class JTableHeaderLocation_pointAtColumnWithName_Test extends JTableHeade
   }
 
   @Test
-  public void should_Return_View_Index() {
+  void should_Return_View_Index() {
     execute(() -> tableHeader.getTable().moveColumn(0, 1));
     when(matcher.isMatching("0")).thenReturn(false);
     when(matcher.isMatching("1")).thenReturn(true);
@@ -71,13 +68,12 @@ public class JTableHeaderLocation_pointAtColumnWithName_Test extends JTableHeade
   }
 
   @Test
-  public void should_Throw_Error_If_Matching_Column_Was_Not_Found() {
+  void should_Throw_Error_If_Matching_Column_Was_Not_Found() {
     when(matcher.isMatching("0")).thenReturn(false);
     when(matcher.isMatching("1")).thenReturn(false);
     when(matcher.description()).thenReturn("text");
     when(matcher.formattedValues()).thenReturn("'Hello'");
-    thrown.expect(LocationUnavailableException.class, "Unable to find column with name matching text 'Hello'");
-    matchingIndexAndPoint();
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> matchingIndexAndPoint(), "Unable to find column with name matching text 'Hello'");
   }
 
   @RunsInEDT

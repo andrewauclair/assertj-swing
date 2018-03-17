@@ -12,15 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JTableDriver#columnIndex(javax.swing.JTable, Object)}.
@@ -28,21 +26,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableDriver_columnIndex_Test extends JTableDriver_TestCase {
-  private final String columnId;
-
-  @Parameters
-  public static Collection<Object[]> ids() {
+class JTableDriver_columnIndex_Test extends JTableDriver_TestCase {
+  private static Collection<Object[]> ids() {
     return newArrayList(columnIds());
   }
 
-  public JTableDriver_columnIndex_Test(String columnId) {
-    this.columnId = columnId;
-  }
-
-  @Test
-  public void should_Return_Column_Index() {
+  @ParameterizedTest
+  @MethodSource("ids")
+  void should_Return_Column_Index(String columnId) {
     assertThat(driver.columnIndex(table, columnId)).isEqualTo(columnIndexFrom(columnId));
   }
 }

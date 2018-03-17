@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 /**
  * Base test case for implementations of {@link InputEventGenerator}.
@@ -63,7 +63,7 @@ public class InputEventGenerator_TestCase extends SequentialEDTSafeTestCase {
     window.destroy();
   }
 
-  @Ignore
+  @Disabled
   public void should_Move_Mouse() {
     eventGenerator.moveMouse(window, 10, 10);
     pause(DELAY);

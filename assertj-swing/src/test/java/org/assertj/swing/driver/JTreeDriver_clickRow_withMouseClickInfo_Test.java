@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.core.MouseClickInfo;
+import org.assertj.swing.test.ExpectedException;
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.assertj.swing.test.recorder.ClickRecorderManager;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
 import static org.assertj.swing.core.MouseClickInfo.rightButton;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.assertj.swing.core.MouseClickInfo;
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#clickRow(javax.swing.JTree, int, MouseClickInfo)}.
@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class JTreeDriver_clickRow_withMouseClickInfo_Test extends JTreeDriver_clickCell_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private static MouseClickInfo mouseClickInfo = rightButton().times(2);
@@ -52,20 +51,17 @@ public class JTreeDriver_clickRow_withMouseClickInfo_Test extends JTreeDriver_cl
   @Test
   void should_Throw_Error_If_Row_Is_Out_Of_Bounds() {
     showWindow();
-    thrown.expectIndexOutOfBoundsException("The given row <100> should be between <0> and <6>");
-    driver.clickRow(tree, 100, mouseClickInfo);
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.clickRow(tree, 100, mouseClickInfo), "The given row <100> should be between <0> and <6>");
   }
 
   @Test
   void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.clickRow(tree, 1, mouseClickInfo);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.clickRow(tree, 1, mouseClickInfo));
   }
 
   @Test
   void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.clickRow(tree, 1, mouseClickInfo);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.clickRow(tree, 1, mouseClickInfo));
   }
 }

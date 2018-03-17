@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,9 +20,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JSpinnerDriver_decrementWithTimes_Test extends JSpinnerDriver_TestCase {
+class JSpinnerDriver_decrementWithTimes_Test extends JSpinnerDriver_TestCase {
   @Test
-  public void should_Decrement_Value() {
+  void should_Decrement_Value() {
     showWindow();
     selectLastValue();
     driver.decrement(spinner, 2);
@@ -29,15 +30,13 @@ public class JSpinnerDriver_decrementWithTimes_Test extends JSpinnerDriver_TestC
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Disabled() {
+  void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disableSpinner();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.decrement(spinner, 2);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.decrement(spinner, 2));
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.decrement(spinner, 2);
+  void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.decrement(spinner, 2));
   }
 }

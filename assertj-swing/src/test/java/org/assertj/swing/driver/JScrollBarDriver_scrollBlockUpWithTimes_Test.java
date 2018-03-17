@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,24 +20,22 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JScrollBarDriver_scrollBlockUpWithTimes_Test extends JScrollBarDriver_TestCase {
+class JScrollBarDriver_scrollBlockUpWithTimes_Test extends JScrollBarDriver_TestCase {
   @Test
-  public void should_Scroll_Block_Up() {
+  void should_Scroll_Block_Up() {
     showWindow();
     driver.scrollBlockUp(scrollBar, 2);
     assertThatScrollBarValueIs(10);
   }
 
   @Test
-  public void should_Throw_Error_If_JScrollBar_Is_Disabled() {
+  void should_Throw_Error_If_JScrollBar_Is_Disabled() {
     disableScrollBar();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.scrollBlockUp(scrollBar, 6);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.scrollBlockUp(scrollBar, 6));
   }
 
   @Test
-  public void should_Throw_Error_If_JScrollBar_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.scrollBlockUp(scrollBar, 6);
+  void should_Throw_Error_If_JScrollBar_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.scrollBlockUp(scrollBar, 6));
   }
 }

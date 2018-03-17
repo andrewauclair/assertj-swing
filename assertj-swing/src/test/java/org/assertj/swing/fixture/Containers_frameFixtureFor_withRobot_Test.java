@@ -12,24 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
 import static java.awt.GridBagConstraints.REMAINDER;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.Box;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Containers#frameFixtureFor(org.assertj.swing.core.Robot, java.awt.Container)}.
@@ -40,13 +33,13 @@ public class Containers_frameFixtureFor_withRobot_Test extends RobotBasedTestCas
   private MyPanel panel;
 
   @Override
-  @Before
+  @BeforeEach
   public void onSetUp() {
     panel = execute(() -> new MyPanel());
   }
 
   @Test
-  public void should_Place_Container_In_JFrame_Without_Showing() {
+  void should_Place_Container_In_JFrame_Without_Showing() {
     FrameFixture frameFixture = null;
     try {
       frameFixture = Containers.frameFixtureFor(robot, panel);

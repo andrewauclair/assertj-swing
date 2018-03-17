@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.DialogDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import java.awt.Dialog;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.DialogDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DialogFixture}.
@@ -29,17 +29,17 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class DialogFixture_withMocks_Test {
+class DialogFixture_withMocks_Test {
   private DialogFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new DialogFixture(mock(Robot.class), mock(Dialog.class));
     fixture.replaceDriverWith(mock(DialogDriver.class));
   }
 
   @Test
-  public void should_Call_RequireModal_In_Driver_And_Return_Self() {
+  void should_Call_RequireModal_In_Driver_And_Return_Self() {
     assertThat(fixture.requireModal()).isSameAs(fixture);
     verify(fixture.driver()).requireModal(fixture.target());
   }

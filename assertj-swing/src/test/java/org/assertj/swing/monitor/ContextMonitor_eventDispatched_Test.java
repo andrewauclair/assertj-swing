@@ -12,42 +12,35 @@
  */
 package org.assertj.swing.monitor;
 
+import org.assertj.swing.listener.WeakEventListener;
+import org.assertj.swing.test.awt.ToolkitStub;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.util.List;
+
 import static java.awt.AWTEvent.COMPONENT_EVENT_MASK;
 import static java.awt.AWTEvent.WINDOW_EVENT_MASK;
-import static java.awt.event.WindowEvent.WINDOW_CLOSED;
-import static java.awt.event.WindowEvent.WINDOW_CLOSING;
-import static java.awt.event.WindowEvent.WINDOW_OPENED;
+import static java.awt.event.WindowEvent.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.monitor.TestContexts.newMockContext;
 import static org.assertj.swing.monitor.TestWindows.newWindowsMock;
 import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 import static org.assertj.swing.test.builder.JTextFields.textField;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
-
-import java.applet.Applet;
-import java.awt.EventQueue;
-import java.awt.FileDialog;
-import java.awt.Window;
-import java.awt.event.ComponentEvent;
-import java.util.List;
-
-import org.assertj.swing.listener.WeakEventListener;
-import org.assertj.swing.test.awt.ToolkitStub;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link ContextMonitor#eventDispatched(java.awt.AWTEvent)}.
  * 
  * @author Alex Ruiz
  */
-public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
+class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   private static final long EVENT_MASK = WINDOW_EVENT_MASK | COMPONENT_EVENT_MASK;
 
   private ContextMonitor monitor;
@@ -56,21 +49,21 @@ public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   private Context context;
   private TestWindow window;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     window = TestWindow.createNewWindow(getClass());
     windows = newWindowsMock();
     context = newMockContext();
     monitor = new ContextMonitor(context, windows);
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     window.destroy();
   }
 
   @Test
-  public void shouldAttachItSelfToToolkit() {
+  void shouldAttachItSelfToToolkit() {
     ToolkitStub toolkit = newToolkitStub();
     monitor.attachTo(toolkit);
     List<WeakEventListener> eventListeners = toolkit.eventListenersUnderEventMask(EVENT_MASK, WeakEventListener.class);
@@ -80,13 +73,13 @@ public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void shouldNotProcessEventIfComponentIsNotWindowOrApplet() {
+  void shouldNotProcessEventIfComponentIsNotWindowOrApplet() {
     monitor.eventDispatched(new ComponentEvent(textField().createNew(), 8));
     verifyZeroInteractions(windows, context);
   }
 
   @Test
-  public void shouldProcessEventWithIdEqualToWindowOpen() {
+  void shouldProcessEventWithIdEqualToWindowOpen() {
     when(context.storedQueueFor(window)).thenReturn(window.getToolkit().getSystemEventQueue());
     monitor.eventDispatched(new ComponentEvent(window, WINDOW_OPENED));
     verify(context).addContextFor(window);
@@ -95,7 +88,7 @@ public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void shouldProcessEventWithIdEqualToWindowOpenedAndMarkWindowAsReadyIfWindowIsFileDialog() {
+  void shouldProcessEventWithIdEqualToWindowOpenedAndMarkWindowAsReadyIfWindowIsFileDialog() {
     Window w = new FileDialog(window);
     when(context.storedQueueFor(w)).thenReturn(w.getToolkit().getSystemEventQueue());
     monitor.eventDispatched(new ComponentEvent(w, WINDOW_OPENED));
@@ -106,7 +99,7 @@ public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void shouldProcessEventWithIdEqualToWindowClosedAndWithRootWindow() {
+  void shouldProcessEventWithIdEqualToWindowClosedAndWithRootWindow() {
     when(context.storedQueueFor(window)).thenReturn(window.getToolkit().getSystemEventQueue());
     monitor.eventDispatched(new ComponentEvent(window, WINDOW_CLOSED));
     verify(context).removeContextFor(window);
@@ -114,7 +107,7 @@ public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void shouldProcessEventWithIdEqualToWindowClosedAndWithNotRootWindow() {
+  void shouldProcessEventWithIdEqualToWindowClosedAndWithNotRootWindow() {
     final Applet applet = new Applet();
     window.add(applet);
     when(context.storedQueueFor(applet)).thenReturn(applet.getToolkit().getSystemEventQueue());
@@ -123,14 +116,14 @@ public class ContextMonitor_eventDispatched_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void shouldNotProcessEventWithIdWindowClosing() {
+  void shouldNotProcessEventWithIdWindowClosing() {
     when(context.storedQueueFor(window)).thenReturn(window.getToolkit().getSystemEventQueue());
     monitor.eventDispatched(new ComponentEvent(window, WINDOW_CLOSING));
     verifyZeroInteractions(windows);
   }
 
   @Test
-  public void shouldAddToContextIfComponentEventQueueNotEqualToSystemEventQueue() {
+  void shouldAddToContextIfComponentEventQueueNotEqualToSystemEventQueue() {
     when(context.storedQueueFor(window)).thenReturn(new EventQueue());
     monitor.eventDispatched(new ComponentEvent(window, WINDOW_CLOSING));
     verify(context).addContextFor(window);

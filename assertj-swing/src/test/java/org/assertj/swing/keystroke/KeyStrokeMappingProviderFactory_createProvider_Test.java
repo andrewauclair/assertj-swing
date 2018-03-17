@@ -12,28 +12,28 @@
  */
 package org.assertj.swing.keystroke;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link KeyStrokeMappingProviderFactory#createProvider(String)}.
  * 
  * @author Alex Ruiz
  */
-public class KeyStrokeMappingProviderFactory_createProvider_Test {
+class KeyStrokeMappingProviderFactory_createProvider_Test {
   private static KeyStrokeMappingProviderFactory factory;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     factory = new KeyStrokeMappingProviderFactory();
   }
 
   @Test
-  public void should_Create_Provider_From_Given_Class_Name() {
+  void should_Create_Provider_From_Given_Class_Name() {
     Class<?> providerType = KeyStrokeMappingProvider_en.class;
     String className = providerType.getName();
     KeyStrokeMappingProvider provider = factory.createProvider(className);
@@ -41,14 +41,14 @@ public class KeyStrokeMappingProviderFactory_createProvider_Test {
   }
 
   @Test
-  public void should_Return_Null_If_Class_Is_Not_KeyStrokeMappingProvider() {
+  void should_Return_Null_If_Class_Is_Not_KeyStrokeMappingProvider() {
     String className = String.class.getName();
     KeyStrokeMappingProvider provider = factory.createProvider(className);
     assertThat(provider).isNull();
   }
 
   @Test
-  public void should_Return_Null_If_Provider_Cannot_Be_Instantiated() {
+  void should_Return_Null_If_Provider_Cannot_Be_Instantiated() {
     String className = MyKeyStrokeMappingProvider.class.getName();
     KeyStrokeMappingProvider provider = factory.createProvider(className);
     assertThat(provider).isNull();

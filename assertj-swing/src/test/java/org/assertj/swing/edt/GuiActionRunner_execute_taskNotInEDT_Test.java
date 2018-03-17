@@ -14,6 +14,7 @@ package org.assertj.swing.edt;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.ExpectedException.none;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 
@@ -47,7 +48,7 @@ public class GuiActionRunner_execute_taskNotInEDT_Test extends SequentialEDTSafe
   }
 
   @Test
-  public void should_Execute_Task() {
+  void should_Execute_Task() {
     TestGuiTask task = new TestGuiTask();
     GuiActionRunner.executeInEDT(false);
     GuiActionRunner.execute(task);
@@ -56,13 +57,13 @@ public class GuiActionRunner_execute_taskNotInEDT_Test extends SequentialEDTSafe
   }
 
   @Test
-  public void should_Wrap_Any_Thrown_Exception() {
+  void should_Wrap_Any_Thrown_Exception() {
     TestGuiTask task = mock(TestGuiTask.class);
     RuntimeException error = expectedError();
     doThrow(error).when(task).executeInEDT();
     GuiActionRunner.executeInEDT(false);
-    thrown.expectWrappingException(UnexpectedException.class, error);
-    GuiActionRunner.execute(task);
+    UnexpectedException unexpectedException = assertThrows(UnexpectedException.class, () -> GuiActionRunner.execute(task));
+    assertThat(unexpectedException.getCause()).isEqualTo(error);
   }
 
   private RuntimeException expectedError() {

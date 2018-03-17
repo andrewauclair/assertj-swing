@@ -17,6 +17,7 @@ import static java.awt.event.KeyEvent.VK_A;
 import static org.assertj.swing.core.KeyPressInfo.keyCode;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -42,9 +43,8 @@ class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriv
   @Test
   void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK));
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK)));
     } finally {
       assertThatTextFieldIsEmpty();
     }
@@ -52,9 +52,8 @@ class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriv
 
   @Test
   void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK));
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK)));
     } finally {
       assertThatTextFieldIsEmpty();
     }

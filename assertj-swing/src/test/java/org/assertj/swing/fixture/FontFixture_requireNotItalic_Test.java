@@ -20,14 +20,14 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class FontFixture_requireNotItalic_Test extends FontFixture_TestCase {
+class FontFixture_requireNotItalic_Test extends FontFixture_TestCase {
   @Test
-  public void should_Pass_If_Font_Is_Not_Italic() {
+  void should_Pass_If_Font_Is_Not_Italic() {
     fixture().requireNotItalic();
   }
 
   @Test
-  public void should_Fail_If_Font_Is_Italic() {
+  void should_Fail_If_Font_Is_Italic() {
     thrown.expect(AssertionError.class);
     thrown.expectMessage("[italic] expected:<[fals]e> but was:<[tru]e>");
     FontFixture fixture = new FontFixture(italicFont());
@@ -35,7 +35,7 @@ public class FontFixture_requireNotItalic_Test extends FontFixture_TestCase {
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Font_Is_Italic() {
+  void should_Fail_Showing_Description_If_Font_Is_Italic() {
     thrown.expect(AssertionError.class);
     thrown.expectMessage("[test - italic] expected:<[fals]e> but was:<[tru]e>");
     FontFixture fixture = new FontFixture(italicFont(), "test");

@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
+// TODO These are broken because they rely on JUnit 4 in the google code
 public class ScreenLock_acquire_acquiredBy_release_Test extends MultithreadedTestCase {
   private LockOwner owner1;
   private LockOwner owner2;

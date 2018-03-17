@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.format;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.builder.JTables.table;
-
-import javax.swing.JTable;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTableFormatter#format(java.awt.Component)}.
@@ -29,19 +29,19 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableFormatter_format_Test extends EDTSafeTestCase {
+class JTableFormatter_format_Test extends EDTSafeTestCase {
   private JTable table;
   private JTableFormatter formatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     table = table().withRowCount(8).withColumnCount(6).withName("table").withSelectionMode(MULTIPLE_INTERVAL_SELECTION)
                    .createNew();
     formatter = new JTableFormatter();
   }
 
   @Test
-  public void should_Format_JTable() {
+  void should_Format_JTable() {
     String formatted = formatter.format(table);
     assertThat(formatted).contains("javax.swing.JTable").contains("name='table'").contains("rowCount=8")
                          .contains("columnCount=6").contains("enabled=true").contains("visible=true")
@@ -49,7 +49,7 @@ public class JTableFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     table = execute(() -> new JTable() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
@@ -58,7 +58,7 @@ public class JTableFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     table = execute(() -> new JTable() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;

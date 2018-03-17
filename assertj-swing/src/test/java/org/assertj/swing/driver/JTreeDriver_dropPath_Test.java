@@ -13,6 +13,7 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.exception.LocationUnavailableException;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,24 +21,21 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_dropPath_Test extends JTreeDriver_dragAndDrop_TestCase {
+class JTreeDriver_dropPath_Test extends JTreeDriver_dragAndDrop_TestCase {
   @Test
-  public void should_Throw_Error_If_Path_Does_Not_Exist() {
+  void should_Throw_Error_If_Path_Does_Not_Exist() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class, "Unable to find path 'somePath'");
-    driver.drop(tree, "somePath");
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.drop(tree, "somePath"), "Unable to find path 'somePath'");
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.drop(tree, "root");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.drop(tree, "root"));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.drop(tree, "root");
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.drop(tree, "root"));
   }
 }

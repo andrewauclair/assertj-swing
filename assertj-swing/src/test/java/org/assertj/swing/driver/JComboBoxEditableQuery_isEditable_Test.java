@@ -12,24 +12,21 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.driver.JComboBoxSetEditableTask.setEditable;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JComboBox;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.driver.JComboBoxSetEditableTask.setEditable;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JComboBoxEditableQuery#isEditable(JComboBox)}.
@@ -37,19 +34,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JComboBoxEditableQuery_isEditable_Test extends RobotBasedTestCase {
+class JComboBoxEditableQuery_isEditable_Test extends RobotBasedTestCase {
   private MyComboBox comboBox;
 
-  private final boolean editable;
-
-  @Parameters
-  public static Collection<Object[]> booleans() {
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
-  }
-
-  public JComboBoxEditableQuery_isEditable_Test(boolean editable) {
-    this.editable = editable;
   }
 
   @Override
@@ -58,8 +47,9 @@ public class JComboBoxEditableQuery_isEditable_Test extends RobotBasedTestCase {
     comboBox = window.comboBox;
   }
 
-  @Test
-  public void should_Indicate_If_JComboBox_Is_Editable() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Indicate_If_JComboBox_Is_Editable(boolean editable) {
     setEditable(comboBox, editable);
     robot.waitForIdle();
     comboBox.startRecording();

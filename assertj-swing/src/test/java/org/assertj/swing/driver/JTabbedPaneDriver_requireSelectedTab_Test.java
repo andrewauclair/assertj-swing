@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.data.Index.atIndex;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,15 +22,15 @@ import org.junit.jupiter.api.Test;
  *
  * @author Christian Rösch
  */
-public class JTabbedPaneDriver_requireSelectedTab_Test extends JTabbedPaneDriver_TestCase {
+class JTabbedPaneDriver_requireSelectedTab_Test extends JTabbedPaneDriver_TestCase {
   @Test
-  public void should_Fail_If_Index_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("selectedIndex", 12, 0);
+  void should_Fail_If_Index_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertAssertionError(() -> driver.requireSelectedTab(tabbedPane, atIndex(12)), "selectedIndex", 12, 0);
     driver.requireSelectedTab(tabbedPane, atIndex(12));
   }
 
   @Test
-  public void should_Pass_If_Index_Is_Equal_To_Expected() {
+  void should_Pass_If_Index_Is_Equal_To_Expected() {
     driver.requireSelectedTab(tabbedPane, atIndex(0));
   }
 }

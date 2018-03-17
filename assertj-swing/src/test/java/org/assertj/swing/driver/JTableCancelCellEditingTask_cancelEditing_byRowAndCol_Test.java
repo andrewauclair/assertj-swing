@@ -12,42 +12,34 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.ExpectedException.none;
-
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link JTableCancelCellEditingTask#cancelEditing(javax.swing.JTable, int, int)}.
  * 
  * @author Alex Ruiz
  */
-public class JTableCancelCellEditingTask_cancelEditing_byRowAndCol_Test extends JTableCellEditingTask_TestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
+class JTableCancelCellEditingTask_cancelEditing_byRowAndCol_Test extends JTableCellEditingTask_TestCase {
   @Test
-  public void should_Throw_Error_If_Row_Index_Is_Out_Of_Bounds() {
-    thrown.expect(IndexOutOfBoundsException.class, "row <8> should be between <0> and <4>");
-    JTableCancelCellEditingTask.cancelEditing(window.table, 8, 2);
+  void should_Throw_Error_If_Row_Index_Is_Out_Of_Bounds() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> JTableCancelCellEditingTask.cancelEditing(window.table, 8, 2), "row <8> should be between <0> and <4>");
   }
 
   @Test
-  public void should_Throw_Error_If_Column_Index_Is_Out_Of_Bounds() {
-    thrown.expect(IndexOutOfBoundsException.class, "column <8> should be between <0> and <1>");
-    JTableCancelCellEditingTask.cancelEditing(window.table, 0, 8);
+  void should_Throw_Error_If_Column_Index_Is_Out_Of_Bounds() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> JTableCancelCellEditingTask.cancelEditing(window.table, 0, 8),"column <8> should be between <0> and <1>");
   }
 
   @Test
-  public void should_Throw_Error_If_Cell_Is_Not_Editable() {
-    thrown.expect(IllegalStateException.class, "Expecting cell [0, 0] to be editable");
-    JTableCancelCellEditingTask.cancelEditing(window.table, 0, 0);
+  void should_Throw_Error_If_Cell_Is_Not_Editable() {
+    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> JTableCancelCellEditingTask.cancelEditing(window.table, 0, 0), "Expecting cell [0, 0] to be editable");
   }
 
   @Test
-  public void should_Cancel_Cell_Editing() {
+  void should_Cancel_Cell_Editing() {
     editTableCellAt(0, 1);
     JTableCancelCellEditingTask.cancelEditing(window.table, 0, 1);
     robot.waitForIdle();

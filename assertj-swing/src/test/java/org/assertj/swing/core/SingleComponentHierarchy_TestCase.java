@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.swing.core.TestComponentHierarchies.newComponentHierarchyMock;
-
 import org.assertj.swing.hierarchy.ComponentHierarchy;
 import org.assertj.swing.hierarchy.SingleComponentHierarchy;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+
+import static org.assertj.swing.core.TestComponentHierarchies.newComponentHierarchyMock;
 
 /**
  * Base test case for {@link SingleComponentHierarchy}.
@@ -30,7 +30,7 @@ public abstract class SingleComponentHierarchy_TestCase extends EDTSafeTestCase 
   TestWindow root;
   SingleComponentHierarchy hierarchy;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     hierarchyDelegate = newComponentHierarchyMock();
     root = TestWindow.createNewWindow(getClass());

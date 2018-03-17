@@ -12,41 +12,34 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.test.ExpectedException.none;
-
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableStopCellEditingTask#checkStateAndStopEditing(javax.swing.JTable, int, int)}.
  * 
  * @author Alex Ruiz
  */
-public class JTableStopCellEditingTask_checkStateAndStopEditing_Test extends JTableCellEditingTask_TestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
+class JTableStopCellEditingTask_checkStateAndStopEditing_Test extends JTableCellEditingTask_TestCase {
   @Test
-  public void should_Throw_Error_If_Row_Index_Is_Out_Of_Bounds() {
-    thrown.expect(IndexOutOfBoundsException.class, "row <8> should be between <0> and <4>");
-    JTableStopCellEditingTask.checkStateAndStopEditing(window.table, 8, 2);
+  void should_Throw_Error_If_Row_Index_Is_Out_Of_Bounds() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> JTableStopCellEditingTask.checkStateAndStopEditing(window.table, 8, 2), "row <8> should be between <0> and <4>");
   }
 
   @Test
-  public void should_Throw_Error_If_Column_Index_Is_Out_Of_Bounds() {
-    thrown.expect(IndexOutOfBoundsException.class, "column <8> should be between <0> and <1>");
-    JTableStopCellEditingTask.checkStateAndStopEditing(window.table, 0, 8);
+  void should_Throw_Error_If_Column_Index_Is_Out_Of_Bounds() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> JTableStopCellEditingTask.checkStateAndStopEditing(window.table, 0, 8), "column <8> should be between <0> and <1>");
   }
 
   @Test
-  public void should_Throw_Error_If_Cell_Is_Not_Editable() {
-    thrown.expect(IllegalStateException.class, "Expecting cell [0, 0] to be editable");
-    JTableStopCellEditingTask.checkStateAndStopEditing(window.table, 0, 0);
+  void should_Throw_Error_If_Cell_Is_Not_Editable() {
+    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> JTableStopCellEditingTask.checkStateAndStopEditing(window.table, 0, 0), "Expecting cell [0, 0] to be editable");
   }
 
   @Test
-  public void should_Stop_Cell_Editing() {
+  void should_Stop_Cell_Editing() {
     int row = 0;
     int col = 1;
     editTableCellAt(row, col);
@@ -56,7 +49,7 @@ public class JTableStopCellEditingTask_checkStateAndStopEditing_Test extends JTa
   }
 
   @Test
-  public void shouldStopCellEditing() {
+  void shouldStopCellEditing() {
     int row = 0;
     int col = 1;
     editTableCellAt(row, col);
@@ -66,8 +59,7 @@ public class JTableStopCellEditingTask_checkStateAndStopEditing_Test extends JTa
   }
 
   @Test
-  public void should_Throw_Error_If_CellEditor_Is_Null() {
-    thrown.expect(NullPointerException.class);
-    JTableStopCellEditingTask.stopEditing(null);
+  void should_Throw_Error_If_CellEditor_Is_Null() {
+    assertThrows(NullPointerException.class, () -> JTableStopCellEditingTask.stopEditing(null));
   }
 }

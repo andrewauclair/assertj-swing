@@ -12,22 +12,19 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.driver.AbstractButtonSelectedQuery.isSelected;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.task.AbstractButtonSetArmedTask.setArmed;
-import static org.assertj.swing.test.task.AbstractButtonSetSelectedTask.setSelected;
-import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
-
-import javax.swing.JCheckBox;
-
 import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.assertj.swing.test.task.ComponentSetVisibleTask;
-import org.junit.Rule;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.driver.AbstractButtonSelectedQuery.isSelected;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.task.AbstractButtonSetArmedTask.setArmed;
+import static org.assertj.swing.test.task.AbstractButtonSetSelectedTask.setSelected;
+import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
 
 /**
  * Base test case for {@link AbstractButtonDriver}.

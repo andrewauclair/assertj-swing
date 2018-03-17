@@ -20,6 +20,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -57,16 +58,12 @@ class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCell_TestC
   @Test
   void should_Fail_If_JTree_Does_Not_Have_Selection() {
     clearTreeSelection();
-    thrown.expectAssertionError("property:'selection'");
-    thrown.expectMessageToContain("No selection");
-    driver.requireSelection(tree, array("root/branch1"));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelection(tree, array("root/branch1")), "property:'selection'", "No selection");
   }
 
   @Test
   void should_Fail_If_Selection_Is_Not_Equal_To_Expected() {
     selectFirstChildOfRoot();
-    thrown.expectAssertionError("property:'selection'");
-    thrown.expectMessageToContain("expecting selection:<[\"root/branch2\"]> but was:<[[root, branch1]]>");
-    driver.requireSelection(tree, array("root/branch2"));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelection(tree, array("root/branch2")), "property:'selection'", "expecting selection:<[\"root/branch2\"]> but was:<[[root, branch1]]>");
   }
 }

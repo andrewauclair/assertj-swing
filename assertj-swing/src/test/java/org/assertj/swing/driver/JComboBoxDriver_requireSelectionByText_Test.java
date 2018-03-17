@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 
 import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,56 +28,50 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JComboBoxDriver_requireSelectionByText_Test extends JComboBoxDriver_TestCase {
+class JComboBoxDriver_requireSelectionByText_Test extends JComboBoxDriver_TestCase {
   @Test
-  public void should_Pass_If_JComboBox_Has_Expected_Selection() {
+  void should_Pass_If_JComboBox_Has_Expected_Selection() {
     selectFirstItem();
     driver.requireSelection(comboBox, "first");
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Pass_If_JComboBox_Has_Matching_Selection() {
+  void should_Pass_If_JComboBox_Has_Matching_Selection() {
     selectFirstItem();
     driver.requireSelection(comboBox, "firs.*");
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Fail_If_JComboBox_Does_Not_Have_Expected_Selection() {
+  void should_Fail_If_JComboBox_Does_Not_Have_Expected_Selection() {
     selectFirstItem();
-    thrown.expectAssertionError("selectedIndex", "first", Pattern.compile("second"));
-    driver.requireSelection(comboBox, "second");
+    ExpectedException.assertAssertionError(() -> driver.requireSelection(comboBox, "second"), "selectedIndex", "first", Pattern.compile("second"));
   }
 
   @Test
-  public void should_Fail_If_JComboBox_Does_Not_Have_Any_Selection() {
+  void should_Fail_If_JComboBox_Does_Not_Have_Any_Selection() {
     clearSelection();
-    thrown.expect(AssertionError.class);
-    thrown.expectMessageToContain("property:'selectedIndex'", "No selection");
-    driver.requireSelection(comboBox, "second");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelection(comboBox, "second"), "property:'selectedIndex'", "No selection");
   }
 
   @Test
-  public void should_Pass_If_Editable_JComboBox_Has_Expected_Selection() {
+  void should_Pass_If_Editable_JComboBox_Has_Expected_Selection() {
     makeEditableAndSelect("Hello World");
     driver.requireSelection(comboBox, "Hello World");
   }
 
   @Test
-  public void should_Fail_If_Editable_JComboBox_Does_Not_Have_Expected_Selection() {
+  void should_Fail_If_Editable_JComboBox_Does_Not_Have_Expected_Selection() {
     makeEditableAndSelect("Hello World");
-    thrown.expectAssertionError("selectedIndex", "Hello World", Pattern.compile("second"));
-    driver.requireSelection(comboBox, "second");
+    ExpectedException.assertAssertionError(() -> driver.requireSelection(comboBox, "second"), "selectedIndex", "Hello World", Pattern.compile("second"));
   }
 
   @Test
-  public void should_Fail_If_Editable_JComboBox_Does_Not_Have_Any_Selection() {
+  void should_Fail_If_Editable_JComboBox_Does_Not_Have_Any_Selection() {
     makeEditableAndClearSelection(comboBox);
     robot.waitForIdle();
-    thrown.expect(AssertionError.class);
-    thrown.expectMessageToContain("property:'selectedIndex'", "No selection");
-    driver.requireSelection(comboBox, "second");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelection(comboBox, "second"), "property:'selectedIndex'", "No selection");
   }
 
   @RunsInEDT

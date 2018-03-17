@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,25 +21,21 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class FontFixture_requireNotPlain_Test extends FontFixture_TestCase {
+class FontFixture_requireNotPlain_Test extends FontFixture_TestCase {
   @Test
-  public void should_Pass_If_Font_Is_Not_Plain() {
+  void should_Pass_If_Font_Is_Not_Plain() {
     fixture().requireNotPlain();
   }
 
   @Test
-  public void should_Fail_If_Font_Is_Plain() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[plain] expected:<[fals]e> but was:<[tru]e>");
+  void should_Fail_If_Font_Is_Plain() {
     FontFixture fixture = new FontFixture(boldFont());
-    fixture.requireNotPlain();
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> fixture.requireNotPlain(), "[plain] expected:<[fals]e> but was:<[tru]e>");
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Font_Is_Plain() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[test - plain] expected:<[fals]e> but was:<[tru]e>");
+  void should_Fail_Showing_Description_If_Font_Is_Plain() {
     FontFixture fixture = new FontFixture(boldFont(), "test");
-    fixture.requireNotPlain();
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> fixture.requireNotPlain(), "[test - plain] expected:<[fals]e> but was:<[tru]e>");
   }
 }

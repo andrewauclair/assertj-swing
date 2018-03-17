@@ -16,6 +16,7 @@ import static org.assertj.swing.test.util.StopWatch.startNewStopWatch;
 import static org.assertj.swing.timing.Timeout.timeout;
 
 import org.assertj.swing.exception.WaitTimedOutError;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.util.StopWatch;
 import org.junit.jupiter.api.Test;
 
@@ -25,21 +26,19 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_requireEnabledWithTimout_Test extends ComponentDriver_TestCase {
+class ComponentDriver_requireEnabledWithTimout_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_Component_Is_Enabled_Before_Timeout() {
+  void should_Pass_If_Component_Is_Enabled_Before_Timeout() {
     driver.requireEnabled(window.button, timeout(100));
   }
 
   @Test
-  public void should_Fail_If_Component_Is_Not_Enabled_Before_Timeout() {
+  void should_Fail_If_Component_Is_Not_Enabled_Before_Timeout() {
     disableButton();
     int timeout = 1000;
     StopWatch stopWatch = startNewStopWatch();
-    thrown.expect(WaitTimedOutError.class, "Timed out waiting for");
-    thrown.expectMessageToContain(window.button.getClass().getName(), "to be enabled");
     try {
-      driver.requireEnabled(window.button, timeout(timeout));
+      ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> driver.requireEnabled(window.button, timeout(timeout)), "Timed out waiting for", window.button.getClass().getName(), "to be enabled");
     } finally {
       stopWatch.stop();
       assertThatWaited(stopWatch, timeout);

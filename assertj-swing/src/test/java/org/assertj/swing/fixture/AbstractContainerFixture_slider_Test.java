@@ -12,23 +12,20 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.GenericTypeMatcher;
+import org.assertj.swing.exception.ComponentLookupException;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+
 import static javax.swing.SwingConstants.HORIZONTAL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
-
-import javax.annotation.Nonnull;
-import javax.swing.JSlider;
-
-import org.assertj.swing.core.GenericTypeMatcher;
-import org.assertj.swing.exception.ComponentLookupException;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests lookups of {@code JSlider}s in {@link AbstractContainerFixture}.
@@ -36,9 +33,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class AbstractContainerFixture_slider_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private ContainerFixture fixture;
   private MyWindow window;
 
@@ -49,14 +43,14 @@ public class AbstractContainerFixture_slider_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Find_Visible_JSlider_By_Name() {
+  void should_Find_Visible_JSlider_By_Name() {
     robot.showWindow(window);
     JSliderFixture slider = fixture.slider("slideMeSlider");
     assertThat(slider.target()).isSameAs(window.slider);
   }
 
   @Test
-  public void should_Fail_If_Visible_JSlider_Not_Found_By_Name() {
+  void should_Fail_If_Visible_JSlider_Not_Found_By_Name() {
     thrown.expect(ComponentLookupException.class);
     thrown.expectMessageToContain("Unable to find component using matcher",
         "name='mySlider', type=javax.swing.JSlider, requireShowing=true");
@@ -64,14 +58,14 @@ public class AbstractContainerFixture_slider_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Find_Visible_JSlider_By_Type() {
+  void should_Find_Visible_JSlider_By_Type() {
     robot.showWindow(window);
     JSliderFixture slider = fixture.slider();
     assertThat(slider.target()).isSameAs(window.slider);
   }
 
   @Test
-  public void should_Fail_If_Visible_JSlider_Not_Found_By_Type() {
+  void should_Fail_If_Visible_JSlider_Not_Found_By_Type() {
     thrown.expect(ComponentLookupException.class);
     thrown.expectMessageToContain("Unable to find component using matcher",
         "type=javax.swing.JSlider, requireShowing=true");
@@ -79,7 +73,7 @@ public class AbstractContainerFixture_slider_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Find_Visible_JSlider_By_Matcher() {
+  void should_Find_Visible_JSlider_By_Matcher() {
     robot.showWindow(window);
     JSliderFixture slider = fixture.slider(new GenericTypeMatcher<JSlider>(JSlider.class) {
       @Override
@@ -91,7 +85,7 @@ public class AbstractContainerFixture_slider_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Fail_If_Visible_JSlider_Not_Found_By_Matcher() {
+  void should_Fail_If_Visible_JSlider_Not_Found_By_Matcher() {
     thrown.expect(ComponentLookupException.class);
     thrown.expectMessageToContain("Unable to find component using matcher");
     fixture.slider(neverMatches(JSlider.class));

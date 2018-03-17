@@ -12,20 +12,16 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+
+import javax.swing.*;
+import java.awt.*;
+
 import static org.assertj.swing.driver.JProgressBarSetIndetermintateTask.setIntedeterminate;
 import static org.assertj.swing.driver.JProgressBarSetValueTask.setValue;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import java.awt.Dimension;
-
-import javax.swing.JProgressBar;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 
 /**
  * Base test case for {@link JProgressBarDriver}.

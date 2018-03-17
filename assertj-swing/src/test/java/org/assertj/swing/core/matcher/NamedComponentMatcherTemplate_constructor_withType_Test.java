@@ -12,26 +12,26 @@
  */
 package org.assertj.swing.core.matcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import javax.swing.JLabel;
-
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link NamedComponentMatcherTemplate#NamedComponentMatcherTemplate(Class)}.
  * 
  * @author Alex Ruiz
  */
-public class NamedComponentMatcherTemplate_constructor_withType_Test extends NamedComponentMatcherTemplate_TestCase {
-  @Before
-  public final void setUp() {
+class NamedComponentMatcherTemplate_constructor_withType_Test extends NamedComponentMatcherTemplate_TestCase {
+  @BeforeEach
+  final void setUp() {
     matcher = new Matcher(JLabel.class);
   }
 
   @Test
-  public void should_Set_Name_To_Match_To_Any() {
+  void should_Set_Name_To_Match_To_Any() {
     assertThat(matcher.name()).isSameAs(NamedComponentMatcherTemplate.anyValue());
   }
 }

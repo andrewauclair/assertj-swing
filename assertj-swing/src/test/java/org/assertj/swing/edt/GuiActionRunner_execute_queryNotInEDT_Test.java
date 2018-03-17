@@ -14,6 +14,7 @@ package org.assertj.swing.edt;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.ExpectedException.none;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,9 +31,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class GuiActionRunner_execute_queryNotInEDT_Test extends SequentialEDTSafeTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private boolean executeInEDT;
 
   @Override
@@ -47,7 +45,7 @@ public class GuiActionRunner_execute_queryNotInEDT_Test extends SequentialEDTSaf
   }
 
   @Test
-  public void should_Execute_Query() {
+  void should_Execute_Query() {
     String valueToReturnWhenExecuted = "Hello";
     TestGuiQuery query = new TestGuiQuery(valueToReturnWhenExecuted);
     GuiActionRunner.executeInEDT(false);
@@ -58,13 +56,13 @@ public class GuiActionRunner_execute_queryNotInEDT_Test extends SequentialEDTSaf
   }
 
   @Test
-  public void should_Wrap_Any_Thrown_Exception() {
+  void should_Wrap_Any_Thrown_Exception() {
     TestGuiQuery query = mock(TestGuiQuery.class);
     RuntimeException error = expectedError();
     when(query.executeInEDT()).thenThrow(error);
     GuiActionRunner.executeInEDT(false);
-    thrown.expectWrappingException(UnexpectedException.class, error);
-    GuiActionRunner.execute(query);
+    UnexpectedException unexpectedException = assertThrows(UnexpectedException.class, () -> GuiActionRunner.execute(query));
+    assertThat(unexpectedException.getCause()).isEqualTo(error);
   }
 
   private RuntimeException expectedError() {

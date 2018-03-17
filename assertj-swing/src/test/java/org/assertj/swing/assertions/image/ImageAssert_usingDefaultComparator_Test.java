@@ -12,11 +12,11 @@
  */
 package org.assertj.swing.assertions.image;
 
-import static junit.framework.Assert.assertSame;
-
 import org.assertj.core.internal.Objects;
 import org.assertj.swing.assertions.ImageAssert;
 import org.assertj.swing.assertions.ImageAssertBaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Tests for <code>{@link ImageAssert#usingComparator(java.util.Comparator)}</code> and

@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,13 +36,11 @@ class JTableHeaderDriver_clickColumnByIndex_Test extends JTableHeaderDriver_Test
   @Test
   void should_Throw_Error_If_JTableHeader_Is_Disabled() {
     disableTableHeader();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.clickColumn(tableHeader, 0);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.clickColumn(tableHeader, 0));
   }
 
   @Test
   void should_Throw_Error_If_JTableHeader_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.clickColumn(tableHeader, 0);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.clickColumn(tableHeader, 0));
   }
 }

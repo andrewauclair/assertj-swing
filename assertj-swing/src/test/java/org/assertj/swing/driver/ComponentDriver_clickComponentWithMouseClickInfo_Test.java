@@ -17,6 +17,7 @@ import static org.assertj.swing.core.MouseClickInfo.leftButton;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.assertj.swing.core.MouseClickInfo;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.Rule;
@@ -62,9 +63,8 @@ class ComponentDriver_clickComponentWithMouseClickInfo_Test extends ComponentDri
     robot.settings().clickOnDisabledComponentsAllowed(false);
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     disableButton();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.click(window.button, leftButton());
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.click(window.button, leftButton()));
     } finally {
       recorder.wasNotClicked();
     }
@@ -73,9 +73,8 @@ class ComponentDriver_clickComponentWithMouseClickInfo_Test extends ComponentDri
   @Test
   void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.click(window.button, leftButton());
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.click(window.button, leftButton()));
     } finally {
       recorder.wasNotClicked();
     }

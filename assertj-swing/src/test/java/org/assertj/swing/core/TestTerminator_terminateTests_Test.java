@@ -12,31 +12,25 @@
  */
 package org.assertj.swing.core;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link TestTerminator#terminateTests()}.
  * 
  * @author Alex Ruiz
  */
-public class TestTerminator_terminateTests_Test {
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
+class TestTerminator_terminateTests_Test {
   private ThreadsSource threadsSource;
   private FrameDisposer frameDisposer;
   private MainThreadIdentifier mainThreadIdentifier;
   private TestTerminator terminator;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     threadsSource = mock(ThreadsSource.class);
     frameDisposer = mock(FrameDisposer.class);
     mainThreadIdentifier = mock(MainThreadIdentifier.class);
@@ -44,7 +38,7 @@ public class TestTerminator_terminateTests_Test {
   }
 
   @Test
-  public void should_Terminate_GUI_Tests() {
+  void should_Terminate_GUI_Tests() {
     Thread mainThread = mock(Thread.class);
     Thread[] allThreads = { mainThread };
     when(threadsSource.allThreads()).thenReturn(allThreads);
@@ -55,7 +49,7 @@ public class TestTerminator_terminateTests_Test {
   }
 
   @Test
-  public void should_Not_Throw_Error_If_Main_Thread_Not_Found() {
+  void should_Not_Throw_Error_If_Main_Thread_Not_Found() {
     Thread[] allThreads = new Thread[0];
     when(threadsSource.allThreads()).thenReturn(allThreads);
     when(mainThreadIdentifier.mainThreadIn(allThreads)).thenReturn(null);
@@ -64,7 +58,6 @@ public class TestTerminator_terminateTests_Test {
   }
 
   private void terminateTestsAndCheckExpectedException() {
-    thrown.expect(RuntimeException.class, "User aborted FEST-Swing tests");
-    terminator.terminateTests();
+    ExpectedException.assertContainsMessage(RuntimeException.class, () -> terminator.terminateTests(), "User aborted FEST-Swing tests");
   }
 }

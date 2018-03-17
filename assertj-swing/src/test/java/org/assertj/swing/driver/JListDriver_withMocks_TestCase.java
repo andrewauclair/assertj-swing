@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.BeforeAll;
+
+import javax.swing.*;
+
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
 import static org.mockito.Mockito.mock;
-
-import javax.swing.JList;
-
-import org.junit.BeforeClass;
 
 /**
  * Base test case for {@link JListDriver} that uses mocks as part of its fixture.
@@ -28,7 +28,7 @@ public class JListDriver_withMocks_TestCase {
   static JList list;
   static JListDriver driver;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     list = mock(JList.class);
     driver = new JListDriver(singletonRobotMock());

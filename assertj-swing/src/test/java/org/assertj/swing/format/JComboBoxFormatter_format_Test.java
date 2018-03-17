@@ -12,15 +12,15 @@
  */
 package org.assertj.swing.format;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.builder.JComboBoxes.comboBox;
-
-import javax.swing.JComboBox;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JComboBoxFormatter#format(java.awt.Component)}.
@@ -28,19 +28,19 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JComboBoxFormatter_format_Test extends EDTSafeTestCase {
+class JComboBoxFormatter_format_Test extends EDTSafeTestCase {
   private JComboBox<?> comboBox;
   private JComboBoxFormatter formatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     comboBox = comboBox().editable(true).withItems("One", 2, "Three", 4).withName("comboBox").withSelectedIndex(1)
                          .createNew();
     formatter = new JComboBoxFormatter();
   }
 
   @Test
-  public void should_Format_JComboBox() {
+  void should_Format_JComboBox() {
     String formatted = formatter.format(comboBox);
     assertThat(formatted).contains("javax.swing.JComboBox").contains("name='comboBox'").contains("selectedItem=2")
                          .contains("contents=[\"One\", 2, \"Three\", 4]").contains("editable=true")
@@ -49,7 +49,7 @@ public class JComboBoxFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     comboBox = execute(() -> new JComboBox() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
@@ -58,7 +58,7 @@ public class JComboBoxFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     comboBox = execute(() -> new JComboBox() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;

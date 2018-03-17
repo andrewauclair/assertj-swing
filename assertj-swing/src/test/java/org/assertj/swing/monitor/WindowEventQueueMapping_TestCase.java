@@ -12,14 +12,13 @@
  */
 package org.assertj.swing.monitor;
 
-import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
+import org.assertj.swing.test.awt.ToolkitStub;
+import org.junit.jupiter.api.BeforeEach;
 
-import java.awt.EventQueue;
-import java.awt.Window;
+import java.awt.*;
 import java.util.Map;
 
-import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Before;
+import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 
 /**
  * Base test case for {@link WindowEventQueueMapping}.
@@ -32,7 +31,7 @@ public abstract class WindowEventQueueMapping_TestCase {
   WindowEventQueueMapping mapping;
   Map<EventQueue, Map<Window, Boolean>> queueMap;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     eventQueue = new EventQueue();
     toolkit = newToolkitStub(eventQueue);

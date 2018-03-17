@@ -12,48 +12,47 @@
  */
 package org.assertj.swing.hierarchy;
 
+import org.assertj.swing.lock.ScreenLock;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.assertj.swing.test.swing.TestMdiWindow;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.hierarchy.JInternalFrameIconifyTask.iconify;
 import static org.assertj.swing.test.builder.JTextFields.textField;
 import static org.assertj.swing.test.swing.TestMdiWindow.createAndShowNewWindow;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.util.Collection;
-
-import org.assertj.swing.lock.ScreenLock;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.assertj.swing.test.swing.TestMdiWindow;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
 /**
  * Tests for {@link JDesktopPaneChildrenFinder#nonExplicitChildrenOf(Container)}.
  *
  * @author Alex Ruiz
  */
-public class JDesktopPaneChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestCase {
+class JDesktopPaneChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestCase {
   private JDesktopPaneChildrenFinder finder;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     finder = new JDesktopPaneChildrenFinder();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Not_JDesktopPane() {
+  void should_Return_Empty_Collection_If_Component_Is_Not_JDesktopPane() {
     Container container = textField().createNew();
     assertThat(finder.nonExplicitChildrenOf(container)).isEmpty();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Null() {
+  void should_Return_Empty_Collection_If_Component_Is_Null() {
     assertThat(finder.nonExplicitChildrenOf(new Container())).isEmpty();
   }
 
   @Test
-  public void should_Return_Iconified_JInternalFrames_If_Component_Is_JDesktopPane() {
+  void should_Return_Iconified_JInternalFrames_If_Component_Is_JDesktopPane() {
     ScreenLock.instance().acquire(this);
     final TestMdiWindow window = createAndShowNewWindow(getClass());
     iconify(window.internalFrame());

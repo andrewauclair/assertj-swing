@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.BeforeAll;
+
+import javax.swing.*;
+
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
 import static org.mockito.Mockito.mock;
-
-import javax.swing.JTable;
-
-import org.junit.BeforeClass;
 
 /**
  * Base test case for {@link JTableDriver} that uses mocks as part of its fixture.
@@ -28,7 +28,7 @@ public class JTableDriver_withMocks_TestCase {
   static JTableDriver driver;
   static JTable table;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     driver = new JTableDriver(singletonRobotMock());
     table = mock(JTable.class);

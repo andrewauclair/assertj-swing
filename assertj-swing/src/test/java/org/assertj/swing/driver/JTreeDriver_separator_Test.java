@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTreeDriver#replaceSeparator(String)}.
@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 class JTreeDriver_separator_Test {
   private JTreeDriver driver;
 
-  @Before
+  @BeforeEach
   void setUp() {
     driver = new JTreeDriver(singletonRobotMock());
   }

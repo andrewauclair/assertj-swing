@@ -12,17 +12,17 @@
  */
 package org.assertj.swing.assertions.error;
 
-import static junit.framework.Assert.assertEquals;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.assertions.error.ShouldHaveDimension.shouldHaveDimension;
-
-import java.awt.Dimension;
-
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.error.ErrorMessageFactory;
 import org.assertj.core.presentation.StandardRepresentation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.assertions.error.ShouldHaveDimension.shouldHaveDimension;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for <code>{@link ShouldHaveDimension#create(Description)}</code>.

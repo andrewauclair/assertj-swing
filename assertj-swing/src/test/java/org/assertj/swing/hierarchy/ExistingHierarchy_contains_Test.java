@@ -25,9 +25,9 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ExistingHierarchy_contains_Test extends ExistingHierarchy_TestCase {
+class ExistingHierarchy_contains_Test extends ExistingHierarchy_TestCase {
   @Test
-  public void should_Always_Return_True() {
+  void should_Always_Return_True() {
     Component component = textField().createNew();
     assertThat(hierarchy.contains(component)).isTrue();
   }

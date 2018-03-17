@@ -52,7 +52,6 @@ public class FailOnThreadViolationRepaintManager extends CheckThreadViolationRep
   @Nonnull public static FailOnThreadViolationRepaintManager install() {
     Object m = currentRepaintManager();
     if (m instanceof FailOnThreadViolationRepaintManager) {
-      previousRepaintManager = (FailOnThreadViolationRepaintManager)m;
       return (FailOnThreadViolationRepaintManager) m;
     }
     return installNew();
@@ -63,13 +62,11 @@ public class FailOnThreadViolationRepaintManager extends CheckThreadViolationRep
    * Tries to restore the repaint manager before installing the {@link FailOnThreadViolationRepaintManager} via
    * {@link #install()}.
    * </p>
-   * 
+   *
    * @return the restored (and installed) repaint manager.
    * @see #install()
    * @see RepaintManager#setCurrentManager(RepaintManager)
    */
-  // TODO This should be added back in, but the test fails with it
-  //@Nonnull
   public static
   RepaintManager uninstall() {
     RepaintManager restored = previousRepaintManager;

@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,26 +23,23 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JComboBoxDriver_requireSelectionByPattern_Test extends JComboBoxDriver_TestCase {
+class JComboBoxDriver_requireSelectionByPattern_Test extends JComboBoxDriver_TestCase {
   @Test
-  public void should_Pass_If_JComboBox_Has_Matching_Selection() {
+  void should_Pass_If_JComboBox_Has_Matching_Selection() {
     selectFirstItem();
     driver.requireSelection(comboBox, Pattern.compile("firs."));
     assertThatCellReaderWasCalled();
   }
 
   @Test
-  public void should_Pass_If_JComboBox_Does_Not_Have_Matching_Selection() {
+  void should_Pass_If_JComboBox_Does_Not_Have_Matching_Selection() {
     selectFirstItem();
-    thrown.expectAssertionError("selectedIndex", "first", Pattern.compile("sec.*"));
-    driver.requireSelection(comboBox, Pattern.compile("sec.*"));
+    ExpectedException.assertAssertionError(() -> driver.requireSelection(comboBox, Pattern.compile("sec.*")), "selectedIndex", "first", Pattern.compile("sec.*"));
   }
 
   @Test
-  public void should_Fail_If_JComboBox_Does_Not_Have_Any_Selection() {
+  void should_Fail_If_JComboBox_Does_Not_Have_Any_Selection() {
     clearSelection();
-    thrown.expect(AssertionError.class);
-    thrown.expectMessageToContain("property:'selectedIndex'", "No selection");
-    driver.requireSelection(comboBox, Pattern.compile("second"));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireSelection(comboBox, Pattern.compile("second")), "property:'selectedIndex'", "No selection");
   }
 }

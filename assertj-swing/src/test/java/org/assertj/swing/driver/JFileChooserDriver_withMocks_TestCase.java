@@ -12,12 +12,12 @@
  */
 package org.assertj.swing.driver;
 
+import org.junit.jupiter.api.BeforeAll;
+
+import javax.swing.*;
+
 import static org.assertj.swing.core.TestRobots.singletonRobotMock;
 import static org.mockito.Mockito.mock;
-
-import javax.swing.JFileChooser;
-
-import org.junit.BeforeClass;
 
 /**
  * Base test case for {@link JFileChooserDriver} that uses mocks as part of its fixture.
@@ -28,7 +28,7 @@ public class JFileChooserDriver_withMocks_TestCase {
   static JFileChooser fileChooser;
   static JFileChooserDriver driver;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     fileChooser = mock(JFileChooser.class);
     driver = new JFileChooserDriver(singletonRobotMock());

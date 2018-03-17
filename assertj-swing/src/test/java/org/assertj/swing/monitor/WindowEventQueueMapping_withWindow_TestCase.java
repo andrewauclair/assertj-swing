@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.monitor;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Toolkit;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+
+import java.awt.*;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Base test case for {@link WindowEventQueueMapping} that require a {@link java.awt.Window} for their execution.
@@ -31,7 +31,7 @@ import org.junit.BeforeClass;
 public abstract class WindowEventQueueMapping_withWindow_TestCase extends WindowEventQueueMapping_TestCase {
   MyWindow window;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     FailOnThreadViolationRepaintManager.install();
   }
@@ -42,7 +42,7 @@ public abstract class WindowEventQueueMapping_withWindow_TestCase extends Window
     window = MyWindow.createNew(toolkit, getClass());
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     try {
       window.destroy();

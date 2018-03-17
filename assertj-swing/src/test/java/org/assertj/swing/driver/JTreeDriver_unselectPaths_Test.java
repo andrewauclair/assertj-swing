@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,9 +20,9 @@ import org.junit.jupiter.api.Test;
  *
  * @author Christian Rösch
  */
-public class JTreeDriver_unselectPaths_Test extends JTreeDriver_selectCell_TestCase {
+class JTreeDriver_unselectPaths_Test extends JTreeDriver_selectCell_TestCase {
   @Test
-  public void should_Unselect_Cells() {
+  void should_Unselect_Cells() {
     clearTreeSelection();
     showWindow();
     updateTreeWithDefaultSelectionModel();
@@ -33,17 +34,15 @@ public class JTreeDriver_unselectPaths_Test extends JTreeDriver_selectCell_TestC
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
     String[] paths = { "root/branch1/branch1.1", "root/branch1/branch1.2" };
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.unselectPaths(tree, paths);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.unselectPaths(tree, paths));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
     String[] paths = { "root/branch1/branch1.1", "root/branch1/branch1.2" };
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.unselectPaths(tree, paths);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.unselectPaths(tree, paths));
   }
 }

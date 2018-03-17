@@ -16,6 +16,8 @@ import static org.assertj.swing.data.Index.atIndex;
 
 import java.util.regex.Pattern;
 
+import org.assertj.swing.test.ExpectedException;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,15 +27,14 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTabbedPaneDriver_requireTabTitleAsPattern_Test extends JTabbedPaneDriver_TestCase {
+class JTabbedPaneDriver_requireTabTitleAsPattern_Test extends JTabbedPaneDriver_TestCase {
   @Test
-  public void should_Fail_If_Title_Does_Not_Match_Pattern() {
-    thrown.expectAssertionError("titleAt", "One", Pattern.compile("Hello"));
-    driver.requireTabTitle(tabbedPane, Pattern.compile("Hello"), atIndex(0));
+  void should_Fail_If_Title_Does_Not_Match_Pattern() {
+    ExpectedException.assertAssertionError(() -> driver.requireTabTitle(tabbedPane, Pattern.compile("Hello"), atIndex(0)), "titleAt", "One", Pattern.compile("Hello"));
   }
 
   @Test
-  public void should_Pass_If_Title_Matches_Pattern() {
+  void should_Pass_If_Title_Matches_Pattern() {
     driver.requireTabTitle(tabbedPane, Pattern.compile("O.*"), atIndex(0));
   }
 }

@@ -12,15 +12,15 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.assertj.swing.util.RobotFactory;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.Robot;
 import java.lang.reflect.Method;
 
-import org.assertj.swing.util.RobotFactory;
-import org.junit.Before;
+import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Base test case for {@link RobotEventGenerator}.
@@ -31,7 +31,7 @@ public abstract class RobotEventGenerator_TestCase {
   Robot robot;
   RobotEventGenerator eventGenerator;
 
-  @Before
+  @BeforeEach
   public final void setUp() throws Exception {
     RobotFactory robotFactory = newRobotFactoryMock();
     robot = mock(Robot.class);

@@ -12,25 +12,22 @@
  */
 package org.assertj.swing.hierarchy;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.builder.JFrames.frame;
-import static org.assertj.swing.test.builder.JTextFields.textField;
-
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Window;
-import java.util.Collection;
-
-import javax.swing.JFrame;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestDialog;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.builder.JFrames.frame;
+import static org.assertj.swing.test.builder.JTextFields.textField;
 
 /**
  * Tests for {@link WindowChildrenFinder#nonExplicitChildrenOf(Container)}.
@@ -38,34 +35,34 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class WindowChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestCase {
+class WindowChildrenFinder_nonExplicitChildrenOf_Test extends EDTSafeTestCase {
   private WindowChildrenFinder finder;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     finder = new WindowChildrenFinder();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Not_Window() {
+  void should_Return_Empty_Collection_If_Component_Is_Not_Window() {
     Container container = textField().createNew();
     assertThat(finder.nonExplicitChildrenOf(container)).isEmpty();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Null() {
+  void should_Return_Empty_Collection_If_Component_Is_Null() {
     assertThat(finder.nonExplicitChildrenOf(new Container())).isEmpty();
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Window_Does_Not_Have_Owned_Windows() {
+  void should_Return_Empty_Collection_If_Window_Does_Not_Have_Owned_Windows() {
     final JFrame frame = frame().createNew();
     Collection<Component> children = findChildren(finder, frame);
     assertThat(children).isEmpty();
   }
 
   @Test
-  public void should_Return_Owned_Windows() {
+  void should_Return_Owned_Windows() {
     ScreenLock.instance().acquire(this);
     TestWindow window = TestWindow.createNewWindow(getClass());
     TestDialog dialog = TestDialog.createNewDialog(window);

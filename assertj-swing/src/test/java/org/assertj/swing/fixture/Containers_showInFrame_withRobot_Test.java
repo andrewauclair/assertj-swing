@@ -12,24 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
 import static java.awt.GridBagConstraints.REMAINDER;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.Box;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Containers}.
@@ -40,13 +33,13 @@ public class Containers_showInFrame_withRobot_Test extends RobotBasedTestCase {
   private MyPanel panel;
 
   @Override
-  @Before
+  @BeforeEach
   public void onSetUp() {
     panel = execute(() -> new MyPanel());
   }
 
   @Test
-  public void should_Show_Container_In_JFrame() {
+  void should_Show_Container_In_JFrame() {
     FrameFixture frameFixture = null;
     try {
       frameFixture = Containers.showInFrame(robot, panel);

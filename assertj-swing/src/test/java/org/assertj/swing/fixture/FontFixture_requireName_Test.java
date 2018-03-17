@@ -20,22 +20,21 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class FontFixture_requireName_Test extends FontFixture_TestCase {
+class FontFixture_requireName_Test extends FontFixture_TestCase {
   @Test
-  public void should_Pass_If_Name_Is_Equal_To_Expected() {
+  void should_Pass_If_Name_Is_Equal_To_Expected() {
     fixture().requireName("SansSerif");
   }
 
   @Test
-  public void should_Fail_If_Name_Is_Not_Equal_To_Expected() {
-    expectAssertionError("name", "[Monospace]", "[SansSerif]");
+  void should_Fail_If_Name_Is_Not_Equal_To_Expected() {
+    expectAssertionError(() -> fixture().requireName("Monospace"), "name", "[Monospace]", "[SansSerif]");
     fixture().requireName("Monospace");
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Name_Is_Not_Equal_To_Expected() {
-    expectAssertionError("test - name", "[Monospace]", "[SansSerif]");
+  void should_Fail_Showing_Description_If_Name_Is_Not_Equal_To_Expected() {
     FontFixture fixture = new FontFixture(font(), "test");
-    fixture.requireName("Monospace");
+    expectAssertionError(() -> fixture.requireName("Monospace"), "test - name", "[Monospace]", "[SansSerif]");
   }
 }

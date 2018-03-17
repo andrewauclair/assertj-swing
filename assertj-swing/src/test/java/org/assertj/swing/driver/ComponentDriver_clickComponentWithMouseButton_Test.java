@@ -12,17 +12,15 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.awt.AWT.centerOf;
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
-import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.assertj.swing.core.MouseButton;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.swing.awt.AWT.centerOf;
+import static org.assertj.swing.core.MouseButton.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link ComponentDriver#click(java.awt.Component, org.assertj.swing.core.MouseButton)}.
@@ -71,9 +69,8 @@ class ComponentDriver_clickComponentWithMouseButton_Test extends ComponentDriver
     robot.settings().clickOnDisabledComponentsAllowed(false);
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     disableButton();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.click(window.button, RIGHT_BUTTON);
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.click(window.button, RIGHT_BUTTON));
     } finally {
       recorder.wasNotClicked();
     }
@@ -82,9 +79,8 @@ class ComponentDriver_clickComponentWithMouseButton_Test extends ComponentDriver
   @Test
   void should_Throw_Error_When_Clicking_Component_Not_Showing() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.click(window.button, RIGHT_BUTTON);
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.click(window.button, RIGHT_BUTTON));
     } finally {
       recorder.wasNotClicked();
     }

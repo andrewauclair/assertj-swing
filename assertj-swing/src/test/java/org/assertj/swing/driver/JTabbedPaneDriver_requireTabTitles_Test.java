@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.core.util.Arrays.array;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,15 +22,14 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTabbedPaneDriver_requireTabTitles_Test extends JTabbedPaneDriver_TestCase {
+class JTabbedPaneDriver_requireTabTitles_Test extends JTabbedPaneDriver_TestCase {
   @Test
-  public void should_Fail_If_Titles_Are_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("tabTitles", array("[Four", "Fiv]e"), array("[One", "Two", "Thre]e"));
-    driver.requireTabTitles(tabbedPane, array("Four", "Five"));
+  void should_Fail_If_Titles_Are_Not_Equal_To_Expected() {
+    ExpectedException.assertAssertionError(() -> driver.requireTabTitles(tabbedPane, array("Four", "Five")), "tabTitles", array("[Four", "Fiv]e"), array("[One", "Two", "Thre]e"));
   }
 
   @Test
-  public void should_Pass_If_Titles_Are_Equal_To_Expected() {
+  void should_Pass_If_Titles_Are_Equal_To_Expected() {
     driver.requireTabTitles(tabbedPane, array("One", "Two", "Three"));
   }
 }

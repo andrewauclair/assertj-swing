@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.format;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.builder.JLists.list;
-
-import javax.swing.JList;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JListFormatter#format(java.awt.Component)}.
@@ -29,19 +29,19 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JListFormatter_format_Test extends EDTSafeTestCase {
+class JListFormatter_format_Test extends EDTSafeTestCase {
   private JList list;
   private JListFormatter formatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     list = list().withItems("One", 2, "Three", 4).withName("list").withSelectedIndices(0, 1)
                  .withSelectionMode(MULTIPLE_INTERVAL_SELECTION).createNew();
     formatter = new JListFormatter();
   }
 
   @Test
-  public void should_Format_JList() {
+  void should_Format_JList() {
     String formatted = formatter.format(list);
     assertThat(formatted).contains("javax.swing.JList").contains("name='list'").contains("selectedValues=[\"One\", 2]")
                          .contains("contents=[\"One\", 2, \"Three\", 4]")
@@ -50,7 +50,7 @@ public class JListFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     list = execute(() -> new JList() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
@@ -59,7 +59,7 @@ public class JListFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     list = execute(() -> new JList() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;

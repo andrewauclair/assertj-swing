@@ -12,6 +12,15 @@
  */
 package org.assertj.swing.internal.assertions.images;
 
+import org.assertj.core.api.AssertionInfo;
+import org.assertj.swing.internal.assertions.ImagesBaseTest;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 import static java.awt.Color.BLUE;
 import static org.assertj.core.data.Offset.offset;
 import static org.assertj.swing.assertions.data.Point.atPoint;
@@ -19,20 +28,9 @@ import static org.assertj.swing.assertions.error.ShouldBeEqualColors.shouldBeEqu
 import static org.assertj.swing.assertions.error.ShouldBeEqualImages.shouldBeEqualImages;
 import static org.assertj.swing.assertions.error.ShouldHaveDimension.shouldHaveDimension;
 import static org.assertj.swing.test.ErrorMessages.offsetIsNull;
-import static org.assertj.swing.test.awt.AwtTestData.blue;
-import static org.assertj.swing.test.awt.AwtTestData.fivePixelBlueImage;
-import static org.assertj.swing.test.awt.AwtTestData.fivePixelYellowImage;
-import static org.assertj.swing.test.awt.AwtTestData.newImage;
-import static org.assertj.swing.test.awt.AwtTestData.yellow;
+import static org.assertj.swing.test.awt.AwtTestData.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
-
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-
-import org.assertj.core.api.AssertionInfo;
-import org.assertj.swing.internal.assertions.ImagesBaseTest;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Images#assertEqual(AssertionInfo, BufferedImage, BufferedImage, Offset)}</code>.
@@ -43,51 +41,48 @@ import org.junit.jupiter.api.Test;
 public class Images_assertEqual_with_offset_Test extends ImagesBaseTest {
 
   @Override
-  @Before
+  @BeforeEach
   public void setUp() {
     super.setUp();
     offset = offset(5);
   }
 
   @Test
-  public void should_Throw_Error_If_Offset_Is_Null() {
-    thrown.expectNullPointerException(offsetIsNull());
-    images.assertEqual(someInfo(), actual, actual, null);
+  void should_Throw_Error_If_Offset_Is_Null() {
+    ExpectedException.assertContainsMessage(NullPointerException.class, () -> images.assertEqual(someInfo(), actual, actual, null), offsetIsNull());
   }
 
   @Test
-  public void should_Pass_If_Images_Are_Equal() {
+  void should_Pass_If_Images_Are_Equal() {
     Color similarBlue = new Color(0, 0, 250);
     images.assertEqual(someInfo(), actual, newImage(5, 5, similarBlue), offset);
   }
 
   @Test
-  public void should_Pass_If_Images_Are_Same() {
+  void should_Pass_If_Images_Are_Same() {
     images.assertEqual(someInfo(), actual, actual, offset);
   }
 
   @Test
-  public void should_Pass_If_Both_Images_Are_Null() {
+  void should_Pass_If_Both_Images_Are_Null() {
     images.assertEqual(someInfo(), null, null, offset);
   }
 
   @Test
-  public void should_Fail_If_Actual_Is_Null_And_Expected_Is_Not() {
+  void should_Fail_If_Actual_Is_Null_And_Expected_Is_Not() {
     AssertionInfo info = someInfo();
-    thrown.expect(AssertionError.class);
     try {
-      images.assertEqual(someInfo(), null, fivePixelBlueImage(), offset);
+      assertThrows(AssertionError.class, () -> images.assertEqual(someInfo(), null, fivePixelBlueImage(), offset));
     } finally {
       verifyFailureThrownWhenImagesAreNotEqual(info);
     }
   }
 
   @Test
-  public void should_Fail_If_Expected_Is_Null_And_Actual_Is_Not() {
+  void should_Fail_If_Expected_Is_Null_And_Actual_Is_Not() {
     AssertionInfo info = someInfo();
-    thrown.expect(AssertionError.class);
     try {
-      images.assertEqual(someInfo(), actual, null, offset);
+      assertThrows(AssertionError.class, () -> images.assertEqual(someInfo(), actual, null, offset));
     } finally {
       verifyFailureThrownWhenImagesAreNotEqual(info);
     }
@@ -98,24 +93,22 @@ public class Images_assertEqual_with_offset_Test extends ImagesBaseTest {
   }
 
   @Test
-  public void should_Fail_If_Images_Have_Different_Size() {
+  void should_Fail_If_Images_Have_Different_Size() {
     AssertionInfo info = someInfo();
     BufferedImage expected = newImage(6, 6, BLUE);
-    thrown.expect(AssertionError.class);
     try {
-      images.assertEqual(info, actual, expected, offset);
+      assertThrows(AssertionError.class, () -> images.assertEqual(info, actual, expected, offset));
     } finally {
       verify(failures).failure(info, shouldHaveDimension(actual, sizeOf(actual), sizeOf(expected)));
     }
   }
 
   @Test
-  public void should_Fail_If_Images_Have_Same_Size_But_Different_Color() {
+  void should_Fail_If_Images_Have_Same_Size_But_Different_Color() {
     AssertionInfo info = someInfo();
     BufferedImage expected = fivePixelYellowImage();
-    thrown.expect(AssertionError.class);
     try {
-      images.assertEqual(info, actual, expected, offset);
+      assertThrows(AssertionError.class, () -> images.assertEqual(info, actual, expected, offset));
     } finally {
       verify(failures).failure(info, shouldBeEqualColors(yellow(), blue(), atPoint(0, 0), offset));
     }

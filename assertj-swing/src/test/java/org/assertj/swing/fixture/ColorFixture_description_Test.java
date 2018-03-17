@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.fixture;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static java.awt.Color.BLUE;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.awt.Color;
-
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ColorFixture#description()}.
@@ -26,23 +26,23 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ColorFixture_description_Test {
+class ColorFixture_description_Test {
   private Color color;
   private ColorFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     color = BLUE;
     fixture = new ColorFixture(color);
   }
 
   @Test
-  public void shouldReturnNullIfDescriptionIsNull() {
+  void shouldReturnNullIfDescriptionIsNull() {
     assertThat(fixture.description()).isNull();
   }
 
   @Test
-  public void shouldReturnDescription() {
+  void shouldReturnDescription() {
     fixture = new ColorFixture(color, "test");
     assertThat(fixture.description()).isEqualTo("test");
   }

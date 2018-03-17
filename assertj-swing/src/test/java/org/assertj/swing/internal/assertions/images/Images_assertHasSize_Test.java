@@ -12,18 +12,20 @@
  */
 package org.assertj.swing.internal.assertions.images;
 
+import org.assertj.core.api.AssertionInfo;
+import org.assertj.swing.internal.assertions.ImagesBaseTest;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static java.awt.Color.BLUE;
 import static org.assertj.core.util.FailureMessages.actualIsNull;
 import static org.assertj.swing.assertions.error.ShouldHaveDimension.shouldHaveDimension;
 import static org.assertj.swing.test.awt.AwtTestData.newImage;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
-
-import java.awt.Dimension;
-
-import org.assertj.core.api.AssertionInfo;
-import org.assertj.swing.internal.assertions.ImagesBaseTest;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <code>{@link Images#assertHasSize(AssertionInfo, BufferedImage, Dimension)}</code>.
@@ -34,48 +36,44 @@ import org.junit.jupiter.api.Test;
 public class Images_assertHasSize_Test extends ImagesBaseTest {
 
   @Override
-  @Before
+  @BeforeEach
   public void setUp() {
     super.setUp();
     actual = newImage(6, 8, BLUE);
   }
 
   @Test
-  public void should_Fail_If_Actual_Is_Null() {
-    thrown.expectAssertionError(actualIsNull());
-    images.assertHasSize(someInfo(), null, new Dimension());
+  void should_Fail_If_Actual_Is_Null() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertHasSize(someInfo(), null, new Dimension()), actualIsNull());
   }
 
   @Test
-  public void should_Throw_Error_If_Size_Is_Null() {
-    thrown.expectNullPointerException("The given size should not be null");
-    images.assertHasSize(someInfo(), actual, null);
+  void should_Throw_Error_If_Size_Is_Null() {
+    ExpectedException.assertContainsMessage(NullPointerException.class, () -> images.assertHasSize(someInfo(), actual, null), "The given size should not be null");
   }
 
   @Test
-  public void should_Pass_If_Actual_Has_Size() {
+  void should_Pass_If_Actual_Has_Size() {
     images.assertHasSize(someInfo(), actual, new Dimension(6, 8));
   }
 
   @Test
-  public void should_Fail_If_Actual_Has_Different_Width() {
+  void should_Fail_If_Actual_Has_Different_Width() {
     AssertionInfo info = someInfo();
     Dimension size = new Dimension(10, 8);
-    thrown.expect(AssertionError.class);
     try {
-      images.assertHasSize(someInfo(), actual, size);
+      assertThrows(AssertionError.class, () -> images.assertHasSize(someInfo(), actual, size));
     } finally {
       verifyFailureThrownWhenSizesAreNotEqual(info, size);
     }
   }
 
   @Test
-  public void should_Fail_If_Actual_Has_Different_Height() {
+  void should_Fail_If_Actual_Has_Different_Height() {
     AssertionInfo info = someInfo();
     Dimension size = new Dimension(6, 10);
-    thrown.expect(AssertionError.class);
     try {
-      images.assertHasSize(someInfo(), actual, size);
+      assertThrows(AssertionError.class, () -> images.assertHasSize(someInfo(), actual, size));
     } finally {
       verifyFailureThrownWhenSizesAreNotEqual(info, size);
     }

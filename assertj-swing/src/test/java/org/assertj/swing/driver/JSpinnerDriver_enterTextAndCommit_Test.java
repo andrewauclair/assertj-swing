@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,24 +20,22 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JSpinnerDriver_enterTextAndCommit_Test extends JSpinnerDriver_TestCase {
+class JSpinnerDriver_enterTextAndCommit_Test extends JSpinnerDriver_TestCase {
   @Test
-  public void should_Enter_Text_And_Commit() {
+  void should_Enter_Text_And_Commit() {
     showWindow();
     driver.enterTextAndCommit(spinner, "Gandalf");
     assertThatLastValueIsSelected();
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Disabled() {
+  void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disableSpinner();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.enterTextAndCommit(spinner, "Gandalf");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.enterTextAndCommit(spinner, "Gandalf"));
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.enterTextAndCommit(spinner, "Gandalf");
+  void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.enterTextAndCommit(spinner, "Gandalf"));
   }
 }

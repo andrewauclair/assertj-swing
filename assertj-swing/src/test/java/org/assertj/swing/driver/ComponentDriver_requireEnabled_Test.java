@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,17 +21,15 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_requireEnabled_Test extends ComponentDriver_TestCase {
+class ComponentDriver_requireEnabled_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_Component_Is_Enabled() {
+  void should_Pass_If_Component_Is_Enabled() {
     driver.requireEnabled(window.button);
   }
 
   @Test
-  public void should_Fail_If_Component_Is_Not_Enabled() {
+  void should_Fail_If_Component_Is_Not_Enabled() {
     disableButton();
-    thrown.expectAssertionError("property:'enabled'");
-    thrown.expectMessageToContain("expected:<[tru]e> but was:<[fals]e>");
-    driver.requireEnabled(window.button);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireEnabled(window.button), "property:'enabled'", "expected:<[tru]e> but was:<[fals]e>");
   }
 }

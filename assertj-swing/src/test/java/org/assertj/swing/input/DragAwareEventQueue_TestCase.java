@@ -12,14 +12,13 @@
  */
 package org.assertj.swing.input;
 
+import org.assertj.swing.test.awt.ToolkitStub;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.awt.*;
+
 import static org.assertj.swing.test.awt.TestAWTEventListeners.singletonAWTEventListenerMock;
 import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
-
-import java.awt.AWTEvent;
-import java.awt.ActiveEvent;
-
-import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Before;
 
 /**
  * Base test case for {@link DragAwareEventQueue}.
@@ -32,7 +31,7 @@ public abstract class DragAwareEventQueue_TestCase {
   ToolkitStub toolkit;
   DragAwareEventQueue queue;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     toolkit = newToolkitStub();
     queue = new DragAwareEventQueue(toolkit, mask, singletonAWTEventListenerMock());

@@ -12,15 +12,15 @@
  */
 package org.assertj.swing.format;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.builder.JTabbedPanes.tabbedPane;
-
-import javax.swing.JTabbedPane;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JTabbedPaneFormatter#format(java.awt.Component)}.
@@ -28,16 +28,16 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JTabbedPaneFormatter_format_Test extends EDTSafeTestCase {
+class JTabbedPaneFormatter_format_Test extends EDTSafeTestCase {
   private JTabbedPaneFormatter formatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     formatter = new JTabbedPaneFormatter();
   }
 
   @Test
-  public void should_Format_JTabbedPane_With_Tabs_And_Selection() {
+  void should_Format_JTabbedPane_With_Tabs_And_Selection() {
     JTabbedPane tabbedPane = tabbedPane().withName("tabbedPane").withTabs("One", "Two").withSelection(1).createNew();
     String formatted = formatter.format(tabbedPane);
     assertThat(formatted).contains("javax.swing.JTabbedPane").contains("name='tabbedPane'")
@@ -47,7 +47,7 @@ public class JTabbedPaneFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Format_JTabbedPane_With_Tabs_And_Without_Selection() {
+  void should_Format_JTabbedPane_With_Tabs_And_Without_Selection() {
     JTabbedPane tabbedPane = tabbedPane().withName("tabbedPane").withTabs("One", "Two").createNew();
     String formatted = formatter.format(tabbedPane);
     assertThat(formatted).contains("javax.swing.JTabbedPane").contains("name='tabbedPane'")
@@ -58,7 +58,7 @@ public class JTabbedPaneFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Format_JTabbedPane_Without_Tabs() {
+  void should_Format_JTabbedPane_Without_Tabs() {
     JTabbedPane tabbedPane = tabbedPane().withName("tabbedPane").createNew();
     String formatted = formatter.format(tabbedPane);
     assertThat(formatted).contains("javax.swing.JTabbedPane").contains("name='tabbedPane'")
@@ -69,7 +69,7 @@ public class JTabbedPaneFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside() {
     JTabbedPane tabbedPane = execute(() -> new JTabbedPane() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;
@@ -78,7 +78,7 @@ public class JTabbedPaneFormatter_format_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
+  void should_Additionally_Show_Name_Of_Superclass_When_Having_Anynomous_Class_Inside_Anonymous_Class() {
     JTabbedPane tabbedPane = execute(() -> new JTabbedPane() {
       /** Generated serial version UID. */
       private static final long serialVersionUID = -6097882709760432679L;

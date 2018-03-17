@@ -12,39 +12,29 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.test.ExpectedException.none;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
-
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TextAssert#matches(java.util.regex.Pattern)}.
  * 
  * @author Alex Ruiz
  */
-public class TextAssert_matches_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class TextAssert_matches_Test {
   @Test
-  public void should_Fail_If_Actual_Does_Not_Match_Regex_Pattern() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("Expecting:\n \"hello\"\nto match pattern:\n \"bye\"");
-    new TextAssert("hello").matches(Pattern.compile("bye"));
+  void should_Fail_If_Actual_Does_Not_Match_Regex_Pattern() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").matches(Pattern.compile("bye")), "Expecting:\n \"hello\"\nto match pattern:\n \"bye\"");
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Actual_Does_Not_Match_Regex_Pattern() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[A Test] \nExpecting:\n \"hello\"\nto match pattern:\n \"bye\"");
-    new TextAssert("hello").as("A Test").matches(Pattern.compile("bye"));
+  void should_Fail_Showing_Description_If_Actual_Does_Not_Match_Regex_Pattern() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").as("A Test").matches(Pattern.compile("bye")), "[A Test] \nExpecting:\n \"hello\"\nto match pattern:\n \"bye\"");
   }
 
   @Test
-  public void should_Pass_If_Actual_Matches_Regex_Pattern() {
+  void should_Pass_If_Actual_Matches_Regex_Pattern() {
     new TextAssert("Hello").matches(Pattern.compile("Hel.*"));
   }
 }

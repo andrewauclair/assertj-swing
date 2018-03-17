@@ -13,7 +13,7 @@
 package org.assertj.swing.hierarchy;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for {@link ExistingHierarchy}.
@@ -24,7 +24,7 @@ import org.junit.Before;
 public abstract class ExistingHierarchy_TestCase extends EDTSafeTestCase {
   ExistingHierarchy hierarchy;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     hierarchy = new ExistingHierarchy();
   }

@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,36 +20,32 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JScrollBarDriver_scrollTo_Test extends JScrollBarDriver_TestCase {
+class JScrollBarDriver_scrollTo_Test extends JScrollBarDriver_TestCase {
   @Test
-  public void should_Scroll_To_Given_Position() {
+  void should_Scroll_To_Given_Position() {
     showWindow();
     driver.scrollTo(scrollBar, 68);
     assertThatScrollBarValueIs(68);
   }
 
   @Test
-  public void should_Throw_Error_If_JScrollBar_Is_Disabled() {
+  void should_Throw_Error_If_JScrollBar_Is_Disabled() {
     disableScrollBar();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.scrollTo(scrollBar, 68);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.scrollTo(scrollBar, 68));
   }
 
   @Test
-  public void should_Throw_Error_If_JScrollBar_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.scrollTo(scrollBar, 68);
+  void should_Throw_Error_If_JScrollBar_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.scrollTo(scrollBar, 68));
   }
 
   @Test
-  public void should_Throw_Error_If_Position_Is_Less_Than_Minimum() {
-    thrown.expectIllegalArgumentException("Position <0> is not within the JScrollBar bounds of <10> and <80>");
-    driver.scrollTo(scrollBar, 0);
+  void should_Throw_Error_If_Position_Is_Less_Than_Minimum() {
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.scrollTo(scrollBar, 0), "Position <0> is not within the JScrollBar bounds of <10> and <80>");
   }
 
   @Test
-  public void should_Throw_Error_If_Position_Is_Greater_Than_Maximum() {
-    thrown.expectIllegalArgumentException("Position <90> is not within the JScrollBar bounds of <10> and <80>");
-    driver.scrollTo(scrollBar, 90);
+  void should_Throw_Error_If_Position_Is_Greater_Than_Maximum() {
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.scrollTo(scrollBar, 90), "Position <90> is not within the JScrollBar bounds of <10> and <80>");
   }
 }

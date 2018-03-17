@@ -28,6 +28,8 @@ import org.assertj.core.util.Arrays;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,7 +38,7 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class ChildrenFinder_childrenOf_Test extends EDTSafeTestCase {
+class ChildrenFinder_childrenOf_Test extends EDTSafeTestCase {
   private Container container;
   private ChildrenFinderStrategy strategy1;
   private ChildrenFinderStrategy strategy2;
@@ -49,8 +51,8 @@ public class ChildrenFinder_childrenOf_Test extends EDTSafeTestCase {
 
   private ChildrenFinder finder;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     container = newContainerMock();
     strategy1 = childrenFinderStrategyMock();
     strategy2 = childrenFinderStrategyMock();
@@ -66,13 +68,13 @@ public class ChildrenFinder_childrenOf_Test extends EDTSafeTestCase {
     return mock(ChildrenFinderStrategy.class);
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     ChildrenFinder.replaceStrategiesWith(originalStrategies);
   }
 
   @Test
-  public void should_Return_Children_In_Container_And_Strategies() {
+  void should_Return_Children_In_Container_And_Strategies() {
     when(container.getComponents()).thenReturn(Arrays.array(child1));
     when(strategy1.nonExplicitChildrenOf(container)).thenReturn(newArrayList(child2));
     when(strategy2.nonExplicitChildrenOf(container)).thenReturn(newArrayList(child3));
@@ -81,7 +83,7 @@ public class ChildrenFinder_childrenOf_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_Empty_Collection_If_Component_Is_Not_Container() {
+  void should_Return_Empty_Collection_If_Component_Is_Not_Container() {
     Collection<Component> children = finder.childrenOf(child1);
     assertThat(children).isEmpty();
   }

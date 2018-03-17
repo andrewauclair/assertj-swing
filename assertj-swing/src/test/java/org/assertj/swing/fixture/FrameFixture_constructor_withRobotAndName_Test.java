@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.builder.JFrames.frame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.awt.Frame;
-
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ScreenLockReleaser;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.builder.JFrames.frame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link FrameFixture#FrameFixture(org.assertj.swing.core.Robot, String)}.
@@ -31,7 +30,6 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 public class FrameFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase {
-  @Rule
   public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
 
   @Test

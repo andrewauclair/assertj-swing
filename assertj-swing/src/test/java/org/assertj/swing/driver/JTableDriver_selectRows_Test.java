@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,24 +20,22 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class JTableDriver_selectRows_Test extends JTableDriver_TestCase {
+class JTableDriver_selectRows_Test extends JTableDriver_TestCase {
 
   @Test
-  public void should_Throw_Error_If_Index_Is_Negative() {
+  void should_Throw_Error_If_Index_Is_Negative() {
     showWindow();
-    thrown.expect(IndexOutOfBoundsException.class, "row <-1> should be between <0> and <9>");
-    driver.selectRows(table, -1);
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.selectRows(table, -1), "row <-1> should be between <0> and <9>");
   }
 
   @Test
-  public void should_Throw_Error_If_Index_Is_Equal_To_The_Number_Of_Rows() {
+  void should_Throw_Error_If_Index_Is_Equal_To_The_Number_Of_Rows() {
     showWindow();
-    thrown.expect(IndexOutOfBoundsException.class, "row <10> should be between <0> and <9>");
-    driver.selectRows(table, 10);
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.selectRows(table, 10), "row <10> should be between <0> and <9>");
   }
 
   @Test
-  public void should_Select_Rows() {
+  void should_Select_Rows() {
     enableMultipleSelection();
     showWindow();
     driver.selectRows(table, 0, 2);
@@ -45,7 +44,7 @@ public class JTableDriver_selectRows_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Select_Row() {
+  void should_Select_Row() {
     enableMultipleSelection();
     showWindow();
     driver.selectRows(table, 0);
@@ -53,16 +52,14 @@ public class JTableDriver_selectRows_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Disabled() {
+  void should_Throw_Error_If_JTable_Is_Disabled() {
     disableTable();
-    thrown.expectIllegalStateIsDisabledComponent();
     robot.settings().clickOnDisabledComponentsAllowed(false);
-    driver.selectRows(table, 0, 2);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectRows(table, 0, 2));
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectRows(table, 0, 2);
+  void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectRows(table, 0, 2));
   }
 }

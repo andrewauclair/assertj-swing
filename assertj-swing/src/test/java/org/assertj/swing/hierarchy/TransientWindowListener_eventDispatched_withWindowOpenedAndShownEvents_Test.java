@@ -24,6 +24,8 @@ import java.awt.event.WindowEvent;
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -33,36 +35,30 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class TransientWindowListener_eventDispatched_withWindowOpenedAndShownEvents_Test extends
+class TransientWindowListener_eventDispatched_withWindowOpenedAndShownEvents_Test extends
     TransientWindowListener_eventDispatched_TestCase {
-  private final int eventId;
-
-  @Parameters
-  public static Collection<Object[]> componentsAndEvents() {
+  private static Collection<Object[]> componentsAndEvents() {
     return newArrayList(new Object[][] { { WINDOW_OPENED }, { COMPONENT_SHOWN } });
   }
 
-  public TransientWindowListener_eventDispatched_withWindowOpenedAndShownEvents_Test(int eventId) {
-    this.eventId = eventId;
-  }
-
-  @Test
-  public void should_Recognize_Window_If_It_Is_Implicitly_Ignored() {
+  @ParameterizedTest
+  @MethodSource("componentsAndEvents")
+  void should_Recognize_Window_If_It_Is_Implicitly_Ignored(int eventId) {
     when(windowFilter.isImplicitlyIgnored(eventSource)).thenReturn(true);
-    listener.eventDispatched(event());
+    listener.eventDispatched(event(eventId));
     verify(windowFilter).recognize(eventSource);
   }
 
-  @Test
-  public void should_Ignore_Window_If_Parent_Is_Ignored() {
+  @ParameterizedTest
+  @MethodSource("componentsAndEvents")
+  void should_Ignore_Window_If_Parent_Is_Ignored(int eventId) {
     when(windowFilter.isImplicitlyIgnored(eventSource)).thenReturn(false);
     when(windowFilter.isIgnored(parent)).thenReturn(true);
-    listener.eventDispatched(event());
+    listener.eventDispatched(event(eventId));
     verify(windowFilter).ignore(eventSource);
   }
 
-  private AWTEvent event() {
+  private AWTEvent event(int eventId) {
     return eventId == WINDOW_OPENED ? new WindowEvent(eventSource, eventId) : new ComponentEvent(eventSource, eventId);
   }
 }

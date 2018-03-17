@@ -12,18 +12,16 @@
  */
 package org.assertj.swing.monitor;
 
-import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-
-import java.awt.EventQueue;
-
 import org.assertj.swing.test.awt.ToolkitStub;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.awt.*;
+
+import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
+import static org.mockito.Mockito.*;
 
 /**
  * Base test case for {@link Context}.
@@ -39,7 +37,7 @@ public abstract class Context_TestCase extends EDTSafeTestCase {
   TestWindow window;
   Context context;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     eventQueue = new EventQueue();
     toolkit = newToolkitStub(eventQueue);
@@ -55,7 +53,7 @@ public abstract class Context_TestCase extends EDTSafeTestCase {
     reset(windowEventQueueMapping);
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     window.destroy();
   }

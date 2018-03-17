@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JPopupMenu;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,16 +24,16 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class ComponentDriver_invokePopup_Test extends ComponentDriver_invokePopup_TestCase {
+class ComponentDriver_invokePopup_Test extends ComponentDriver_invokePopup_TestCase {
   @Test
-  public void should_Show_JPopupMenu() {
+  void should_Show_JPopupMenu() {
     showWindow();
     JPopupMenu p = driver.invokePopupMenu(window.textField);
     assertThat(p).isSameAs(popupMenu);
   }
 
   @Test
-  public void should_Show_JPopupMenu_On_Disabled_Component() {
+  void should_Show_JPopupMenu_On_Disabled_Component() {
     showWindow();
     disableTextField();
     JPopupMenu p = driver.invokePopupMenu(window.textField);
@@ -40,22 +41,20 @@ public class ComponentDriver_invokePopup_Test extends ComponentDriver_invokePopu
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
+  void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
     robot.settings().clickOnDisabledComponentsAllowed(false);
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.invokePopupMenu(window.textField);
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.invokePopupMenu(window.textField));
     } finally {
       assertThatTextFieldIsEmpty();
     }
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     try {
-      driver.invokePopupMenu(window.textField);
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.invokePopupMenu(window.textField));
     } finally {
       assertThatTextFieldIsEmpty();
     }

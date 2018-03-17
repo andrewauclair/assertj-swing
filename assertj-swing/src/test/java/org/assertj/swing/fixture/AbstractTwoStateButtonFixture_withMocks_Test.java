@@ -12,17 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.AbstractButtonDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import javax.annotation.Nonnull;
-import javax.swing.AbstractButton;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.AbstractButtonDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractTwoStateButtonFixture}.
@@ -30,82 +30,82 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class AbstractTwoStateButtonFixture_withMocks_Test {
+class AbstractTwoStateButtonFixture_withMocks_Test {
   private TwoStateButtonFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new TwoStateButtonFixture();
   }
 
   @Test
-  public void should_Call_Select_In_Driver_And_Return_Self() {
+  void should_Call_Select_In_Driver_And_Return_Self() {
     assertThat(fixture.check()).isSameAs(fixture);
     verify(fixture.driver()).select(fixture.target());
   }
 
   @Test
-  public void should_Call_Deselect_In_Driver_And_Return_Self() {
+  void should_Call_Deselect_In_Driver_And_Return_Self() {
     assertThat(fixture.uncheck()).isSameAs(fixture);
     verify(fixture.driver()).deselect(fixture.target());
   }
 
   @Test
-  public void should_Call_Select_In_Driver_And_Return_Self_If_Checked_Is_True() {
+  void should_Call_Select_In_Driver_And_Return_Self_If_Checked_Is_True() {
     assertThat(fixture.check(true)).isSameAs(fixture);
     verify(fixture.driver()).select(fixture.target());
   }
 
   @Test
-  public void should_Call_Deselect_In_Driver_And_Return_Self_If_Checked_Is_False() {
+  void should_Call_Deselect_In_Driver_And_Return_Self_If_Checked_Is_False() {
     assertThat(fixture.check(false)).isSameAs(fixture);
     verify(fixture.driver()).deselect(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireSelected_In_Driver_And_Return_Self() {
+  void should_Call_RequireSelected_In_Driver_And_Return_Self() {
     assertThat(fixture.requireSelected()).isSameAs(fixture);
     verify(fixture.driver()).requireSelected(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireNotSelected_In_Driver_And_Return_Self() {
+  void should_Call_RequireNotSelected_In_Driver_And_Return_Self() {
     assertThat(fixture.requireNotSelected()).isSameAs(fixture);
     verify(fixture.driver()).requireNotSelected(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireSelected_In_Driver_And_Return_Self_If_Selected_Is_True() {
+  void should_Call_RequireSelected_In_Driver_And_Return_Self_If_Selected_Is_True() {
     assertThat(fixture.requireSelected(true)).isSameAs(fixture);
     verify(fixture.driver()).requireSelected(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireNotSelected_In_Driver_And_Return_Self_If_Selected_Is_False() {
+  void should_Call_RequireNotSelected_In_Driver_And_Return_Self_If_Selected_Is_False() {
     assertThat(fixture.requireSelected(false)).isSameAs(fixture);
     verify(fixture.driver()).requireNotSelected(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireArmed_In_Driver_And_Return_Self() {
+  void should_Call_RequireArmed_In_Driver_And_Return_Self() {
     assertThat(fixture.requireArmed()).isSameAs(fixture);
     verify(fixture.driver()).requireArmed(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireNotArmed_In_Driver_And_Return_Self() {
+  void should_Call_RequireNotArmed_In_Driver_And_Return_Self() {
     assertThat(fixture.requireNotArmed()).isSameAs(fixture);
     verify(fixture.driver()).requireNotArmed(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireArmed_In_Driver_And_Return_Self_If_Armed_Is_True() {
+  void should_Call_RequireArmed_In_Driver_And_Return_Self_If_Armed_Is_True() {
     assertThat(fixture.requireArmed(true)).isSameAs(fixture);
     verify(fixture.driver()).requireArmed(fixture.target());
   }
 
   @Test
-  public void should_Call_RequireNotArmed_In_Driver_And_Return_Self_If_Armed_Is_False() {
+  void should_Call_RequireNotArmed_In_Driver_And_Return_Self_If_Armed_Is_False() {
     assertThat(fixture.requireArmed(false)).isSameAs(fixture);
     verify(fixture.driver()).requireNotArmed(fixture.target());
   }

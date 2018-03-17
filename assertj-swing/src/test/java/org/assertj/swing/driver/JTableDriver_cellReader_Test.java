@@ -12,12 +12,11 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.core.TestRobots.singletonRobotMock;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.swing.core.TestRobots.singletonRobotMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableDriver#replaceCellReader(org.assertj.swing.cell.JTableCellReader)}.

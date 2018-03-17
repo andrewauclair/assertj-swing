@@ -31,9 +31,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class WindowFilter_ignore_Test extends WindowFilter_TestCase {
+class WindowFilter_ignore_Test extends WindowFilter_TestCase {
   @Test
-  public void should_Ignore_Component() {
+  void should_Ignore_Component() {
     Component c = button().createNew();
     addToImplicitlyIgnoredMap(c);
     ignore(filter, c);
@@ -42,7 +42,7 @@ public class WindowFilter_ignore_Test extends WindowFilter_TestCase {
   }
 
   @Test
-  public void should_Ignore_Owned_Windows() {
+  void should_Ignore_Owned_Windows() {
     TestWindow window = TestWindow.createNewWindow(getClass());
     TestDialog dialog = TestDialog.createNewDialog(window);
     addToImplicitlyIgnoredMap(window, dialog);
@@ -52,7 +52,7 @@ public class WindowFilter_ignore_Test extends WindowFilter_TestCase {
   }
 
   @Test
-  public void should_Ignore_Children_Of_Shared_Invisible_Frame() {
+  void should_Ignore_Children_Of_Shared_Invisible_Frame() {
     JDialog dialog = dialog().createNew();
     addToImplicitlyIgnoredMap(dialog);
     ignore(filter, dialog.getOwner());

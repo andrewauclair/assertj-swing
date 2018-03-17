@@ -14,13 +14,13 @@ package org.assertj.swing.assertions;
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.image.BufferedImage;
+
 import static org.assertj.core.api.AssertionInternalData.getActual;
 import static org.assertj.swing.assertions.Assertions.assertThat;
 import static org.assertj.swing.test.awt.AwtTestData.fivePixelBlueImage;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-
-import java.awt.image.BufferedImage;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Tests for <code>{@link AwtAssertions#assertThat(BufferedImage)}</code>.

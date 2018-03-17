@@ -12,10 +12,7 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.test.ExpectedException.none;
-
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,34 +20,29 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class TextAssert_isEqualOrMatches_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class TextAssert_isEqualOrMatches_Test {
   @Test
-  public void should_Fail_If_Actual_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("Expecting:\n \"hello\"\nto match pattern:\n \"bye\"");
-    new TextAssert("hello").isEqualOrMatches("bye");
+  void should_Fail_If_Actual_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").isEqualOrMatches("bye"), "Expecting:\n \"hello\"\nto match pattern:\n \"bye\"");
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Actual_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("[A Test] \nExpecting:\n \"hello\"\nto match pattern:\n \"bye\"");
-    new TextAssert("hello").as("A Test").isEqualOrMatches("bye");
+  void should_Fail_Showing_Description_If_Actual_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").as("A Test").isEqualOrMatches("bye"), "[A Test] \nExpecting:\n \"hello\"\nto match pattern:\n \"bye\"");
   }
 
   @Test
-  public void should_Pass_If_Actual_Is_Equal_To_Expected_But_No_Valid_Pattern() {
+  void should_Pass_If_Actual_Is_Equal_To_Expected_But_No_Valid_Pattern() {
     new TextAssert("[He$$o").isEqualOrMatches("[He$$o");
   }
 
   @Test
-  public void should_Pass_If_Actual_Is_Equal_To_Expected() {
+  void should_Pass_If_Actual_Is_Equal_To_Expected() {
     new TextAssert("Hello").isEqualOrMatches("Hello");
   }
 
   @Test
-  public void should_Pass_If_Actual_Matches_Regex_Pattern() {
+  void should_Pass_If_Actual_Matches_Regex_Pattern() {
     new TextAssert("Hello").isEqualOrMatches("Hell.");
   }
 }

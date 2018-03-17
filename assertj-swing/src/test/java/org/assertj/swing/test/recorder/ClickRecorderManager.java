@@ -12,24 +12,19 @@
  */
 package org.assertj.swing.test.recorder;
 
-import static org.assertj.core.util.Lists.newArrayList;
-
-import java.awt.Component;
+import javax.annotation.Nonnull;
+import java.awt.*;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import static org.assertj.core.util.Lists.newArrayList;
 
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
-
-public class ClickRecorderManager implements TestRule {
+public class ClickRecorderManager {//implements TestRule {
   private List<ToolkitClickRecorder> attachedToolkitClickRecorders = newArrayList();
 
-  @Override
-  public Statement apply(Statement base, Description description) {
-    return new RecorderStatement(base);
-  }
+//  @Override
+//  public Statement apply(Statement base, Description description) {
+//    return new RecorderStatement(base);
+//  }
 
   @Nonnull public ClickRecorder attachDirectlyTo(@Nonnull Component target) {
     return ClickRecorder.attachTo(target);
@@ -41,24 +36,24 @@ public class ClickRecorderManager implements TestRule {
     return clickRecorder;
   }
 
-  private class RecorderStatement extends Statement {
-
-    private Statement base;
-
-    public RecorderStatement(Statement base) {
-      this.base = base;
-    }
-
-    @Override
-    public void evaluate() throws Throwable {
-      try {
-        base.evaluate();
-      } finally {
-        for (ToolkitClickRecorder recorder : attachedToolkitClickRecorders) {
-          ToolkitClickRecorder.remove(recorder);
-        }
-        attachedToolkitClickRecorders.clear();
-      }
-    }
-  }
+//  private class RecorderStatement extends Statement {
+//
+//    private Statement base;
+//
+//    public RecorderStatement(Statement base) {
+//      this.base = base;
+//    }
+//
+//    @Override
+//    public void evaluate() throws Throwable {
+//      try {
+//        base.evaluate();
+//      } finally {
+//        for (ToolkitClickRecorder recorder : attachedToolkitClickRecorders) {
+//          ToolkitClickRecorder.remove(recorder);
+//        }
+//        attachedToolkitClickRecorders.clear();
+//      }
+//    }
+//  }
 }

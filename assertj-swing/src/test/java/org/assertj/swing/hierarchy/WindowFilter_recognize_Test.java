@@ -28,9 +28,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class WindowFilter_recognize_Test extends WindowFilter_TestCase {
+class WindowFilter_recognize_Test extends WindowFilter_TestCase {
   @Test
-  public void should_Recognize_Component() {
+  void should_Recognize_Component() {
     Component c = button().createNew();
     addToIgnoredMap(c);
     addToImplicitlyIgnoredMap(c);
@@ -40,7 +40,7 @@ public class WindowFilter_recognize_Test extends WindowFilter_TestCase {
   }
 
   @Test
-  public void should_Recognize_Children_Of_Shared_Invisible_Frame() {
+  void should_Recognize_Children_Of_Shared_Invisible_Frame() {
     JDialog dialog = dialog().createNew();
     addToIgnoredMap(dialog);
     addToImplicitlyIgnoredMap(dialog);

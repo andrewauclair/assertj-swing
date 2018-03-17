@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.Rule;
@@ -27,7 +28,7 @@ public class JTreeDriver_unselectRow_Test extends JTreeDriver_selectCell_TestCas
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Unselect_Cell() {
+  void should_Unselect_Cell() {
     showWindow();
     clearTreeSelection();
     select(0);
@@ -36,7 +37,7 @@ public class JTreeDriver_unselectRow_Test extends JTreeDriver_selectCell_TestCas
   }
 
   @Test
-  public void should_Not_Do_Anything_If_Cell_Is_Already_Unselected() {
+  void should_Not_Do_Anything_If_Cell_Is_Already_Unselected() {
     showWindow();
     clearTreeSelection();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tree);
@@ -46,15 +47,13 @@ public class JTreeDriver_unselectRow_Test extends JTreeDriver_selectCell_TestCas
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.unselectRow(tree, 0);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.unselectRow(tree, 0));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.unselectRow(tree, 0);
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.unselectRow(tree, 0));
   }
 }

@@ -12,28 +12,22 @@
  */
 package org.assertj.swing.edt;
 
-import static org.assertj.swing.test.ExpectedException.none;
-
-import javax.swing.JTextField;
-
 import org.assertj.swing.exception.EdtViolationException;
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link FailOnThreadViolationRepaintManager#install()}.
  * 
  * @author Alex Ruiz
  */
-public class FailOnThreadViolationRepaintManager_install_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class FailOnThreadViolationRepaintManager_install_Test {
   @Test
-  public void should_Throw_Error_In_Case_Of_EDT_Access_Violation() {
+  void should_Throw_Error_In_Case_Of_EDT_Access_Violation() {
     FailOnThreadViolationRepaintManager.install();
-    thrown.expect(EdtViolationException.class);
-    new JTextField();
+    assertThrows(EdtViolationException.class, JTextField::new);
   }
 }

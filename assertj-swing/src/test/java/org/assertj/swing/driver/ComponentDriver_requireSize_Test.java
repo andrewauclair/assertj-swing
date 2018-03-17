@@ -16,6 +16,7 @@ import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
 
 import java.awt.Dimension;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,18 +25,17 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_requireSize_Test extends ComponentDriver_TestCase {
+class ComponentDriver_requireSize_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_Actual_Size_Is_Equal_To_Expected() {
+  void should_Pass_If_Actual_Size_Is_Equal_To_Expected() {
     Dimension expected = sizeOf(window.button);
     driver.requireSize(window.button, expected);
   }
 
   @Test
-  public void should_Fail_If_Actual_Size_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Actual_Size_Is_Not_Equal_To_Expected() {
     showWindow();
-    thrown.expectAssertionError("property:'size'");
-    thrown.expectMessageToContain("expected:<...awt.Dimension[width=[0,height=0]]>", "but was:<");
+    ExpectedException.assertAssertionError(() -> driver.requireSize(window.button, new Dimension(0, 0)), "property:'size'", "expected:<...awt.Dimension[width=[0,height=0]]>", "but was:<");
     driver.requireSize(window.button, new Dimension(0, 0));
   }
 }

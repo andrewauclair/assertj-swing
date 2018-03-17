@@ -12,27 +12,27 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SimpleFallbackExceptionHandler#handle(Throwable)}.
  * 
  * @author Alex Ruiz
  */
-public class SimpleFallbackExceptionHandler_handle_Test {
+class SimpleFallbackExceptionHandler_handle_Test {
   private SimpleFallbackExceptionHandler handler;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     handler = new SimpleFallbackExceptionHandler();
   }
 
   @Test
-  public void should_Print_Stack_Trace_Of_Given_Exception() {
+  void should_Print_Stack_Trace_Of_Given_Exception() {
     Throwable t = mock(Throwable.class);
     handler.handle(t);
     verify(t).printStackTrace();

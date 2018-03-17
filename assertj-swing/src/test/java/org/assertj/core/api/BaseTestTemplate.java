@@ -12,13 +12,13 @@
  */
 package org.assertj.core.api;
 
-import static junit.framework.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-
 import org.assertj.core.internal.Conditions;
 import org.assertj.core.internal.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.Mockito.mock;
 
 /**
  * Template to write tests for {@link AbstractAssert} implementations.

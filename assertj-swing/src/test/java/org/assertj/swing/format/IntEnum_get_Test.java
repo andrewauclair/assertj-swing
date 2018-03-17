@@ -12,32 +12,32 @@
  */
 package org.assertj.swing.format;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link IntEnum#get(int)}.
  * 
  * @author Alex Ruiz
  */
-public class IntEnum_get_Test {
+class IntEnum_get_Test {
   private IntEnum intEnum;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     intEnum = new IntEnum();
     intEnum.put(0, "Zero");
   }
 
   @Test
-  public void should_Return_Value_For_Existing_Key() {
+  void should_Return_Value_For_Existing_Key() {
     assertThat(intEnum.get(0)).isEqualTo("Zero");
   }
 
   @Test
-  public void should_Return_Key_If_Key_Not_Found() {
+  void should_Return_Key_If_Key_Not_Found() {
     assertThat(intEnum.get(1)).isEqualTo("1");
   }
 }

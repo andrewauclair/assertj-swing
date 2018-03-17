@@ -12,49 +12,39 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import javax.swing.tree.TreePath;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JTree;
-import javax.swing.tree.TreePath;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JTreeDriver#selectPath(javax.swing.JTree, String)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JTreeDriver_selectPath_withManyPaths_Test extends JTreeDriver_selectCell_TestCase {
-  private final String treePath;
-
-  @Parameters
-  public static Collection<Object[]> paths() {
+class JTreeDriver_selectPath_withManyPaths_Test extends JTreeDriver_selectCell_TestCase {
+  private static Collection<Object[]> paths() {
     return newArrayList(new Object[][] { { "root/branch1" }, { "root/branch1/branch1.2" }, { "root" } });
   }
 
-  public JTreeDriver_selectPath_withManyPaths_Test(String treePath) {
-    this.treePath = treePath;
-  }
-
-  @Test
-  public void should_Select_Cell() {
+  @ParameterizedTest
+  @MethodSource("paths")
+  void should_Select_Cell(String treePath) {
     showWindow();
     clearTreeSelection();
     driver.selectPath(tree, treePath);
-    requireThatPathIsSelected();
+    requireThatPathIsSelected(treePath);
   }
 
   @RunsInEDT
-  private void requireThatPathIsSelected() {
+  private void requireThatPathIsSelected(String treePath) {
     assertThat(textOf(selectionPathOf(tree))).isEqualTo(treePath);
   }
 

@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class TransientWindowListener_eventDispatched_Test extends TransientWindowListener_eventDispatched_TestCase {
+class TransientWindowListener_eventDispatched_Test extends TransientWindowListener_eventDispatched_TestCase {
   private WindowEvent event;
 
   @Override
@@ -35,7 +35,7 @@ public class TransientWindowListener_eventDispatched_Test extends TransientWindo
   }
 
   @Test
-  public void shouldFilterClosedWindowAfterEventIsProcessed() {
+  void shouldFilterClosedWindowAfterEventIsProcessed() {
     when(windowFilter.isIgnored(eventSource)).thenReturn(false);
     when(windowFilter.isImplicitlyIgnored(eventSource)).thenReturn(true);
     listener.eventDispatched(event);
@@ -45,7 +45,7 @@ public class TransientWindowListener_eventDispatched_Test extends TransientWindo
   }
 
   @Test
-  public void shouldNotFilterClosedWindowAfterEventIsProcessedIfWindowNotImplicitFiltered() {
+  void shouldNotFilterClosedWindowAfterEventIsProcessedIfWindowNotImplicitFiltered() {
     when(windowFilter.isIgnored(eventSource)).thenReturn(false);
     when(windowFilter.isImplicitlyIgnored(eventSource)).thenReturn(false);
     listener.eventDispatched(event);

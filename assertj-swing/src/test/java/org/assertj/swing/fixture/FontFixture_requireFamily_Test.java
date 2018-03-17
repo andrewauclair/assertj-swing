@@ -20,22 +20,20 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class FontFixture_requireFamily_Test extends FontFixture_TestCase {
+class FontFixture_requireFamily_Test extends FontFixture_TestCase {
   @Test
-  public void should_Pass_If_Family_Is_Equal_To_Expected() {
+  void should_Pass_If_Family_Is_Equal_To_Expected() {
     fixture().requireFamily("SansSerif");
   }
 
   @Test
-  public void should_Fail_If_Family_Is_Not_Equal_To_Expected() {
-    expectAssertionError("family", "[Monospace]", "[SansSerif]");
-    fixture().requireFamily("Monospace");
+  void should_Fail_If_Family_Is_Not_Equal_To_Expected() {
+    expectAssertionError(() -> fixture().requireFamily("Monospace"), "family", "[Monospace]", "[SansSerif]");
   }
 
   @Test
-  public void should_Fail_Showing_Description_If_Family_Is_Not_Equal_To_Expected() {
-    expectAssertionError("test - family", "[Monospace]", "[SansSerif]");
+  void should_Fail_Showing_Description_If_Family_Is_Not_Equal_To_Expected() {
     FontFixture fixture = new FontFixture(font(), "test");
-    fixture.requireFamily("Monospace");
+    expectAssertionError(() -> fixture.requireFamily("Monospace"), "test - family", "[Monospace]", "[SansSerif]");
   }
 }

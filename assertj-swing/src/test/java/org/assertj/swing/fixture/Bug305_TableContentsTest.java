@@ -12,21 +12,19 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Strings.concat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.util.Arrays.format;
-
-import javax.swing.JTable;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TableRenderDemo;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Strings.concat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.util.Arrays.format;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=135">Bug 135</a>.
@@ -38,9 +36,6 @@ public class Bug305_TableContentsTest extends RobotBasedTestCase {
   private MyWindow window;
   private JTableFixture fixture;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected void onSetUp() {
     window = MyWindow.createNew();
@@ -49,7 +44,7 @@ public class Bug305_TableContentsTest extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Return_Table_Contents() {
+  void should_Return_Table_Contents() {
     String[][] contents = fixture.contents();
     assertThat(contents.length).isEqualTo(5);
     assertThat(contents[0].length).isEqualTo(5);
@@ -81,7 +76,7 @@ public class Bug305_TableContentsTest extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Pass_If_Content_Is_Equal_To_Expected() {
+  void should_Pass_If_Content_Is_Equal_To_Expected() {
     String[][] contents = new String[][] { { "Mary", "Campione", "Snowboarding", "5", "false" },
         { "Alison", "Huml", "Rowing", "3", "true" }, { "Kathy", "Walrath", "Knitting", "2", "false" },
         { "Sharon", "Zakhour", "Speed reading", "20", "true" }, { "Philip", "Milne", "Pool", "10", "false" } };
@@ -89,10 +84,8 @@ public class Bug305_TableContentsTest extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Fail_If_Content_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("property:'contents'");
-    thrown.expectMessageToContain("expected:<[['hello']]>", concat("but was<", format(fixture.contents()), ">"));
-    fixture.requireContents(new String[][] { { "hello" } });
+  void should_Fail_If_Content_Not_Equal_To_Expected() {
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> fixture.requireContents(new String[][] { { "hello" } }), "property:'contents'", "expected:<[['hello']]>", concat("but was<", format(fixture.contents()), ">"));
   }
 
   private static class MyWindow extends TestWindow {

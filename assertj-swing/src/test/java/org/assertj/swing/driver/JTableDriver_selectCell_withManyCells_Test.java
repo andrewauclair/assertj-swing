@@ -12,15 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.data.TableCell.row;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.data.TableCell.row;
 
 /**
  * Tests for {@link JTableDriver#selectCell(javax.swing.JTable, org.assertj.swing.data.TableCell)}.
@@ -28,23 +26,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableDriver_selectCell_withManyCells_Test extends JTableDriver_TestCase {
-  private final int row;
-  private final int column;
-
-  @Parameters
-  public static Collection<Object[]> cells() {
+class JTableDriver_selectCell_withManyCells_Test extends JTableDriver_TestCase {
+  private static Collection<Object[]> cells() {
     return newArrayList(tableCells());
   }
 
-  public JTableDriver_selectCell_withManyCells_Test(int row, int column) {
-    this.row = row;
-    this.column = column;
-  }
-
-  @Test
-  public void shouldSelectCell() {
+  @ParameterizedTest
+  @MethodSource("cells")
+  void shouldSelectCell(int row, int column) {
     showWindow();
     driver.selectCell(table, row(row).column(column));
     requireCellSelected(row, column);

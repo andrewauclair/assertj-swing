@@ -12,15 +12,14 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.core.util.Strings.concat;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.core.util.Strings.concat;
 
 /**
  * Tests for {@link JTabbedPaneDriver#selectTab(javax.swing.JTabbedPane, int)}.
@@ -28,23 +27,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTabbedPaneDriver_selectTabByIndex_withInvalidIndices_Test extends JTabbedPaneDriver_TestCase {
-  private final int index;
-
-  @Parameters
-  public static Collection<Object[]> indices() {
+class JTabbedPaneDriver_selectTabByIndex_withInvalidIndices_Test extends JTabbedPaneDriver_TestCase {
+  private static Collection<Object[]> indices() {
     return newArrayList(new Object[][] { { -1 }, { 3 } });
   }
 
-  public JTabbedPaneDriver_selectTabByIndex_withInvalidIndices_Test(int index) {
-    this.index = index;
-  }
-
-  @Test
-  public void should_Throw_Error_If_Index_Is_Out_Of_Bounds() {
-    thrown.expectIndexOutOfBoundsException(concat("Index <", index,
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Throw_Error_If_Index_Is_Out_Of_Bounds(int index) {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.selectTab(tabbedPane, index), concat("Index <", index,
         "> is not within the JTabbedPane bounds of <0> and <2> (inclusive)"));
-    driver.selectTab(tabbedPane, index);
   }
 }

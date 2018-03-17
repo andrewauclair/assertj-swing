@@ -12,16 +12,15 @@
  */
 package org.assertj.swing.monitor;
 
-import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
+import org.assertj.swing.test.awt.ToolkitStub;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
 
-import java.awt.Component;
-import java.awt.EventQueue;
+import java.awt.*;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 
-import org.assertj.swing.test.awt.ToolkitStub;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
+import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 
 /**
  * Base test case for {@link EventQueueMapping}.
@@ -37,7 +36,7 @@ public abstract class EventQueueMapping_TestCase extends EDTSafeTestCase {
   EventQueueMapping mapping;
   Map<Component, WeakReference<EventQueue>> queueMap;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     eventQueue = new EventQueue();
     toolkit = newToolkitStub(eventQueue);

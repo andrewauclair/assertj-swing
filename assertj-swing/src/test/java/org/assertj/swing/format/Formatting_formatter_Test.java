@@ -12,16 +12,15 @@
  */
 package org.assertj.swing.format;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.awt.Component;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nonnull;
-import javax.swing.JComboBox;
+import javax.swing.*;
+import java.awt.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link Formatting#formatter(Class)}.
@@ -29,13 +28,13 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class Formatting_formatter_Test {
+class Formatting_formatter_Test {
   private Class<JComboBox> type;
   private ComponentFormatter oldFormatter;
   private ComponentFormatter newFormatter;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     type = JComboBox.class;
     oldFormatter = Formatting.formatter(type);
     newFormatter = new ComponentFormatterTemplate() {
@@ -51,13 +50,13 @@ public class Formatting_formatter_Test {
     };
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     Formatting.register(oldFormatter);
   }
 
   @Test
-  public void should_Replace_Existing_Formatter() {
+  void should_Replace_Existing_Formatter() {
     Formatting.register(newFormatter);
     assertThat(Formatting.formatter(type)).isSameAs(newFormatter);
   }

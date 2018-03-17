@@ -12,34 +12,33 @@
  */
 package org.assertj.swing.monitor;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-
-import java.awt.Component;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JTextField;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 /**
  * Tests for {@link WindowAvailabilityMonitor}.
  * 
  * @author Alex Ruiz
  */
-public class WindowAvailabilityMonitor_eventDispatched_Test extends WindowAvailabilityMonitor_TestCase {
+class WindowAvailabilityMonitor_eventDispatched_Test extends WindowAvailabilityMonitor_TestCase {
   private MyWindow window;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     FailOnThreadViolationRepaintManager.install();
   }
 
@@ -49,8 +48,8 @@ public class WindowAvailabilityMonitor_eventDispatched_Test extends WindowAvaila
     window = MyWindow.createNew(getClass());
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     try {
       window.destroy();
     } finally {
@@ -59,20 +58,20 @@ public class WindowAvailabilityMonitor_eventDispatched_Test extends WindowAvaila
   }
 
   @Test
-  public void should_Mark_Source_Window_As_Ready_If_Event_Is_MouseEvent() {
+  void should_Mark_Source_Window_As_Ready_If_Event_Is_MouseEvent() {
     monitor.eventDispatched(mouseEvent(window));
     verify(windows).markAsReady(window);
   }
 
   @Test
-  public void should_Mark_Source_Window_Ancestor_As_Ready_If_Event_Is_MouseEvent() {
+  void should_Mark_Source_Window_Ancestor_As_Ready_If_Event_Is_MouseEvent() {
     JTextField source = window.textField;
     monitor.eventDispatched(mouseEvent(source));
     verify(windows).markAsReady(window);
   }
 
   @Test
-  public void should_Not_Mark_Source_Window_As_Ready_If_Event_Is_Not_MouseEvent() {
+  void should_Not_Mark_Source_Window_As_Ready_If_Event_Is_Not_MouseEvent() {
     monitor.eventDispatched(new KeyEvent(window, 8, 9238, 0, 0, 'a'));
     verifyZeroInteractions(windows);
   }

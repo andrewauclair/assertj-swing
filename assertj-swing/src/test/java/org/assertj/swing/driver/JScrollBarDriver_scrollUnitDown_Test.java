@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,24 +20,22 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JScrollBarDriver_scrollUnitDown_Test extends JScrollBarDriver_TestCase {
+class JScrollBarDriver_scrollUnitDown_Test extends JScrollBarDriver_TestCase {
   @Test
-  public void should_Scroll_Unit_Down() {
+  void should_Scroll_Unit_Down() {
     showWindow();
     driver.scrollUnitDown(scrollBar);
     assertThatScrollBarValueIs(31);
   }
 
   @Test
-  public void should_Throw_Error_If_JScrollBar_Is_Disabled() {
+  void should_Throw_Error_If_JScrollBar_Is_Disabled() {
     disableScrollBar();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.scrollUnitDown(scrollBar);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.scrollUnitDown(scrollBar));
   }
 
   @Test
-  public void should_Throw_Error_If_JScrollBar_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.scrollUnitDown(scrollBar);
+  void should_Throw_Error_If_JScrollBar_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.scrollUnitDown(scrollBar));
   }
 }

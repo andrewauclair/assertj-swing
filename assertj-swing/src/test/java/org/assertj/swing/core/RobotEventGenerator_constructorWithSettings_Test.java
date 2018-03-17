@@ -12,28 +12,28 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link RobotEventGenerator#RobotEventGenerator(Settings)}.
  * 
  * @author Alex Ruiz
  */
-public class RobotEventGenerator_constructorWithSettings_Test {
+class RobotEventGenerator_constructorWithSettings_Test {
   private RobotEventGenerator eventGenerator;
   private Settings settings;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     settings = new Settings();
     eventGenerator = new RobotEventGenerator(settings);
   }
 
   @Test
-  public void should_Attach_Robot_To_Settings() {
+  void should_Attach_Robot_To_Settings() {
     assertThat(eventGenerator.robot()).isSameAs(settings.robot());
   }
 }

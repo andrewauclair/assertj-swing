@@ -12,14 +12,12 @@
  */
 package org.assertj.swing.monitor;
 
-import static java.awt.AWTEvent.MOUSE_EVENT_MASK;
-import static java.awt.AWTEvent.MOUSE_MOTION_EVENT_MASK;
-import static java.awt.AWTEvent.PAINT_EVENT_MASK;
+import org.assertj.swing.test.awt.ToolkitStub;
+import org.junit.jupiter.api.BeforeEach;
+
+import static java.awt.AWTEvent.*;
 import static org.assertj.swing.monitor.TestWindows.newWindowsMock;
 import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
-
-import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Before;
 
 /**
  * Base test case for {@link WindowAvailabilityMonitor}.
@@ -34,7 +32,7 @@ public abstract class WindowAvailabilityMonitor_TestCase {
   ToolkitStub toolkit;
   Windows windows;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     toolkit = newToolkitStub();
     windows = newWindowsMock();

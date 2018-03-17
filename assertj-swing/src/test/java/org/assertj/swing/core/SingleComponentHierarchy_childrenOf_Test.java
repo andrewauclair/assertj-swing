@@ -12,27 +12,25 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.util.Collection;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import org.junit.After;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SingleComponentHierarchy#childrenOf(Component)}.
  *
  * @author Alex Ruiz
  */
-public class SingleComponentHierarchy_childrenOf_Test extends SingleComponentHierarchy_TestCase {
+class SingleComponentHierarchy_childrenOf_Test extends SingleComponentHierarchy_TestCase {
   private FrameWithButton parent;
 
   @Override
@@ -40,8 +38,8 @@ public class SingleComponentHierarchy_childrenOf_Test extends SingleComponentHie
     parent = FrameWithButton.createNew();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     execute(() -> {
       parent.setVisible(false);
       parent.dispose();
@@ -49,7 +47,7 @@ public class SingleComponentHierarchy_childrenOf_Test extends SingleComponentHie
   }
 
   @Test
-  public void should_Return_Children_Of_Component() {
+  void should_Return_Children_Of_Component() {
     List<Component> children = newArrayList((Component) parent.button);
     when(hierarchyDelegate.childrenOf(parent)).thenReturn(children);
     Collection<Component> foundChildren = hierarchy.childrenOf(parent);

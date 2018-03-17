@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.awt.Point;
-
-import javax.swing.JPopupMenu;
-
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.recorder.ToolkitClickRecorder;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Test for {@link ComponentDriver#invokePopupMenu(java.awt.Component, java.awt.Point)}.
@@ -62,9 +61,8 @@ class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopu
   void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
     robot.settings().clickOnDisabledComponentsAllowed(false);
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.invokePopupMenu(window.textField, new Point(8, 6));
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.invokePopupMenu(window.textField, new Point(8, 6)));
     } finally {
       assertThatTextFieldIsEmpty();
     }
@@ -72,9 +70,8 @@ class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopu
 
   @Test
   void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.invokePopupMenu(window.textField, new Point(8, 6));
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.invokePopupMenu(window.textField, new Point(8, 6)));
     } finally {
       assertThatTextFieldIsEmpty();
     }
