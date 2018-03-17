@@ -37,14 +37,10 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Yvonne Wang
  */
-public class ApplicationLauncher_start_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
+class ApplicationLauncher_start_Test extends RobotBasedTestCase {
   @Test
   void should_Throw_Error_If_Application_Class_Name_Is_Invalid() {
-    thrown.expect(UnexpectedException.class, "Unable to load class 'Hello'");
-    ApplicationLauncher.application("Hello").start();
+    ExpectedException.assertContainsMessage(UnexpectedException.class, () -> ApplicationLauncher.application("Hello").start(), "Unable to load class 'Hello'");
   }
 
   @Test

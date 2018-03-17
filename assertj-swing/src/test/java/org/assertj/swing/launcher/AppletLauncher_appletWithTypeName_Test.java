@@ -15,6 +15,7 @@ package org.assertj.swing.launcher;
 import javax.swing.JButton;
 
 import org.assertj.swing.exception.UnexpectedException;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,13 +44,11 @@ class AppletLauncher_appletWithTypeName_Test extends AppletLauncher_TestCase {
 
   @Test
   void should_Throw_Error_If_Applet_Type_Does_Not_Exist() {
-    thrown.expect(UnexpectedException.class, "Unable to load class Hello");
-    AppletLauncher.applet("Hello");
+    ExpectedException.assertContainsMessage(UnexpectedException.class, () -> AppletLauncher.applet("Hello"), "Unable to load class Hello");
   }
 
   @Test
   void should_Throw_Error_If_Applet_Cannot_Be_Instantiated_From_Type_Name() {
-    thrown.expect(UnexpectedException.class, "Unable to create a new instance");
-    AppletLauncher.applet(AnApplet.class.getName());
+    ExpectedException.assertContainsMessage(UnexpectedException.class, () -> AppletLauncher.applet(AnApplet.class.getName()), "Unable to create a new instance");
   }
 }

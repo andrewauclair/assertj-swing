@@ -32,9 +32,6 @@ public abstract class AppletLauncher_TestCase extends SequentialEDTSafeTestCase 
   TestApplet applet;
   AppletViewer viewer;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected final void onTearDown() {
     try {

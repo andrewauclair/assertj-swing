@@ -15,6 +15,7 @@ package org.assertj.swing.launcher;
 import java.applet.Applet;
 
 import org.assertj.swing.exception.UnexpectedException;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,7 +34,6 @@ class AppletLauncher_appletWithType_Test extends AppletLauncher_TestCase {
 
   @Test
   void should_Throw_Error_If_Applet_Cannot_Be_Instantiated() {
-    thrown.expect(UnexpectedException.class, "Unable to create a new instance");
-    AppletLauncher.applet(AnApplet.class);
+    ExpectedException.assertContainsMessage(UnexpectedException.class, () -> AppletLauncher.applet(AnApplet.class), "Unable to create a new instance");
   }
 }
