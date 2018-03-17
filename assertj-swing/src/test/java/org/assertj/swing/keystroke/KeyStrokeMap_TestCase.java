@@ -24,6 +24,8 @@ import javax.swing.KeyStroke;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for {@link KeyStrokeMap}.
@@ -36,7 +38,7 @@ public abstract class KeyStrokeMap_TestCase {
   KeyStrokeMapping mapping;
   Collection<KeyStrokeMapping> mappings;
 
-  @Before
+  @BeforeEach
   public final void setUp() {
     provider = mock(KeyStrokeMappingProvider.class);
     keyStroke = KeyStroke.getKeyStroke(VK_A, CTRL_MASK);
@@ -47,7 +49,7 @@ public abstract class KeyStrokeMap_TestCase {
     assertThat(KeyStrokeMap.hasKeyStrokes()).isFalse();
   }
 
-  @After
+  @AfterEach
   public final void tearDown() {
     KeyStrokeMap.updateKeyStrokeMapCollection(new KeyStrokeMapCollection());
     KeyStrokeMap.reloadFromSystemSettings();

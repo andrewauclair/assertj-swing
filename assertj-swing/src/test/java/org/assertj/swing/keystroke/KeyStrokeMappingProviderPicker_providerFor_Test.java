@@ -20,6 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,18 +28,18 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class KeyStrokeMappingProviderPicker_providerFor_Test {
+class KeyStrokeMappingProviderPicker_providerFor_Test {
   private KeyStrokeMappingProviderFactory factory;
   private KeyStrokeMappingProviderPicker picker;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     factory = mock(KeyStrokeMappingProviderFactory.class);
     picker = new KeyStrokeMappingProviderPicker(factory);
   }
 
   @Test
-  public void should_Try_To_Instantiate_Provider_From_System_Settings() {
+  void should_Try_To_Instantiate_Provider_From_System_Settings() {
     KeyStrokeMappingProviderNames names = generateNamesFrom(WINDOWS, US);
     String firstName = names.iterator().next();
     KeyStrokeMappingProvider provider = mock(KeyStrokeMappingProvider.class);
@@ -47,7 +48,7 @@ public class KeyStrokeMappingProviderPicker_providerFor_Test {
   }
 
   @Test
-  public void should_Return_Default_Provider_If_Provider_From_System_Settings_Was_Not_Found() {
+  void should_Return_Default_Provider_If_Provider_From_System_Settings_Was_Not_Found() {
     for (String name : generateNamesFrom(WINDOWS, US)) {
       when(factory.createProvider(name)).thenReturn(null);
     }

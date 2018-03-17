@@ -48,11 +48,8 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class KeyStrokeMappingProvider_parse_Test {
+class KeyStrokeMappingProvider_parse_Test {
   private KeyStrokeMappingsParser parser;
-
-  @Rule
-  public ExpectedException thrown = none();
 
   @BeforeEach
   void setUp() {
@@ -81,8 +78,7 @@ public class KeyStrokeMappingProvider_parse_Test {
 
   @Test
   void should_Throw_Error_If_File_Not_Found() {
-    thrown.expect(ParsingException.class, "Unable to open file abc.txt");
-    parser.parse("abc.txt");
+    ExpectedException.assertContainsMessage(ParsingException.class, () -> parser.parse("abc.txt"), "Unable to open file abc.txt");
   }
 
   @Test

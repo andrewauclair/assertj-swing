@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class KeyStrokeMap_keyStrokeFor_Test extends KeyStrokeMap_TestCase {
+class KeyStrokeMap_keyStrokeFor_Test extends KeyStrokeMap_TestCase {
   @Test
-  public void should_Return_KeyStroke_From_Char() {
+  void should_Return_KeyStroke_From_Char() {
     when(provider.keyStrokeMappings()).thenReturn(mappings);
     KeyStrokeMap.addKeyStrokesFrom(provider);
     assertThat(KeyStrokeMap.keyStrokeFor('A')).isSameAs(keyStroke);

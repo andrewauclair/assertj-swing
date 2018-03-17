@@ -28,16 +28,16 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class KeyStrokeMap_charFor_Test extends KeyStrokeMap_TestCase {
+class KeyStrokeMap_charFor_Test extends KeyStrokeMap_TestCase {
   @Test
-  public void should_Return_Char_For_KeyStroke() {
+  void should_Return_Char_For_KeyStroke() {
     when(provider.keyStrokeMappings()).thenReturn(mappings);
     KeyStrokeMap.addKeyStrokesFrom(provider);
     assertThat(KeyStrokeMap.charFor(keyStroke)).isEqualTo('A');
   }
 
   @Test
-  public void should_Strip_Modifiers_Except_Shift_If_Char_For_KeyStroke_Not_Found() {
+  void should_Strip_Modifiers_Except_Shift_If_Char_For_KeyStroke_Not_Found() {
     Character character = 'a';
     KeyStrokeMapCollection maps = mock(KeyStrokeMapCollection.class);
     KeyStrokeMap.updateKeyStrokeMapCollection(maps);
@@ -47,7 +47,7 @@ public class KeyStrokeMap_charFor_Test extends KeyStrokeMap_TestCase {
   }
 
   @Test
-  public void should_Return_Undefined_Character_If_Char_For_KeyStroke_Not_Found() {
+  void should_Return_Undefined_Character_If_Char_For_KeyStroke_Not_Found() {
     KeyStrokeMapCollection maps = mock(KeyStrokeMapCollection.class);
     KeyStrokeMap.updateKeyStrokeMapCollection(maps);
     when(maps.charFor(keyStroke)).thenReturn(null);

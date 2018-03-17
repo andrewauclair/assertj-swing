@@ -23,7 +23,10 @@ import static org.assertj.swing.keystroke.KeyStrokeMappingProvider.NO_MASK;
 import java.util.Collection;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -33,13 +36,8 @@ import org.junit.runners.Parameterized.Parameters;
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class KeyStrokeMappingsParser_mappingFrom_Test {
-  private final String lineToParse;
-  private final KeyStrokeMapping expectedMapping;
-
-  @Parameters
-  public static Collection<Object[]> linesToParse() {
+class KeyStrokeMappingsParser_mappingFrom_Test {
+  private static Collection<Object[]> linesToParse() {
     return newArrayList(new Object[][] { { "a, A, NO_MASK", mapping('a', VK_A, NO_MASK) },
         { "A, A, SHIFT_MASK", mapping('A', VK_A, SHIFT_MASK) }, { "COMMA, COMMA, NO_MASK", mappingForComma() },
         { "COMMA,COMMA,NO_MASK", mappingForComma() }, { "  COMMA,  COMMA,  NO_MASK", mappingForComma() }, });
@@ -49,20 +47,16 @@ public class KeyStrokeMappingsParser_mappingFrom_Test {
     return mapping(',', VK_COMMA, NO_MASK);
   }
 
-  public KeyStrokeMappingsParser_mappingFrom_Test(String lineToParse, KeyStrokeMapping expectedMapping) {
-    this.lineToParse = lineToParse;
-    this.expectedMapping = expectedMapping;
-  }
-
   private KeyStrokeMappingsParser parser;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     parser = new KeyStrokeMappingsParser();
   }
 
-  @Test
-  public void should_Create_Mapping_From_Line() {
+  @ParameterizedTest
+  @MethodSource("linesToParse")
+  void should_Create_Mapping_From_Line(String lineToParse, KeyStrokeMapping expectedMapping) {
     KeyStrokeMapping parsedMapping = parser.mappingFrom(lineToParse);
     assertThat(parsedMapping).isEqualTo(expectedMapping);
   }
