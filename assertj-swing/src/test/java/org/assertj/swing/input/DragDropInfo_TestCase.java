@@ -12,13 +12,12 @@
  */
 package org.assertj.swing.input;
 
-import static org.assertj.swing.test.builder.JTextFields.textField;
-
-import java.awt.Component;
-import java.awt.Point;
-
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.awt.*;
+
+import static org.assertj.swing.test.builder.JTextFields.textField;
 
 /**
  * Base test case for {@link DragDropInfo}.
@@ -31,7 +30,7 @@ public abstract class DragDropInfo_TestCase extends EDTSafeTestCase {
   long when;
   DragDropInfo info;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     source = textField().createNew();
     origin = new Point(6, 8);

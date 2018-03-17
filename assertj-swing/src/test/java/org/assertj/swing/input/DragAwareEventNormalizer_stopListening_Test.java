@@ -22,6 +22,7 @@ import javax.annotation.Nonnull;
 
 import org.assertj.swing.test.awt.ToolkitStub;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -35,7 +36,7 @@ public class DragAwareEventNormalizer_stopListening_Test extends DragAwareEventN
   private int mask;
 
   @Override
-  @Before
+  @BeforeEach
   public void setUp() {
     eventQueue = new EventQueueStub();
     toolkit = newToolkitStub();
@@ -44,7 +45,7 @@ public class DragAwareEventNormalizer_stopListening_Test extends DragAwareEventN
   }
 
   @Test
-  public void should_Dispose_EventQueue_When_Stops_Listening() {
+  void should_Dispose_EventQueue_When_Stops_Listening() {
     final DragAwareEventQueue dragAwareEventQueue = mock(DragAwareEventQueue.class);
     eventNormalizer = new DragAwareEventNormalizer() {
       @Override
@@ -59,7 +60,7 @@ public class DragAwareEventNormalizer_stopListening_Test extends DragAwareEventN
   }
 
   @Test
-  public void should_Gracefully_Stop_Listening_If_DragAwareQueue_Is_Null() {
+  void should_Gracefully_Stop_Listening_If_DragAwareQueue_Is_Null() {
     eventNormalizer = new DragAwareEventNormalizer() {
       @Override
       DragAwareEventQueue createEventQueue(@Nonnull Toolkit t, long m) {

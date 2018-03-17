@@ -12,47 +12,32 @@
  */
 package org.assertj.swing.input;
 
-import static java.awt.event.MouseEvent.BUTTON1;
-import static java.awt.event.MouseEvent.MOUSE_CLICKED;
-import static java.awt.event.MouseEvent.MOUSE_DRAGGED;
-import static java.awt.event.MouseEvent.MOUSE_ENTERED;
-import static java.awt.event.MouseEvent.MOUSE_EXITED;
-import static java.awt.event.MouseEvent.MOUSE_WHEEL;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.test.builder.JComboBoxes.comboBox;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 
-import javax.swing.JComboBox;
-
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static java.awt.event.MouseEvent.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.test.builder.JComboBoxes.comboBox;
 
 /**
  * Tests for {@link DragDropInfo#update(java.awt.event.MouseEvent)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class DragDropInfo_update_withUnrecognizedEvents_Test extends DragDropInfo_TestCase {
-  private final int eventMask;
-
-  @Parameters
-  public static Collection<Object[]> eventMasks() {
+class DragDropInfo_update_withUnrecognizedEvents_Test extends DragDropInfo_TestCase {
+  private static Collection<Object[]> eventMasks() {
     return newArrayList(new Object[][] { { MOUSE_CLICKED }, { MOUSE_DRAGGED }, { MOUSE_ENTERED }, { MOUSE_EXITED },
         { MOUSE_WHEEL } });
   }
 
-  public DragDropInfo_update_withUnrecognizedEvents_Test(int eventMask) {
-    this.eventMask = eventMask;
-  }
-
-  @Test
-  public void should_Not_Update_For_Unrecognized_Events() {
+  @ParameterizedTest
+  @MethodSource("eventMasks")
+  void should_Not_Update_For_Unrecognized_Events(int eventMask) {
     info.source(source);
     info.origin(origin);
     JComboBox c = comboBox().createNew();

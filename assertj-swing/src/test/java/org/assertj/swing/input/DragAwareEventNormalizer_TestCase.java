@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.input;
 
-import java.awt.EventQueue;
+import org.junit.jupiter.api.BeforeEach;
 
-import org.junit.Before;
+import java.awt.*;
 
 /**
  * Base test case for {@link DragAwareEventNormalizer}.
@@ -24,7 +24,7 @@ import org.junit.Before;
 public abstract class DragAwareEventNormalizer_TestCase extends EventNormalizer_TestCase {
   DragAwareEventNormalizer eventNormalizer;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     eventNormalizer = new DragAwareEventNormalizer();
   }

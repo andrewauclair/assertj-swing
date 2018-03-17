@@ -23,9 +23,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class DragAwareEventNormalizer_startListening_Test extends DragAwareEventNormalizer_TestCase {
+class DragAwareEventNormalizer_startListening_Test extends DragAwareEventNormalizer_TestCase {
   @Test
-  public void should_Replace_EventQueue_When_Starts_Listening() {
+  void should_Replace_EventQueue_When_Starts_Listening() {
     ToolkitStub toolkit = newToolkitStub();
     EventQueueStub eventQueue = new EventQueueStub();
     toolkit.eventQueue(eventQueue);

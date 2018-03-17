@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.test.swing.TestWindow;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,13 +31,13 @@ import org.junit.jupiter.api.Test;
  *
  * @author Alex Ruiz
  */
-public class DisposalMonitor_componentShown_Test {
+class DisposalMonitor_componentShown_Test {
   private JFrame frame;
   private Map<Window, Boolean> disposedWindows;
   private DisposalMonitor monitor;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     frame = TestWindow.createNewWindow(DisposalMonitor_componentShown_Test.class);
     disposedWindows = newHashMap();
     monitor = new DisposalMonitor(disposedWindows);
@@ -44,7 +45,7 @@ public class DisposalMonitor_componentShown_Test {
   }
 
   @Test
-  public void should_Remove_Component_When_Shown() {
+  void should_Remove_Component_When_Shown() {
     disposedWindows.put(frame, true);
     monitor.componentShown(new ComponentEvent(frame, 0));
     assertThat(disposedWindows).isEmpty();

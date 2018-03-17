@@ -16,6 +16,7 @@ import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 
 import org.assertj.swing.test.awt.ToolkitStub;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,16 +24,16 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class EventNormalizer_startListening_Test extends EventNormalizer_TestCase {
+class EventNormalizer_startListening_Test extends EventNormalizer_TestCase {
   private EventNormalizer eventNormalizer;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     eventNormalizer = new EventNormalizer();
   }
 
   @Test
-  public void should_Attach_To_Toolkit_When_Start_Listening() {
+  void should_Attach_To_Toolkit_When_Start_Listening() {
     ToolkitStub toolkit = newToolkitStub();
     int mask = 8;
     eventNormalizer.startListening(toolkit, delegateEventListenerMock(), mask);

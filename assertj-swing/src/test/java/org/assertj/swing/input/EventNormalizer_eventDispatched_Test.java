@@ -23,6 +23,7 @@ import java.awt.AWTEvent;
 import java.awt.event.AWTEventListener;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,14 +31,14 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class EventNormalizer_eventDispatched_Test extends EventNormalizer_TestCase {
+class EventNormalizer_eventDispatched_Test extends EventNormalizer_TestCase {
   private DisposedWindowMonitor disposedWindowMonitor;
   private AWTEventListener delegateEventListener;
   private AWTEvent event;
   private EventNormalizer eventNormalizer;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     disposedWindowMonitor = mock(DisposedWindowMonitor.class);
     delegateEventListener = delegateEventListenerMock();
     event = singletonAWTEventMock();
@@ -46,14 +47,14 @@ public class EventNormalizer_eventDispatched_Test extends EventNormalizer_TestCa
   }
 
   @Test
-  public void should_Delegate_Event_If_It_Is_Not_A_Duplicate_Dispose() {
+  void should_Delegate_Event_If_It_Is_Not_A_Duplicate_Dispose() {
     when(disposedWindowMonitor.isDuplicateDispose(event)).thenReturn(false);
     eventNormalizer.eventDispatched(event);
     verify(delegateEventListener).eventDispatched(event);
   }
 
   @Test
-  public void should_Not_Delegate_Event_If_It_Is_A_Duplicate_Dispose() {
+  void should_Not_Delegate_Event_If_It_Is_A_Duplicate_Dispose() {
     when(disposedWindowMonitor.isDuplicateDispose(event)).thenReturn(true);
     eventNormalizer.eventDispatched(event);
     verifyZeroInteractions(delegateEventListener);

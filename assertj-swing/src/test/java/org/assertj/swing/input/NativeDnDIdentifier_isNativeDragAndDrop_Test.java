@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,28 +29,28 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class NativeDnDIdentifier_isNativeDragAndDrop_Test extends EDTSafeTestCase {
+class NativeDnDIdentifier_isNativeDragAndDrop_Test extends EDTSafeTestCase {
   private NativeDndIdentifier dnd;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     FailOnThreadViolationRepaintManager.install();
     dnd = new NativeDndIdentifier();
   }
 
   @Test
-  public void should_Return_True_If_Event_Is_Mouse_Event_And_Its_Class_Name_Is_SunDropTargetEvent() {
+  void should_Return_True_If_Event_Is_Mouse_Event_And_Its_Class_Name_Is_SunDropTargetEvent() {
     assertThat(dnd.isNativeDragAndDrop(new SunDropTargetEvent())).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Event_Is_Not_Mouse_Event() {
+  void should_Return_False_If_Event_Is_Not_Mouse_Event() {
     KeyEvent e = new KeyEvent(label().createNew(), 0, 0, 0, 0, 'a');
     assertThat(dnd.isNativeDragAndDrop(e)).isFalse();
   }
 
   @Test
-  public void should_Return_False_If_Event_Class_Name_Is_Not_SunDropTargetEvent() {
+  void should_Return_False_If_Event_Class_Name_Is_Not_SunDropTargetEvent() {
     MouseEvent e = new MouseEvent(label().createNew(), 0, 0, 0, 0, 0, 0, false);
     assertThat(dnd.isNativeDragAndDrop(e)).isFalse();
   }

@@ -30,10 +30,10 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class DragDropInfo_update_Test extends DragDropInfo_TestCase {
+class DragDropInfo_update_Test extends DragDropInfo_TestCase {
 
   @Test
-  public void should_Update_Source_And_X_Y_Coordinates_On_Mouse_Pressed() {
+  void should_Update_Source_And_X_Y_Coordinates_On_Mouse_Pressed() {
     MouseEvent event = new MouseEvent(source, MOUSE_PRESSED, when, 0, origin.x, origin.y, 1, false, BUTTON1);
     info.update(event);
     assertThat(info.source()).isSameAs(source);
@@ -41,7 +41,7 @@ public class DragDropInfo_update_Test extends DragDropInfo_TestCase {
   }
 
   @Test
-  public void should_Clear_Source_On_Mouse_Released() {
+  void should_Clear_Source_On_Mouse_Released() {
     info.source(source);
     info.origin(origin);
     JComboBox c = comboBox().createNew();
@@ -51,7 +51,7 @@ public class DragDropInfo_update_Test extends DragDropInfo_TestCase {
   }
 
   @Test
-  public void should_Clear_Source_On_Mouse_Moved() {
+  void should_Clear_Source_On_Mouse_Moved() {
     info.source(source);
     info.origin(origin);
     JComboBox c = comboBox().createNew();
