@@ -12,43 +12,43 @@
  */
 package org.assertj.swing.monitor;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.TimerTask;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link ProtectingTimerTask#run()}.
  * 
  * @author Alex Ruiz
  */
-public class ProtectingTimerTask_run_Test {
+class ProtectingTimerTask_run_Test {
   private MyTimerTask underProtection;
   private ProtectingTimerTask protecting;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     underProtection = new MyTimerTask();
     protecting = new ProtectingTimerTask(underProtection);
   }
 
   @Test
-  public void shouldExecuteTaskUnderProtection() {
+  void shouldExecuteTaskUnderProtection() {
     protecting.run();
     assertThat(underProtection.executed).isTrue();
   }
 
   @Test
-  public void shouldIgnoreExceptionsFromTaskUnderProtection() {
+  void shouldIgnoreExceptionsFromTaskUnderProtection() {
     underProtection.exceptionToThrow = new RuntimeException();
     protecting.run();
     assertThat(underProtection.executed).isTrue();
   }
 
   @Test
-  public void shouldNotExecuteIfTaskUnderProtectionIsCancelled() {
+  void shouldNotExecuteIfTaskUnderProtectionIsCancelled() {
     underProtection.cancel();
     protecting.run();
     assertThat(underProtection.executed).isFalse();

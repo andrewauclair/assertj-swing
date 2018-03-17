@@ -12,49 +12,39 @@
  */
 package org.assertj.swing.monitor;
 
-import static java.awt.event.WindowEvent.WINDOW_CLOSED;
-import static java.awt.event.WindowEvent.WINDOW_CLOSING;
-import static java.awt.event.WindowEvent.WINDOW_FIRST;
-import static java.awt.event.WindowEvent.WINDOW_LAST;
-import static java.awt.event.WindowEvent.WINDOW_OPENED;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import static java.awt.event.WindowEvent.*;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.monitor.TestContexts.newMockContext;
 import static org.assertj.swing.monitor.TestWindows.newWindowsMock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.awt.Window;
-import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 /**
  * Tests for {@link ContextMonitor#eventDispatched(java.awt.AWTEvent)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class ContextMonitor_eventDispatched_ParameterizedTest extends EDTSafeTestCase {
+class ContextMonitor_eventDispatched_ParameterizedTest extends EDTSafeTestCase {
   private ContextMonitor monitor;
 
   private Windows windows;
   private Context context;
   private TestWindow window;
 
-  private final int eventId;
-
-  @Parameters
-  public static Collection<Object[]> eventsBetweenWindowFirstAndWindowLast() {
+  private static Collection<Object[]> eventsBetweenWindowFirstAndWindowLast() {
     List<Object[]> ids = newArrayList();
     for (int id = WINDOW_FIRST; id <= WINDOW_LAST; id++) {
       if (id == WINDOW_OPENED || id == WINDOW_CLOSED || id == WINDOW_CLOSING) {
@@ -65,25 +55,22 @@ public class ContextMonitor_eventDispatched_ParameterizedTest extends EDTSafeTes
     return ids;
   }
 
-  public ContextMonitor_eventDispatched_ParameterizedTest(int eventId) {
-    this.eventId = eventId;
-  }
-
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     window = TestWindow.createNewWindow(getClass());
     windows = newWindowsMock();
     context = newMockContext();
     monitor = new ContextMonitor(context, windows);
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     window.destroy();
   }
 
-  @Test
-  public void shouldProcessEventWithIdBetweenWindowFirstAndWindowLastAndWindowNotInContext() {
+  @ParameterizedTest
+  @MethodSource("eventsBetweenWindowFirstAndWindowLast")
+  void shouldProcessEventWithIdBetweenWindowFirstAndWindowLastAndWindowNotInContext(int eventId) {
     when(context.rootWindows()).thenReturn(new ArrayList<Window>());
     when(context.storedQueueFor(window)).thenReturn(window.getToolkit().getSystemEventQueue());
     dispatchEventToMonitor(eventId);
@@ -92,8 +79,9 @@ public class ContextMonitor_eventDispatched_ParameterizedTest extends EDTSafeTes
     verify(windows).markAsShowing(window);
   }
 
-  @Test
-  public void shouldProcessEventWithIdBetweenWindowFirstAndWindowLastAndWindowInContextAndClosed() {
+  @ParameterizedTest
+  @MethodSource("eventsBetweenWindowFirstAndWindowLast")
+  void shouldProcessEventWithIdBetweenWindowFirstAndWindowLastAndWindowInContextAndClosed(int eventId) {
     when(context.storedQueueFor(window)).thenReturn(window.getToolkit().getSystemEventQueue());
     when(context.rootWindows()).thenReturn(frameInList());
     when(windows.isClosed(window)).thenReturn(true);
@@ -103,8 +91,9 @@ public class ContextMonitor_eventDispatched_ParameterizedTest extends EDTSafeTes
     verify(windows).markAsShowing(window);
   }
 
-  @Test
-  public void shouldProcessEventWithIdBetweenWindowFirstAndWindowLastAndWindowInContextAndNotClosed() {
+  @ParameterizedTest
+  @MethodSource("eventsBetweenWindowFirstAndWindowLast")
+  void shouldProcessEventWithIdBetweenWindowFirstAndWindowLastAndWindowInContextAndNotClosed(int eventId) {
     when(context.storedQueueFor(window)).thenReturn(window.getToolkit().getSystemEventQueue());
     when(context.rootWindows()).thenReturn(frameInList());
     when(windows.isClosed(window)).thenReturn(false);

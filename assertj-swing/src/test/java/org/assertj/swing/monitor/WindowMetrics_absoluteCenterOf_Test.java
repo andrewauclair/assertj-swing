@@ -22,6 +22,7 @@ import java.awt.Window;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class WindowMetrics_absoluteCenterOf_Test extends EDTSafeTestCase {
+class WindowMetrics_absoluteCenterOf_Test extends EDTSafeTestCase {
   private int x;
   private int y;
   private int left;
@@ -40,8 +41,8 @@ public class WindowMetrics_absoluteCenterOf_Test extends EDTSafeTestCase {
   private int height;
   private Window window;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     x = 600;
     y = 300;
     left = 20;
@@ -54,7 +55,7 @@ public class WindowMetrics_absoluteCenterOf_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Calculate_Center() {
+  void should_Calculate_Center() {
     when(window.getInsets()).thenReturn(new Insets(top, left, bottom, right));
     when(window.getX()).thenReturn(x);
     when(window.getY()).thenReturn(y);

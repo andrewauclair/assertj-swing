@@ -21,6 +21,7 @@ import java.awt.AWTException;
 
 import org.assertj.swing.util.RobotFactory;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,18 +29,18 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class WindowStatus_constructor_Test {
+class WindowStatus_constructor_Test {
   private RobotFactory factory;
   private Windows windows;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     factory = newRobotFactoryMock();
     windows = singletonWindowsMock();
   }
 
   @Test
-  public void should_Have_Null_Robot_If_Robot_Cannot_Be_Created() throws AWTException {
+  void should_Have_Null_Robot_If_Robot_Cannot_Be_Created() throws AWTException {
     when(factory.newRobotInLeftScreen()).thenThrow(new AWTException("Thrown on purpose"));
     WindowStatus status = new WindowStatus(windows, factory);
     assertThat(status.robot).isNull();
