@@ -12,42 +12,30 @@
  */
 package org.assertj.swing.core.matcher;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.builder.JLabels.label;
-
-import java.util.Collection;
-
-import javax.swing.JLabel;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link JLabelMatcher#matches(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JLabelMatcher_matches_byNameAndText_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final String text;
-
-  @Parameters
-  public static Collection<Object[]> namesAndText() {
+class JLabelMatcher_matches_byNameAndText_withNoMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndText() {
     return newArrayList(new Object[][] { { "someName", "text" }, { "name", "someText" }, { "name", "text" } });
   }
 
-  public JLabelMatcher_matches_byNameAndText_withNoMatch_Test(String name, String text) {
-    this.name = name;
-    this.text = text;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Or_Text_Are_Not_Equal_To_Expected() {
+  @ParameterizedTest
+  @MethodSource("namesAndText")
+  void should_Return_False_If_Name_Or_Text_Are_Not_Equal_To_Expected(String name, String text) {
     JLabelMatcher matcher = JLabelMatcher.withName(name).andText(text);
     JLabel label = label().withName("someName").withText("someText").createNew();
     assertThat(matcher.matches(label)).isFalse();

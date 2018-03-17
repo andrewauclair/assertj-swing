@@ -12,44 +12,32 @@
  */
 package org.assertj.swing.core.matcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.test.builder.JLabels.label;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import javax.swing.*;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-import javax.swing.JLabel;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.test.builder.JLabels.label;
 
 /**
  * Tests for {@link JLabelMatcher#matches(java.awt.Component)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JLabelMatcher_matches_byNameAndTextPattern_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final Pattern text;
-
-  @Parameters
-  public static Collection<Object[]> namesAndText() {
+class JLabelMatcher_matches_byNameAndTextPattern_withNoMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndText() {
     return newArrayList(new Object[][] { { "someName", Pattern.compile("text") },
         { "name", Pattern.compile("someText") }, { "name", Pattern.compile("text") } });
   }
 
-  public JLabelMatcher_matches_byNameAndTextPattern_withNoMatch_Test(String name, Pattern text) {
-    this.name = name;
-    this.text = text;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Text_Does_Not_Match_Pattern() {
+  @ParameterizedTest
+  @MethodSource("namesAndText")
+  void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Text_Does_Not_Match_Pattern(String name, Pattern text) {
     JLabelMatcher matcher = JLabelMatcher.withName(name).andText(text);
     JLabel label = label().withName("someName").withText("someText").createNew();
     assertThat(matcher.matches(label)).isFalse();

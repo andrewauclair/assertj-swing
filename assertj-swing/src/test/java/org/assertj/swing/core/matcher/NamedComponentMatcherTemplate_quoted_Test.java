@@ -12,39 +12,38 @@
  */
 package org.assertj.swing.core.matcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
 import java.util.regex.Pattern;
 
-import javax.swing.JLabel;
-
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link NamedComponentMatcherTemplate#quoted(Object)}.
  * 
  * @author Alex Ruiz
  */
-public class NamedComponentMatcherTemplate_quoted_Test extends NamedComponentMatcherTemplate_TestCase {
-  @Before
-  public final void setUp() {
+class NamedComponentMatcherTemplate_quoted_Test extends NamedComponentMatcherTemplate_TestCase {
+  @BeforeEach
+  final void setUp() {
     matcher = new Matcher(JLabel.class);
   }
 
   @Test
-  public void should_Not_Quote_Any() {
+  void should_Not_Quote_Any() {
     Object anyValue = NamedComponentMatcherTemplate.anyValue();
     assertThat(matcher.quoted(anyValue)).isSameAs(anyValue);
   }
 
   @Test
-  public void should_Quote_Pattern_As_String() {
+  void should_Quote_Pattern_As_String() {
     assertThat(matcher.quoted(Pattern.compile("hello"))).isEqualTo("'hello'");
   }
 
   @Test
-  public void should_Quote_If_Not_Any() {
+  void should_Quote_If_Not_Any() {
     assertThat(matcher.quoted("hello")).isEqualTo("'hello'");
   }
 }

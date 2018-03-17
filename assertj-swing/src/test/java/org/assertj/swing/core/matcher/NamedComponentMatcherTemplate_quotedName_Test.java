@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import javax.swing.JLabel;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,19 +25,19 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class NamedComponentMatcherTemplate_quotedName_Test extends NamedComponentMatcherTemplate_TestCase {
-  @Before
-  public final void setUp() {
+class NamedComponentMatcherTemplate_quotedName_Test extends NamedComponentMatcherTemplate_TestCase {
+  @BeforeEach
+  final void setUp() {
     matcher = new Matcher(JLabel.class);
   }
 
   @Test
-  public void should_Not_Quote_Name_If_It_Is_Any() {
+  void should_Not_Quote_Name_If_It_Is_Any() {
     assertThat(matcher.quotedName()).isSameAs(NamedComponentMatcherTemplate.anyValue());
   }
 
   @Test
-  public void should_Quote_Name_If_It_Is_Not_Any() {
+  void should_Quote_Name_If_It_Is_Not_Any() {
     matcher = new Matcher(JLabel.class, "hello");
     assertThat(matcher.quotedName()).isEqualTo("'hello'");
   }

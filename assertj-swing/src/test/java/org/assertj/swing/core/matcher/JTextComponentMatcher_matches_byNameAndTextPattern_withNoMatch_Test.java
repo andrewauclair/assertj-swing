@@ -12,20 +12,17 @@
  */
 package org.assertj.swing.core.matcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.test.builder.JTextFields.textField;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import javax.swing.*;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-import javax.swing.JTextField;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.test.builder.JTextFields.textField;
 
 /**
  * Tests for {@link JTextComponentMatcher#matches(java.awt.Component)}.
@@ -33,24 +30,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTextComponentMatcher_matches_byNameAndTextPattern_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final Pattern text;
-
-  @Parameters
-  public static Collection<Object[]> namesAndText() {
+class JTextComponentMatcher_matches_byNameAndTextPattern_withNoMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndText() {
     return newArrayList(new Object[][] { { "someName", Pattern.compile("text") },
         { "name", Pattern.compile("someText") }, { "name", Pattern.compile("text") } });
   }
 
-  public JTextComponentMatcher_matches_byNameAndTextPattern_withNoMatch_Test(String name, Pattern text) {
-    this.name = name;
-    this.text = text;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Text_Does_Not_Match_Pattern() {
+  @ParameterizedTest
+  @MethodSource("namesAndText")
+  void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Text_Does_Not_Match_Pattern(String name, Pattern text) {
     JTextComponentMatcher matcher = JTextComponentMatcher.withName(name).andText(text);
     JTextField textField = textField().withName("someName").withText("someText").createNew();
     assertThat(matcher.matches(textField)).isFalse();

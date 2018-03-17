@@ -23,6 +23,8 @@ import javax.swing.JDialog;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -33,24 +35,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class DialogMatcher_matches_byNameAndTitlePattern_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final Pattern title;
-
-  @Parameters
-  public static Collection<Object[]> namesAndTitles() {
+class DialogMatcher_matches_byNameAndTitlePattern_withNoMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndTitles() {
     return newArrayList(new Object[][] { { "someName", Pattern.compile("title") },
         { "name", Pattern.compile("someTitle") }, { "name", Pattern.compile("title") } });
   }
 
-  public DialogMatcher_matches_byNameAndTitlePattern_withNoMatch_Test(String name, Pattern title) {
-    this.name = name;
-    this.title = title;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Title_Does_Not_Match_Pattern() {
+  @ParameterizedTest
+  @MethodSource("namesAndTitles")
+  void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Title_Does_Not_Match_Pattern(String name, Pattern title) {
     DialogMatcher matcher = DialogMatcher.withName(name).andTitle(title);
     JDialog dialog = dialog().withName("someName").withTitle("someTitle").createNew();
     assertThat(matcher.matches(dialog)).isFalse();

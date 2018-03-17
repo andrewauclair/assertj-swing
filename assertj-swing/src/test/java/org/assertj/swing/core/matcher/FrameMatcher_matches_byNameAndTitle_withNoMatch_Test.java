@@ -22,6 +22,8 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -32,23 +34,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class FrameMatcher_matches_byNameAndTitle_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final String title;
-
+class FrameMatcher_matches_byNameAndTitle_withNoMatch_Test extends EDTSafeTestCase {
   @Parameters
-  public static Collection<Object[]> namesAndTitles() {
+  private static Collection<Object[]> namesAndTitles() {
     return newArrayList(new Object[][] { { "someName", "title" }, { "name", "someTitle" }, { "name", "title" } });
   }
 
-  public FrameMatcher_matches_byNameAndTitle_withNoMatch_Test(String name, String title) {
-    this.name = name;
-    this.title = title;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Or_Title_Are_Not_Equal_To_Expected() {
+  @ParameterizedTest
+  @MethodSource("namesAndTitles")
+  void should_Return_False_If_Name_Or_Title_Are_Not_Equal_To_Expected(String name, String title) {
     FrameMatcher matcher = FrameMatcher.withName(name).andTitle(title);
     JFrame frame = frame().withName("someName").withTitle("someTitle").createNew();
     assertThat(matcher.matches(frame)).isFalse();

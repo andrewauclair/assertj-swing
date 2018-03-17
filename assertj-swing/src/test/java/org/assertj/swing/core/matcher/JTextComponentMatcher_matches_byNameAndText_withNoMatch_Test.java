@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -32,23 +34,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTextComponentMatcher_matches_byNameAndText_withNoMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final String text;
-
-  @Parameters
-  public static Collection<Object[]> namesAndText() {
+class JTextComponentMatcher_matches_byNameAndText_withNoMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndText() {
     return newArrayList(new Object[][] { { "someName", "text" }, { "name", "someText" }, { "name", "text" } });
   }
 
-  public JTextComponentMatcher_matches_byNameAndText_withNoMatch_Test(String name, String text) {
-    this.name = name;
-    this.text = text;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Or_Text_Are_Not_Equal_To_Expected() {
+  @ParameterizedTest
+  @MethodSource("namesAndText")
+  void should_Return_False_If_Name_Or_Text_Are_Not_Equal_To_Expected(String name, String text) {
     JTextComponentMatcher matcher = JTextComponentMatcher.withName(name).andText(text);
     JTextField textField = textField().withName("someName").withText("someText").createNew();
     assertThat(matcher.matches(textField)).isFalse();

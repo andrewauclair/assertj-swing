@@ -23,6 +23,8 @@ import javax.swing.JButton;
 
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -33,24 +35,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JButtonMatcher_matches_byNameAndTextPattern_withNotMatch_Test extends EDTSafeTestCase {
-  private final String name;
-  private final Pattern text;
-
-  @Parameters
-  public static Collection<Object[]> namesAndText() {
+class JButtonMatcher_matches_byNameAndTextPattern_withNotMatch_Test extends EDTSafeTestCase {
+  private static Collection<Object[]> namesAndText() {
     return newArrayList(new Object[][] { { "someName", Pattern.compile("text") },
         { "name", Pattern.compile("someText") }, { "name", Pattern.compile("text") } });
   }
 
-  public JButtonMatcher_matches_byNameAndTextPattern_withNotMatch_Test(String name, Pattern text) {
-    this.name = name;
-    this.text = text;
-  }
-
-  @Test
-  public void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Text_Does_Not_Match_Pattern() {
+  @ParameterizedTest
+  @MethodSource("namesAndText")
+  void should_Return_False_If_Name_Is_Not_Equal_To_Expected_Or_Text_Does_Not_Match_Pattern(String name, Pattern text) {
     JButtonMatcher matcher = JButtonMatcher.withName(name).andText(text);
     JButton button = button().withName("someName").withText("someText").createNew();
     assertThat(matcher.matches(button)).isFalse();
