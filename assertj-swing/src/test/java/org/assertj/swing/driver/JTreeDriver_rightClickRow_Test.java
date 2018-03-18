@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
 
 /**
  * Tests for {@link JTreeDriver#rightClickRow(JTree, int)}.
@@ -26,11 +26,10 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class JTreeDriver_rightClickRow_Test extends JTreeDriver_clickCell_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Right_Click_Cell() {
+  void should_Right_Click_Cell() {
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tree);
     int row = 5;
@@ -40,15 +39,13 @@ public class JTreeDriver_rightClickRow_Test extends JTreeDriver_clickCell_TestCa
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.rightClickRow(tree, 0);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.rightClickRow(tree, 0));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.rightClickRow(tree, 0);
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.rightClickRow(tree, 0));
   }
 }

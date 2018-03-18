@@ -12,9 +12,10 @@
  */
 package org.assertj.swing.driver;
 
-import static java.awt.event.KeyEvent.VK_A;
-
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
+
+import static java.awt.event.KeyEvent.VK_A;
 
 /**
  * Tests for {@link ComponentDriver#pressKey(java.awt.Component, int)} and
@@ -30,29 +31,25 @@ public class ComponentDriver_releaseKey_Test extends ComponentDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled() {
+  void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.pressKey(window.textField, VK_A);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.pressKey(window.textField, VK_A));
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     assertThatTextFieldIsEmpty();
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.pressKey(window.textField, VK_A);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.pressKey(window.textField, VK_A));
   }
 
   @Test
-  public void shouldThrowErrorWhenReleasingKeyInDisabledComponent() {
+  void shouldThrowErrorWhenReleasingKeyInDisabledComponent() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.releaseKey(window.textField, VK_A);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.releaseKey(window.textField, VK_A));
   }
 
   @Test
-  public void shouldThrowErrorWhenReleasingKeyInNotShowingComponent() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.releaseKey(window.textField, VK_A);
+  void shouldThrowErrorWhenReleasingKeyInNotShowingComponent() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.releaseKey(window.textField, VK_A));
   }
 }

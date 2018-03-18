@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.data.TableCell.row;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,9 +23,9 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_selectCell_Test extends JTableDriver_TestCase {
+class JTableDriver_selectCell_Test extends JTableDriver_TestCase {
   @Test
-  public void should_Not_Select_Cell_If_It_Is_Already_Selected() {
+  void should_Not_Select_Cell_If_It_Is_Already_Selected() {
     showWindow();
     driver.selectCell(table, row(0).column(0));
     requireCellSelected(0, 0);
@@ -33,16 +34,14 @@ public class JTableDriver_selectCell_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Disabled() {
+  void should_Throw_Error_If_JTable_Is_Disabled() {
     disableTable();
-    thrown.expectIllegalStateIsDisabledComponent();
     robot.settings().clickOnDisabledComponentsAllowed(false);
-    driver.selectCell(table, row(0).column(0));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectCell(table, row(0).column(0)));
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectCell(table, row(0).column(0));
+  void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectCell(table, row(0).column(0)));
   }
 }

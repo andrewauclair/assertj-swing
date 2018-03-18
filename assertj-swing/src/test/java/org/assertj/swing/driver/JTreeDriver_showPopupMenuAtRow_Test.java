@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.swing.JPopupMenu;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,31 +24,29 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_showPopupMenuAtRow_Test extends JTreeDriver_showPopupMenuAtCell_TestCase {
+class JTreeDriver_showPopupMenuAtRow_Test extends JTreeDriver_showPopupMenuAtCell_TestCase {
   @Test
-  public void should_Show_Popup_Menu() {
+  void should_Show_Popup_Menu() {
     showWindow();
     JPopupMenu popupMenu = driver.showPopupMenu(tree, 0);
     assertThat(popupMenu).isSameAs(popupMenu());
   }
 
   @Test
-  public void should_Scroll_To_Node_Before_Showing_Popup_Menu() {
+  void should_Scroll_To_Node_Before_Showing_Popup_Menu() {
     showWindow();
     JPopupMenu popupMenu = driver.showPopupMenu(tree, 5);
     assertThat(popupMenu).isSameAs(popupMenu());
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.showPopupMenu(tree, 0);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.showPopupMenu(tree, 0));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.showPopupMenu(tree, 0);
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.showPopupMenu(tree, 0));
   }
 }

@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -61,14 +62,12 @@ class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
   @Test
   void should_Throw_Error_If_JTable_Is_Disabled() {
     disableTable();
-    thrown.expectIllegalStateIsDisabledComponent();
     robot.settings().clickOnDisabledComponentsAllowed(false);
-    driver.unselectRows(table, 0, 2);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.unselectRows(table, 0, 2));
   }
 
   @Test
   void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.unselectRows(table, 0, 2);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.unselectRows(table, 0, 2));
   }
 }

@@ -13,6 +13,7 @@
 package org.assertj.swing.driver;
 
 import org.assertj.swing.core.MouseButton;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.jupiter.api.Test;
@@ -54,13 +55,11 @@ class JTreeDriver_clickRow_withMouseButton_Test extends JTreeDriver_clickCell_Te
   @Test
   void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.clickRow(tree, 1, RIGHT_BUTTON);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.clickRow(tree, 1, RIGHT_BUTTON));
   }
 
   @Test
   void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.clickRow(tree, 1, RIGHT_BUTTON);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.clickRow(tree, 1, RIGHT_BUTTON));
   }
 }

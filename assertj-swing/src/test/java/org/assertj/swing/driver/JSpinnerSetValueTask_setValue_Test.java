@@ -12,24 +12,21 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.core.MethodInvocations.Args.args;
-import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
-import static org.assertj.swing.test.task.ComponentSetVisibleTask.hide;
-
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.MethodInvocations.Args;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.core.MethodInvocations.Args.args;
+import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
+import static org.assertj.swing.test.task.ComponentSetVisibleTask.hide;
 
 /**
  * Tests for {@link JSpinnerSetValueTask#setValue(JSpinner, Object)}.
@@ -40,9 +37,6 @@ public class JSpinnerSetValueTask_setValue_Test extends RobotBasedTestCase {
   private MyWindow window;
   private MySpinner spinner;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @Override
   protected void onSetUp() {
     window = MyWindow.createNew();
@@ -50,7 +44,7 @@ public class JSpinnerSetValueTask_setValue_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Set_Value() {
+  void should_Set_Value() {
     robot.showWindow(window);
     String value = "Three";
     spinner.startRecording();
@@ -61,19 +55,17 @@ public class JSpinnerSetValueTask_setValue_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Disabled() {
+  void should_Throw_Error_If_JSpinner_Is_Disabled() {
     disable(spinner);
     robot.waitForIdle();
-    thrown.expectIllegalStateIsDisabledComponent();
-    JSpinnerSetValueTask.setValue(spinner, "Two");
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> JSpinnerSetValueTask.setValue(spinner, "Two"));
   }
 
   @Test
-  public void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_JSpinner_Is_Not_Showing_On_The_Screen() {
     hide(window);
     robot.waitForIdle();
-    thrown.expectIllegalStateIsNotShowingComponent();
-    JSpinnerSetValueTask.setValue(spinner, "Two");
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> JSpinnerSetValueTask.setValue(spinner, "Two"));
   }
 
   private static class MyWindow extends TestWindow {

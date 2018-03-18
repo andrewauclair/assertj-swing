@@ -17,6 +17,7 @@ import static java.awt.event.KeyEvent.VK_C;
 import static java.awt.event.KeyEvent.VK_E;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -44,9 +45,8 @@ class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_TestCase 
   @Test
   void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
-    thrown.expectIllegalStateIsDisabledComponent();
     try {
-      driver.pressAndReleaseKeys(window.textField, VK_A);
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.pressAndReleaseKeys(window.textField, VK_A));
     } finally {
       assertThatTextFieldIsEmpty();
     }
@@ -54,9 +54,8 @@ class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_TestCase 
 
   @Test
   void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.pressAndReleaseKeys(window.textField, VK_A);
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.pressAndReleaseKeys(window.textField, VK_A));
     } finally {
       assertThatTextFieldIsEmpty();
     }

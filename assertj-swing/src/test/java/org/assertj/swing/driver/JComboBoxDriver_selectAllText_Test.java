@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.text.JTextComponent;
 
 import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -33,14 +34,12 @@ class JComboBoxDriver_selectAllText_Test extends JComboBoxDriver_TestCase {
   @Test
   void should_Throw_Error_If_JComboBox_Is_Disabled() {
     disableComboBox();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.selectAllText(comboBox);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectAllText(comboBox));
   }
 
   @Test
   void should_Throw_Error_If_JComboBox_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectAllText(comboBox);
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectAllText(comboBox));
   }
 
   @Test

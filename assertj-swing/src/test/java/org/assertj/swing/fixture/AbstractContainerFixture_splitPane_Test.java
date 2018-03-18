@@ -14,6 +14,7 @@ package org.assertj.swing.fixture;
 
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.ComponentLookupException;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.junit.jupiter.api.Test;
@@ -52,10 +53,8 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
 
   @Test
   void should_Fail_If_Visible_JButton_Not_Found_By_Name() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher",
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.splitPane("mySplitPane"), "Unable to find component using matcher",
         "name='mySplitPane', type=javax.swing.JSplitPane, requireShowing=true");
-    fixture.splitPane("mySplitPane");
   }
 
   @Test
@@ -67,10 +66,8 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
 
   @Test
   void should_Fail_If_Visible_JButton_Not_Found_By_Type() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher",
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.splitPane(), "Unable to find component using matcher",
         "type=javax.swing.JSplitPane, requireShowing=true");
-    fixture.splitPane();
   }
 
   @Test
@@ -87,9 +84,7 @@ public class AbstractContainerFixture_splitPane_Test extends RobotBasedTestCase 
 
   @Test
   void should_Fail_If_Visible_JButton_Not_Found_By_Matcher() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher");
-    fixture.splitPane(neverMatches(JSplitPane.class));
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.splitPane(neverMatches(JSplitPane.class)), "Unable to find component using matcher");
   }
 
   private static class MyWindow extends TestWindow {

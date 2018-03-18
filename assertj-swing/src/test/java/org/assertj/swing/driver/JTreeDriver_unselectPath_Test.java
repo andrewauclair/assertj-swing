@@ -37,7 +37,6 @@ public class JTreeDriver_unselectPath_Test extends JTreeDriver_selectCell_TestCa
   @Test
   void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
     ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.unselectPath(tree, "root/branch1"));
   }
 
@@ -53,7 +52,6 @@ public class JTreeDriver_unselectPath_Test extends JTreeDriver_selectCell_TestCa
 
   @Test
   void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.unselectPath(tree, "root/branch1");
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.unselectPath(tree, "root/branch1"));
   }
 }

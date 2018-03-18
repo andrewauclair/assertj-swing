@@ -203,31 +203,16 @@ public class ExpectedException {//implements TestRule {
 //    });
   }
 
-  public void expectIllegalStateIsNotShowingComponent() {
-    expect(IllegalStateException.class, "Expecting component");
-    expectMessageToContain("to be showing on the screen");
-  }
-
   public static void assertIllegalStateIsNotShowingComponent(Executable executable) {
     Throwable exception = assertThrows(IllegalStateException.class, executable);
     assertTrue(exception.getMessage().contains("Expecting component"));
     assertTrue(exception.getMessage().contains("to be showing on the screen"));
   }
 
-  public void expectIllegalStateIsNotResizableComponent() {
-    expect(IllegalStateException.class, "Expecting component");
-    expectMessageToContain("to be resizable by the user");
-  }
-
   public static void assertIllegalStateIsNotResizableComponent(Executable executable) {
     Throwable exception = assertThrows(IllegalStateException.class, executable);
     assertTrue(exception.getMessage().contains("Expecting component"));
     assertTrue(exception.getMessage().contains("to be resizable by the user"));
-  }
-
-  public void expectIllegalStateIsDisabledComponent() {
-    expect(IllegalStateException.class, "Expecting component");
-    expectMessageToContain("to be enabled");
   }
 
   public static void assertIllegalStateIsDisabledComponent(Executable executable) {

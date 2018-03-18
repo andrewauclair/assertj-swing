@@ -20,6 +20,7 @@ import java.util.Collection;
 import javax.swing.JSlider;
 
 import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -31,7 +32,7 @@ import org.junit.runners.Parameterized.Parameters;
  */
 public class JSliderDriver_slideToMaximum_Test extends JSliderDriver_TestCase {
   @Parameters
-  public static Collection<Object[]> allOrientations() {
+  static Collection<Object[]> allOrientations() {
     return newArrayList(orientations());
   }
 
@@ -40,7 +41,7 @@ public class JSliderDriver_slideToMaximum_Test extends JSliderDriver_TestCase {
   }
 
   @Test
-  public void should_Slide_To_Maximum() {
+  void should_Slide_To_Maximum() {
     showWindow();
     driver.slideToMaximum(slider);
     assertThatSliderValueIs(maximumOf(slider));
@@ -52,15 +53,13 @@ public class JSliderDriver_slideToMaximum_Test extends JSliderDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JSlider_Is_Disabled() {
+  void should_Throw_Error_If_JSlider_Is_Disabled() {
     disableSlider();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.slideToMaximum(slider);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.slideToMaximum(slider));
   }
 
   @Test
-  public void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.slideToMaximum(slider);
+  void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.slideToMaximum(slider));
   }
 }

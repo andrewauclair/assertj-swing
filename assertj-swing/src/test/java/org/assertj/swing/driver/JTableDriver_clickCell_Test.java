@@ -12,14 +12,14 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
-import static org.assertj.swing.data.TableCell.row;
-
 import org.assertj.swing.data.TableCell;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
+import static org.assertj.swing.data.TableCell.row;
 
 /**
  * Tests for
@@ -30,11 +30,10 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 public class JTableDriver_clickCell_Test extends JTableDriver_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Click_Cell() {
+  void should_Click_Cell() {
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(table);
     TableCell cell = row(0).column(1);
@@ -44,16 +43,14 @@ public class JTableDriver_clickCell_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Disabled() {
+  void should_Throw_Error_If_JTable_Is_Disabled() {
     disableTable();
-    thrown.expectIllegalStateIsDisabledComponent();
     robot.settings().clickOnDisabledComponentsAllowed(false);
-    driver.selectCell(table, row(0).column(0));
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.selectCell(table, row(0).column(0)));
   }
 
   @Test
-  public void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.selectCell(table, row(0).column(0));
+  void should_Throw_Error_If_JTable_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.selectCell(table, row(0).column(0)));
   }
 }

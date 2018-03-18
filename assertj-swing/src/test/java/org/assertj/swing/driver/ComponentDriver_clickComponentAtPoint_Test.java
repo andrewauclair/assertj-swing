@@ -16,6 +16,7 @@ import static org.assertj.swing.awt.AWT.centerOf;
 
 import java.awt.Point;
 
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.junit.Rule;
@@ -32,7 +33,7 @@ public class ComponentDriver_clickComponentAtPoint_Test extends ComponentDriver_
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Click_Component_At_Given_Point() {
+  void should_Click_Component_At_Given_Point() {
     showWindow();
     Point center = centerOf(window.button);
     Point where = new Point(center.x + 1, center.y + 1);
@@ -43,7 +44,7 @@ public class ComponentDriver_clickComponentAtPoint_Test extends ComponentDriver_
   }
 
   @Test
-  public void should_Click_Disabled_Component() {
+  void should_Click_Disabled_Component() {
     showWindow();
     disableButton();
     Point center = centerOf(window.button);
@@ -54,24 +55,23 @@ public class ComponentDriver_clickComponentAtPoint_Test extends ComponentDriver_
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
+  void should_Throw_Error_If_Component_Is_Disabled_And_ClickOnDisabledAllowd_Is_False() {
     robot.settings().clickOnDisabledComponentsAllowed(false);
     disableButton();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
 
     try {
-      thrown.assertIllegalStateIsDisabledComponent(() -> driver.click(window.button, new Point(10, 10)));
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.click(window.button, new Point(10, 10)));
     } finally {
       recorder.wasNotClicked();
     }
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.click(window.button, new Point(10, 10));
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.click(window.button, new Point(10, 10)));
     } finally {
       recorder.wasNotClicked();
     }

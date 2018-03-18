@@ -16,6 +16,7 @@ import static org.assertj.core.util.Lists.newArrayList;
 
 import java.util.Collection;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -27,7 +28,7 @@ import org.junit.runners.Parameterized.Parameters;
  */
 public class JSliderDriver_slide_withInvalidInputAndState_Test extends JSliderDriver_TestCase {
   @Parameters
-  public static Collection<Object[]> allOrientations() {
+  static Collection<Object[]> allOrientations() {
     return newArrayList(orientations());
   }
 
@@ -36,29 +37,27 @@ public class JSliderDriver_slide_withInvalidInputAndState_Test extends JSliderDr
   }
 
   @Test
-  public void should_Throw_Error_If_Value_Is_Less_Than_Minimum() {
+  void should_Throw_Error_If_Value_Is_Less_Than_Minimum() {
     showWindow();
     thrown.expectIllegalArgumentException("Value <-1> is not within the JSlider bounds of <0> and <30>");
     driver.slide(slider, -1);
   }
 
   @Test
-  public void should_Throw_Error_If_Value_Is_Greater_Than_Maximum() {
+  void should_Throw_Error_If_Value_Is_Greater_Than_Maximum() {
     showWindow();
     thrown.expectIllegalArgumentException("Value <31> is not within the JSlider bounds of <0> and <30>");
     driver.slide(slider, 31);
   }
 
   @Test
-  public void should_Throw_Error_If_JSlider_Is_Disabled() {
+  void should_Throw_Error_If_JSlider_Is_Disabled() {
     disableSlider();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.slide(slider, 6);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.slide(slider, 6));
   }
 
   @Test
-  public void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.slide(slider, 6);
+  void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.slide(slider, 6));
   }
 }

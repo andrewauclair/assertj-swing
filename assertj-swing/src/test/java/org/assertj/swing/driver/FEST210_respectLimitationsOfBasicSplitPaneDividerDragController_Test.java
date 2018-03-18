@@ -47,7 +47,7 @@ public class FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Tes
   private final int orientation;
 
   @Parameters
-  public static Collection<Object[]> orientations() {
+  static Collection<Object[]> orientations() {
     return newArrayList(new Object[][] { { VERTICAL_SPLIT }, { HORIZONTAL_SPLIT } });
   }
 
@@ -63,7 +63,7 @@ public class FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Tes
   }
 
   @Test
-  public void should_Respect_Minimum_Size_When_Moving_Divider() {
+  void should_Respect_Minimum_Size_When_Moving_Divider() {
     driver.moveDividerTo(window.splitPane, 30);
     driver.moveDividerTo(window.splitPane, 10);
     assertThatIsGreaterOrLessThanMinimumSize(sizeOf(window.leftPanel));

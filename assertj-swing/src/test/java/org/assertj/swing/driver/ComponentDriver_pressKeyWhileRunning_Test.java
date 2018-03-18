@@ -15,6 +15,7 @@ package org.assertj.swing.driver;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.mockito.Mockito.mock;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,23 +23,22 @@ import org.junit.jupiter.api.Test;
  *
  * @author Christian Rösch
  */
-public class ComponentDriver_pressKeyWhileRunning_Test extends ComponentDriver_TestCase {
+class ComponentDriver_pressKeyWhileRunning_Test extends ComponentDriver_TestCase {
   @Test
-  public void should_Throw_Error_If_Component_Is_Disabled() {
+  void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
     try {
-      thrown.assertIllegalStateIsDisabledComponent(() -> driver.pressKeyWhileRunning(window.textField, VK_A, mock(Runnable.class)));
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.pressKeyWhileRunning(window.textField, VK_A, mock(Runnable.class)));
     } finally {
       assertThatTextFieldIsEmpty();
     }
   }
 
   @Test
-  public void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
+  void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     assertThatTextFieldIsEmpty();
-    thrown.expectIllegalStateIsNotShowingComponent();
     try {
-      driver.pressKeyWhileRunning(window.textField, VK_A, mock(Runnable.class));
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.pressKeyWhileRunning(window.textField, VK_A, mock(Runnable.class)));
     } finally {
       assertThatTextFieldIsEmpty();
     }

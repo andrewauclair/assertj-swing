@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,9 +20,9 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JTreeDriver_toggleRow_Test extends JTreeDriver_toggleCell_TestCase {
+class JTreeDriver_toggleRow_Test extends JTreeDriver_toggleCell_TestCase {
   @Test
-  public void shouldToggleNodeByRow() {
+  void shouldToggleNodeByRow() {
     showWindow();
     requireRowCollapsed(5);
     driver.toggleRow(tree, 5);
@@ -33,15 +34,13 @@ public class JTreeDriver_toggleRow_Test extends JTreeDriver_toggleCell_TestCase 
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Disabled() {
+  void should_Throw_Error_If_JTree_Is_Disabled() {
     disableTree();
-    thrown.expectIllegalStateIsDisabledComponent();
-    driver.toggleRow(tree, 0);
+    ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.toggleRow(tree, 0));
   }
 
   @Test
-  public void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
-    thrown.expectIllegalStateIsNotShowingComponent();
-    driver.toggleRow(tree, 0);
+  void should_Throw_Error_If_JTree_Is_Not_Showing_On_The_Screen() {
+    ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.toggleRow(tree, 0));
   }
 }

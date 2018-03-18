@@ -48,37 +48,33 @@ public class AbstractContainerFixture_progressBar_Test extends RobotBasedTestCas
   }
 
   @Test
-  public void should_Find_Visible_JProgressBar_By_Name() {
+  void should_Find_Visible_JProgressBar_By_Name() {
     robot.showWindow(window);
     JProgressBarFixture progressBar = fixture.progressBar("progressBar");
     assertThat(progressBar.target()).isSameAs(window.progressBar);
   }
 
   @Test
-  public void should_Fail_If_Visible_JProgressBar_Not_Found_By_Name() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher",
+  void should_Fail_If_Visible_JProgressBar_Not_Found_By_Name() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.progressBar("myProgressBar"), "Unable to find component using matcher",
         "name='myProgressBar', type=javax.swing.JProgressBar, requireShowing=true");
-    fixture.progressBar("myProgressBar");
   }
 
   @Test
-  public void should_Find_Visible_JProgressBar_By_Type() {
+  void should_Find_Visible_JProgressBar_By_Type() {
     robot.showWindow(window);
     JProgressBarFixture progressBar = fixture.progressBar();
     assertThat(progressBar.target()).isSameAs(window.progressBar);
   }
 
   @Test
-  public void should_Fail_If_Visible_JProgressBar_Not_Found_By_Type() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher",
+  void should_Fail_If_Visible_JProgressBar_Not_Found_By_Type() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.progressBar(), "Unable to find component using matcher",
         "type=javax.swing.JProgressBar, requireShowing=true");
-    fixture.progressBar();
   }
 
   @Test
-  public void should_Find_Visible_JProgressBar_By_Matcher() {
+  void should_Find_Visible_JProgressBar_By_Matcher() {
     robot.showWindow(window);
     JProgressBarFixture progressBar = fixture.progressBar(new GenericTypeMatcher<JProgressBar>(JProgressBar.class) {
       @Override
@@ -90,10 +86,8 @@ public class AbstractContainerFixture_progressBar_Test extends RobotBasedTestCas
   }
 
   @Test
-  public void should_Fail_If_Visible_JProgressBar_Not_Found_By_Matcher() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher");
-    fixture.progressBar(neverMatches(JProgressBar.class));
+  void should_Fail_If_Visible_JProgressBar_Not_Found_By_Matcher() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.progressBar(neverMatches(JProgressBar.class)), "Unable to find component using matcher");
   }
 
   private static class MyWindow extends TestWindow {
