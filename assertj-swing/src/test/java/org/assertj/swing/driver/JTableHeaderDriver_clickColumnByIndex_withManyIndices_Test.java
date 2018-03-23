@@ -12,41 +12,30 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.assertj.swing.test.recorder.ClickRecorderManager;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JTableHeaderDriver#clickColumn(javax.swing.table.JTableHeader, int)}.
  * 
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableHeaderDriver_clickColumnByIndex_withManyIndices_Test extends JTableHeaderDriver_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class JTableHeaderDriver_clickColumnByIndex_withManyIndices_Test extends JTableHeaderDriver_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
-  private final int index;
-
-  @Parameters
-  public static Collection<Object[]> indices() {
+  private static Collection<Object[]> indices() {
     return newArrayList(columnIndices());
   }
 
-  public JTableHeaderDriver_clickColumnByIndex_withManyIndices_Test(int index) {
-    this.index = index;
-  }
-
-  @Test
-  public void should_Click_Column() {
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Click_Column(int index) {
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tableHeader);
     driver.clickColumn(tableHeader, index);

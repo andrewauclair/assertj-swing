@@ -37,7 +37,7 @@ public class FEST150_cannotTypeDashInTableCell_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Enter_Dash_In_Cell() {
+  void should_Enter_Dash_In_Cell() {
     table.cell(row(0).column(0)).enterValue("-");
   }
 

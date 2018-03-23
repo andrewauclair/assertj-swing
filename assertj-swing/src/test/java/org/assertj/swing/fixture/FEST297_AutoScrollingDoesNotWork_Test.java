@@ -12,26 +12,19 @@
  */
 package org.assertj.swing.fixture;
 
-import static javax.swing.BoxLayout.Y_AXIS;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static javax.swing.BoxLayout.Y_AXIS;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-297" target="_blank">FEST-297</a>.
@@ -39,9 +32,8 @@ import org.junit.jupiter.api.Test;
  * @author Nicolae Bucalaete
  * @author Alex Ruiz
  */
-public class FEST297_AutoScrollingDoesNotWork_Test extends RobotBasedTestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class FEST297_AutoScrollingDoesNotWork_Test extends RobotBasedTestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private FrameFixture frame;
   private MyWindow window;

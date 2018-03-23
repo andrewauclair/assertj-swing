@@ -12,45 +12,30 @@
  */
 package org.assertj.swing.driver;
 
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.PLAIN_MESSAGE;
-import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static javax.swing.JOptionPane.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JOptionPaneMessageTypes#messageTypeAsText(int)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JOptionPaneMessageTypes_messageTypeAsText_Test {
-  private final int messageType;
-  private final String expected;
-
-  @Parameters
-  public static Collection<Object[]> messageTypes() {
+class JOptionPaneMessageTypes_messageTypeAsText_Test {
+  private static Collection<Object[]> messageTypes() {
     return newArrayList(new Object[][] { { ERROR_MESSAGE, "Error Message" },
         { INFORMATION_MESSAGE, "Information Message" }, { WARNING_MESSAGE, "Warning Message" },
         { QUESTION_MESSAGE, "Question Message" }, { PLAIN_MESSAGE, "Plain Message" } });
   }
 
-  public JOptionPaneMessageTypes_messageTypeAsText_Test(int messageType, String expected) {
-    this.messageType = messageType;
-    this.expected = expected;
-  }
-
-  @Test
-  public void should_Return_Text_For_Given_Message_Type_Value() {
+  @ParameterizedTest
+  @MethodSource("messageTypes")
+  void should_Return_Text_For_Given_Message_Type_Value(int messageType, String expected) {
     assertThat(JOptionPaneMessageTypes.messageTypeAsText(messageType)).isEqualTo(expected);
   }
 }

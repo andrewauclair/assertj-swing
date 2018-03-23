@@ -12,19 +12,15 @@
  */
 package org.assertj.swing.input;
 
-import static org.assertj.swing.test.awt.TestAWTEvents.singletonAWTEventMock;
-import static org.assertj.swing.test.awt.Toolkits.newToolkitMock;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
-
-import java.awt.AWTEvent;
-import java.awt.event.AWTEventListener;
-
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.event.AWTEventListener;
+
+import static org.assertj.swing.test.awt.TestAWTEvents.singletonAWTEventMock;
+import static org.assertj.swing.test.awt.Toolkits.newToolkitMock;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link EventNormalizer#eventDispatched(AWTEvent)}.

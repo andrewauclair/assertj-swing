@@ -12,6 +12,15 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,51 +28,32 @@ import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.query.ComponentSizeQuery.sizeOf;
 
-import java.awt.Dimension;
-import java.util.Collection;
-
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-210" target="_blank">FEST-210</a>
  *
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Test extends RobotBasedTestCase {
+class FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Test extends RobotBasedTestCase {
   private static final int MINIMUM_SIZE = 20;
 
   private JSplitPaneDriver driver;
   private MyWindow window;
 
-  private final int orientation;
-
-  @Parameters
-  static Collection<Object[]> orientations() {
+  private static Collection<Object[]> orientations() {
     return newArrayList(new Object[][] { { VERTICAL_SPLIT }, { HORIZONTAL_SPLIT } });
-  }
-
-  public FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Test(int orientation) {
-    this.orientation = orientation;
   }
 
   @Override
   protected void onSetUp() {
     driver = new JSplitPaneDriver(robot);
-    window = MyWindow.createNew(orientation);
-    robot.showWindow(window);
   }
 
-  @Test
-  void should_Respect_Minimum_Size_When_Moving_Divider() {
+  @ParameterizedTest
+  @MethodSource("orientations")
+  void should_Respect_Minimum_Size_When_Moving_Divider(int orientation) {
+    window = MyWindow.createNew(orientation);
+    robot.showWindow(window);
+
     driver.moveDividerTo(window.splitPane, 30);
     driver.moveDividerTo(window.splitPane, 10);
     assertThatIsGreaterOrLessThanMinimumSize(sizeOf(window.leftPanel));

@@ -12,20 +12,19 @@
  */
 package org.assertj.swing.image;
 
-import static org.assertj.swing.image.TestImageFileWriters.newImageFileWriterMock;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.assertj.swing.internal.annotation.IORuntimeException;
+import org.assertj.swing.util.RobotFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import org.assertj.swing.internal.annotation.IORuntimeException;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.util.RobotFactory;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.image.TestImageFileWriters.newImageFileWriterMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link ScreenshotTaker#saveImage(BufferedImage, String)}.
@@ -33,18 +32,15 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ScreenshotTaker_saveImage_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class ScreenshotTaker_saveImage_Test {
   private BufferedImage image;
   private String path;
   private ImageFileWriter writer;
   private IOException error;
   private ScreenshotTaker taker;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     image = mock(BufferedImage.class);
     path = "image.png";
     writer = newImageFileWriterMock();
@@ -53,9 +49,9 @@ public class ScreenshotTaker_saveImage_Test {
   }
 
   @Test
-  public void should_Throw_Wrapped_Exception_Thrown_When_Writing_Image_To_File() throws IOException {
+  void should_Throw_Wrapped_Exception_Thrown_When_Writing_Image_To_File() throws IOException {
     when(writer.writeAsPng(image, path)).thenThrow(error);
-    thrown.expectWrappingException(IORuntimeException.class, error);
-    taker.saveImage(image, path);
+    Throwable exception = assertThrows(IORuntimeException.class, () -> taker.saveImage(image, path));
+    assertThat(exception.getCause()).isEqualTo(error);
   }
 }

@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTextComponentDriver_requireTextAsPattern_Test extends JTextComponentDriver_TestCase {
+class JTextComponentDriver_requireTextAsPattern_Test extends JTextComponentDriver_TestCase {
   @Test
-  public void should_Pass_If_Text_Matches_Pattern() {
+  void should_Pass_If_Text_Matches_Pattern() {
     setTextFieldText("Hi");
     driver.requireText(textField, Pattern.compile("H.*"));
   }
 
   @Test
-  public void should_Fail_If_Text_Does_Not_Match_Pattern() {
+  void should_Fail_If_Text_Does_Not_Match_Pattern() {
     setTextFieldText("Hi");
     ExpectedException.assertAssertionError(() -> driver.requireText(textField, Pattern.compile("Bye")), "text", "Hi", Pattern.compile("Bye"));
   }

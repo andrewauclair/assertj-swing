@@ -12,16 +12,14 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.builder.JTables.table;
-
-import javax.swing.JTable;
-
-import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.BeforeClass;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.swing.test.builder.JTables.table;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link JTableDriver#selectRows(javax.swing.JTable, int...)} using invalid input.
@@ -29,13 +27,10 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class JTableDriver_selectRows_withInvalidInput_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private static JTable table;
   private JTableDriver driver;
 
-  @BeforeClass
+  @BeforeAll
   public static void setUpOnce() {
     table = table().withRowCount(6).withColumnCount(8).createNew();
   }
@@ -46,14 +41,12 @@ public class JTableDriver_selectRows_withInvalidInput_Test extends RobotBasedTes
   }
 
   @Test
-  public void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
-    thrown.expect(NullPointerException.class);
-    driver.selectRows(table, null);
+  void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
+    assertThrows(NullPointerException.class, () -> driver.selectRows(table, null));
   }
 
   @Test
-  public void should_Throw_Error_If_Array_Of_Indices_Is_Empty() {
-    thrown.expect(IllegalArgumentException.class);
-    driver.selectRows(table, new int[0]);
+  void should_Throw_Error_If_Array_Of_Indices_Is_Empty() {
+    assertThrows(IllegalArgumentException.class, () -> driver.selectRows(table, new int[0]));
   }
 }

@@ -12,31 +12,29 @@
  */
 package org.assertj.swing.driver;
 
-import java.util.regex.Pattern;
-
 import org.assertj.swing.exception.LocationUnavailableException;
+import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import java.util.regex.Pattern;
 
 /**
  * Tests for {@link JTableHeaderDriver#clickColumn(javax.swing.table.JTableHeader, java.util.regex.Pattern)}.
  * 
  * @author Yvonne Wang
  */
-public class JTableHeaderDriver_clickColumnByPattern_Test extends JTableHeaderDriver_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class JTableHeaderDriver_clickColumnByPattern_Test extends JTableHeaderDriver_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Fail_If_Matching_Column_Was_Not_Found() {
-    thrown.expect(LocationUnavailableException.class, "Unable to find column with name matching pattern 'hello'");
-    driver.clickColumn(tableHeader, Pattern.compile("hello"));
+  void should_Fail_If_Matching_Column_Was_Not_Found() {
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.clickColumn(tableHeader, Pattern.compile("hello")), "Unable to find column with name matching pattern 'hello'");
   }
 
   @Test
-  public void should_Click_Column() {
+  void should_Click_Column() {
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tableHeader);
     driver.clickColumn(tableHeader, Pattern.compile("0.*"));

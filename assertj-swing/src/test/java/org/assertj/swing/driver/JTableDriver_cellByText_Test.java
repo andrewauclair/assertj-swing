@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.exception.ActionFailedException;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,9 +25,9 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_cellByText_Test extends JTableDriver_TestCase {
+class JTableDriver_cellByText_Test extends JTableDriver_TestCase {
   @Test
-  public void should_Find_Cell_Having_Value_That_Matches_Given_Pattern() {
+  void should_Find_Cell_Having_Value_That_Matches_Given_Pattern() {
     TableCell cell = driver.cell(table, "1.*");
     assertThat(cell.row).isEqualTo(1);
     assertThat(cell.column).isEqualTo(0);
@@ -34,8 +35,7 @@ public class JTableDriver_cellByText_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Throw_Error_If_A_Matching_Cell_Was_Not_Found() {
-    thrown.expect(ActionFailedException.class, "Unable to find cell matching value 'Hello World'");
-    driver.cell(table, "Hello World");
+  void should_Throw_Error_If_A_Matching_Cell_Was_Not_Found() {
+    ExpectedException.assertContainsMessage(ActionFailedException.class, () -> driver.cell(table, "Hello World"), "Unable to find cell matching value 'Hello World'");
   }
 }

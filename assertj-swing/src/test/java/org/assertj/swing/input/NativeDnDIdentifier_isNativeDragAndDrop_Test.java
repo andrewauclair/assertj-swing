@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.input;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.builder.JLabels.label;
+import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.builder.JLabels.label;
 
 /**
  * Tests for {@link NativeDndIdentifier#isNativeDragAndDrop(java.awt.AWTEvent)}.

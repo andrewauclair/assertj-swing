@@ -12,21 +12,19 @@
  */
 package org.assertj.swing.core;
 
+import org.assertj.swing.test.ExpectedException;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.List;
+
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.core.UnexpectedJOptionPaneFinder.OPTION_PANE_MATCHER;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.test.builder.JOptionPanes.optionPane;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.util.List;
-
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link UnexpectedJOptionPaneFinder#requireNoJOptionPaneIsShowing}.
@@ -37,7 +35,7 @@ class UnexpectedJOptionPaneFinder_requireNoJOptionPaneIsShowing_Test extends EDT
   private ComponentFinder delegate;
   private UnexpectedJOptionPaneFinder finder;
 
-  @Before
+  @BeforeEach
   void setUp() {
     delegate = mock(ComponentFinder.class);
     finder = new UnexpectedJOptionPaneFinder(delegate);

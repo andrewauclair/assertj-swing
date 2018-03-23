@@ -12,27 +12,23 @@
  */
 package org.assertj.swing.fixture;
 
-import static java.lang.String.valueOf;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.timing.Pause.pause;
-
-import java.awt.Dimension;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.exception.LocationUnavailableException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestTree;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import java.awt.*;
+
+import static java.lang.String.valueOf;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.timing.Pause.pause;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=133">Bug 133</a>.
@@ -42,8 +38,6 @@ import org.junit.jupiter.api.Test;
 public class Bug133_scrollToItemToSelectInJTree_Test extends RobotBasedTestCase {
   private FrameFixture frame;
   private MyWindow window;
-  @Rule
-  public ExpectedException thrown = none();
 
   @Override
   public void onSetUp() {
@@ -53,19 +47,19 @@ public class Bug133_scrollToItemToSelectInJTree_Test extends RobotBasedTestCase 
   }
 
   @Test
-  public void should_Scroll_To_Cell_When_Selecting_By_Path() {
+  void should_Scroll_To_Cell_When_Selecting_By_Path() {
     frame.tree("drag").selectPath("root/100/100.1");
     assertThat(selectionOf(window.dragTree)).isEqualTo("100.1");
   }
 
   @Test
-  public void should_Scroll_To_Cell_When_Selecting_By_Row_Index() {
+  void should_Scroll_To_Cell_When_Selecting_By_Row_Index() {
     frame.tree("drag").selectRow(99);
     assertThat(selectionOf(window.dragTree)).isEqualTo("99");
   }
 
   @Test
-  public void should_Scroll_To_Cells_When_Dragging_And_Dropping_By_Path() {
+  void should_Scroll_To_Cells_When_Dragging_And_Dropping_By_Path() {
     frame.tree("drag").drag("root/99");
     frame.tree("drop").drop("root/90");
     assertPathNotFoundInDragTree("root/99");
@@ -74,7 +68,7 @@ public class Bug133_scrollToItemToSelectInJTree_Test extends RobotBasedTestCase 
   }
 
   @Test
-  public void should_Scroll_To_Cells_When_Dragging_And_Dropping_By_Row_Index() {
+  void should_Scroll_To_Cells_When_Dragging_And_Dropping_By_Row_Index() {
     frame.tree("drag").drag(99);
     frame.tree("drop").drop(90);
     assertPathNotFoundInDragTree("root/99");
@@ -83,9 +77,7 @@ public class Bug133_scrollToItemToSelectInJTree_Test extends RobotBasedTestCase 
   }
 
   private void assertPathNotFoundInDragTree(String path) {
-    thrown.expect(LocationUnavailableException.class);
-    thrown.expectMessageToContain(path);
-    frame.tree("drag").selectPath(path);
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> frame.tree("drag").selectPath(path), path);
   }
 
   @RunsInEDT

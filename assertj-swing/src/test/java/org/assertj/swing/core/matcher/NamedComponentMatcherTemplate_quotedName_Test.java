@@ -12,13 +12,12 @@
  */
 package org.assertj.swing.core.matcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import javax.swing.JLabel;
-
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link NamedComponentMatcherTemplate#quotedName()}.

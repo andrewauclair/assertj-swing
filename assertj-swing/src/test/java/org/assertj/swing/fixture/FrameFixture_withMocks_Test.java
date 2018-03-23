@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.FrameDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import java.awt.Frame;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.FrameDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameFixture}.
@@ -29,35 +29,35 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class FrameFixture_withMocks_Test {
+class FrameFixture_withMocks_Test {
   private FrameFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new FrameFixture(mock(Robot.class), mock(Frame.class));
     fixture.replaceDriverWith(mock(FrameDriver.class));
   }
 
   @Test
-  public void should_Call_Iconify_In_Driver_And_Return_Self() {
+  void should_Call_Iconify_In_Driver_And_Return_Self() {
     assertThat(fixture.iconify()).isSameAs(fixture);
     verify(fixture.driver()).iconify(fixture.target());
   }
 
   @Test
-  public void should_Call_Deiconify_In_Driver_And_Return_Self() {
+  void should_Call_Deiconify_In_Driver_And_Return_Self() {
     assertThat(fixture.deiconify()).isSameAs(fixture);
     verify(fixture.driver()).deiconify(fixture.target());
   }
 
   @Test
-  public void should_Call_Maximize_In_Driver_And_Return_Self() {
+  void should_Call_Maximize_In_Driver_And_Return_Self() {
     assertThat(fixture.maximize()).isSameAs(fixture);
     verify(fixture.driver()).maximize(fixture.target());
   }
 
   @Test
-  public void should_Call_Normalize_In_Driver_And_Return_Self() {
+  void should_Call_Normalize_In_Driver_And_Return_Self() {
     assertThat(fixture.normalize()).isSameAs(fixture);
     verify(fixture.driver()).normalize(fixture.target());
   }

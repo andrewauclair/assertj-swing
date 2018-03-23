@@ -24,15 +24,13 @@ class JTableDriver_unselectRows_Test extends JTableDriver_TestCase {
   @Test
   void should_Throw_Error_If_Index_Is_Negative() {
     showWindow();
-    thrown.expect(IndexOutOfBoundsException.class, "row <-1> should be between <0> and <9>");
-    driver.unselectRows(table, -1);
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.unselectRows(table, -1), "row <-1> should be between <0> and <9>");
   }
 
   @Test
   void should_Throw_Error_If_Index_Is_Equal_To_The_Number_Of_Rows() {
     showWindow();
-    thrown.expect(IndexOutOfBoundsException.class, "row <10> should be between <0> and <9>");
-    driver.unselectRows(table, 10);
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.unselectRows(table, 10), "row <10> should be between <0> and <9>");
   }
 
   @Test

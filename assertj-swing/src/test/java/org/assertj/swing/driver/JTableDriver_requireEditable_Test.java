@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import static org.assertj.swing.data.TableCell.row;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,18 +23,16 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_requireEditable_Test extends JTableDriver_TestCase {
+class JTableDriver_requireEditable_Test extends JTableDriver_TestCase {
   @Test
-  public void should_Pass_If_Cell_Is_Editable() {
+  void should_Pass_If_Cell_Is_Editable() {
     makeFirstCellEditable();
     driver.requireEditable(table, row(0).column(0));
   }
 
   @Test
-  public void should_Fail_If_Cell_Is_Not_Editable() {
+  void should_Fail_If_Cell_Is_Not_Editable() {
     makeFirstCellNotEditable();
-    thrown.expectAssertionError("property:'editable [row=0, column=0]'");
-    thrown.expectMessageToContain("expected:<[tru]e> but was:<[fals]e>");
-    driver.requireEditable(table, row(0).column(0));
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireEditable(table, row(0).column(0)), "property:'editable [row=0, column=0]'", "expected:<[tru]e> but was:<[fals]e>");
   }
 }

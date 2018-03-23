@@ -12,23 +12,19 @@
  */
 package org.assertj.swing.hierarchy;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowEvent;
+import java.util.Collection;
+
 import static java.awt.event.ComponentEvent.COMPONENT_SHOWN;
 import static java.awt.event.WindowEvent.WINDOW_OPENED;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.awt.AWTEvent;
-import java.awt.event.ComponentEvent;
-import java.awt.event.WindowEvent;
-import java.util.Collection;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link TransientWindowListener#eventDispatched(AWTEvent)}.

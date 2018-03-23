@@ -12,25 +12,22 @@
  */
 package org.assertj.swing.hierarchy;
 
+import org.assertj.core.util.Arrays;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.Collection;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.awt.TestComponents.newComponentMock;
 import static org.assertj.swing.test.awt.TestContainers.newContainerMock;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.awt.Container;
-import java.util.Collection;
-import java.util.List;
-
-import org.assertj.core.util.Arrays;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ChildrenFinder#childrenOf(Component)}.

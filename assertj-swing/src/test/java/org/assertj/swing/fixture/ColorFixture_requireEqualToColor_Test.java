@@ -12,14 +12,12 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
+
 import static java.awt.Color.BLUE;
 import static java.awt.Color.RED;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ColorFixture#requireEqualTo(java.awt.Color)}.

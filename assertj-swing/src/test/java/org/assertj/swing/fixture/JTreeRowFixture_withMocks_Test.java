@@ -12,105 +12,103 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.MouseClickInfo;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
 import static org.assertj.swing.core.MouseClickInfo.middleButton;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.assertj.swing.core.MouseClickInfo;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link JTreeRowFixture}.
  *
  * @author Alex Ruiz
  */
-public class JTreeRowFixture_withMocks_Test extends EDTSafeTestCase {
+class JTreeRowFixture_withMocks_Test extends EDTSafeTestCase {
   private JTreeFixture treeFixture;
   private int index;
 
   private JTreeRowFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JTreeRowFixture(mock(JTreeFixture.class), 6);
     treeFixture = fixture.treeFixture();
     index = fixture.index();
   }
 
   @Test
-  public void should_Call_ExpandRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_ExpandRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.expand()).isSameAs(fixture);
     verify(treeFixture).expandRow(index);
   }
 
   @Test
-  public void should_Call_CollapseRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_CollapseRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.collapse()).isSameAs(fixture);
     verify(treeFixture).collapseRow(index);
   }
 
   @Test
-  public void should_Call_SelectRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_SelectRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.select()).isSameAs(fixture);
     verify(treeFixture).selectRow(index);
   }
 
   @Test
-  public void should_Call_UnselectRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_UnselectRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.unselect()).isSameAs(fixture);
     verify(treeFixture).unselectRow(index);
   }
 
   @Test
-  public void should_Call_ClickRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_ClickRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.click()).isSameAs(fixture);
     verify(treeFixture).clickRow(index);
   }
 
   @Test
-  public void should_Call_ClickRow_With_MouseButtion_In_JTreeFixture_And_Return_Self() {
+  void should_Call_ClickRow_With_MouseButtion_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.click(MIDDLE_BUTTON)).isSameAs(fixture);
     verify(treeFixture).clickRow(index, MIDDLE_BUTTON);
   }
 
   @Test
-  public void should_Call_ClickRow_With_MouseClickInfo_In_JTreeFixture_And_Return_Self() {
+  void should_Call_ClickRow_With_MouseClickInfo_In_JTreeFixture_And_Return_Self() {
     MouseClickInfo info = middleButton().times(3);
     assertThat(fixture.click(info)).isSameAs(fixture);
     verify(treeFixture).clickRow(index, info);
   }
 
   @Test
-  public void should_Call_DoubleClickRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_DoubleClickRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.doubleClick()).isSameAs(fixture);
     verify(treeFixture).doubleClickRow(index);
   }
 
   @Test
-  public void should_Call_RightClickRow_In_JTreeFixture_And_Return_Self() {
+  void should_Call_RightClickRow_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.rightClick()).isSameAs(fixture);
     verify(treeFixture).rightClickRow(index);
   }
 
   @Test
-  public void should_Call_Drag_In_JTreeFixture_And_Return_Self() {
+  void should_Call_Drag_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.drag()).isSameAs(fixture);
     verify(treeFixture).drag(index);
   }
 
   @Test
-  public void should_Call_Drop_In_JTreeFixture_And_Return_Self() {
+  void should_Call_Drop_In_JTreeFixture_And_Return_Self() {
     assertThat(fixture.drop()).isSameAs(fixture);
     verify(treeFixture).drop(index);
   }
 
   @Test
-  public void should_Return_JPopupMenu_Using_JTreeFixture() {
+  void should_Return_JPopupMenu_Using_JTreeFixture() {
     JPopupMenuFixture popupMenuFixture = mock(JPopupMenuFixture.class);
     when(treeFixture.showPopupMenuAt(index)).thenReturn(popupMenuFixture);
     assertThat(fixture.showPopupMenu()).isSameAs(popupMenuFixture);
@@ -118,7 +116,7 @@ public class JTreeRowFixture_withMocks_Test extends EDTSafeTestCase {
   }
 
   @Test
-  public void should_Return_Value_Using_JTreeFixture() {
+  void should_Return_Value_Using_JTreeFixture() {
     when(treeFixture.valueAt(index)).thenReturn("Hello");
     assertThat(fixture.value()).isEqualTo("Hello");
     verify(treeFixture).valueAt(index);

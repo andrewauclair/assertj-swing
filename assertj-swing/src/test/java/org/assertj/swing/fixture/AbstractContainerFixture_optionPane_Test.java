@@ -12,16 +12,14 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.timing.Timeout.timeout;
-
 import org.assertj.swing.exception.WaitTimedOutError;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.JOptionPaneLauncherWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.timing.Timeout.timeout;
 
 /**
  * Tests lookups of {@code JOptionPane}s in {@link AbstractContainerFixture}.
@@ -29,9 +27,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class AbstractContainerFixture_optionPane_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private ContainerFixture launcher;
   private JOptionPaneLauncherWindow window;
 
@@ -42,7 +37,7 @@ public class AbstractContainerFixture_optionPane_Test extends RobotBasedTestCase
   }
 
   @Test
-  public void should_Find_Visible_JOptionPane_By_Type() {
+  void should_Find_Visible_JOptionPane_By_Type() {
     robot.showWindow(window);
     launchOptionPane(0);
     JOptionPaneFixture optionPane = launcher.optionPane();
@@ -50,7 +45,7 @@ public class AbstractContainerFixture_optionPane_Test extends RobotBasedTestCase
   }
 
   @Test
-  public void should_Find_Visible_JOptionPane_By_Type_With_Timeout() {
+  void should_Find_Visible_JOptionPane_By_Type_With_Timeout() {
     robot.showWindow(window);
     launchOptionPane(2000);
     JOptionPaneFixture optionPane = launcher.optionPane(timeout(3000));
@@ -58,10 +53,8 @@ public class AbstractContainerFixture_optionPane_Test extends RobotBasedTestCase
   }
 
   @Test
-  public void should_Fail_If_Visible_JOptionPane_Not_Found_By_Type_With_Timeout() {
-    thrown.expect(WaitTimedOutError.class);
-    thrown.expectMessageToContain("Timed out waiting for option pane to be found");
-    launcher.optionPane(timeout(100));
+  void should_Fail_If_Visible_JOptionPane_Not_Found_By_Type_With_Timeout() {
+    ExpectedException.assertContainsMessage(WaitTimedOutError.class, () -> launcher.optionPane(timeout(100)), "Timed out waiting for option pane to be found");
   }
 
   private void launchOptionPane(int delay) {

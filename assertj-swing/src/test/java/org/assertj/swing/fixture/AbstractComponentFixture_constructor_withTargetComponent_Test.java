@@ -12,20 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.ComponentDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-
-import java.awt.Component;
-import java.awt.Frame;
-
-import javax.annotation.Nonnull;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.ComponentDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractComponentFixture#AbstractComponentFixture(Class, Robot, Component)}.

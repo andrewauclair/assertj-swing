@@ -12,18 +12,15 @@
  */
 package org.assertj.swing.edt;
 
+import org.assertj.swing.exception.UnexpectedException;
+import org.assertj.swing.test.core.MethodInvocations;
+import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
-
-import org.assertj.swing.exception.UnexpectedException;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.MethodInvocations;
-import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link GuiActionRunner#execute(GuiTask)}.
@@ -31,9 +28,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class GuiActionRunner_execute_taskNotInEDT_Test extends SequentialEDTSafeTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private boolean executeInEDT;
 
   @Override

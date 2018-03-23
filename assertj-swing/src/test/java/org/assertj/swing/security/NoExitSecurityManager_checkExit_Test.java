@@ -25,9 +25,6 @@ import static org.mockito.Mockito.*;
  * @author Alex Ruiz
  */
 class NoExitSecurityManager_checkExit_Test {
-//  @Rule
-//  public ExpectedException thrown = none();
-
   private ExitCallHook hook;
   private StackTraces stackTraces;
   private NoExitSecurityManager securityManager;

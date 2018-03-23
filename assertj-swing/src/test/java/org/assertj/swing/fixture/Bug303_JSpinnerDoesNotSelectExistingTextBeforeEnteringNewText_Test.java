@@ -37,8 +37,13 @@ public class Bug303_JSpinnerDoesNotSelectExistingTextBeforeEnteringNewText_Test 
     window.show();
   }
 
+  @Override
+  protected void onTearDown() {
+    window.cleanUp();
+  }
+
   @Test
-  public void should_Select_Existing_Text_Before_Entering_New_Ext() {
+  void should_Select_Existing_Text_Before_Entering_New_Ext() {
     window.spinner("spinner1").focus();
     window.spinner("spinner2").enterTextAndCommit("Gandalf").requireValue("Gandalf");
   }
@@ -46,7 +51,7 @@ public class Bug303_JSpinnerDoesNotSelectExistingTextBeforeEnteringNewText_Test 
   private static class MyWindow extends TestWindow {
     @RunsInEDT
     static MyWindow createNew() {
-      return execute(() -> new MyWindow());
+      return execute(MyWindow::new);
     }
 
     final JSpinner spinner1 = new JSpinner(new SpinnerListModel(array("Anakin", "Leia", "Han")));

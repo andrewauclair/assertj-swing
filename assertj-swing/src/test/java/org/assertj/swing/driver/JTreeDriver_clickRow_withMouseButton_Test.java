@@ -48,8 +48,7 @@ class JTreeDriver_clickRow_withMouseButton_Test extends JTreeDriver_clickCell_Te
   @Test
   void should_Throw_Error_If_Row_Is_Out_Of_Bounds() {
     showWindow();
-    thrown.expectIndexOutOfBoundsException("The given row <1000> should be between <0> and <6>");
-    driver.clickRow(tree, 1000, RIGHT_BUTTON);
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> driver.clickRow(tree, 1000, RIGHT_BUTTON), "The given row <1000> should be between <0> and <6>");
   }
 
   @Test

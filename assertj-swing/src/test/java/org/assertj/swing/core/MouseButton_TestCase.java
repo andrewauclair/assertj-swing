@@ -12,31 +12,21 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.BUTTON1_MASK;
-import static java.awt.event.InputEvent.BUTTON2_MASK;
-import static java.awt.event.InputEvent.BUTTON3_MASK;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
-import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-
 import java.util.Collection;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static java.awt.event.InputEvent.*;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.core.MouseButton.*;
 
 /**
  * Base test case for {@link MouseButton}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
 public abstract class MouseButton_TestCase {
   final MouseButton button;
   final int mask;
 
-  @Parameters
   public static Collection<Object[]> mouseButtonMasks() {
     return newArrayList(new Object[][] { { LEFT_BUTTON, BUTTON1_MASK }, { MIDDLE_BUTTON, BUTTON2_MASK },
         { RIGHT_BUTTON, BUTTON3_MASK }, });

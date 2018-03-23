@@ -12,23 +12,16 @@
  */
 package org.assertj.swing.assertions.data;
 
-import static junit.framework.Assert.assertEquals;
-import static org.assertj.swing.test.ExpectedException.none;
-
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for <code>{@link RgbColor#color(int)}</code>.
  * 
  * @author Yvonne Wang
  */
-public class RgbColor_color_with_single_RGB_Test {
-
-  @Rule
-  public ExpectedException thrown = none();
-
+class RgbColor_color_with_single_RGB_Test {
   @Test
   void should_Decompose_Single_Value_Into_Individual_RGB_Values() {
     RgbColor color = RgbColor.color(0x69FC62);

@@ -37,9 +37,6 @@ import static org.mockito.Mockito.mock;
 public class ContainerDriver_checkCanResize_Test extends RobotBasedTestCase {
   private ContainerDriver driver;
 
-//  @Rule
-//  public ExpectedException thrown = none();
-
   @Override
   protected void onSetUp() {
     driver = new ContainerDriver(mock(Robot.class)) {

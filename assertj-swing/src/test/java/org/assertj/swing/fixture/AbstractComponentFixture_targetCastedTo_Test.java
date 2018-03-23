@@ -16,12 +16,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import java.awt.Component;
+import java.util.concurrent.Callable;
 
 import javax.annotation.Nonnull;
 import javax.swing.JTable;
 
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.ComponentDriver;
+import org.assertj.swing.edt.GuiActionRunner;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,19 +31,19 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Christian Rösch
  */
-public class AbstractComponentFixture_targetCastedTo_Test {
+class AbstractComponentFixture_targetCastedTo_Test {
 
   @Test
-  public void should_Return_Object_Reference_Passed_Via_Constructor() {
-    Component table = new JTable();
+  void should_Return_Object_Reference_Passed_Via_Constructor() {
+    Component table = GuiActionRunner.execute((Callable<JTable>) JTable::new);
     ConcreteComponentFixture fixture = new ConcreteComponentFixture(table);
 
     assertThat(fixture.targetCastedTo(JTable.class)).isSameAs(table);
   }
 
   @Test
-  public void should_Return_Object_Of_Type_The_Component_Is_Casted_To() {
-    Component table = new JTable();
+  void should_Return_Object_Of_Type_The_Component_Is_Casted_To() {
+    Component table = GuiActionRunner.execute((Callable<JTable>) JTable::new);
     ConcreteComponentFixture fixture = new ConcreteComponentFixture(table);
 
     // check that it compiles
@@ -51,7 +53,7 @@ public class AbstractComponentFixture_targetCastedTo_Test {
 
   private static class ConcreteComponentFixture extends
       AbstractComponentFixture<ConcreteComponentFixture, Component, ComponentDriver> {
-    public ConcreteComponentFixture(Component component) {
+    ConcreteComponentFixture(Component component) {
       super(ConcreteComponentFixture.class, mock(Robot.class), component);
     }
 

@@ -12,8 +12,8 @@
  */
 package org.assertj.swing.assertions.error;
 
-import static junit.framework.Assert.assertEquals;
 import static org.assertj.swing.assertions.error.ShouldNotBeEqualImages.shouldNotBeEqualImages;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.error.ErrorMessageFactory;

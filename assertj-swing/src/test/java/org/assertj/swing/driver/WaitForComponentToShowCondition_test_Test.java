@@ -12,39 +12,39 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import javax.swing.JTextField;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link WaitForComponentToShowCondition#test()}.
  *
  * @author Yvonne Wang
  */
-public class WaitForComponentToShowCondition_test_Test extends EDTSafeTestCase {
+class WaitForComponentToShowCondition_test_Test extends EDTSafeTestCase {
   private WaitForComponentToShowCondition condition;
   private ComponentStub c;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     c = ComponentStub.createNew();
     condition = WaitForComponentToShowCondition.untilIsShowing(c);
   }
 
   @Test
-  public void should_Return_True_If_Component_Is_Showing() {
+  void should_Return_True_If_Component_Is_Showing() {
     c.showing(true);
     assertThat(condition.test()).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Component_Is_Not_Showing() {
+  void should_Return_False_If_Component_Is_Not_Showing() {
     assertThat(condition.test()).isFalse();
   }
 

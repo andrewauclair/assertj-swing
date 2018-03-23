@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.JSliderDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import javax.swing.JSlider;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.JSliderDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JSliderFixture}.
@@ -29,29 +29,29 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JSliderFixture_withMocks_Test {
+class JSliderFixture_withMocks_Test {
   private JSliderFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JSliderFixture(mock(Robot.class), mock(JSlider.class));
     fixture.replaceDriverWith(mock(JSliderDriver.class));
   }
 
   @Test
-  public void should_Call_SlideTo_In_Driver_And_Return_Self() {
+  void should_Call_SlideTo_In_Driver_And_Return_Self() {
     assertThat(fixture.slideTo(6)).isSameAs(fixture);
     verify(fixture.driver()).slide(fixture.target(), 6);
   }
 
   @Test
-  public void should_Call_SlideToMaximum_In_Driver_And_Return_Self() {
+  void should_Call_SlideToMaximum_In_Driver_And_Return_Self() {
     assertThat(fixture.slideToMaximum()).isSameAs(fixture);
     verify(fixture.driver()).slideToMaximum(fixture.target());
   }
 
   @Test
-  public void should_Call_SlideToMinimum_In_Driver_And_Return_Self() {
+  void should_Call_SlideToMinimum_In_Driver_And_Return_Self() {
     assertThat(fixture.slideToMinimum()).isSameAs(fixture);
     verify(fixture.driver()).slideToMinimum(fixture.target());
   }

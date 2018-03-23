@@ -12,6 +12,10 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.core.Robot;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.TestRobots.newRobotMock;
 import static org.assertj.swing.util.Platform.controlOrCommandKey;
@@ -20,26 +24,22 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-import org.assertj.swing.core.Robot;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
 /**
  * Tests for {@link MultipleSelectionTemplate#multiSelect()}.
  *
  * @author Yvonne Wang
  */
-public class MultipleSelectionTemplate_multiSelect_Test {
+class MultipleSelectionTemplate_multiSelect_Test {
   private Robot robot;
   private MultipleSelection template;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robot = newRobotMock();
   }
 
   @Test
-  public void should_Select_Once_If_Element_Count_Is_One() {
+  void should_Select_Once_If_Element_Count_Is_One() {
     template = new MultipleSelection(robot, 1);
     template.multiSelect();
     assertThat(template.timesSelected).isEqualTo(1);
@@ -47,7 +47,7 @@ public class MultipleSelectionTemplate_multiSelect_Test {
   }
 
   @Test
-  public void should_Select_Multiple_Items() {
+  void should_Select_Multiple_Items() {
     template = new MultipleSelection(robot, 2);
     int key = controlOrCommandKey();
     template.multiSelect();

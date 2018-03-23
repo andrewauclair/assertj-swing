@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,18 +21,16 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_requireNoSelection_Test extends JTableDriver_TestCase {
+class JTableDriver_requireNoSelection_Test extends JTableDriver_TestCase {
   @Test
-  public void should_Pass_If_JTable_Does_Not_Have_Selection() {
+  void should_Pass_If_JTable_Does_Not_Have_Selection() {
     clearSelection();
     driver.requireNoSelection(table);
   }
 
   @Test
-  public void should_Fail_If_JTable_Has_Have_Selection() {
+  void should_Fail_If_JTable_Has_Have_Selection() {
     selectCell(0, 0);
-    thrown.expectAssertionError("property:'selection'");
-    thrown.expectMessageToContain("expected no selection but was:<rows=[0], columns=[0]>");
-    driver.requireNoSelection(table);
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireNoSelection(table), "property:'selection'", "expected no selection but was:<rows=[0], columns=[0]>");
   }
 }

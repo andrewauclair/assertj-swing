@@ -12,15 +12,14 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.core.TestRobots.singletonRobotMock;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.text.JTextComponent;
 
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.assertj.swing.core.TestRobots.singletonRobotMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 
 /**
  * Tests for {@link JTextComponentDriver#replaceText(javax.swing.text.JTextComponent, String)}.

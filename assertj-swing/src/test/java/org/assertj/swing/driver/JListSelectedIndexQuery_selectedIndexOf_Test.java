@@ -12,24 +12,21 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.driver.JListSetSelectedIndexTask.setSelectedIndex;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JList;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestListModel;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.driver.JListSetSelectedIndexTask.setSelectedIndex;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JListSelectedIndexQuery#selectedIndexOf(JList)}.
@@ -37,19 +34,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JListSelectedIndexQuery_selectedIndexOf_Test extends RobotBasedTestCase {
+class JListSelectedIndexQuery_selectedIndexOf_Test extends RobotBasedTestCase {
   private MyList list;
 
-  private final int selectedIndex;
-
-  @Parameters
-  public static Collection<Object[]> selectedIndices() {
+  private static Collection<Object[]> selectedIndices() {
     return newArrayList(new Object[][] { { 0 }, { 1 }, { 2 }, { -1 } });
-  }
-
-  public JListSelectedIndexQuery_selectedIndexOf_Test(int selectedIndex) {
-    this.selectedIndex = selectedIndex;
   }
 
   @Override
@@ -58,8 +47,9 @@ public class JListSelectedIndexQuery_selectedIndexOf_Test extends RobotBasedTest
     list = window.list;
   }
 
-  @Test
-  public void should_Return_Selected_Index_Of_JList() {
+  @ParameterizedTest
+  @MethodSource("selectedIndices")
+  void should_Return_Selected_Index_Of_JList(int selectedIndex) {
     setSelectedIndex(list, selectedIndex);
     robot.waitForIdle();
     list.startRecording();

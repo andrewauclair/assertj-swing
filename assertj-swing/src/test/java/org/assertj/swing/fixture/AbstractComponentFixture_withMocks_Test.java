@@ -12,6 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.KeyPressInfo;
+import org.assertj.swing.core.MouseClickInfo;
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.ComponentDriver;
+import org.assertj.swing.timing.Timeout;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+
 import static java.awt.Color.BLUE;
 import static java.awt.event.KeyEvent.VK_C;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,23 +30,7 @@ import static org.assertj.swing.core.KeyPressInfo.keyCode;
 import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
 import static org.assertj.swing.core.MouseClickInfo.leftButton;
 import static org.assertj.swing.timing.Timeout.timeout;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.awt.Font;
-
-import javax.annotation.Nonnull;
-
-import org.assertj.swing.core.KeyPressInfo;
-import org.assertj.swing.core.MouseClickInfo;
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.ComponentDriver;
-import org.assertj.swing.timing.Timeout;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link AbstractComponentFixture}.

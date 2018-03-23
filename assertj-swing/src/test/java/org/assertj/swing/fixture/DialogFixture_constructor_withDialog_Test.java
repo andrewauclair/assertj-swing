@@ -51,6 +51,6 @@ public class DialogFixture_constructor_withDialog_Test extends EDTSafeTestCase {
 
   @Test
   void should_Throw_Error_If_Dialog_Is_Null() {
-    assertThrows(NullPointerException.class, () -> fixture = new DialogFixture((Dialog) null));
+    assertThrows(IllegalArgumentException.class, () -> fixture = new DialogFixture((Dialog) null));
   }
 }

@@ -12,43 +12,33 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.driver.JTreeSetEditableTask.setEditable;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.data.BooleanProvider;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.driver.JTreeSetEditableTask.setEditable;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JTreeEditableQuery#isEditable(JTree)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class JTreeEditableQuery_isEditable_Test extends RobotBasedTestCase {
+class JTreeEditableQuery_isEditable_Test extends RobotBasedTestCase {
   private MyTree tree;
-  private final boolean editable;
 
-  @Parameters
-  public static Collection<Object[]> booleans() {
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
-  }
-
-  public JTreeEditableQuery_isEditable_Test(boolean editable) {
-    this.editable = editable;
   }
 
   @Override
@@ -57,8 +47,9 @@ public class JTreeEditableQuery_isEditable_Test extends RobotBasedTestCase {
     tree = window.tree;
   }
 
-  @Test
-  public void should_Indicate_If_JTree_Is_Editable() {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Indicate_If_JTree_Is_Editable(boolean editable) {
     setEditable(tree, editable);
     robot.waitForIdle();
     tree.startRecording();

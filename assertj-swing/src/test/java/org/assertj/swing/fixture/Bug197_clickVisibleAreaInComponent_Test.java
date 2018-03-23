@@ -12,20 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for <a href="http://code.google.com/p/fest/issues/detail?id=197" target="_blank">Bug 197</a>.
@@ -33,7 +30,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class Bug197_clickVisibleAreaInComponent_Test extends RobotBasedTestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private FrameFixture fixture;

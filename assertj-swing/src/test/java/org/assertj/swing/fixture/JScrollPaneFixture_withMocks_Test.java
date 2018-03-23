@@ -12,18 +12,15 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.JScrollPaneDriver;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link JScrollPaneFixture}.
@@ -31,14 +28,14 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JScrollPaneFixture_withMocks_Test {
+class JScrollPaneFixture_withMocks_Test {
   private JScrollPaneDriver driver;
   private JScrollPane target;
 
   private JScrollPaneFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JScrollPaneFixture(mock(Robot.class), mock(JScrollPane.class));
     fixture.replaceDriverWith(mock(JScrollPaneDriver.class));
     driver = fixture.driver();
@@ -46,7 +43,7 @@ public class JScrollPaneFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Return_Horizontal_JScrollBar_Using_Driver() {
+  void should_Return_Horizontal_JScrollBar_Using_Driver() {
     JScrollBar scrollBar = mock(JScrollBar.class);
     when(driver.horizontalScrollBarIn(target)).thenReturn(scrollBar);
     JScrollBarFixture scrollBarFixture = fixture.horizontalScrollBar();
@@ -55,7 +52,7 @@ public class JScrollPaneFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Return_Vertical_JScrollBar_Using_Driver() {
+  void should_Return_Vertical_JScrollBar_Using_Driver() {
     JScrollBar scrollBar = mock(JScrollBar.class);
     when(driver.verticalScrollBarIn(target)).thenReturn(scrollBar);
     JScrollBarFixture scrollBarFixture = fixture.verticalScrollBar();

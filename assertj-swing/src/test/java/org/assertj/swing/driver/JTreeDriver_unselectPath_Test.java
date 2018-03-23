@@ -16,7 +16,6 @@ import org.assertj.swing.exception.LocationUnavailableException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,8 +29,7 @@ public class JTreeDriver_unselectPath_Test extends JTreeDriver_selectCell_TestCa
   @Test
   void should_Throw_Error_If_Path_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class, "Unable to find path 'another'");
-    driver.unselectPath(tree, "another");
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.unselectPath(tree, "another"), "Unable to find path 'another'");
   }
 
   @Test

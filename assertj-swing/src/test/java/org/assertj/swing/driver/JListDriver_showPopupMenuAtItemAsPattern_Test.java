@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
-
-import java.util.regex.Pattern;
-
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.recorder.ToolkitClickRecorder;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
+import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
 
 /**
  * Tests for {@link JListDriver#showPopupMenu(javax.swing.JList, java.util.regex.Pattern)}.
@@ -30,9 +29,8 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JListDriver_showPopupMenuAtItemAsPattern_Test extends JListDriver_showPopupMenu_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class JListDriver_showPopupMenuAtItemAsPattern_Test extends JListDriver_showPopupMenu_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
   void should_Show_Popup_Menu_At_Item_Matching_Pattern() {

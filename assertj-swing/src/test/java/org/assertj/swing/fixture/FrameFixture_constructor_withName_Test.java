@@ -12,32 +12,32 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.builder.JFrames.frame;
-
-import java.awt.Frame;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameFixture#FrameFixture(String)}.
  * 
  * @author Alex Ruiz
  */
-public class FrameFixture_constructor_withName_Test extends EDTSafeTestCase {
+class FrameFixture_constructor_withName_Test extends EDTSafeTestCase {
   private FrameFixture fixture;
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     if (fixture != null) {
       fixture.cleanUp();
     }
   }
 
   @Test
-  public void should_Lookup_Showing_Frame_By_Name_Using_New_Robot() {
+  void should_Lookup_Showing_Frame_By_Name_Using_New_Robot() {
     Frame target = frame().withName("frame").withTitle(getClass().getSimpleName()).createAndShow();
     fixture = new FrameFixture("frame");
     assertThat(fixture.robot()).isNotNull();

@@ -24,8 +24,7 @@ import org.junit.jupiter.api.Test;
 class JTableHeaderDriver_clickColumnByName_Test extends JTableHeaderDriver_TestCase {
   @Test
   void should_Fail_If_Matching_Column_Was_Not_Found() {
-    thrown.expect(LocationUnavailableException.class, "Unable to find column with name matching value 'hello'");
-    driver.clickColumn(tableHeader, "hello");
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.clickColumn(tableHeader, "hello"), "Unable to find column with name matching value 'hello'");
   }
 
   @Test

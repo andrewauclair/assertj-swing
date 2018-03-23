@@ -12,18 +12,16 @@
  */
 package org.assertj.swing.input;
 
+import org.assertj.swing.test.awt.ToolkitStub;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+
 import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import java.awt.Toolkit;
-
-import javax.annotation.Nonnull;
-
-import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DragAwareEventNormalizer#stopListening()}.

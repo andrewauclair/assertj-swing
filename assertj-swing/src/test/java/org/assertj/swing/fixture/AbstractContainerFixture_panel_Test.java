@@ -12,23 +12,21 @@
  */
 package org.assertj.swing.fixture;
 
-import static java.awt.Color.RED;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Preconditions.checkNotNull;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
-
-import javax.annotation.Nonnull;
-import javax.swing.JPanel;
-
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+
+import static java.awt.Color.RED;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Preconditions.checkNotNull;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
 
 /**
  * Tests lookups of {@code JPanel}s in {@link AbstractContainerFixture}.
@@ -36,9 +34,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class AbstractContainerFixture_panel_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private ContainerFixture fixture;
   private MyWindow window;
 
@@ -49,37 +44,33 @@ public class AbstractContainerFixture_panel_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Find_Visible_JPanel_By_Name() {
+  void should_Find_Visible_JPanel_By_Name() {
     robot.showWindow(window);
     JPanelFixture panel = fixture.panel("myPanel");
     assertThat(panel.target()).isSameAs(window.panel);
   }
 
   @Test
-  public void should_Fail_If_Visible_JPanel_Not_Found_By_Name() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher",
+  void should_Fail_If_Visible_JPanel_Not_Found_By_Name() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.panel("somePanel"), "Unable to find component using matcher",
                                   "name='somePanel', type=javax.swing.JPanel, requireShowing=true");
-    fixture.panel("somePanel");
   }
 
   @Test
-  public void should_Find_Visible_JPanel_By_Type() {
+  void should_Find_Visible_JPanel_By_Type() {
     robot.showWindow(window);
     JPanelFixture panel = fixture.panel();
     assertThat(panel.target()).isSameAs(window.panel);
   }
 
   @Test
-  public void should_Fail_If_Visible_JPanel_Not_Found_By_Type() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher",
+  void should_Fail_If_Visible_JPanel_Not_Found_By_Type() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.panel(), "Unable to find component using matcher",
                                   "type=javax.swing.JPanel, requireShowing=true");
-    fixture.panel();
   }
 
   @Test
-  public void should_Find_Visible_JPanel_By_Matcher() {
+  void should_Find_Visible_JPanel_By_Matcher() {
     robot.showWindow(window);
     JPanelFixture panel = fixture.panel(new GenericTypeMatcher<JPanel>(JPanel.class) {
       @Override
@@ -91,10 +82,8 @@ public class AbstractContainerFixture_panel_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Fail_If_Visible_JPanel_Not_Found_By_Matcher() {
-    thrown.expect(ComponentLookupException.class);
-    thrown.expectMessageToContain("Unable to find component using matcher");
-    fixture.panel(neverMatches(JPanel.class));
+  void should_Fail_If_Visible_JPanel_Not_Found_By_Matcher() {
+    ExpectedException.assertContainsMessage(ComponentLookupException.class, () -> fixture.panel(neverMatches(JPanel.class)), "Unable to find component using matcher");
   }
 
   private static class MyWindow extends TestWindow {

@@ -12,25 +12,19 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.RobotBasedTestCase;
+import org.assertj.swing.test.swing.TestWindow;
+
+import javax.swing.*;
+import java.awt.*;
+
 import static javax.swing.SwingConstants.HORIZONTAL;
 import static javax.swing.SwingConstants.VERTICAL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.driver.JSliderValueQuery.valueOf;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.test.task.ComponentSetEnabledTask.disable;
-
-import java.awt.Dimension;
-
-import javax.swing.JSlider;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 /**
  * Base test case for {@link JSliderDriver}.
@@ -38,17 +32,16 @@ import org.junit.runners.Parameterized;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
 public abstract class JSliderDriver_TestCase extends RobotBasedTestCase {
   MyWindow window;
   JSlider slider;
   JSliderDriver driver;
 
-  final int orientation;
+//  final int orientation;
 
-  public JSliderDriver_TestCase(int orientation) {
-    this.orientation = orientation;
-  }
+//  public JSliderDriver_TestCase(int orientation) {
+//    this.orientation = orientation;
+//  }
 
   static Object[][] orientations() {
     return new Object[][] { { HORIZONTAL }, { VERTICAL } };
@@ -56,6 +49,13 @@ public abstract class JSliderDriver_TestCase extends RobotBasedTestCase {
 
   @Override
   protected final void onSetUp() {
+  }
+//    driver = new JSliderDriver(robot);
+//    window = MyWindow.createNew(getClass(), orientation);
+//    slider = window.slider;
+//  }
+
+  void setup(int orientation) {
     driver = new JSliderDriver(robot);
     window = MyWindow.createNew(getClass(), orientation);
     slider = window.slider;

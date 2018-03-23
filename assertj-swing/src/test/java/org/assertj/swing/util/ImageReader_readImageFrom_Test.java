@@ -13,15 +13,13 @@
 package org.assertj.swing.util;
 
 import static java.awt.Color.RED;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,25 +27,19 @@ import org.junit.jupiter.api.Test;
  *
  * @author Yvonne Wang
  */
-public class ImageReader_readImageFrom_Test {
-
-  @Rule
-  public ExpectedException thrown = none();
-
+class ImageReader_readImageFrom_Test {
   @Test
-  public void should_Throw_Error_If_Path_Is_Null() throws IOException {
-    thrown.expectNullPointerException("The path of the image to read should not be null");
-    ImageReader.readImageFrom(null);
+  void should_Throw_Error_If_Path_Is_Null() {
+    ExpectedException.assertContainsMessage(NullPointerException.class, () -> ImageReader.readImageFrom(null), "The path of the image to read should not be null");
   }
 
   @Test
-  public void should_Throw_Error_If_Path_Does_Not_Belong_To_File() throws IOException {
-    thrown.expectIllegalArgumentException("The path 'xyz' does not belong to a file");
-    ImageReader.readImageFrom("xyz");
+  void should_Throw_Error_If_Path_Does_Not_Belong_To_File() {
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> ImageReader.readImageFrom("xyz"), "The path 'xyz' does not belong to a file");
   }
 
   @Test
-  public void should_Read_Image_File() throws IOException {
+  void should_Read_Image_File() throws IOException {
     BufferedImage image = ImageReader.readImageFrom("src/test/resources/red.png");
     assertNotNull(image);
     int w = image.getWidth();

@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.test.swing.TestTable.createCellValueFrom;
+import org.assertj.swing.data.TableCell;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.assertj.swing.data.TableCell;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.test.swing.TestTable.createCellValueFrom;
 
 /**
  * Tests for {@link JTableDriver#cell(javax.swing.JTable, String)}.
@@ -30,23 +29,14 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableDriver_cellByText_withManyCells_Test extends JTableDriver_TestCase {
-  private final int row;
-  private final int column;
-
-  @Parameters
-  public static Collection<Object[]> cells() {
+class JTableDriver_cellByText_withManyCells_Test extends JTableDriver_TestCase {
+  private static Collection<Object[]> cells() {
     return newArrayList(tableCells());
   }
 
-  public JTableDriver_cellByText_withManyCells_Test(int row, int column) {
-    this.row = row;
-    this.column = column;
-  }
-
-  @Test
-  public void should_Return_Cell_With_Given_Text() {
+  @ParameterizedTest
+  @MethodSource("cells")
+  void should_Return_Cell_With_Given_Text(int row, int column) {
     String value = createCellValueFrom(row, column);
     TableCell cell = driver.cell(table, value);
     assertThat(cell.row).isEqualTo(row);

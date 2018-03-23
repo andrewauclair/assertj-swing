@@ -48,12 +48,12 @@ public class JScrollBarFixture_constructor_withRobotAndName_Test extends RobotBa
 
   @Test
   void should_Throw_Error_If_JScrollBar_With_Matching_Name_Is_Not_Showing() {
-    assertThrows(ComponentLookupException.class, () -> assertThrows(ComponentLookupException.class, () -> new JScrollBarFixture(robot, "scrollBar")));
+    assertThrows(ComponentLookupException.class, () -> new JScrollBarFixture(robot, "scrollBar"));
   }
 
   @Test
   void should_Throw_Error_If_A_JScrollBar_With_Matching_Name_Is_Not_Found() {
-    assertThrows(ComponentLookupException.class, () -> assertThrows(ComponentLookupException.class, () -> new JScrollBarFixture(robot, "other")));
+    assertThrows(ComponentLookupException.class, () -> new JScrollBarFixture(robot, "other"));
   }
 
   private static class MyWindow extends TestWindow {

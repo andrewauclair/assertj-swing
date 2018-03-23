@@ -12,8 +12,8 @@
  */
 package org.assertj.swing.assertions.data;
 
-import static junit.framework.Assert.assertEquals;
 import static org.assertj.swing.assertions.data.RgbColor.color;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -12,19 +12,18 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-import static org.assertj.swing.data.TableCell.row;
-import static org.assertj.swing.test.task.ComponentSetPopupMenuTask.createAndSetPopupMenu;
-
-import javax.swing.JPopupMenu;
-
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
+import static org.assertj.swing.data.TableCell.row;
+import static org.assertj.swing.test.task.ComponentSetPopupMenuTask.createAndSetPopupMenu;
 
 /**
  * Tests for {@link JTableDriver#showPopupMenuAt(javax.swing.JTable, org.assertj.swing.data.TableCell)}.

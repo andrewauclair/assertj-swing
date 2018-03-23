@@ -12,24 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-
-import java.awt.Component;
-import java.awt.Dimension;
-import java.util.Collection;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link AbstractJTableCellWriter#editorForCell(javax.swing.JTable, int, int)}.

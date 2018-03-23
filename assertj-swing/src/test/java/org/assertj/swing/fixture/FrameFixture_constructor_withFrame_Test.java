@@ -12,27 +12,24 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.ScreenLockReleaser;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.builder.JFrames.frame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.awt.Frame;
-
-import org.assertj.swing.test.ScreenLockReleaser;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.After;
-import org.junit.Rule;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FrameFixture#FrameFixture(Frame)}.
  * 
  * @author Alex Ruiz
  */
-public class FrameFixture_constructor_withFrame_Test extends EDTSafeTestCase {
-  @Rule
-  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
+class FrameFixture_constructor_withFrame_Test extends EDTSafeTestCase {
+  private ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
 
   private FrameFixture fixture;
 
@@ -53,6 +50,6 @@ public class FrameFixture_constructor_withFrame_Test extends EDTSafeTestCase {
 
   @Test
   void should_Throw_Error_If_Frame_Is_Null() {
-    assertThrows(NullPointerException.class, () -> fixture = new FrameFixture((Frame) null));
+    assertThrows(IllegalArgumentException.class, () -> fixture = new FrameFixture((Frame) null));
   }
 }

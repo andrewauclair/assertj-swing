@@ -12,18 +12,17 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Arrays.array;
-
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.exception.LocationUnavailableException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
+
+import static org.assertj.core.util.Arrays.array;
 
 /**
  * Tests for {@link JTreeDriver#selectPath(javax.swing.JTree, String)}.
@@ -31,14 +30,12 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class JTreeDriver_selectPath_Test extends JTreeDriver_selectCell_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
   void should_Throw_Error_If_Path_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class, "Unable to find path 'another'");
-    driver.selectPath(tree, "another");
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.selectPath(tree, "another"), "Unable to find path 'another'");
   }
 
   @Test

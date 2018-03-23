@@ -12,45 +12,32 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
-import static java.awt.event.InputEvent.ALT_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.META_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static java.awt.event.InputEvent.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link InputModifiers}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class InputModifiers_unify_Test {
-  private final int[] modifiers;
-
-  @Parameters
-  public static Collection<Object[]> modifiers() {
+class InputModifiers_unify_Test {
+  private static Collection<Object[]> modifiers() {
     return newArrayList(new Object[][] { { new int[] { ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK, META_MASK, SHIFT_MASK } },
         { new int[] { ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK, META_MASK } },
         { new int[] { ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK } }, { new int[] { ALT_MASK, ALT_GRAPH_MASK } },
         { new int[] { ALT_MASK } } });
   }
 
-  public InputModifiers_unify_Test(int[] modifiers) {
-    this.modifiers = modifiers;
-  }
-
-  @Test
-  public void should_Unify_Modifiers() {
+  @ParameterizedTest
+  @MethodSource("modifiers")
+  void should_Unify_Modifiers(int[] modifiers) {
     int unified = InputModifiers.unify(modifiers);
     // asserts that contains only the passed modifiers
     for (int modifier : modifiers) {

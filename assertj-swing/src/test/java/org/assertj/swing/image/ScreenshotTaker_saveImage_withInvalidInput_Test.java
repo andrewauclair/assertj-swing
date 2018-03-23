@@ -12,11 +12,10 @@
  */
 package org.assertj.swing.image;
 
-import java.awt.image.BufferedImage;
-
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.image.BufferedImage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

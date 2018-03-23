@@ -12,37 +12,29 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.util.Strings.concat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.builder.JFrames.frame;
-import static org.assertj.swing.timing.Pause.pause;
-
-import java.awt.Dimension;
-import java.util.logging.Logger;
-
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.logging.Logger;
+
+import static org.assertj.core.util.Strings.concat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.builder.JFrames.frame;
+import static org.assertj.swing.timing.Pause.pause;
 
 /**
  * Tests for <a href="http://code.google.com/p/fest/issues/detail?id=159" target="_blank">Bug 159</a>.
  * 
  * @author Alex Ruiz
  */
-public class Bug159_moveParentToFrontWhenClickingMenuItem_Test extends RobotBasedTestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class Bug159_moveParentToFrontWhenClickingMenuItem_Test extends RobotBasedTestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   private static final int DELAY_BEFORE_SHOWING_MENU = 2000;
 
@@ -61,7 +53,7 @@ public class Bug159_moveParentToFrontWhenClickingMenuItem_Test extends RobotBase
   }
 
   @Test
-  public void should_Select_Menu_Item_From_Menu_Bar() {
+  void should_Select_Menu_Item_From_Menu_Bar() {
     JMenuItem menuItem = window.menuItemFromMenuBar;
     JMenuItemFixture fixture = fixtureFor(menuItem);
     pauseBeforeShowingMenu();
@@ -71,7 +63,7 @@ public class Bug159_moveParentToFrontWhenClickingMenuItem_Test extends RobotBase
   }
 
   @Test
-  public void should_Select_Menu_Item_From_Popup_Menu() {
+  void should_Select_Menu_Item_From_Popup_Menu() {
     JMenuItem menuItem = window.menuItemFromPopupMenu;
     JMenuItemFixture fixture = fixtureFor(menuItem);
     pauseBeforeShowingMenu();

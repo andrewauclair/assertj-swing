@@ -12,13 +12,12 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.awt.AWT.centerOf;
-
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.swing.awt.AWT.centerOf;
 
 /**
  * Tests for {@link ComponentDriver#click(java.awt.Component)}.
@@ -26,9 +25,8 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ComponentDriver_clickComponent_Test extends ComponentDriver_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class ComponentDriver_clickComponent_Test extends ComponentDriver_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
   void should_Click_Component() {

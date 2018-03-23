@@ -22,6 +22,8 @@ import org.junit.jupiter.api.Test;
 import javax.annotation.Nonnull;
 import javax.swing.*;
 
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
@@ -96,6 +98,7 @@ public class AbstractContainerFixture_list_Test extends RobotBasedTestCase {
       super(testClass);
       list.setName("selectMeList");
       addComponents(list);
+      setPreferredSize(new Dimension(200, 200));
     }
   }
 }

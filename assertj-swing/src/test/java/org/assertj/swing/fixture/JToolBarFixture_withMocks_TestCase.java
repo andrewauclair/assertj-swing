@@ -12,19 +12,18 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.driver.JToolBarDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.fixture.JToolBarFixture.UnfloatConstraint.WEST;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import java.awt.Point;
-
-import javax.swing.JToolBar;
-
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.driver.JToolBarDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JToolBarFixture}.
@@ -32,29 +31,29 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JToolBarFixture_withMocks_TestCase {
+class JToolBarFixture_withMocks_TestCase {
   private JToolBarFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JToolBarFixture(mock(Robot.class), mock(JToolBar.class));
     fixture.replaceDriverWith(mock(JToolBarDriver.class));
   }
 
   @Test
-  public void should_Call_FloatTo_In_Driver_And_Return_Self() {
+  void should_Call_FloatTo_In_Driver_And_Return_Self() {
     assertThat(fixture.floatTo(new Point(6, 8))).isSameAs(fixture);
     verify(fixture.driver()).floatTo(fixture.target(), 6, 8);
   }
 
   @Test
-  public void should_Call_Unfloat_In_Driver_And_Return_Self() {
+  void should_Call_Unfloat_In_Driver_And_Return_Self() {
     assertThat(fixture.unfloat()).isSameAs(fixture);
     verify(fixture.driver()).unfloat(fixture.target());
   }
 
   @Test
-  public void should_Call_Unfloat_With_Constraing_In_Driver_And_Return_Self() {
+  void should_Call_Unfloat_With_Constraing_In_Driver_And_Return_Self() {
     assertThat(fixture.unfloat(WEST)).isSameAs(fixture);
     verify(fixture.driver()).unfloat(fixture.target(), WEST.value());
   }

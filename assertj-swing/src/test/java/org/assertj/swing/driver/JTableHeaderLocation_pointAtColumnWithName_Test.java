@@ -12,23 +12,20 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.awt.Point;
-
-import javax.swing.table.JTableHeader;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.exception.LocationUnavailableException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.util.Pair;
 import org.assertj.swing.util.TextMatcher;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link JTableHeaderLocation#pointAt(JTableHeader, TextMatcher)}.

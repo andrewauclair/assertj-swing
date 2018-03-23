@@ -30,6 +30,7 @@ import org.assertj.swing.core.MouseButton;
 import org.assertj.swing.core.MouseClickInfo;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.ComponentDriver;
+import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.query.ComponentEnabledQuery;
 import org.assertj.swing.timing.Timeout;
 
@@ -105,7 +106,14 @@ public abstract class AbstractComponentFixture<S, C extends Component, D extends
                                                              @Nonnull Class<? extends C> type) {
     checkNotNull(robot);
     checkNotNull(type);
-    return robot.finder().findByName(name, type, requireShowing(robot));
+
+    try {
+      return robot.finder().findByName(name, type, requireShowing(robot));
+    }
+    catch (ComponentLookupException e) {
+      robot.cleanUp();
+      throw e;
+    }
   }
 
   /**

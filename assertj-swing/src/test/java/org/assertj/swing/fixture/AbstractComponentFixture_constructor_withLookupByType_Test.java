@@ -12,23 +12,21 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.core.ComponentFinder;
+import org.assertj.swing.core.Robot;
+import org.assertj.swing.core.Settings;
+import org.assertj.swing.driver.ComponentDriver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.ComponentLookupScope.SHOWING_ONLY;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.awt.Frame;
-
-import javax.annotation.Nonnull;
-
-import org.assertj.swing.core.ComponentFinder;
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.core.Settings;
-import org.assertj.swing.driver.ComponentDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AbstractComponentFixture#AbstractComponentFixture(Class, Robot, Class)}.
@@ -39,7 +37,7 @@ class AbstractComponentFixture_constructor_withLookupByType_Test {
   private Robot robot;
   private Class<Frame> type;
 
-  @Before
+  @BeforeEach
   void setUp() {
     robot = mock(Robot.class);
     type = Frame.class;

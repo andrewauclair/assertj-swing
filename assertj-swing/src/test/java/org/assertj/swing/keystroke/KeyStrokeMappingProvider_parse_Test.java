@@ -12,36 +12,23 @@
  */
 package org.assertj.swing.keystroke;
 
+import org.assertj.swing.exception.ParsingException;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.*;
+import java.util.Collection;
+
 import static java.awt.event.InputEvent.SHIFT_MASK;
-import static java.awt.event.KeyEvent.VK_A;
-import static java.awt.event.KeyEvent.VK_BACK_SPACE;
-import static java.awt.event.KeyEvent.VK_COMMA;
-import static java.awt.event.KeyEvent.VK_DELETE;
-import static java.awt.event.KeyEvent.VK_ENTER;
-import static java.awt.event.KeyEvent.VK_ESCAPE;
-import static java.awt.event.KeyEvent.VK_TAB;
+import static java.awt.event.KeyEvent.*;
 import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Files.newTemporaryFile;
 import static org.assertj.swing.keystroke.KeyStrokeMapping.mapping;
 import static org.assertj.swing.keystroke.KeyStrokeMappingProvider.NO_MASK;
-import static org.assertj.swing.test.ExpectedException.none;
 import static org.assertj.swing.util.Platform.isWindows;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Collection;
-
-import org.assertj.swing.exception.ParsingException;
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyStrokeMappingsParser#parse(String)}.

@@ -12,47 +12,38 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.awt.Robot;
 import java.util.Collection;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link Settings#delayBetweenEvents(int)} and {@link Settings#delayBetweenEvents()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class Settings_delayBetweenEvents_Test {
-  private final int delay;
-
+class Settings_delayBetweenEvents_Test {
   private Settings settings;
   private java.awt.Robot robot;
 
-  @Parameters
-  public static Collection<Object[]> autoDelays() {
+  private static Collection<Object[]> autoDelays() {
     return newArrayList(new Object[][] { { 100 }, { 200 }, { 68 } });
   }
 
-  public Settings_delayBetweenEvents_Test(int delay) {
-    this.delay = delay;
-  }
-
-  @Before
-  public void setUp() throws Exception {
+  @BeforeEach
+  void setUp() throws Exception {
     settings = new Settings();
     robot = new Robot();
   }
 
-  @Test
-  public void shouldUpdateAndReturnDelayBetweenEvents() {
+  @ParameterizedTest
+  @MethodSource("autoDelays")
+  void shouldUpdateAndReturnDelayBetweenEvents(int delay) {
     settings.attachTo(robot);
     settings.delayBetweenEvents(delay);
     assertThat(robot.getAutoDelay()).isEqualTo(settings.delayBetweenEvents());

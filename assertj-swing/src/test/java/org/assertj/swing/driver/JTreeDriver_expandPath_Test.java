@@ -41,8 +41,7 @@ class JTreeDriver_expandPath_Test extends JTreeDriver_toggleCell_TestCase {
   @Test
   void should_Throw_Error_If_Path_Does_Not_Exist() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class, "Unable to find path 'somePath'");
-    driver.expandPath(tree, "somePath");
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.expandPath(tree, "somePath"), "Unable to find path 'somePath'");
   }
 
   @Test

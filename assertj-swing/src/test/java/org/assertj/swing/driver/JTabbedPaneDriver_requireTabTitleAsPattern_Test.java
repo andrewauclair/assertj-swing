@@ -12,13 +12,12 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.data.Index.atIndex;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import static org.assertj.swing.data.Index.atIndex;
 
 /**
  * Tests for

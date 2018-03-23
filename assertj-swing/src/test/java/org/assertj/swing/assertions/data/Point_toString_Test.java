@@ -12,8 +12,8 @@
  */
 package org.assertj.swing.assertions.data;
 
-import static junit.framework.Assert.assertEquals;
 import static org.assertj.swing.assertions.data.Point.atPoint;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

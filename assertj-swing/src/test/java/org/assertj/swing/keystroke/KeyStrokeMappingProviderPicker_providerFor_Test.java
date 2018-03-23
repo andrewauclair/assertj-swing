@@ -12,16 +12,15 @@
  */
 package org.assertj.swing.keystroke;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static java.util.Locale.US;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.keystroke.KeyStrokeMappingProviderNames.generateNamesFrom;
 import static org.assertj.swing.util.OSFamily.WINDOWS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyStrokeMappingProviderPicker#providerFor(OSFamily, Locale)}.

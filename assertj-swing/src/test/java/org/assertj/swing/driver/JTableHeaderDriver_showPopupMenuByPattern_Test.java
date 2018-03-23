@@ -12,16 +12,15 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.assertj.swing.test.recorder.ClickRecorderManager;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
+import static org.assertj.swing.query.ComponentVisibleQuery.isVisible;
 
 /**
  * Tests for {@link JTableHeaderDriver#showPopupMenu(javax.swing.table.JTableHeader, java.util.regex.Pattern)}.

@@ -12,10 +12,10 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link ThreadsSource#allThreads}.
@@ -25,13 +25,13 @@ import org.junit.jupiter.api.Test;
 public class ThreadsSource_allThreads_Test {
   private ThreadsSource source;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     source = new ThreadsSource();
   }
 
   @Test
-  public void shouldReturnAllActiveThreads() {
+  void shouldReturnAllActiveThreads() {
     Thread[] all = new Thread[Thread.activeCount()];
     Thread.enumerate(all);
     assertThat(source.allThreads()).isEqualTo(all);

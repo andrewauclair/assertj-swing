@@ -12,29 +12,24 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.exception.ActionFailedException;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static javax.swing.Action.NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import javax.swing.Action;
-import javax.swing.ActionMap;
-
-import org.assertj.swing.exception.ActionFailedException;
-import org.assertj.swing.test.ExpectedException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Actions#findActionKey(String, ActionMap)}.
  * 
  * @author Alex Ruiz
  */
-public class Actions_findActionKey_Test {
-  public ExpectedException thrown = ExpectedException.none();
-
+class Actions_findActionKey_Test {
   private ActionMap map;
   private Action action;
 
@@ -61,8 +56,6 @@ public class Actions_findActionKey_Test {
   @Test
   void should_Throw_Error_If_Key_Not_Found() {
     when(action.getValue(NAME)).thenReturn("name");
-    thrown.expect(ActionFailedException.class, "The action 'someName' is not available, available actions:['key']");
-    Object found = Actions.findActionKey("someName", map);
-    assertThat(found).isEqualTo("key");
+    ExpectedException.assertContainsMessage(ActionFailedException.class, () -> Actions.findActionKey("someName", map), "The action 'someName' is not available, available actions:['key']");
   }
 }

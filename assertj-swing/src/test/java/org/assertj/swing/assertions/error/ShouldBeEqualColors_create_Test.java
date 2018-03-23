@@ -12,17 +12,17 @@
  */
 package org.assertj.swing.assertions.error;
 
-import static junit.framework.Assert.assertEquals;
-import static org.assertj.core.data.Offset.offset;
-import static org.assertj.swing.assertions.data.Point.atPoint;
-import static org.assertj.swing.assertions.data.RgbColor.color;
-import static org.assertj.swing.assertions.error.ShouldBeEqualColors.shouldBeEqualColors;
-
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.error.ErrorMessageFactory;
 import org.assertj.core.presentation.StandardRepresentation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.data.Offset.offset;
+import static org.assertj.swing.assertions.data.Point.atPoint;
+import static org.assertj.swing.assertions.data.RgbColor.color;
+import static org.assertj.swing.assertions.error.ShouldBeEqualColors.shouldBeEqualColors;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for <code>{@link ShouldBeEqualColors#create(Description)}</code>.

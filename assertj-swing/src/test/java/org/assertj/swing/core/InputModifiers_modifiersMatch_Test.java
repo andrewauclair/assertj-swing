@@ -12,50 +12,38 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
-import static java.awt.event.InputEvent.ALT_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.META_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
-import static java.awt.event.KeyEvent.VK_A;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.test.awt.TestComponents.singletonComponentMock;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static java.awt.event.InputEvent.*;
+import static java.awt.event.KeyEvent.VK_A;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.test.awt.TestComponents.singletonComponentMock;
 
 /**
  * Tests for {@link InputModifiers#modifiersMatch(java.awt.event.InputEvent, int)}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class InputModifiers_modifiersMatch_Test {
-  private final int modifier;
-
-  @Parameters
-  public static Collection<Object[]> modifiers() {
+class InputModifiers_modifiersMatch_Test {
+  private static Collection<Object[]> modifiers() {
     return newArrayList(new Object[][] { { ALT_MASK }, { ALT_GRAPH_MASK }, { CTRL_MASK }, { META_MASK }, { SHIFT_MASK } });
   }
 
-  public InputModifiers_modifiersMatch_Test(int modifier) {
-    this.modifier = modifier;
-  }
-
-  @Test
-  public void should_Return_True_If_Modifiers_Match() {
+  @ParameterizedTest
+  @MethodSource("modifiers")
+  void should_Return_True_If_Modifiers_Match(int modifier) {
     KeyEvent e = keyEventWithModifiers(modifier);
     assertThat(InputModifiers.modifiersMatch(e, modifier)).isTrue();
   }
 
-  @Test
-  public void _return_false_if_modifiers_do_not_match() {
+  @ParameterizedTest
+  @MethodSource("modifiers")
+  void _return_false_if_modifiers_do_not_match(int modifier) {
     KeyEvent e = keyEventWithModifiers(0);
     assertThat(InputModifiers.modifiersMatch(e, modifier)).isFalse();
   }

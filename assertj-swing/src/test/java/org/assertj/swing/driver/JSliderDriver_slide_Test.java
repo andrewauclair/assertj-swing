@@ -12,14 +12,14 @@
  */
 package org.assertj.swing.driver;
 
-import static javax.swing.SwingConstants.HORIZONTAL;
-import static javax.swing.SwingConstants.VERTICAL;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runners.Parameterized.Parameters;
+import static javax.swing.SwingConstants.HORIZONTAL;
+import static javax.swing.SwingConstants.VERTICAL;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JSliderDriver#slide(javax.swing.JSlider, int)}.
@@ -27,22 +27,16 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JSliderDriver_slide_Test extends JSliderDriver_TestCase {
-  private final int value;
-
-  @Parameters
-  public static Collection<Object[]> valueProvider() {
+class JSliderDriver_slide_Test extends JSliderDriver_TestCase {
+  private static Collection<Object[]> valueProvider() {
     return newArrayList(new Object[][] { { HORIZONTAL, 5 }, { VERTICAL, 5 }, { HORIZONTAL, 10 }, { VERTICAL, 10 },
         { HORIZONTAL, 28 }, { VERTICAL, 28 }, { HORIZONTAL, 20 }, { VERTICAL, 20 } });
   }
 
-  public JSliderDriver_slide_Test(int orientation, int value) {
-    super(orientation);
-    this.value = value;
-  }
-
-  @Test
-  public void should_Slide_To_Value() {
+  @ParameterizedTest
+  @MethodSource("valueProvider")
+  void should_Slide_To_Value(int orientation, int value) {
+    setup(orientation);
     showWindow();
     driver.slide(slider, value);
     assertThatSliderValueIs(value);

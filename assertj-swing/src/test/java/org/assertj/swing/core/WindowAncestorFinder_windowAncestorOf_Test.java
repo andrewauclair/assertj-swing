@@ -12,23 +12,19 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.query.ComponentParentQuery.parentOf;
-
-import java.awt.*;
-
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.query.ComponentParentQuery.parentOf;
 
 /**
  * Tests for {@link WindowAncestorFinder#windowAncestorOf(java.awt.Component)}.
@@ -38,36 +34,36 @@ import org.junit.jupiter.api.Test;
 public class WindowAncestorFinder_windowAncestorOf_Test extends EDTSafeTestCase {
   private MyWindow frame;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     frame = MyWindow.createNew();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     frame.destroy();
   }
 
   @Test
-  public void should_Find_Window_Ancestor() {
+  void should_Find_Window_Ancestor() {
     Window ancestor = WindowAncestorFinder.windowAncestorOf(frame.button);
     assertThat(ancestor).isSameAs(frame);
   }
 
   @Test
-  public void should_Return_Null_If_Component_Is_Null() {
+  void should_Return_Null_If_Component_Is_Null() {
     Window ancestor = WindowAncestorFinder.windowAncestorOf(new Component(){});
     assertThat(ancestor).isSameAs(null);
   }
 
   @Test
-  public void should_Return_Window_As_Its_Own_Ancestor() {
+  void should_Return_Window_As_Its_Own_Ancestor() {
     Window ancestor = WindowAncestorFinder.windowAncestorOf(frame);
     assertThat(ancestor).isSameAs(frame);
   }
 
   @Test
-  public void should_Return_Invoker_As_Ancestor_Of_MenuElement() {
+  void should_Return_Invoker_As_Ancestor_Of_MenuElement() {
     Robot robot = null;
     try {
       robot = BasicRobot.robotWithCurrentAwtHierarchy();
@@ -83,7 +79,7 @@ public class WindowAncestorFinder_windowAncestorOf_Test extends EDTSafeTestCase 
   }
 
   @Test
-  public void should_Return_Parent_As_Ancestor_If_Component_Is_MenuElement_And_Invoker_Is_Null() {
+  void should_Return_Parent_As_Ancestor_If_Component_Is_MenuElement_And_Invoker_Is_Null() {
     Window ancestor = WindowAncestorFinder.windowAncestorOf(frame.popupMenu);
     assertThat(ancestor).isSameAs(parentOf(frame.popupMenu));
   }

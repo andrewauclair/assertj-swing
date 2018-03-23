@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.monitor;
 
+import org.assertj.swing.util.RobotFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.monitor.TestWindows.singletonWindowsMock;
 import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
 import static org.mockito.Mockito.when;
-
-import java.awt.AWTException;
-
-import org.assertj.swing.util.RobotFactory;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowStatus#WindowStatus(Windows, org.assertj.swing.util.RobotFactory)}.

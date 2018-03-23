@@ -12,9 +12,9 @@
  */
 package org.assertj.swing.assertions.error;
 
-import static junit.framework.Assert.assertEquals;
 import static org.assertj.core.data.Offset.offset;
 import static org.assertj.swing.assertions.error.ShouldBeEqualImages.shouldBeEqualImages;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.error.ErrorMessageFactory;

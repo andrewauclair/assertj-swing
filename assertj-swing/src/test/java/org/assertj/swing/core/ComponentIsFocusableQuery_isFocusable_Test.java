@@ -12,26 +12,20 @@
  */
 package org.assertj.swing.core;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.assertj.swing.test.data.BooleanProvider;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.assertj.swing.test.data.BooleanProvider;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link ComponentIsFocusableQuery#isFocusable(Component)}.

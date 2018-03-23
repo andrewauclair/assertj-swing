@@ -12,15 +12,14 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
-
 import org.assertj.swing.exception.LocationUnavailableException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.MouseButton.RIGHT_BUTTON;
 
 /**
  * Tests for {@link JTreeDriver#rightClickPath(javax.swing.JTree, String)}.
@@ -28,7 +27,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class JTreeDriver_rightClickPath_Test extends JTreeDriver_clickCell_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
@@ -44,8 +42,7 @@ public class JTreeDriver_rightClickPath_Test extends JTreeDriver_clickCell_TestC
   @Test
   void should_Throw_Error_If_Path_Not_Found() {
     showWindow();
-    thrown.expect(LocationUnavailableException.class, "Unable to find path 'another'");
-    driver.rightClickPath(tree, "another");
+    ExpectedException.assertContainsMessage(LocationUnavailableException.class, () -> driver.rightClickPath(tree, "another"), "Unable to find path 'another'");
   }
 
   @Test

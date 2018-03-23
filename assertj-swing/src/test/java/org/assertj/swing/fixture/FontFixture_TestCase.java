@@ -13,14 +13,12 @@
 package org.assertj.swing.fixture;
 
 import org.assertj.swing.test.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.function.Executable;
 
 import java.awt.*;
 
 import static java.awt.Font.*;
-import static org.assertj.swing.test.ExpectedException.none;
 
 /**
  * Base test class for {@link FontFixture}.
@@ -32,16 +30,13 @@ public class FontFixture_TestCase {
   private static Font font;
   private static FontFixture fixture;
 
-  @Rule
-  public ExpectedException thrown = none();
-
   @BeforeAll
   public static void setUpOnce() {
     font = new Font("SansSerif", PLAIN, 8);
     fixture = new FontFixture(font);
   }
 
-  public void expectAssertionError(Executable executable, String property, String expected, String actual) {
+  void expectAssertionError(Executable executable, String property, String expected, String actual) {
     ExpectedException.assertContainsMessage(AssertionError.class, executable, "[" + property + "] expected:<\"" + expected + "\"> but was:<\"" + actual + "\">");
   }
 

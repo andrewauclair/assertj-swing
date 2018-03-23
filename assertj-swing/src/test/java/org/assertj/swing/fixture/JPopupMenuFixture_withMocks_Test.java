@@ -12,34 +12,31 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.JPopupMenuDriver;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link JPopupMenuFixture}.
  * 
  * @author Yvonne Wang
  */
-public class JPopupMenuFixture_withMocks_Test {
+class JPopupMenuFixture_withMocks_Test {
   private JPopupMenuDriver driver;
   private JPopupMenu target;
 
   private JPopupMenuFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JPopupMenuFixture(mock(Robot.class), mock(JPopupMenu.class));
     fixture.replaceDriverWith(mock(JPopupMenuDriver.class));
     driver = fixture.driver();
@@ -47,7 +44,7 @@ public class JPopupMenuFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Find_JMenuItem_With_Name_Using_Driver() {
+  void should_Find_JMenuItem_With_Name_Using_Driver() {
     JMenuItem menuItem = mock(JMenuItem.class);
     when(driver.menuItem(target, "File")).thenReturn(menuItem);
     JMenuItemFixture menuItemFixture = fixture.menuItem("File");
@@ -56,7 +53,7 @@ public class JPopupMenuFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Find_JMenuItem_With_Matcher_Using_Driver() {
+  void should_Find_JMenuItem_With_Matcher_Using_Driver() {
     GenericTypeMatcher<JMenuItem> matcher = neverMatches(JMenuItem.class);
     JMenuItem menuItem = mock(JMenuItem.class);
     when(driver.menuItem(target, matcher)).thenReturn(menuItem);
@@ -66,7 +63,7 @@ public class JPopupMenuFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Return_Menu_Labels_Using_Driver() {
+  void should_Return_Menu_Labels_Using_Driver() {
     String[] labels = { "One", "Two" };
     when(driver.menuLabelsOf(target)).thenReturn(labels);
     assertThat(fixture.menuLabels()).isSameAs(labels);

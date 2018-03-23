@@ -12,19 +12,17 @@
  */
 package org.assertj.swing.input;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.util.Maps.newHashMap;
+import org.assertj.swing.test.swing.TestWindow;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.util.Map;
 
-import javax.swing.JFrame;
-
-import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.util.Maps.newHashMap;
 
 /**
  * Tests for {@link DisposalMonitor#componentShown(ComponentEvent)}.

@@ -12,15 +12,12 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JTableHeaderLocation#pointAt(javax.swing.table.JTableHeader, int)}.
@@ -28,21 +25,13 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableHeaderLocation_pointAtColumnByIndex_Test extends JTableHeaderLocation_TestCase {
-  private final int index;
-
-  @Parameters
-  public static Collection<Object[]> indices() {
+class JTableHeaderLocation_pointAtColumnByIndex_Test extends JTableHeaderLocation_TestCase {
+  private static Collection<Object[]> indices() {
     return newArrayList(columnIndices());
   }
 
-  public JTableHeaderLocation_pointAtColumnByIndex_Test(int index) {
-    this.index = index;
-  }
-
   @Test
-  public void should_Return_Point_At_Column() {
+  void should_Return_Point_At_Column(int index) {
     showWindow();
     assertThat(pointAt(index)).isEqualTo(expectedPoint(index));
   }

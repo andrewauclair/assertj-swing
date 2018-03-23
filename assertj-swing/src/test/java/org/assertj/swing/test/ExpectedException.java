@@ -48,14 +48,15 @@ public class ExpectedException {//implements TestRule {
     assertContainsMessage(AssertionError.class, executable, message);
   }
 
-  public void expectAssertionError(String property, String expected, String actual) {
+  private void expectAssertionError(String property, String expected, String actual) {
     expectAssertionErrorForProperty(property, doubleQuote(expected), doubleQuote(actual));
   }
 
   public static void assertAssertionError(Executable executable, String property, String expected, String actual) {
     assertAssertionErrorForProperty(executable, property, doubleQuote(expected), doubleQuote(actual));
   }
-  public void expectAssertionError(String property, int expected, int actual) {
+
+  private void expectAssertionError(String property, int expected, int actual) {
     expectAssertionErrorForProperty(property, quote(expected), quote(actual));
   }
 
@@ -131,12 +132,12 @@ public class ExpectedException {//implements TestRule {
     expect(UnsupportedOperationException.class, message);
   }
 
-  public void expect(Class<? extends Throwable> type, String message) {
+  private void expect(Class<? extends Throwable> type, String message) {
     expect(type);
     expectMessage(message);
   }
 
-  public void expect(Throwable error) {
+  private void expect(Throwable error) {
     expect(error.getClass());
     expectMessage(error.getMessage());
   }
@@ -145,7 +146,7 @@ public class ExpectedException {//implements TestRule {
 //    delegate.expect(type);
   }
 
-  public void expectMessage(String message) {
+  private void expectMessage(String message) {
 //    delegate.expectMessage(message);
   }
 

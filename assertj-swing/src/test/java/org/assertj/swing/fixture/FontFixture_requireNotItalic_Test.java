@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,17 +29,13 @@ class FontFixture_requireNotItalic_Test extends FontFixture_TestCase {
 
   @Test
   void should_Fail_If_Font_Is_Italic() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[italic] expected:<[fals]e> but was:<[tru]e>");
     FontFixture fixture = new FontFixture(italicFont());
-    fixture.requireNotItalic();
+    ExpectedException.assertContainsMessage(AssertionError.class, fixture::requireNotItalic, "[italic] expected:<[fals]e> but was:<[tru]e>");
   }
 
   @Test
   void should_Fail_Showing_Description_If_Font_Is_Italic() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage("[test - italic] expected:<[fals]e> but was:<[tru]e>");
     FontFixture fixture = new FontFixture(italicFont(), "test");
-    fixture.requireNotItalic();
+    ExpectedException.assertContainsMessage(AssertionError.class, fixture::requireNotItalic, "[test - italic] expected:<[fals]e> but was:<[tru]e>");
   }
 }

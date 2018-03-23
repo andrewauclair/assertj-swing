@@ -12,17 +12,16 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JSlider;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.ExpectedException;
-import org.junit.jupiter.api.Test;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JSliderDriver#slideToMaximum(javax.swing.JSlider)}.
@@ -30,18 +29,15 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JSliderDriver_slideToMaximum_Test extends JSliderDriver_TestCase {
-  @Parameters
-  static Collection<Object[]> allOrientations() {
+class JSliderDriver_slideToMaximum_Test extends JSliderDriver_TestCase {
+  private static Collection<Object[]> allOrientations() {
     return newArrayList(orientations());
   }
 
-  public JSliderDriver_slideToMaximum_Test(int orientation) {
-    super(orientation);
-  }
-
-  @Test
-  void should_Slide_To_Maximum() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Slide_To_Maximum(int orientation) {
+    setup(orientation);
     showWindow();
     driver.slideToMaximum(slider);
     assertThatSliderValueIs(maximumOf(slider));
@@ -52,14 +48,18 @@ public class JSliderDriver_slideToMaximum_Test extends JSliderDriver_TestCase {
     return execute(() -> slider.getMaximum());
   }
 
-  @Test
-  void should_Throw_Error_If_JSlider_Is_Disabled() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Throw_Error_If_JSlider_Is_Disabled(int orientation) {
+    setup(orientation);
     disableSlider();
     ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.slideToMaximum(slider));
   }
 
-  @Test
-  void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen(int orientation) {
+    setup(orientation);
     ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.slideToMaximum(slider));
   }
 }

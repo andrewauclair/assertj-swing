@@ -12,23 +12,20 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.data.TableCell.row;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JTable;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TableRenderDemo;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.data.TableCell.row;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JTableCellEditableQuery#isCellEditable(JTable, org.assertj.swing.data.TableCell)}.
@@ -36,21 +33,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JTableCellEditableQuery_isCellEditable_Test extends RobotBasedTestCase {
+class JTableCellEditableQuery_isCellEditable_Test extends RobotBasedTestCase {
   private JTable table;
 
-  private final int column;
-  private final boolean editable;
-
-  @Parameters
-  public static Collection<Object[]> cells() {
+  private static Collection<Object[]> cells() {
     return newArrayList(new Object[][] { { 0, false }, { 1, false }, { 2, true }, { 3, true }, { 4, true }, });
-  }
-
-  public JTableCellEditableQuery_isCellEditable_Test(int column, boolean editable) {
-    this.column = column;
-    this.editable = editable;
   }
 
   @Override
@@ -59,8 +46,9 @@ public class JTableCellEditableQuery_isCellEditable_Test extends RobotBasedTestC
     table = window.table;
   }
 
-  @Test
-  public void shouldIndicateWhetherCellIsEditableOrNot() {
+  @ParameterizedTest
+  @MethodSource("cells")
+  void shouldIndicateWhetherCellIsEditableOrNot(int column, boolean editable) {
     // TODO test validation of cell indices
     assertThat(isCellEditable(table, 0, column)).isEqualTo(editable);
   }

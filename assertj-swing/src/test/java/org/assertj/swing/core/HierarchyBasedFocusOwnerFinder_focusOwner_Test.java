@@ -12,19 +12,18 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.test.awt.TestComponents.singletonComponentMock;
 import static org.assertj.swing.test.awt.TestContainers.singletonContainerMock;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.awt.Container;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HierarchyBasedFocusOwnerFinder#focusOwner()}.
@@ -38,20 +37,20 @@ public class HierarchyBasedFocusOwnerFinder_focusOwner_Test {
   private HierarchyRootsSource rootsSource;
   private HierarchyBasedFocusOwnerFinder finder;
 
-  @BeforeClass
-  public static void setUpOnce() {
+  @BeforeAll
+  static void setUpOnce() {
     container = singletonContainerMock();
   }
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     delegate = mock(ContainerFocusOwnerFinder.class);
     rootsSource = mock(HierarchyRootsSource.class);
     finder = new HierarchyBasedFocusOwnerFinder(delegate, rootsSource);
   }
 
   @Test
-  public void should_Return_Focus_Owner_From_Delegate() {
+  void should_Return_Focus_Owner_From_Delegate() {
     Component focusOwner = singletonComponentMock();
     when(rootsSource.existingHierarchyRoots()).thenReturn(array(container));
     when(delegate.focusOwnerOf(container)).thenReturn(focusOwner);
@@ -59,14 +58,14 @@ public class HierarchyBasedFocusOwnerFinder_focusOwner_Test {
   }
 
   @Test
-  public void should_Return_Null_If_Delegate_Did_Not_Find_Focus_Owner() {
+  void should_Return_Null_If_Delegate_Did_Not_Find_Focus_Owner() {
     when(rootsSource.existingHierarchyRoots()).thenReturn(array(container));
     when(delegate.focusOwnerOf(container)).thenReturn(null);
     assertThat(finder.focusOwner()).isNull();
   }
 
   @Test
-  public void should_Return_Null_If_There_Are_Not_Any_Root_Containers() {
+  void should_Return_Null_If_There_Are_Not_Any_Root_Containers() {
     when(rootsSource.existingHierarchyRoots()).thenReturn(new Container[0]);
     assertThat(finder.focusOwner()).isNull();
   }

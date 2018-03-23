@@ -12,20 +12,17 @@
  */
 package org.assertj.swing.keystroke;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import javax.swing.*;
+import java.util.Collection;
+
 import static java.awt.event.InputEvent.CTRL_MASK;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.Mockito.mock;
-
-import java.util.Collection;
-
-import javax.swing.KeyStroke;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Base test case for {@link KeyStrokeMap}.

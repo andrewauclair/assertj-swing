@@ -12,12 +12,11 @@
  */
 package org.assertj.swing.input;
 
-import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
-
 import org.assertj.swing.test.awt.ToolkitStub;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
 
 /**
  * Tests for {@link EventNormalizer#startListening(java.awt.Toolkit, AWTEventListener, long)}.

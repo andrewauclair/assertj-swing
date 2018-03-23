@@ -12,25 +12,21 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Preconditions.checkNotNull;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
-
-import java.awt.Dimension;
-
-import javax.annotation.Nonnull;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.ComponentLookupException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Preconditions.checkNotNull;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.test.core.NeverMatchingComponentMatcher.neverMatches;
 
 /**
  * Tests lookups of {@code JTabbedPane}s in {@link AbstractContainerFixture}.
@@ -38,9 +34,6 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class AbstractContainerFixture_tabbedPane_Test extends RobotBasedTestCase {
-  @Rule
-  public ExpectedException thrown = none();
-
   private ContainerFixture fixture;
   private MyWindow window;
 

@@ -13,14 +13,18 @@
 package org.assertj.swing.fixture;
 
 import org.assertj.swing.exception.ComponentLookupException;
+import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.test.builder.JDialogs.dialog;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
@@ -49,6 +53,9 @@ class DialogFixture_constructor_withName_Test extends EDTSafeTestCase {
 
   @Test
   void should_Throw_Error_If_Dialog_With_Matching_Name_Is_Not_Found() {
-    assertThrows(ComponentLookupException.class, () -> fixture = new DialogFixture("dialog"));
+    assertAll(
+            () -> assertThrows(ComponentLookupException.class, () -> new DialogFixture("dialog")),
+            () -> assertFalse(ScreenLock.instance().acquired())
+    );
   }
 }

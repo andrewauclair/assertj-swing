@@ -12,21 +12,17 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.awt.Point;
-import java.util.regex.Pattern;
-
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.driver.JComponentDriver;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link JPanelFixture}.
@@ -34,14 +30,14 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JPanelFixture_withMocks_Test {
+class JPanelFixture_withMocks_Test {
   private JPanel target;
   private JComponentDriver driver;
 
   private JPanelFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     fixture = new JPanelFixture(mock(Robot.class), mock(JPanel.class));
     fixture.replaceDriverWith(mock(JComponentDriver.class));
     driver = fixture.driver();
@@ -49,27 +45,27 @@ public class JPanelFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Call_RequireToolTip_With_Text_In_Driver_And_Return_Self() {
+  void should_Call_RequireToolTip_With_Text_In_Driver_And_Return_Self() {
     assertThat(fixture.requireToolTip("Hello")).isSameAs(fixture);
     verify(driver).requireToolTip(target, "Hello");
   }
 
   @Test
-  public void should_Call_RequireToolTip_With_Pattern_In_Driver_And_Return_Self() {
+  void should_Call_RequireToolTip_With_Pattern_In_Driver_And_Return_Self() {
     Pattern pattern = Pattern.compile("Hello");
     assertThat(fixture.requireToolTip(pattern)).isSameAs(fixture);
     verify(driver).requireToolTip(target, pattern);
   }
 
   @Test
-  public void should_Return_Client_Property_Using_Driver() {
+  void should_Return_Client_Property_Using_Driver() {
     when(driver.clientProperty(target, "name")).thenReturn("Yoda");
     assertThat(fixture.clientProperty("name")).isEqualTo("Yoda");
     verify(driver).clientProperty(target, "name");
   }
 
   @Test
-  public void should_Show_JPopupMenu_Using_Driver() {
+  void should_Show_JPopupMenu_Using_Driver() {
     JPopupMenu popupMenu = mock(JPopupMenu.class);
     when(driver.invokePopupMenu(target)).thenReturn(popupMenu);
     JPopupMenuFixture popupMenuFixture = fixture.showPopupMenu();
@@ -78,7 +74,7 @@ public class JPanelFixture_withMocks_Test {
   }
 
   @Test
-  public void should_Show_JPopupMenu_At_Location_Using_Driver() {
+  void should_Show_JPopupMenu_At_Location_Using_Driver() {
     Point p = new Point(6, 8);
     JPopupMenu popupMenu = mock(JPopupMenu.class);
     when(driver.invokePopupMenu(target, p)).thenReturn(popupMenu);

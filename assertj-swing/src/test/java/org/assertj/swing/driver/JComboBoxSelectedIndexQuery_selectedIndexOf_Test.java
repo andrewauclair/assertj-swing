@@ -12,23 +12,20 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.driver.JComboBoxSetSelectedIndexTask.setSelectedIndex;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.util.Collection;
-
-import javax.swing.JComboBox;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.MethodInvocations;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.driver.JComboBoxSetSelectedIndexTask.setSelectedIndex;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link JComboBoxSelectedIndexQuery#selectedIndexOf(JComboBox)}.
@@ -36,19 +33,11 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-@RunWith(Parameterized.class)
-public class JComboBoxSelectedIndexQuery_selectedIndexOf_Test extends RobotBasedTestCase {
+class JComboBoxSelectedIndexQuery_selectedIndexOf_Test extends RobotBasedTestCase {
   private MyComboBox comboBox;
 
-  private final int selectedIndex;
-
-  @Parameters
-  public static Collection<Object[]> indices() {
+  private static Collection<Object[]> indices() {
     return newArrayList(new Object[][] { { 0 }, { 1 }, { 2 }, { -1 } });
-  }
-
-  public JComboBoxSelectedIndexQuery_selectedIndexOf_Test(int selectedIndex) {
-    this.selectedIndex = selectedIndex;
   }
 
   @Override
@@ -57,8 +46,9 @@ public class JComboBoxSelectedIndexQuery_selectedIndexOf_Test extends RobotBased
     comboBox = window.comboBox;
   }
 
-  @Test
-  public void should_Return_Selected_Index_Of_JComboBox() {
+  @ParameterizedTest
+  @MethodSource("indices")
+  void should_Return_Selected_Index_Of_JComboBox(int selectedIndex) {
     comboBox.startRecording();
     setSelectedIndex(comboBox, selectedIndex);
     robot.waitForIdle();

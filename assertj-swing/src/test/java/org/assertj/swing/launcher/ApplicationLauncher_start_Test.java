@@ -12,16 +12,6 @@
  */
 package org.assertj.swing.launcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.awt.Frame;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.exception.UnexpectedException;
 import org.assertj.swing.finder.WindowFinder;
@@ -29,8 +19,15 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.launcher.JavaApp.ArgumentObserver;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link ApplicationLauncher#start()}.

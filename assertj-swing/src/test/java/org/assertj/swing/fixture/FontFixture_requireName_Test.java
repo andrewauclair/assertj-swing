@@ -29,7 +29,6 @@ class FontFixture_requireName_Test extends FontFixture_TestCase {
   @Test
   void should_Fail_If_Name_Is_Not_Equal_To_Expected() {
     expectAssertionError(() -> fixture().requireName("Monospace"), "name", "[Monospace]", "[SansSerif]");
-    fixture().requireName("Monospace");
   }
 
   @Test

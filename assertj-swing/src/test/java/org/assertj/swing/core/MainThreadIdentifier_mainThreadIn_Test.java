@@ -12,11 +12,11 @@
  */
 package org.assertj.swing.core;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
-
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link MainThreadIdentifier#mainThreadIn(Thread[])}.
@@ -26,25 +26,25 @@ import org.junit.jupiter.api.Test;
 public class MainThreadIdentifier_mainThreadIn_Test {
   private MainThreadIdentifier identifier;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     identifier = new MainThreadIdentifier();
   }
 
   @Test
-  public void should_Return_Thread_With_Name_Equal_To_Main() {
+  void should_Return_Thread_With_Name_Equal_To_Main() {
     Thread mainThread = new Thread("main");
     Thread[] allThreads = array(new Thread(), mainThread);
     assertThat(identifier.mainThreadIn(allThreads)).isSameAs(mainThread);
   }
 
   @Test
-  public void should_Return_Null_If_Thread_Array__Is_Empty() {
+  void should_Return_Null_If_Thread_Array__Is_Empty() {
     assertThat(identifier.mainThreadIn(new Thread[0])).isNull();
   }
 
   @Test
-  public void should_Return_Null_If_Thread_Array__Does_Not_Contain_Main_Thread() {
+  void should_Return_Null_If_Thread_Array__Does_Not_Contain_Main_Thread() {
     Thread[] allThreads = array(new Thread(), new Thread());
     assertThat(identifier.mainThreadIn(allThreads)).isNull();
   }

@@ -40,8 +40,13 @@ public class ExtensionTest extends RobotBasedTestCase {
     fixture = new FrameFixture(robot, TestWindow.createNewWindow(ExtensionTest.class));
   }
 
+  @Override
+  protected void onTearDown() {
+    fixture.cleanUp();
+  }
+
   @Test
-  public void shouldCreateFixtureUsingExtension() {
+  void shouldCreateFixtureUsingExtension() {
     JTextFieldFixture textField = fixture.with(JTextFieldFixtureExtension.textFieldWithName("hello"));
     assertThat(textField).isNotNull();
   }
@@ -64,7 +69,7 @@ public class ExtensionTest extends RobotBasedTestCase {
   }
 
   static class JTextFieldFixture extends AbstractComponentFixture<JTextFieldFixture, JTextField, JComponentDriver> {
-    public JTextFieldFixture(Robot robot, JTextField target) {
+    JTextFieldFixture(Robot robot, JTextField target) {
       super(JTextFieldFixture.class, robot, target);
     }
 

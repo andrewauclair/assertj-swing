@@ -12,40 +12,35 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.assertj.swing.exception.UnexpectedException;
+import org.assertj.swing.util.RobotFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.awt.AWTException;
+import java.awt.*;
 import java.awt.Robot;
 
-import org.assertj.swing.exception.UnexpectedException;
-import org.assertj.swing.test.ExpectedException;
-import org.assertj.swing.util.RobotFactory;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link RobotEventGenerator#RobotEventGenerator(org.assertj.swing.util.RobotFactory, Settings)}.
  * 
  * @author Alex Ruiz
  */
-public class RobotEventGenerator_constructorWithRobotFactory_Test {
+class RobotEventGenerator_constructorWithRobotFactory_Test {
   private RobotFactory robotFactory;
 
-  @Rule
-  public ExpectedException thrown = none();
-
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     robotFactory = newRobotFactoryMock();
   }
 
   @Test
-  public void should_Use_RobotFactory_To_Create_AWTRobot() throws AWTException {
+  void should_Use_RobotFactory_To_Create_AWTRobot() throws AWTException {
     Robot robot = mock(Robot.class);
     when(robotFactory.newRobotInLeftScreen()).thenReturn(robot);
     RobotEventGenerator eventGenerator = new RobotEventGenerator(robotFactory, new Settings());
@@ -53,12 +48,11 @@ public class RobotEventGenerator_constructorWithRobotFactory_Test {
   }
 
   @Test
-  public void should_Rethrow_Any_Error_From_RobotFactory() throws AWTException {
+  void should_Rethrow_Any_Error_From_RobotFactory() throws AWTException {
     AWTException toThrow = new AWTException("Thrown on purpose");
     when(robotFactory.newRobotInLeftScreen()).thenThrow(toThrow);
-    thrown.expect(UnexpectedException.class);
     try {
-      new RobotEventGenerator(robotFactory, new Settings());
+      assertThrows(UnexpectedException.class, () -> new RobotEventGenerator(robotFactory, new Settings()));
     } catch (UnexpectedException e) {
       assertThat(e.getCause()).isSameAs(toThrow);
       throw e;

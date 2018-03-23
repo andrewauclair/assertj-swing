@@ -14,10 +14,10 @@ package org.assertj.swing.junit.testcase;
 
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.testing.AssertJSwingTestCaseTemplate;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Understands a template for test cases that use AssertJ-Swing and JUnit. This template installs a
@@ -31,7 +31,7 @@ public abstract class AssertJSwingJUnitTestCase extends AssertJSwingTestCaseTemp
   /**
    * Installs a <code>{@link FailOnThreadViolationRepaintManager}</code> to catch violations of Swing threading rules.
    */
-  @BeforeClass
+  @BeforeAll
   public static final void setUpOnce() {
     FailOnThreadViolationRepaintManager.install();
   }
@@ -42,7 +42,7 @@ public abstract class AssertJSwingJUnitTestCase extends AssertJSwingTestCaseTemp
    * @see #setUpRobot()
    * @see #onSetUp()
    */
-  @Before
+  @BeforeEach
   public final void setUp() {
     setUpRobot();
     onSetUp();
@@ -58,7 +58,7 @@ public abstract class AssertJSwingJUnitTestCase extends AssertJSwingTestCaseTemp
    * Removes the <code>{@link FailOnThreadViolationRepaintManager}</code> again to allow EDT violating and EDT safe
    * tests in the same suite.
    */
-  @AfterClass
+  @AfterAll
   public static final void tearDownOnce() {
     FailOnThreadViolationRepaintManager.uninstall();
   }
@@ -70,7 +70,7 @@ public abstract class AssertJSwingJUnitTestCase extends AssertJSwingTestCaseTemp
    * @see #cleanUp()
    * @see #onTearDown()
    */
-  @After
+  @AfterEach
   public final void tearDown() {
     try {
       onTearDown();

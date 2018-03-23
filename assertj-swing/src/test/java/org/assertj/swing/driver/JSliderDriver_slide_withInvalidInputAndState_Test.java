@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Lists.newArrayList;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import org.assertj.swing.test.ExpectedException;
-import org.junit.jupiter.api.Test;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link JSliderDriver#slide(javax.swing.JSlider, int)}.
@@ -26,38 +26,39 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class JSliderDriver_slide_withInvalidInputAndState_Test extends JSliderDriver_TestCase {
-  @Parameters
-  static Collection<Object[]> allOrientations() {
+class JSliderDriver_slide_withInvalidInputAndState_Test extends JSliderDriver_TestCase {
+  private static Collection<Object[]> allOrientations() {
     return newArrayList(orientations());
   }
 
-  public JSliderDriver_slide_withInvalidInputAndState_Test(int orientation) {
-    super(orientation);
-  }
-
-  @Test
-  void should_Throw_Error_If_Value_Is_Less_Than_Minimum() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Throw_Error_If_Value_Is_Less_Than_Minimum(int orientation) {
+    setup(orientation);
     showWindow();
-    thrown.expectIllegalArgumentException("Value <-1> is not within the JSlider bounds of <0> and <30>");
-    driver.slide(slider, -1);
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.slide(slider, -1), "Value <-1> is not within the JSlider bounds of <0> and <30>");
   }
 
-  @Test
-  void should_Throw_Error_If_Value_Is_Greater_Than_Maximum() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Throw_Error_If_Value_Is_Greater_Than_Maximum(int orientation) {
+    setup(orientation);
     showWindow();
-    thrown.expectIllegalArgumentException("Value <31> is not within the JSlider bounds of <0> and <30>");
-    driver.slide(slider, 31);
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> driver.slide(slider, 31), "Value <31> is not within the JSlider bounds of <0> and <30>");
   }
 
-  @Test
-  void should_Throw_Error_If_JSlider_Is_Disabled() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Throw_Error_If_JSlider_Is_Disabled(int orientation) {
+    setup(orientation);
     disableSlider();
     ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.slide(slider, 6));
   }
 
-  @Test
-  void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen() {
+  @ParameterizedTest
+  @MethodSource("allOrientations")
+  void should_Throw_Error_If_JSlider_Is_Not_Showing_On_The_Screen(int orientation) {
+    setup(orientation);
     ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.slide(slider, 6));
   }
 }

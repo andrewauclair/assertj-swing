@@ -12,21 +12,16 @@
  */
 package org.assertj.swing.core.matcher;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.swing.*;
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.test.builder.JFrames.frame;
-
-import java.util.Collection;
-
-import javax.swing.JFrame;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Tests for {@link FrameMatcher#matches(java.awt.Component)}.
@@ -35,7 +30,6 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Yvonne Wang
  */
 class FrameMatcher_matches_byNameAndTitle_withNoMatch_Test extends EDTSafeTestCase {
-  @Parameters
   private static Collection<Object[]> namesAndTitles() {
     return newArrayList(new Object[][] { { "someName", "title" }, { "name", "someTitle" }, { "name", "title" } });
   }

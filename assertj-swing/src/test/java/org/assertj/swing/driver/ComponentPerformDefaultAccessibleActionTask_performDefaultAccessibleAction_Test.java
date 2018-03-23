@@ -12,30 +12,21 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.util.Locale;
-
-import javax.accessibility.Accessible;
-import javax.accessibility.AccessibleAction;
-import javax.accessibility.AccessibleContext;
-import javax.accessibility.AccessibleRole;
-import javax.accessibility.AccessibleStateSet;
-import javax.swing.JTextField;
-
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.exception.ActionFailedException;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+
+import javax.accessibility.*;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Locale;
+
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link ComponentPerformDefaultAccessibleActionTask#performDefaultAccessibleAction(Component)}.

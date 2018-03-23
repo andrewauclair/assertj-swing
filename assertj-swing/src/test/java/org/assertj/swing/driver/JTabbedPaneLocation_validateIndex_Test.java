@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,22 +20,19 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Yvonne Wang
  */
-public class JTabbedPaneLocation_validateIndex_Test extends JTabbedPaneLocation_TestCase {
+class JTabbedPaneLocation_validateIndex_Test extends JTabbedPaneLocation_TestCase {
   @Test
-  public void should_Pass_If_Index_If_Valid() {
+  void should_Pass_If_Index_If_Valid() {
     location.checkIndexInBounds(tabbedPane, 0);
   }
 
   @Test
-  public void should_Fail_If_Index_Is_Negative() {
-    thrown
-        .expectIndexOutOfBoundsException("Index <-1> is not within the JTabbedPane bounds of <0> and <1> (inclusive)");
-    location.checkIndexInBounds(tabbedPane, -1);
+  void should_Fail_If_Index_Is_Negative() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> location.checkIndexInBounds(tabbedPane, -1), "Index <-1> is not within the JTabbedPane bounds of <0> and <1> (inclusive)");
   }
 
   @Test
-  public void should_Fail_If_Index_Is_Out_Of_Bounds() {
-    thrown.expectIndexOutOfBoundsException("Index <2> is not within the JTabbedPane bounds of <0> and <1> (inclusive)");
-    location.checkIndexInBounds(tabbedPane, 2);
+  void should_Fail_If_Index_Is_Out_Of_Bounds() {
+    ExpectedException.assertContainsMessage(IndexOutOfBoundsException.class, () -> location.checkIndexInBounds(tabbedPane, 2), "Index <2> is not within the JTabbedPane bounds of <0> and <1> (inclusive)");
   }
 }

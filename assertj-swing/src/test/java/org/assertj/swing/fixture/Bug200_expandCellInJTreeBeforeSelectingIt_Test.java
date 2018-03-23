@@ -45,7 +45,7 @@ public class Bug200_expandCellInJTreeBeforeSelectingIt_Test extends RobotBasedTe
   }
 
   @Test
-  public void should_Expand_Cell_And_Show_Popup_Menu() {
+  void should_Expand_Cell_And_Show_Popup_Menu() {
     JPopupMenuFixture popupMenu = frame.tree("tree").showPopupMenuAt("root/node");
     assertThat(popupMenu).isNotNull();
   }
@@ -53,7 +53,7 @@ public class Bug200_expandCellInJTreeBeforeSelectingIt_Test extends RobotBasedTe
   private static class MyWindow extends TestWindow {
     @RunsInEDT
     static MyWindow createNew() {
-      return execute(() -> new MyWindow());
+      return execute(MyWindow::new);
     }
 
     private MyWindow() {

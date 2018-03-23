@@ -20,6 +20,8 @@ import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.edt.GuiQuery;
 
+import java.awt.*;
+
 /**
  * Factory of {@code JFrame}s.
  *
@@ -68,7 +70,7 @@ public final class JFrames {
 
     @RunsInEDT
     public JFrame createNew() {
-      return execute(() -> create());
+      return execute(this::create);
     }
 
     @RunsInCurrentThread
@@ -77,6 +79,7 @@ public final class JFrames {
       frame.setName(name);
       frame.setTitle(title);
       frame.setResizable(resizable);
+      frame.setPreferredSize(new Dimension(200, 200));
       return frame;
     }
   }

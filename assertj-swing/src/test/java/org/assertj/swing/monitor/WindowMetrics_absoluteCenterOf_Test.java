@@ -12,18 +12,15 @@
  */
 package org.assertj.swing.monitor;
 
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Window;
-
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WindowMetrics#absoluteCenterOf(Window)}.

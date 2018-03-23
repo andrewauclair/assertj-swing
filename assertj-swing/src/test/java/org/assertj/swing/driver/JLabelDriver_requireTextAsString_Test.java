@@ -14,6 +14,7 @@ package org.assertj.swing.driver;
 
 import java.util.regex.Pattern;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,20 +22,19 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Yvonne Wang
  */
-public class JLabelDriver_requireTextAsString_Test extends JLabelDriver_TestCase {
+class JLabelDriver_requireTextAsString_Test extends JLabelDriver_TestCase {
   @Test
-  public void should_Pass_If_Text_Is_Equal_To_Expected() {
+  void should_Pass_If_Text_Is_Equal_To_Expected() {
     driver.requireText(label, "Hi");
   }
 
   @Test
-  public void should_Pass_If_Text_Matches_Expected_Pattern() {
+  void should_Pass_If_Text_Matches_Expected_Pattern() {
     driver.requireText(label, "H.*");
   }
 
   @Test
-  public void should_Fail_If_Text_Is_Not_Equal_To_Expected() {
-    thrown.expectAssertionError("text", "Hi", Pattern.compile("Bye"));
-    driver.requireText(label, "Bye");
+  void should_Fail_If_Text_Is_Not_Equal_To_Expected() {
+    ExpectedException.assertAssertionError(() -> driver.requireText(label, "Bye"), "text", "Hi", Pattern.compile("Bye"));
   }
 }

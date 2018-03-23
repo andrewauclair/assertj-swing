@@ -12,25 +12,6 @@
  */
 package org.assertj.swing.fixture;
 
-import static java.awt.Color.BLUE;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
-import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
-import static org.assertj.swing.core.MouseClickInfo.middleButton;
-import static org.assertj.swing.data.TableCell.row;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.awt.Font;
-import java.awt.Point;
-import java.util.regex.Pattern;
-
-import javax.swing.JPopupMenu;
-import javax.swing.JTable;
-import javax.swing.table.JTableHeader;
-
 import org.assertj.swing.cell.JTableCellReader;
 import org.assertj.swing.cell.JTableCellWriter;
 import org.assertj.swing.core.MouseClickInfo;
@@ -38,8 +19,22 @@ import org.assertj.swing.core.Robot;
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.data.TableCellFinder;
 import org.assertj.swing.driver.JTableDriver;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.util.regex.Pattern;
+
+import static java.awt.Color.BLUE;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
+import static org.assertj.swing.core.MouseButton.MIDDLE_BUTTON;
+import static org.assertj.swing.core.MouseClickInfo.middleButton;
+import static org.assertj.swing.data.TableCell.row;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link JTableFixture}.
@@ -54,7 +49,7 @@ class JTableFixture_withMocks_Test {
 
   private JTableFixture fixture;
 
-  @Before
+  @BeforeEach
   void setUp() {
     cell = row(6).column(8);
     fixture = new JTableFixture(mock(Robot.class), mock(JTable.class));

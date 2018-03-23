@@ -78,10 +78,11 @@ public class FailOnThreadViolationRepaintManager extends CheckThreadViolationRep
   @Nullable private static
   RepaintManager currentRepaintManager() {
     try {
-      Object repaintManager = method("appContextGet").withReturnType(Object.class).withParameterTypes(Object.class)
-                                                     .in(SwingUtilities.class).invoke(RepaintManager.class);
-      if (repaintManager instanceof RepaintManager) {
-        return (RepaintManager) repaintManager;
+      RepaintManager repaintManager = RepaintManager.currentManager(null);
+//      Object repaintManager = method("appContextGet").withReturnType(Object.class).withParameterTypes(Object.class)
+//                                                     .in(SwingUtilities.class).invoke(RepaintManager.class);
+      if (repaintManager != null) {
+        return repaintManager;
       }
     } catch (RuntimeException e) {
       return null;

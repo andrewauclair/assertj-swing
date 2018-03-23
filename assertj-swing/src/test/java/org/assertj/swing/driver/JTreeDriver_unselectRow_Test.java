@@ -15,7 +15,6 @@ package org.assertj.swing.driver;
 import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,9 +22,8 @@ import org.junit.jupiter.api.Test;
  *
  * @author Christian Rösch
  */
-public class JTreeDriver_unselectRow_Test extends JTreeDriver_selectCell_TestCase {
-  @Rule
-  public ClickRecorderManager clickRecorder = new ClickRecorderManager();
+class JTreeDriver_unselectRow_Test extends JTreeDriver_selectCell_TestCase {
+  private ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
   void should_Unselect_Cell() {

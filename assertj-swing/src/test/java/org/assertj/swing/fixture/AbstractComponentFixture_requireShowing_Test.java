@@ -12,58 +12,46 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.swing.core.ComponentLookupScope.ALL;
-import static org.assertj.swing.core.ComponentLookupScope.DEFAULT;
-import static org.assertj.swing.core.ComponentLookupScope.SHOWING_ONLY;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.awt.Component;
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
 import org.assertj.swing.core.ComponentLookupScope;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.core.Settings;
 import org.assertj.swing.driver.ComponentDriver;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.assertj.swing.core.ComponentLookupScope.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link AbstractComponentFixture#requireShowing()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class AbstractComponentFixture_requireShowing_Test {
-  @Parameters
-  public static Collection<Object[]> parameters() {
+class AbstractComponentFixture_requireShowing_Test {
+  private static Collection<Object[]> parameters() {
     return newArrayList(new Object[][] { { ALL }, { DEFAULT }, { SHOWING_ONLY } });
-  }
-
-  private final ComponentLookupScope scope;
-
-  public AbstractComponentFixture_requireShowing_Test(ComponentLookupScope scope) {
-    this.scope = scope;
   }
 
   private Settings settings;
   private ConcreteComponentFixture fixture;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     settings = mock(Settings.class);
     fixture = new ConcreteComponentFixture();
   }
 
-  @Test
-  public void should_Check_Settings() {
+  @ParameterizedTest
+  @MethodSource("parameters")
+  void should_Check_Settings(ComponentLookupScope scope) {
     when(fixture.robot().settings()).thenReturn(settings);
     when(settings.componentLookupScope()).thenReturn(scope);
     assertThat(fixture.requireShowing()).isEqualTo(scope.requireShowing());
@@ -71,7 +59,7 @@ public class AbstractComponentFixture_requireShowing_Test {
 
   private static class ConcreteComponentFixture extends
       AbstractComponentFixture<ConcreteComponentFixture, Component, ComponentDriver> {
-    public ConcreteComponentFixture() {
+    ConcreteComponentFixture() {
       super(ConcreteComponentFixture.class, mock(Robot.class), mock(Component.class));
     }
 

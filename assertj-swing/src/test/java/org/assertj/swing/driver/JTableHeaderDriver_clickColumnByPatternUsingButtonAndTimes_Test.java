@@ -12,14 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
+import org.assertj.swing.test.recorder.ClickRecorder;
+import org.assertj.swing.test.recorder.ClickRecorderManager;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
-import org.assertj.swing.test.recorder.ClickRecorder;
-import org.assertj.swing.test.recorder.ClickRecorderManager;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
 
 /**
  * Tests for {@link JTableHeaderDriver#clickColumn(javax.swing.table.JTableHeader, String)}.
@@ -27,11 +26,10 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 public class JTableHeaderDriver_clickColumnByPatternUsingButtonAndTimes_Test extends JTableHeaderDriver_TestCase {
-  @Rule
   public ClickRecorderManager clickRecorder = new ClickRecorderManager();
 
   @Test
-  public void should_Click_Column() {
+  void should_Click_Column() {
     showWindow();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(tableHeader);
     driver.clickColumn(tableHeader, Pattern.compile("0.*"), LEFT_BUTTON, 3);

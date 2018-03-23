@@ -12,28 +12,27 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.annotation.RunsInEDT;
+import org.assertj.swing.test.core.EDTSafeTestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-
-import org.assertj.swing.annotation.RunsInEDT;
-import org.assertj.swing.test.core.EDTSafeTestCase;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JPopupMenuElementsAsTextQuery#menuElementsAsText(javax.swing.JPopupMenu)}.
  *
  * @author Alex Ruiz
  */
-public class JPopupMenuElementsAsTextQuery_menuElementsAsText_Test extends EDTSafeTestCase {
+class JPopupMenuElementsAsTextQuery_menuElementsAsText_Test extends EDTSafeTestCase {
   private JPopupMenu popupMenu;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     popupMenu = popupMenu();
   }
 
@@ -50,7 +49,7 @@ public class JPopupMenuElementsAsTextQuery_menuElementsAsText_Test extends EDTSa
   }
 
   @Test
-  public void should_Return_Elements_As_Text() {
+  void should_Return_Elements_As_Text() {
     String[] elements = JPopupMenuElementsAsTextQuery.menuElementsAsText(popupMenu);
     assertThat(elements).isEqualTo(array("Anakin", "Luke", "Leia"));
   }

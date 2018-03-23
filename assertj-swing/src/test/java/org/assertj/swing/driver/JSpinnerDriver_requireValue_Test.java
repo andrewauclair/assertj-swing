@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,17 +20,16 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JSpinnerDriver_requireValue_Test extends JSpinnerDriver_TestCase {
+class JSpinnerDriver_requireValue_Test extends JSpinnerDriver_TestCase {
   @Test
-  public void should_Pass_If_Value_Is_Equal_To_Expected() {
+  void should_Pass_If_Value_Is_Equal_To_Expected() {
     selectLastValue();
     driver.requireValue(spinner, "Gandalf");
   }
 
   @Test
-  public void should_Fail_If_Value_Is_Not_Equal_To_Expected() {
+  void should_Fail_If_Value_Is_Not_Equal_To_Expected() {
     selectLastValue();
-    thrown.expectAssertionError("value", "[Frodo]", "[Gandalf]");
-    driver.requireValue(spinner, "Frodo");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireValue(spinner, "Frodo"), "value", "[Frodo]", "[Gandalf]");
   }
 }

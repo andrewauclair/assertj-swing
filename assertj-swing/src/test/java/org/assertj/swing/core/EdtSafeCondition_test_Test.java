@@ -12,45 +12,33 @@
  */
 package org.assertj.swing.core;
 
-import static javax.swing.SwingUtilities.isEventDispatchThread;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
+import org.assertj.swing.exception.EdtViolationException;
+import org.assertj.swing.test.data.BooleanProvider;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import javax.annotation.Nonnull;
-
-import org.assertj.swing.exception.EdtViolationException;
-import org.assertj.swing.test.data.BooleanProvider;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import static javax.swing.SwingUtilities.isEventDispatchThread;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 
 /**
  * Tests for {@link EdtSafeCondition#test()}.
  * 
  * @author Alex Ruiz
  */
-@RunWith(Parameterized.class)
-public class EdtSafeCondition_test_Test {
-  private final boolean conditionSatisfied;
+class EdtSafeCondition_test_Test {
 
-  @Parameters
-  @Nonnull public static Collection<Object[]> booleans() {
+  private static Collection<Object[]> booleans() {
     return newArrayList(BooleanProvider.booleans());
   }
 
-  public EdtSafeCondition_test_Test(boolean conditionSatisfied) {
-    this.conditionSatisfied = conditionSatisfied;
-  }
-
-  private EdtSafeCondition condition;
-
-  @Before
-  public void setUp() {
-    condition = new EdtSafeCondition("Hello World!") {
+  @ParameterizedTest
+  @MethodSource("booleans")
+  void should_Test_Condition_In_EDT(boolean conditionSatisfied) {
+    EdtSafeCondition condition = new EdtSafeCondition("Hello World!") {
       @Override
       protected boolean testInEDT() {
         if (!isEventDispatchThread()) {
@@ -59,10 +47,7 @@ public class EdtSafeCondition_test_Test {
         return conditionSatisfied;
       }
     };
-  }
 
-  @Test
-  public void should_Test_Condition_In_EDT() {
     assertThat(condition.test()).isEqualTo(conditionSatisfied);
   }
 }

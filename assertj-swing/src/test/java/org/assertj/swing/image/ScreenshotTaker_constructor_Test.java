@@ -12,18 +12,17 @@
  */
 package org.assertj.swing.image;
 
-import static org.assertj.swing.image.TestImageFileWriters.singletonImageFileWriterMock;
-import static org.assertj.swing.test.ExpectedException.none;
-import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
-import static org.mockito.Mockito.when;
-
-import java.awt.AWTException;
-
-import org.assertj.swing.test.ExpectedException;
 import org.assertj.swing.util.RobotFactory;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.swing.image.TestImageFileWriters.singletonImageFileWriterMock;
+import static org.assertj.swing.util.TestRobotFactories.newRobotFactoryMock;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link ScreenshotTaker#ScreenshotTaker(ImageFileWriter, RobotFactory)}.
@@ -31,25 +30,22 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class ScreenshotTaker_constructor_Test {
-  @Rule
-  public ExpectedException thrown = none();
-
+class ScreenshotTaker_constructor_Test {
   private ImageFileWriter writer;
   private RobotFactory robotFactory;
   private AWTException toThrow;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     writer = singletonImageFileWriterMock();
     robotFactory = newRobotFactoryMock();
     toThrow = new AWTException("Thrown on purpose");
   }
 
   @Test
-  public void should_Throw_Wrapped_Exception_Thrown_When_Creating_Robot() throws AWTException {
+  void should_Throw_Wrapped_Exception_Thrown_When_Creating_Robot() throws AWTException {
     when(robotFactory.newRobotInLeftScreen()).thenThrow(toThrow);
-    thrown.expectWrappingException(ImageException.class, toThrow);
-    new ScreenshotTaker(writer, robotFactory);
+    Throwable exception = assertThrows(ImageException.class, () -> new ScreenshotTaker(writer, robotFactory));
+    assertThat(exception.getCause()).isEqualTo(toThrow);
   }
 }
