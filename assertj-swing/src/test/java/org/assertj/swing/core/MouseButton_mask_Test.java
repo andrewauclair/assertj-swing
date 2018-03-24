@@ -27,7 +27,7 @@ public class MouseButton_mask_Test extends MouseButton_TestCase {
   }
 
   @Test
-  public void should_Contain_Correct_Mask() {
+  void should_Contain_Correct_Mask() {
     assertThat(button.mask).isEqualTo(mask);
   }
 }

@@ -38,6 +38,6 @@ class JFileChooserDriver_selectFiles_withInvalidInput_Test extends JFileChooserD
 
   @Test
   void should_Throw_Error_If_Any_File_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.selectFiles(fileChooser, array(new File("fake"), null)));
+    assertThrows(NullPointerException.class, () -> driver.selectFiles(fileChooser, array(new File("fake"), null)));
   }
 }

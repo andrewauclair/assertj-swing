@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.edt.GuiActionRunner;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
@@ -21,9 +22,9 @@ import javax.swing.*;
  * 
  * @author Alex Ruiz
  */
-public class JTableCancelCellEditingTask_cancelEditing_withEditor_Test {
+class JTableCancelCellEditingTask_cancelEditing_withEditor_Test {
   @Test
-  public void should_Not_Throw_Error_If_Cell_Editor_Is_Null() {
-    JTableCancelCellEditingTask.cancelEditing(new DefaultCellEditor(new JTextField()));
+  void should_Not_Throw_Error_If_Cell_Editor_Is_Null() {
+    GuiActionRunner.execute(() -> JTableCancelCellEditingTask.cancelEditing(new DefaultCellEditor(new JTextField())));
   }
 }

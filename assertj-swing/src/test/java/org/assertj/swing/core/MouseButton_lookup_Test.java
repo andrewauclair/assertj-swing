@@ -27,7 +27,7 @@ public class MouseButton_lookup_Test extends MouseButton_TestCase {
   }
 
   @Test
-  public void shouldLookupButtonGivenMask() {
+  void shouldLookupButtonGivenMask() {
     assertThat(MouseButton.lookup(mask)).isEqualTo(button);
   }
 }
