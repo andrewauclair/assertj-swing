@@ -58,7 +58,8 @@ public final class ExpectedException {
   }
 
   public static void assertAssertionError(Executable executable, String property, String content, Pattern pattern) {
-    assertContainsMessage(AssertionError.class, executable, "property:'" + property + "'", "\r\nExpecting:\r\n \"" + content + "\"\r\nto match pattern:\r\n \"" + pattern.pattern() + "\"");
+    String NL = System.getProperty("line.separator");
+    assertContainsMessage(AssertionError.class, executable, "property:'" + property + "'", NL + "Expecting:" + NL + " \"" + content + "\"" + NL + "to match pattern:" + NL + " \"" + pattern.pattern() + "\"");
   }
 
   private static String buildStringForMessage(String[] array) {
