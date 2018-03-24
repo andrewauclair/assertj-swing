@@ -26,7 +26,6 @@ class JTabbedPaneDriver_requireSelectedTab_Test extends JTabbedPaneDriver_TestCa
   @Test
   void should_Fail_If_Index_Is_Not_Equal_To_Expected() {
     ExpectedException.assertAssertionError(() -> driver.requireSelectedTab(tabbedPane, atIndex(12)), "selectedIndex", 12, 0);
-    driver.requireSelectedTab(tabbedPane, atIndex(12));
   }
 
   @Test

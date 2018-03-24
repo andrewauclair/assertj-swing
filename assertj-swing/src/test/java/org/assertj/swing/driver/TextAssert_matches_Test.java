@@ -23,14 +23,16 @@ import java.util.regex.Pattern;
  * @author Alex Ruiz
  */
 class TextAssert_matches_Test {
+  private static final String NL = System.getProperty("line.separator");
+
   @Test
   void should_Fail_If_Actual_Does_Not_Match_Regex_Pattern() {
-    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").matches(Pattern.compile("bye")), "Expecting:\n \"hello\"\nto match pattern:\n \"bye\"");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").matches(Pattern.compile("bye")), "Expecting:" + NL + " \"hello\"" + NL + "to match pattern:" + NL + " \"bye\"");
   }
 
   @Test
   void should_Fail_Showing_Description_If_Actual_Does_Not_Match_Regex_Pattern() {
-    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").as("A Test").matches(Pattern.compile("bye")), "[A Test] \nExpecting:\n \"hello\"\nto match pattern:\n \"bye\"");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> new TextAssert("hello").as("A Test").matches(Pattern.compile("bye")), "[A Test] " + NL + "Expecting:" + NL + " \"hello\"" + NL + "to match pattern:" + NL + " \"bye\"");
   }
 
   @Test

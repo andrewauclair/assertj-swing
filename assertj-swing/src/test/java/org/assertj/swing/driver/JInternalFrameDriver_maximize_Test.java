@@ -72,7 +72,7 @@ class JInternalFrameDriver_maximize_Test extends JInternalFrameDriver_TestCase {
   void should_Throw_Error_If_JInternalFrame_Is_Not_Maximizable() {
     makeNotMaximizable();
     showWindow();
-    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> driver.maximize(internalFrame), "The JInternalFrame <", ">is not maximizable");
+    ExpectedException.assertContainsMessage(IllegalStateException.class, () -> driver.maximize(internalFrame), "The JInternalFrame <", "> is not maximizable");
   }
 
   @RunsInEDT

@@ -29,7 +29,6 @@ class JTabbedPaneDriver_requireTabToolTipTextAsPattern_Test extends JTabbedPaneD
   @Test
   void should_Fail_If_ToolTipText_Does_Not_Match_Pattern() {
     ExpectedException.assertAssertionError(() -> driver.requireTabToolTipText(tabbedPane, Pattern.compile("Hello"), atIndex(0)), "toolTipTextAt", "tip1", Pattern.compile("Hello"));
-    driver.requireTabToolTipText(tabbedPane, Pattern.compile("Hello"), atIndex(0));
   }
 
   @Test

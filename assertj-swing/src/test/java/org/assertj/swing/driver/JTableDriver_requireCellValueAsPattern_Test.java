@@ -34,6 +34,5 @@ class JTableDriver_requireCellValueAsPattern_Test extends JTableDriver_TestCase 
   @Test
   void should_Fail_If_Cell_Value_Does_Not_Match_Pattern() {
     ExpectedException.assertAssertionError(() -> driver.requireCellValue(table, row(0).column(0), Pattern.compile("0-1")), "value [row=0, column=0]", "0-0", Pattern.compile("0-1"));
-    driver.requireCellValue(table, row(0).column(0), Pattern.compile("0-1"));
   }
 }

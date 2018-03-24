@@ -59,6 +59,6 @@ class JOptionPaneDriver_requireMessage_Test extends JOptionPaneDriver_TestCase {
   void should_Fail_Is_Message_Does_Match_Expected() {
     JOptionPane optionPane = messageWithValue("Palpatine");
     pack(optionPane, title());
-    ExpectedException.assertAssertionError(() -> driver.requireMessage(optionPane, "Anakin"), "property", "Palpatine", Pattern.compile("Anakin"));
+    ExpectedException.assertAssertionError(() -> driver.requireMessage(optionPane, "Anakin"), "message", "Palpatine", Pattern.compile("Anakin"));
   }
 }
