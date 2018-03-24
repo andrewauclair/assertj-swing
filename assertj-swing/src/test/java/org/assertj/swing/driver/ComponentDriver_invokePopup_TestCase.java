@@ -23,7 +23,7 @@ import org.assertj.swing.annotation.RunsInEDT;
  * 
  * @author Alex Ruiz
  */
-public abstract class ComponentDriver_invokePopup_TestCase extends ComponentDriver_TestCase {
+abstract class ComponentDriver_invokePopup_TestCase extends ComponentDriver_TestCase {
   JPopupMenu popupMenu;
 
   @RunsInEDT

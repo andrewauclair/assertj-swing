@@ -12,7 +12,8 @@
  */
 package org.assertj.swing.driver;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
@@ -30,7 +31,8 @@ class JTableHeaderLocation_pointAtColumnByIndex_Test extends JTableHeaderLocatio
     return newArrayList(columnIndices());
   }
 
-  @Test
+  @ParameterizedTest
+  @MethodSource("indices")
   void should_Return_Point_At_Column(int index) {
     showWindow();
     assertThat(pointAt(index)).isEqualTo(expectedPoint(index));

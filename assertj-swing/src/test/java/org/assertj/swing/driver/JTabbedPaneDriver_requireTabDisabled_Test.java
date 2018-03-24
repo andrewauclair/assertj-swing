@@ -25,7 +25,7 @@ import static org.assertj.swing.data.Index.atIndex;
 class JTabbedPaneDriver_requireTabDisabled_Test extends JTabbedPaneDriver_TestCase {
   @Test
   void should_Fail_If_Tab_Is_Enabled() {
-    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireTabDisabled(tabbedPane, atIndex(0)), "property:'enabledAt'", "expected:<fals>e but was:<[tru]e>");
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> driver.requireTabDisabled(tabbedPane, atIndex(0)), "property:'enabledAt'", "expected:<[fals]e> but was:<[tru]e>");
   }
 
   @Test

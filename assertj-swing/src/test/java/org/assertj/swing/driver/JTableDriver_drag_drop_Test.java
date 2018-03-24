@@ -12,6 +12,9 @@
  */
 package org.assertj.swing.driver;
 
+import org.assertj.swing.test.swing.TestTable;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.data.TableCell.row;
 import static org.assertj.swing.driver.JTableCellValueQuery.cellValueOf;
@@ -22,9 +25,6 @@ import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.swing.TestTable.columnNames;
 import static org.assertj.swing.test.swing.TestTable.createCellValueFrom;
 
-import org.assertj.swing.test.swing.TestTable;
-import org.junit.jupiter.api.Test;
-
 /**
  * Tests for {@link JTableDriver#drag(javax.swing.JTable, org.assertj.swing.data.TableCell)} and
  * {@link JTableDriver#drop(javax.swing.JTable, org.assertj.swing.data.TableCell)}.
@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class JTableDriver_drag_drop_Test extends JTableDriver_TestCase {
+class JTableDriver_drag_drop_Test extends JTableDriver_TestCase {
   private static final int DROP_TABLE_ROW_COUNT = 2;
 
   private TestTable dropTable;
@@ -57,7 +57,7 @@ public class JTableDriver_drag_drop_Test extends JTableDriver_TestCase {
   }
 
   @Test
-  public void should_Drag_And_Drop() {
+  void should_Drag_And_Drop() {
     showWindow();
     driver.drag(table, row(3).column(0));
     driver.drop(dropTable, row(1).column(0));

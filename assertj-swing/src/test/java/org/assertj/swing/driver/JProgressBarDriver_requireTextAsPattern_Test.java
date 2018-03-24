@@ -22,14 +22,14 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class JProgressBarDriver_requireTextAsPattern_Test extends JProgressBarDriver_TestCase {
+class JProgressBarDriver_requireTextAsPattern_Test extends JProgressBarDriver_TestCase {
   @Test
-  public void should_Pass_If_Text_Matches_Pattern() {
+  void should_Pass_If_Text_Matches_Pattern() {
     driver.requireText(progressBar, Pattern.compile("60.*"));
   }
 
   @Test
-  public void should_Fail_If_Text_Does_Not_Match_Pattern() {
+  void should_Fail_If_Text_Does_Not_Match_Pattern() {
     ExpectedException.assertAssertionError(() -> driver.requireText(progressBar, Pattern.compile("50%")), "string", "60%", Pattern.compile("50%"));
   }
 }

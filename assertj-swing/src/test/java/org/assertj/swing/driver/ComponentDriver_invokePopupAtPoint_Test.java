@@ -34,7 +34,9 @@ class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopu
   @Test
   void should_Show_JPopupMenu() {
     showWindow();
-    Point p = new Point(8, 6);
+    Point p = window.textField.getLocation();
+    p.x += window.textField.getWidth() / 2;
+    p.y += window.textField.getHeight() / 2;
     ToolkitClickRecorder recorder = clickRecorder.attachToToolkitFor(window.textField);
     JPopupMenu found = driver.invokePopupMenu(window.textField, p);
     assertThat(found).isSameAs(popupMenu);
@@ -45,7 +47,9 @@ class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopu
   void should_Show_JPopupMenu_On_Disabled_Component() {
     disableTextField();
     showWindow();
-    Point p = new Point(8, 6);
+    Point p = window.textField.getLocation();
+    p.x += window.textField.getWidth() / 2;
+    p.y += window.textField.getHeight() / 2;
     ToolkitClickRecorder recorder = clickRecorder.attachToToolkitFor(window.textField);
     JPopupMenu found = driver.invokePopupMenu(window.textField, p);
     assertThat(found).isSameAs(popupMenu);
