@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.BasicRobot.robotWithNewAwtHierarchy;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
 import static org.assertj.swing.test.query.ContainerInsetsQuery.insetsOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -36,6 +37,7 @@ class AWT_insetsFromContainer_Test {
 
   @Test
   void should_Return_Insets_From_Container() {
+    assertEquals("", "asdf");
     Robot robot = robotWithNewAwtHierarchy();
     TestWindow window = TestWindow.createNewWindow(getClass());
     try {

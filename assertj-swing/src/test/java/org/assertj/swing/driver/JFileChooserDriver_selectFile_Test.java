@@ -47,7 +47,7 @@ class JFileChooserDriver_selectFile_Test extends JFileChooserDriver_TestCase {
 
   @RunsInEDT
   private static File selectedFileIn(final JFileChooser fileChooser) {
-    return execute(() -> fileChooser.getSelectedFile());
+    return execute(fileChooser::getSelectedFile);
   }
 
   @Test
