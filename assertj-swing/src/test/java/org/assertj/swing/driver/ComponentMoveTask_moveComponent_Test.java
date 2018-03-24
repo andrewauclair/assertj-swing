@@ -13,8 +13,12 @@
 package org.assertj.swing.driver;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
@@ -29,9 +33,11 @@ import org.junit.jupiter.api.Test;
 public class ComponentMoveTask_moveComponent_Test extends RobotBasedTestCase {
   private TestWindow window;
   private Point location;
+  private boolean moved;
 
   @Override
   protected void onSetUp() {
+    moved = false;
     window = TestWindow.createNewWindow(getClass());
     robot.showWindow(window);
     location = new Point(80, 60);
@@ -39,9 +45,20 @@ public class ComponentMoveTask_moveComponent_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Move_Component_To_Given_Location() {
+  void should_Move_Component_To_Given_Location() {
+    window.addComponentListener(new ComponentListener() {
+      public void componentResized(ComponentEvent e) {}
+      public void componentMoved(ComponentEvent e) {
+        moved = true;
+      }
+      public void componentShown(ComponentEvent e) {}
+      public void componentHidden(ComponentEvent e) {}
+    });
     ComponentMoveTask.moveComponent(window, location);
     robot.waitForIdle();
-    assertThat(location).isEqualTo(window.getLocationOnScreen());
+    assertAll(
+            () -> assertTrue(moved),
+            () -> assertThat(location.getX()).isEqualTo(window.getLocationOnScreen().getX())
+    );
   }
 }
