@@ -39,7 +39,9 @@ class BasicRobot_clickComponentAtPointWithButtonTheGivenTimes_Test extends Basic
 
   @ParameterizedTest
   @MethodSource("buttons")
-  void should_Click_At_Given_Point_With_Given_Mouse_Button_And_Given_Number_Of_Times(MouseButton button, int times) {
+  void should_Click_At_Given_Point_With_Given_Mouse_Button_And_Given_Number_Of_Times(MouseButton button, int times) throws InterruptedException {
+    // TODO Without this sleep these tests fail on Ubuntu because the dialog resizes after we get the sizes. Maybe it's a VM thing. Going to try it on real hardware.
+    Thread.sleep(750);
     JTextField textField = window().textField();
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(textField);
     Point screenLocation = checkNotNull(locationOnScreenOf(textField));
