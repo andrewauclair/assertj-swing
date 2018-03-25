@@ -46,7 +46,7 @@ public class Scrolling_scrollToVisible_Test extends RobotBasedTestCase {
   }
 
   @Test
-  @Disabled("Takes forever to run currently, need to look into it")
+  @Disabled("Takes forever to run currently, need to look into it, also clicks task view button in windows 10 which is an issue")
   void should_Auto_Scroll_To_JButton() {
     JButton button = window.button;
     Scrolling.scrollToVisible(robot, button);

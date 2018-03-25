@@ -12,22 +12,32 @@
  */
 package org.assertj.swing.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import org.junit.jupiter.api.Test;
+import java.util.stream.Stream;
+
+import static java.awt.event.InputEvent.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link MouseButton#mask}.
  * 
  * @author Alex Ruiz
  */
-public class MouseButton_mask_Test extends MouseButton_TestCase {
-  public MouseButton_mask_Test(MouseButton button, int mask) {
-    super(button, mask);
+public class MouseButton_mask_Test {
+  private static Stream<Arguments> arguments() {
+    return Stream.of(
+            Arguments.of(MouseButton.LEFT_BUTTON, BUTTON1_MASK),
+            Arguments.of(MouseButton.MIDDLE_BUTTON, BUTTON2_MASK),
+            Arguments.of(MouseButton.RIGHT_BUTTON, BUTTON3_MASK)
+    );
   }
 
-  @Test
-  void should_Contain_Correct_Mask() {
+  @ParameterizedTest
+  @MethodSource("arguments")
+  void should_Contain_Correct_Mask(MouseButton button, int mask) {
     assertThat(button.mask).isEqualTo(mask);
   }
 }

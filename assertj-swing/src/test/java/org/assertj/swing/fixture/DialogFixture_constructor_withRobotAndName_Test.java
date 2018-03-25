@@ -32,9 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class DialogFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase {
   @Test
-//  @Disabled("Having a problem with this hanging forever when running all tests")
   void should_Lookup_Showing_Dialog_By_Name() {
-    int i = 0;
     Dialog target = dialog().withName("dialog").withTitle(getClass().getSimpleName()).createAndShow();
     DialogFixture fixture = new DialogFixture(robot, "dialog");
     assertThat(fixture.robot()).isSameAs(robot);
@@ -43,7 +41,6 @@ class DialogFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase
 
   @Test
   void should_Throw_Error_If_Dialog_With_Matching_Name_Is_Not_Showing() {
-    int i = 0;
     dialog().withName("dialog").createNew();
     assertThrows(ComponentLookupException.class, () -> new DialogFixture(robot, "dialog"));
   }
