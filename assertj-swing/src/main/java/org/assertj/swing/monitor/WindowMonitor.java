@@ -38,12 +38,10 @@ import org.assertj.swing.util.ToolkitProvider;
  */
 public class WindowMonitor {
   private final Context context;
-  private final ContextMonitor contextMonitor;
-  private final Windows windows;
+    private final Windows windows;
   private final WindowStatus windowStatus;
-  private final WindowAvailabilityMonitor windowAvailabilityMonitor;
 
-  /**
+    /**
    * <p>
    * Create an instance of WindowTracker which will track all windows coming and going on the current and subsequent
    * {@code AppContext}s.
@@ -66,9 +64,9 @@ public class WindowMonitor {
     this.context = context;
     this.windowStatus = windowStatus;
     windows = windowStatus.windows();
-    contextMonitor = new ContextMonitor(context, windows);
+      ContextMonitor contextMonitor = new ContextMonitor(context, windows);
     contextMonitor.attachTo(toolkit);
-    windowAvailabilityMonitor = new WindowAvailabilityMonitor(windows);
+      WindowAvailabilityMonitor windowAvailabilityMonitor = new WindowAvailabilityMonitor(windows);
     windowAvailabilityMonitor.attachTo(toolkit);
     populateExistingWindows();
   }
@@ -149,7 +147,7 @@ public class WindowMonitor {
       @Override
       protected WindowMonitor executeInEDT() {
         return new WindowMonitor(ToolkitProvider.instance().defaultToolkit());
-      };
+      }
     });
   }
 }

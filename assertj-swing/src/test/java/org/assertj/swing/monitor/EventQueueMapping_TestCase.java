@@ -29,9 +29,8 @@ import static org.assertj.swing.test.awt.Toolkits.newToolkitStub;
  * @author Alex Ruiz
  */
 public abstract class EventQueueMapping_TestCase extends EDTSafeTestCase {
-  private ToolkitStub toolkit;
 
-  EventQueue eventQueue;
+    EventQueue eventQueue;
   ComponentWithCustomEventQueue component;
   EventQueueMapping mapping;
   Map<Component, WeakReference<EventQueue>> queueMap;
@@ -39,7 +38,7 @@ public abstract class EventQueueMapping_TestCase extends EDTSafeTestCase {
   @BeforeEach
   public final void setUp() {
     eventQueue = new EventQueue();
-    toolkit = newToolkitStub(eventQueue);
+      ToolkitStub toolkit = newToolkitStub(eventQueue);
     component = new ComponentWithCustomEventQueue(toolkit);
     mapping = new EventQueueMapping();
     queueMap = mapping.queueMap;

@@ -105,5 +105,5 @@ class IntrospectionComponentFormatter_format_Test extends EDTSafeTestCase {
     public String[] getNames() {
       return names;
     }
-  };
+  }
 }

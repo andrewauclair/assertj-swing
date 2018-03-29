@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
 
   @RunsInEDT
-  private final JPopupMenu[] addPopupMenuToTextFieldWithCascade(int cascadePosition) {
+  private JPopupMenu[] addPopupMenuToTextFieldWithCascade(int cascadePosition) {
     return createAndSetPopupMenuWithCascade(cascadePosition, window().textField(), "Luke", "Leia");
   }
 
@@ -103,7 +103,7 @@ public class BasicRobot_findActivePopupMenu_Test extends BasicRobot_TestCase {
   }
 
   @RunsInEDT
-  private final JPopupMenu[] addPopupMenuToTextFieldWithCascadeWithCascade(int cascadeCascadePosition) {
+  private JPopupMenu[] addPopupMenuToTextFieldWithCascadeWithCascade(int cascadeCascadePosition) {
     return createAndSetPopupMenuWithCascadeWithCascade(cascadeCascadePosition, window().textField(),
                                                        "Luke2", "Leia2");
   }

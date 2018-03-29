@@ -113,7 +113,7 @@ public class FEST254_JComboBoxFixtureIsNotUsingCellReaderForRequireSelection_Tes
     return v == null ? null : v.toString().toLowerCase();
   }
 
-  private static enum TestValue {
+  private enum TestValue {
     FIRST, SECOND, THIRD
   }
 }

@@ -59,7 +59,7 @@ public abstract class AssertJSwingTestngTestCase extends AssertJSwingTestCaseTem
    * tests in the same suite.
    */
   @AfterClass(alwaysRun = true)
-  public static final void tearDownOnce() {
+  public static void tearDownOnce() {
     FailOnThreadViolationRepaintManager.uninstall();
   }
 

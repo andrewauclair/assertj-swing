@@ -31,14 +31,13 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class FEST249_shouldNotAllowExit extends RobotBasedTestCase {
-  private MyWindow window;
-  private FrameFixture frame;
+    private FrameFixture frame;
   private NoExitSecurityManagerInstaller noExitSecurityManagerInstaller;
 
   @Override
   protected void onSetUp() {
     noExitSecurityManagerInstaller = installNoExitSecurityManager();
-    window = MyWindow.createNew();
+      MyWindow window = MyWindow.createNew();
     frame = new FrameFixture(robot, window);
     frame.show();
   }

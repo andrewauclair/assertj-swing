@@ -88,7 +88,7 @@ public class AbstractContainerFixture_list_Test extends RobotBasedTestCase {
   }
 
   private static class MyWindow extends TestWindow {
-    final JList list = new JList(array("One", "Two", "Three"));
+    final JList<String> list = new JList<>(array("One", "Two", "Three"));
 
     static MyWindow createNew(final Class<?> testClass) {
       return execute(() -> new MyWindow(testClass));

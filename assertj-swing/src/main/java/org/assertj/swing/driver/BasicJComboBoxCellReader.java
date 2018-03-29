@@ -42,9 +42,8 @@ public class BasicJComboBoxCellReader implements JComboBoxCellReader {
       @Override
       protected JList<T> executeInEDT() {
         return new JList<T>();
-      };
+      }
     });
-    ;
     return checkNotNull(result);
   }
 

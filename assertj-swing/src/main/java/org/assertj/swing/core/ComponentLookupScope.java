@@ -36,7 +36,7 @@ public enum ComponentLookupScope {
 
   private final boolean requireShowing;
 
-  private ComponentLookupScope(boolean requireShowing) {
+  ComponentLookupScope(boolean requireShowing) {
     this.requireShowing = requireShowing;
   }
 

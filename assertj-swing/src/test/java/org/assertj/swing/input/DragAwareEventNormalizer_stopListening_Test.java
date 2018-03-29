@@ -30,13 +30,12 @@ import static org.mockito.Mockito.verify;
  */
 public class DragAwareEventNormalizer_stopListening_Test extends DragAwareEventNormalizer_TestCase {
   private ToolkitStub toolkit;
-  private EventQueueStub eventQueue;
-  private int mask;
+    private int mask;
 
   @Override
   @BeforeEach
   public void setUp() {
-    eventQueue = new EventQueueStub();
+      EventQueueStub eventQueue = new EventQueueStub();
     toolkit = newToolkitStub();
     toolkit.eventQueue(eventQueue);
     mask = 8;

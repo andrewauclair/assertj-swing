@@ -59,7 +59,7 @@ public abstract class NewHierarchy_TestCase extends SequentialEDTSafeTestCase {
       return execute(() -> new MyWindow(testClass));
     }
 
-    final JComboBox comboBox = new JComboBox(array("One", "Two"));
+    final JComboBox<String> comboBox = new JComboBox<>(array("One", "Two"));
     final JTextField textField = new JTextField(20);
 
     private MyWindow(Class<?> testClass) {

@@ -97,7 +97,7 @@ class KeyStrokeMappingProvider_parse_Test {
   private static File createMappingFile(String... mappings) throws IOException {
     File f = newTemporaryFile();
 
-    try (Writer output = new BufferedWriter(new FileWriter(f));) {
+    try (Writer output = new BufferedWriter(new FileWriter(f))) {
       for (String mapping : mappings) {
         output.write(mapping);
         output.write(lineSeparator());

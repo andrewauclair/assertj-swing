@@ -81,5 +81,5 @@ class Pause_pauseWithConditionsAndTimeoutInMilliseconds_Test {
   @Test
   void should_Throw_Error_If_Any_Condition_In_Array_Is_Null() {
     assertThrows(NullPointerException.class, () -> Pause.pause(new Condition[] { new NeverSatisfiedCondition(), null }, 1000));
-  };
+  }
 }

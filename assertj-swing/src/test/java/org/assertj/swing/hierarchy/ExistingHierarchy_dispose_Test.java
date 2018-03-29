@@ -76,5 +76,5 @@ public class ExistingHierarchy_dispose_Test extends SequentialEDTSafeTestCase {
     MethodInvocations requireInvoked(String methodName) {
       return methodInvocations.requireInvoked(methodName);
     }
-  };
+  }
 }

@@ -21,32 +21,32 @@ import org.junit.jupiter.api.Test;
  */
 public interface ItemFixture_TestCase {
   @Test
-  public void should_Select_Item();
+  void should_Select_Item();
 
   @Test
-  public void should_Click_Item();
+  void should_Click_Item();
 
   @Test
-  public void should_Click_Item_With_MouseButton();
+  void should_Click_Item_With_MouseButton();
 
   @Test
-  public void should_Click_Item_Using_MouseClickInfo();
+  void should_Click_Item_Using_MouseClickInfo();
 
   @Test
-  public void should_Double_Click_Item();
+  void should_Double_Click_Item();
 
   @Test
-  public void should_Right_Click_Item();
+  void should_Right_Click_Item();
 
   @Test
-  public void should_Show_Popup_Menu_At_Item();
+  void should_Show_Popup_Menu_At_Item();
 
   @Test
-  public void should_Return_Item_Contents();
+  void should_Return_Item_Contents();
 
   @Test
-  public void should_Drag_Item();
+  void should_Drag_Item();
 
   @Test
-  public void should_Drop_Item();
+  void should_Drop_Item();
 }

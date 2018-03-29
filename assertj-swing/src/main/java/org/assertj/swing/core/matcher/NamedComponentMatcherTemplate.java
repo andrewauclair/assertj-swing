@@ -147,7 +147,7 @@ public abstract class NamedComponentMatcherTemplate<T extends Component> extends
     return name;
   }
 
-  protected static final @Nonnull Object anyValue() {
+  protected static @Nonnull Object anyValue() {
     return ANY;
   }
 }

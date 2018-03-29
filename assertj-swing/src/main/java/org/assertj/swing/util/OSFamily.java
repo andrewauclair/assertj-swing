@@ -24,7 +24,7 @@ public enum OSFamily {
 
   private final String key;
 
-  private OSFamily(@Nonnull String key) {
+  OSFamily(@Nonnull String key) {
     this.key = key;
   }
 

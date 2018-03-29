@@ -86,7 +86,7 @@ public abstract class JTreeDriver_TestCase extends RobotBasedTestCase {
     return b.toString();
   }
 
-  public static final Object[][] outOfBoundRowIndices() {
+  public static Object[][] outOfBoundRowIndices() {
     return new Object[][] { { -1 }, { 6 }, { 100 } };
   }
 

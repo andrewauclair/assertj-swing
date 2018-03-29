@@ -69,7 +69,7 @@ class JTextComponentDriver_selectText_Test extends JTextComponentDriver_TestCase
   }
 
   @RunsInEDT
-  private final void updateTextTo(JTextField f, String text) {
+  private void updateTextTo(JTextField f, String text) {
     setText(f, text);
     robot.waitForIdle();
   }

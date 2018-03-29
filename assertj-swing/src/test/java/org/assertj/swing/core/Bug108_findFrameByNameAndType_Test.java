@@ -31,11 +31,10 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 class Bug108_findFrameByNameAndType_Test extends RobotBasedTestCase {
-  private MyWindow window;
 
   @Override
   protected void onSetUp() {
-    window = MyWindow.createNew();
+    MyWindow window = MyWindow.createNew();
     robot.showWindow(window);
   }
 

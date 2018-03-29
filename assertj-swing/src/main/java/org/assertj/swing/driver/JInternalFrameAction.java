@@ -25,7 +25,7 @@ enum JInternalFrameAction {
   final String name;
   final boolean value;
 
-  private JInternalFrameAction(@Nonnull String name, boolean value) {
+  JInternalFrameAction(@Nonnull String name, boolean value) {
     this.name = name;
     this.value = value;
   }

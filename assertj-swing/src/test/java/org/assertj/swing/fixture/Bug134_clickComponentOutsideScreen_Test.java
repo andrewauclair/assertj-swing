@@ -31,11 +31,10 @@ import static org.assertj.swing.edt.GuiActionRunner.execute;
  */
 public class Bug134_clickComponentOutsideScreen_Test extends RobotBasedTestCase {
   private FrameFixture fixture;
-  private MyWindow window;
 
   @Override
   protected final void onSetUp() {
-    window = MyWindow.createNew();
+    MyWindow window = MyWindow.createNew();
     fixture = new FrameFixture(robot, window);
     fixture.show();
   }

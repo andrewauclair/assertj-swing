@@ -39,11 +39,10 @@ import org.junit.jupiter.api.Test;
  */
 public class Bug209_JComboBoxWithCustomModel_Test extends RobotBasedTestCase {
   private DialogFixture dialog;
-  private NamedObject[] values;
 
-  @Override
+    @Override
   protected void onSetUp() {
-    values = array(new NamedObject("hat"), new NamedObject("son"));
+        NamedObject[] values = array(new NamedObject("hat"), new NamedObject("son"));
     dialog = new DialogFixture(robot, MyDialog.createNew(values));
     dialog.show();
   }

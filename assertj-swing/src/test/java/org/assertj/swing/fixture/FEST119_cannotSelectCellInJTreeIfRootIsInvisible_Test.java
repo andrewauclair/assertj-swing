@@ -36,12 +36,11 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class FEST119_cannotSelectCellInJTreeIfRootIsInvisible_Test extends RobotBasedTestCase {
-  private MyWindow window;
-  private FrameFixture frameFixture;
+    private FrameFixture frameFixture;
 
   @Override
   protected void onSetUp() {
-    window = MyWindow.createNew();
+      MyWindow window = MyWindow.createNew();
     frameFixture = new FrameFixture(robot, window);
     frameFixture.show();
   }

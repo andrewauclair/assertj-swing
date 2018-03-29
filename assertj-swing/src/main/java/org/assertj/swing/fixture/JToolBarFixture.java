@@ -33,7 +33,7 @@ public class JToolBarFixture extends AbstractSwingContainerFixture<JToolBarFixtu
    * 
    * @author Alex Ruiz
    */
-  public static enum UnfloatConstraint {
+  public enum UnfloatConstraint {
     NORTH(BorderLayout.NORTH), EAST(BorderLayout.EAST), SOUTH(BorderLayout.SOUTH), WEST(BorderLayout.WEST);
 
     private final String value;

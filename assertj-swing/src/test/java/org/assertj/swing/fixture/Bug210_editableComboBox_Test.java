@@ -38,12 +38,11 @@ import org.junit.jupiter.api.Test;
  */
 public class Bug210_editableComboBox_Test extends RobotBasedTestCase {
   private final static String ADDED_STRING = "rocket";
-  private String[] values;
-  private DialogFixture dialog;
+    private DialogFixture dialog;
 
   @Override
   protected void onSetUp() {
-    values = array("hat", "son");
+      String[] values = array("hat", "son");
     dialog = new DialogFixture(robot, MyDialog.createNew(values));
     dialog.show();
   }

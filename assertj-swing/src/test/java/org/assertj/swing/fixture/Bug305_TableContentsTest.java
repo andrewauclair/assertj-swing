@@ -33,12 +33,11 @@ import static org.assertj.swing.util.Arrays.format;
  * @author Yvonne Wang
  */
 public class Bug305_TableContentsTest extends RobotBasedTestCase {
-  private MyWindow window;
-  private JTableFixture fixture;
+    private JTableFixture fixture;
 
   @Override
   protected void onSetUp() {
-    window = MyWindow.createNew();
+      MyWindow window = MyWindow.createNew();
     robot.showWindow(window);
     fixture = new JTableFixture(robot, window.table);
   }

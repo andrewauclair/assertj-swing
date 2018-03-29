@@ -112,7 +112,7 @@ public abstract class JComboBoxDriver_TestCase extends RobotBasedTestCase {
   }
 
   @RunsInEDT
-  final static String textIn(final JComboBox comboBox) {
+  static String textIn(final JComboBox comboBox) {
     return execute(() -> {
       Component editor = comboBox.getEditor().getEditorComponent();
       if (editor instanceof JLabel) {

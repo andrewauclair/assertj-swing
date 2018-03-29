@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.swing.assertions.data.Point.atPoint;
 import static org.fest.test.EqualsHashCodeContractAssert.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Tests for <code>{@link Index#equals(Object)}</code> and <code>{@link Index#hashCode()}</code>.
@@ -55,7 +56,7 @@ class Point_equals_hashCode_Test {
 
   @Test
   void should_Not_Be_Equal_To_Object_Of_Different_Type() {
-    assertFalse(point.equals("6, 8"));
+    assertNotEquals("6, 8", point);
   }
 
   @Test
@@ -65,11 +66,11 @@ class Point_equals_hashCode_Test {
 
   @Test
   void should_Not_Be_Equal_To_Index_With_Different_X() {
-    assertFalse(point.equals(atPoint(8, 8)));
+    assertNotEquals(point, atPoint(8, 8));
   }
 
   @Test
   void should_Not_Be_Equal_To_Index_With_Different_Y() {
-    assertFalse(point.equals(atPoint(6, 6)));
+    assertNotEquals(point, atPoint(6, 6));
   }
 }

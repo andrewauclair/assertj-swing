@@ -40,14 +40,13 @@ class Bug159_moveParentToFrontWhenClickingMenuItem_Test extends RobotBasedTestCa
 
   private static Logger logger = Logger.getAnonymousLogger();
 
-  private JFrame frameToFocus;
-  private MyWindow window;
+    private MyWindow window;
 
   @Override
   protected void onSetUp() {
     window = MyWindow.createNew();
     window.display();
-    frameToFocus = frame().withTitle("To Focus").createNew();
+      JFrame frameToFocus = frame().withTitle("To Focus").createNew();
     robot.showWindow(frameToFocus, new Dimension(300, 200));
     robot.focus(frameToFocus);
   }

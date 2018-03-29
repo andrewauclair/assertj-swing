@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  *
@@ -12,20 +12,16 @@
  */
 package org.assertj.swing.fixture;
 
-import static org.assertj.swing.data.TableCell.row;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.Dimension;
-
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.TableColumn;
-
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import javax.swing.table.TableColumn;
+import java.awt.*;
+
+import static org.assertj.swing.data.TableCell.row;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Test case for bug <a href="http://jira.codehaus.org/browse/FEST-122" target="_blank">FEST-122</a>.
@@ -52,7 +48,7 @@ public class FEST122_addSupportForEditableJComboBoxAsCellEditor_Test extends Rob
 
   private static class MyWindow extends TestWindow {
     static MyWindow createNew() {
-      return execute(() -> new MyWindow());
+      return execute(MyWindow::new);
     }
 
     final JTable table = data();
@@ -71,7 +67,7 @@ public class FEST122_addSupportForEditableJComboBoxAsCellEditor_Test extends Rob
     }
 
     private static void setUpColorColumn(TableColumn column) {
-      JComboBox comboBox = new JComboBox();
+      JComboBox<String> comboBox = new JComboBox<>();
       comboBox.setEditable(true);
       comboBox.addItem("Blue");
       comboBox.addItem("Red");

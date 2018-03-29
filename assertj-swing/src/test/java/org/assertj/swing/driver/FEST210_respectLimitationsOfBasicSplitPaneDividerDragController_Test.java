@@ -37,9 +37,8 @@ class FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Test exten
   private static final int MINIMUM_SIZE = 20;
 
   private JSplitPaneDriver driver;
-  private MyWindow window;
 
-  private static Collection<Object[]> orientations() {
+    private static Collection<Object[]> orientations() {
     return newArrayList(new Object[][] { { VERTICAL_SPLIT }, { HORIZONTAL_SPLIT } });
   }
 
@@ -51,7 +50,7 @@ class FEST210_respectLimitationsOfBasicSplitPaneDividerDragController_Test exten
   @ParameterizedTest
   @MethodSource("orientations")
   void should_Respect_Minimum_Size_When_Moving_Divider(int orientation) {
-    window = MyWindow.createNew(orientation);
+      MyWindow window = MyWindow.createNew(orientation);
     robot.showWindow(window);
 
     driver.moveDividerTo(window.splitPane, 30);

@@ -52,8 +52,7 @@ public final class Arrays {
     if (one.length != two.length) {
       return false;
     }
-    ;
-    if (one.length == 0) {
+      if (one.length == 0) {
       return true;
     }
     if (one[0].length != two[0].length) {

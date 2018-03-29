@@ -32,7 +32,7 @@ public abstract class AssertJSwingJUnitTestCase extends AssertJSwingTestCaseTemp
    * Installs a <code>{@link FailOnThreadViolationRepaintManager}</code> to catch violations of Swing threading rules.
    */
   @BeforeAll
-  public static final void setUpOnce() {
+  public static void setUpOnce() {
     FailOnThreadViolationRepaintManager.install();
   }
 
@@ -59,7 +59,7 @@ public abstract class AssertJSwingJUnitTestCase extends AssertJSwingTestCaseTemp
    * tests in the same suite.
    */
   @AfterAll
-  public static final void tearDownOnce() {
+  public static void tearDownOnce() {
     FailOnThreadViolationRepaintManager.uninstall();
   }
 

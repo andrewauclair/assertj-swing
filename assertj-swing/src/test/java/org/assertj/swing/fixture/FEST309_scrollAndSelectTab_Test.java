@@ -38,12 +38,11 @@ import org.junit.jupiter.api.Test;
  * @author Alex Ruiz
  */
 public class FEST309_scrollAndSelectTab_Test extends RobotBasedTestCase {
-  private MyWindow window;
-  private FrameFixture frame;
+    private FrameFixture frame;
 
   @Override
   protected void onSetUp() {
-    window = MyWindow.createNew();
+      MyWindow window = MyWindow.createNew();
     frame = new FrameFixture(robot, window);
     frame.show();
   }

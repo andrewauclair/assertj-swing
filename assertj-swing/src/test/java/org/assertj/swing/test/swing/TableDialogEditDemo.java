@@ -60,7 +60,7 @@ public class TableDialogEditDemo extends JPanel {
 
   public void setUpSportColumn(TableColumn sportColumn) {
     // Set up the editor for the sport cells.
-    JComboBox comboBox = new JComboBox();
+    JComboBox<String> comboBox = new JComboBox<>();
     comboBox.addItem("Snowboarding");
     comboBox.addItem("Rowing");
     comboBox.addItem("Knitting");

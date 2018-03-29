@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  *
@@ -60,10 +60,10 @@ public class JListFixture_constructor_withRobotAndName_Test extends RobotBasedTe
 
   private static class MyWindow extends TestWindow {
     static MyWindow createNew() {
-      return execute(() -> new MyWindow());
+      return execute(MyWindow::new);
     }
 
-    final JList list = new JList(array("One"));
+    final JList<String> list = new JList<>(array("One"));
 
     private MyWindow() {
       super(JListFixture_constructor_withRobotAndName_Test.class);
