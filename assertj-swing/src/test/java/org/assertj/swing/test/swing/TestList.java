@@ -38,8 +38,8 @@ import org.assertj.swing.annotation.RunsInEDT;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public final class TestList extends JList {
-  final DefaultListModel model = new DefaultListModel();
+public final class TestList extends JList<String> {
+  private final DefaultListModel<String> model = new DefaultListModel<>();
 
   @RunsInCurrentThread
   public TestList(String... elements) {

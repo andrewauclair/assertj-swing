@@ -33,7 +33,7 @@ class JListDriver_selectItemsByFluentRange_Test extends JListDriver_TestCase {
   void should_Select_Items() {
     showWindow();
     driver.selectItems(list, from(0), to(1));
-    assertThat(selectedValues()).isEqualTo(array("one", "two"));
+    assertThat(selectedValues()).containsOnly("one", "two");
   }
 
   @Test
@@ -41,7 +41,7 @@ class JListDriver_selectItemsByFluentRange_Test extends JListDriver_TestCase {
     select(0, 1);
     showWindow();
     driver.selectItems(list, from(0), to(1));
-    assertThat(selectedValues()).isEqualTo(array("one", "two"));
+    assertThat(selectedValues()).containsOnly("one", "two");
   }
 
   @Test

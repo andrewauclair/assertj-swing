@@ -122,7 +122,7 @@ class Context {
     return execute(() -> {
       Component parent = c;
       // Components above the applet in the hierarchy may or may not share the same context with the applet itself.
-      while (!(parent instanceof java.applet.Applet) && parent.getParent() != null) {
+      while (parent.getParent() != null) {
         parent = parent.getParent();
       }
       return parent;

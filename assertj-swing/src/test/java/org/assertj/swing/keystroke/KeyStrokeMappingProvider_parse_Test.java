@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.util.Collection;
 
-import static java.awt.event.InputEvent.SHIFT_MASK;
 import static java.awt.event.KeyEvent.*;
 import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,7 +58,7 @@ class KeyStrokeMappingProvider_parse_Test {
     KeyStrokeMappingProvider mappingProvider = parser.parse("keyboard-mapping.txt");
     assertThatContainsDefaultMappings(mappingProvider);
     Collection<KeyStrokeMapping> mappings = mappingProvider.keyStrokeMappings();
-    assertThat(mappings).contains(mapping('a', VK_A, NO_MASK), mapping('A', VK_A, SHIFT_MASK),
+    assertThat(mappings).contains(mapping('a', VK_A, NO_MASK), mapping('A', VK_A, SHIFT_DOWN_MASK),
                                   mapping(',', VK_COMMA, NO_MASK));
   }
 

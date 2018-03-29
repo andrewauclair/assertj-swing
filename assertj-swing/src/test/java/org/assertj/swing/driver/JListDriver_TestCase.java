@@ -21,6 +21,8 @@ import org.assertj.swing.test.swing.TestWindow;
 import javax.annotation.Nonnull;
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 import static javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
 import static org.assertj.swing.driver.JListSetSelectedIndexTask.setSelectedIndex;
@@ -97,13 +99,13 @@ public abstract class JListDriver_TestCase extends RobotBasedTestCase {
   }
 
   @RunsInEDT
-  final Object[] selectedValues() {
+  final List selectedValues() {
     return selectedValues(list);
   }
 
   @RunsInEDT
-  private static Object[] selectedValues(final JList list) {
-    return execute(() -> list.getSelectedValues());
+  private static List selectedValues(final JList list) {
+    return execute((Callable<List>) list::getSelectedValuesList);
   }
 
   @RunsInEDT

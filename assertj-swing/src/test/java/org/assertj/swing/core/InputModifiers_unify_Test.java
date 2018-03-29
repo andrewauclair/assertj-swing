@@ -29,10 +29,10 @@ import static org.assertj.core.util.Lists.newArrayList;
  */
 class InputModifiers_unify_Test {
   private static Collection<Object[]> modifiers() {
-    return newArrayList(new Object[][] { { new int[] { ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK, META_MASK, SHIFT_MASK } },
-        { new int[] { ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK, META_MASK } },
-        { new int[] { ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK } }, { new int[] { ALT_MASK, ALT_GRAPH_MASK } },
-        { new int[] { ALT_MASK } } });
+    return newArrayList(new Object[][] { { new int[] { ALT_DOWN_MASK, ALT_GRAPH_DOWN_MASK, CTRL_DOWN_MASK, META_DOWN_MASK, SHIFT_DOWN_MASK } },
+        { new int[] { ALT_DOWN_MASK, ALT_GRAPH_DOWN_MASK, CTRL_DOWN_MASK, META_DOWN_MASK } },
+        { new int[] { ALT_DOWN_MASK, ALT_GRAPH_DOWN_MASK, CTRL_DOWN_MASK } }, { new int[] { ALT_DOWN_MASK, ALT_GRAPH_DOWN_MASK } },
+        { new int[] { ALT_DOWN_MASK } } });
   }
 
   @ParameterizedTest
@@ -58,6 +58,6 @@ class InputModifiers_unify_Test {
   }
 
   private List<Integer> allModifiers() {
-    return newArrayList(ALT_MASK, ALT_GRAPH_MASK, CTRL_MASK, META_MASK, SHIFT_MASK);
+    return newArrayList(ALT_DOWN_MASK, ALT_GRAPH_DOWN_MASK, CTRL_DOWN_MASK, META_DOWN_MASK, SHIFT_DOWN_MASK);
   }
 }

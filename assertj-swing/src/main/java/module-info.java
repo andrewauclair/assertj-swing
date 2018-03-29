@@ -1,4 +1,4 @@
-open module assertj.swing {
+module assertj.swing {
     requires assertj.core;
     requires java.desktop;
     requires java.logging;

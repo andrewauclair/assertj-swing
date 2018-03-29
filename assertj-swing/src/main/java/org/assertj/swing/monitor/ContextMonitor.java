@@ -68,7 +68,7 @@ final class ContextMonitor implements AWTEventListener {
     // beyond OPENED in order to catch windows that have already opened by the time we start listening but which are not
     // in the Frame.getFrames list (i.e. they are on a different context). Specifically watch for COMPONENT_SHOWN on
     // applets, since we may not get frame events for them.
-    if (!(component instanceof Applet) && !(component instanceof Window)) {
+    if (!(component instanceof Window)) {
       return;
     }
     processEvent(event);
