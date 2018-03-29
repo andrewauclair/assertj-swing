@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.driver;
 
-import static java.awt.Event.SHIFT_MASK;
+import org.assertj.swing.test.ExpectedException;
+import org.junit.jupiter.api.Test;
+
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.assertj.swing.core.KeyPressInfo.keyCode;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.assertj.swing.test.ExpectedException;
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ComponentDriver#pressAndReleaseKey(java.awt.Component, org.assertj.swing.core.KeyPressInfo)}.
@@ -36,7 +36,7 @@ class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriv
   void should_Press_And_Release_Key_In_Given_KeyPressInfo() {
     showWindow();
     assertThatTextFieldIsEmpty();
-    driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK));
+    driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_DOWN_MASK));
     assertThatTextInTextFieldIs("A");
   }
 
@@ -44,7 +44,7 @@ class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriv
   void should_Throw_Error_If_Component_Is_Disabled() {
     disableTextField();
     try {
-      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK)));
+      ExpectedException.assertIllegalStateIsDisabledComponent(() -> driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_DOWN_MASK)));
     } finally {
       assertThatTextFieldIsEmpty();
     }
@@ -53,7 +53,7 @@ class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriv
   @Test
   void should_Throw_Error_If_Component_Is_Not_Showing_On_The_Screen() {
     try {
-      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_MASK)));
+      ExpectedException.assertIllegalStateIsNotShowingComponent(() -> driver.pressAndReleaseKey(window.textField, keyCode(VK_A).modifiers(SHIFT_DOWN_MASK)));
     } finally {
       assertThatTextFieldIsEmpty();
     }

@@ -38,7 +38,7 @@ public final class TestRobots {
     doAnswer(new Answer<Object>() {
       @Override
       public Object answer(InvocationOnMock invocation) throws Throwable {
-        invocation.getArgumentAt(1, Runnable.class).run();
+        invocation.<Runnable>getArgument(1).run();
         return null;
       }
     }).when(mock).pressKeyWhileRunning(Mockito.anyInt(), Mockito.anyObject());

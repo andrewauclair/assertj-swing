@@ -14,16 +14,12 @@ package org.assertj.swing.util;
 
 import org.junit.jupiter.api.Test;
 
-import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
-import static java.awt.event.InputEvent.ALT_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.META_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
-import static java.awt.event.KeyEvent.VK_ALT;
-import static java.awt.event.KeyEvent.VK_ALT_GRAPH;
-import static java.awt.event.KeyEvent.VK_CONTROL;
-import static java.awt.event.KeyEvent.VK_META;
-import static java.awt.event.KeyEvent.VK_SHIFT;
+import static java.awt.event.InputEvent.ALT_DOWN_MASK;
+import static java.awt.event.InputEvent.ALT_GRAPH_DOWN_MASK;
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
+import static java.awt.event.InputEvent.META_DOWN_MASK;
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
+import static java.awt.event.KeyEvent.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -34,37 +30,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 class Modifiers_keysFor_Test {
   @Test
   void should_Return_Key_For_Alt_Mask() {
-    int[] keys = Modifiers.keysFor(ALT_MASK);
+    int[] keys = Modifiers.keysFor(ALT_DOWN_MASK);
     assertThat(keys).hasSize(1).containsOnly(VK_ALT);
   }
 
   @Test
   void should_Return_Key_For_AltGraph_Mask() {
-    int[] keys = Modifiers.keysFor(ALT_GRAPH_MASK);
+    int[] keys = Modifiers.keysFor(ALT_GRAPH_DOWN_MASK);
     assertThat(keys).hasSize(1).containsOnly(VK_ALT_GRAPH);
   }
 
   @Test
   void should_Return_Key_For_Ctrl_Mask() {
-    int[] keys = Modifiers.keysFor(CTRL_MASK);
+    int[] keys = Modifiers.keysFor(CTRL_DOWN_MASK);
     assertThat(keys).hasSize(1).containsOnly(VK_CONTROL);
   }
 
   @Test
   void should_Return_Key_For_Meta_Mask() {
-    int[] keys = Modifiers.keysFor(META_MASK);
+    int[] keys = Modifiers.keysFor(META_DOWN_MASK);
     assertThat(keys).hasSize(1).containsOnly(VK_META);
   }
 
   @Test
   void should_Return_Key_For_Shift_Mask() {
-    int[] keys = Modifiers.keysFor(SHIFT_MASK);
+    int[] keys = Modifiers.keysFor(SHIFT_DOWN_MASK);
     assertThat(keys).hasSize(1).containsOnly(VK_SHIFT);
   }
 
   @Test
   void should_Return_Key_For__More_Than_One_Mask() {
-    int[] keys = Modifiers.keysFor(ALT_MASK | ALT_GRAPH_MASK | CTRL_MASK | META_MASK | SHIFT_MASK);
+    int[] keys = Modifiers.keysFor(ALT_DOWN_MASK | ALT_GRAPH_DOWN_MASK | CTRL_DOWN_MASK | META_DOWN_MASK | SHIFT_DOWN_MASK);
     assertThat(keys).hasSize(5).containsOnly(VK_ALT, VK_ALT_GRAPH, VK_CONTROL, VK_META, VK_SHIFT);
   }
 

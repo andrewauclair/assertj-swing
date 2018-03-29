@@ -14,7 +14,7 @@ package org.assertj.swing.util;
 
 import org.junit.jupiter.api.Test;
 
-import static java.awt.Event.CTRL_MASK;
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 class Platform_controlOrCommandMask_Test extends Platform_TestCase {
   @Test
   void should_Return_Control_Or_Command_Mask() {
-    when(toolkit.getMenuShortcutKeyMask()).thenReturn(CTRL_MASK);
-    assertThat(Platform.controlOrCommandMask()).isEqualTo(CTRL_MASK);
+    when(toolkit.getMenuShortcutKeyMaskEx()).thenReturn(CTRL_DOWN_MASK);
+    assertThat(Platform.controlOrCommandMask()).isEqualTo(CTRL_DOWN_MASK);
   }
 }
