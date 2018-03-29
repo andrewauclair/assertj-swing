@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.swing.internal.assertions.ImagesBaseTest;
+import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -37,25 +38,25 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  * @author Joel Costigliola
  */
-public class Images_assertEqual_Test extends ImagesBaseTest {
+class Images_assertEqual_Test extends ImagesBaseTest {
 
   @Test
-  public void should_Pass_If_Images_Are_Equal() {
+  void should_Pass_If_Images_Are_Equal() {
     images.assertEqual(someInfo(), actual, newImage(5, 5, BLUE));
   }
 
   @Test
-  public void should_Pass_If_Images_Are_Same() {
+  void should_Pass_If_Images_Are_Same() {
     images.assertEqual(someInfo(), actual, actual);
   }
 
   @Test
-  public void should_Pass_If_Both_Images_Are_Null() {
+  void should_Pass_If_Both_Images_Are_Null() {
     images.assertEqual(someInfo(), null, null);
   }
 
   @Test
-  public void should_Fail_If_Actual_Is_Null_And_Expected_Is_Not() {
+  void should_Fail_If_Actual_Is_Null_And_Expected_Is_Not() {
     AssertionInfo info = someInfo();
     try {
       images.assertEqual(someInfo(), null, fivePixelBlueImage());
@@ -67,7 +68,7 @@ public class Images_assertEqual_Test extends ImagesBaseTest {
   }
 
   @Test
-  public void should_Fail_If_Expected_Is_Null_And_Actual_Is_Not() {
+  void should_Fail_If_Expected_Is_Null_And_Actual_Is_Not() {
     AssertionInfo info = someInfo();
     try {
       images.assertEqual(someInfo(), actual, null);
@@ -83,20 +84,23 @@ public class Images_assertEqual_Test extends ImagesBaseTest {
   }
 
   @Test
-  public void should_Fail_If_Images_Have_Different_Size() {
+  void should_Fail_If_Images_Have_Different_Size() {
     AssertionInfo info = someInfo();
     BufferedImage expected = newImage(6, 6, BLUE);
-    try {
-      images.assertEqual(info, actual, expected);
-    } catch (AssertionError e) {
-      verify(failures).failure(info, shouldHaveDimension(actual, sizeOf(actual), sizeOf(expected)));
-      return;
-    }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertEqual(info, actual, expected), "expected size:<6x6> but was:<5x5>");
+
+//    try {
+//      images.assertEqual(info, actual, expected);
+//    } catch (AssertionError e) {
+//      verify(failures).failure(info, shouldHaveDimension(actual, sizeOf(actual), sizeOf(expected)));
+//      return;
+//    }
+//    failBecauseExpectedAssertionErrorWasNotThrown();
   }
 
   @Test
-  public void should_Fail_If_Images_Have_Same_Size_But_Different_Color() {
+  void should_Fail_If_Images_Have_Same_Size_But_Different_Color() {
     AssertionInfo info = someInfo();
     BufferedImage expected = fivePixelYellowImage();
     try {

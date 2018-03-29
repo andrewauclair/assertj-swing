@@ -22,7 +22,6 @@ import static org.easymock.classextension.EasyMock.createMock;
 
 import java.io.File;
 
-import org.assertj.core.api.exception.RuntimeIOException;
 import org.fest.mocks.EasyMockTemplate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -57,7 +57,7 @@ class Pause_pauseWithConditionsAndTimeoutInTimeUnit_Test {
 
   @Test
   void should_Timeout_If_Any_Condition_Runs_Longer_Than_Timeout() {
-    assertTimeoutPreemptively(Duration.ofMillis(1100), () -> assertThrows(IllegalArgumentException.class, () -> Pause.pause(new Condition[] { new SatisfiedCondition(10000) }, timeout(1000))));
+    assertTimeoutPreemptively(Duration.ofMillis(1100), () -> assertThrows(WaitTimedOutError.class, () -> Pause.pause(new Condition[] { new SatisfiedCondition(10000) }, timeout(1000))));
   }
 
   @Test
@@ -81,7 +81,7 @@ class Pause_pauseWithConditionsAndTimeoutInTimeUnit_Test {
 
   @Test
   void should_Throw_Error_If_Any_Condition_In_Array_Is_Null() {
-    assertThrows(NumberFormatException.class, () -> Pause.pause(new Condition[] { new NeverSatisfiedCondition(), null }, timeout(1000)));
+    assertThrows(NullPointerException.class, () -> Pause.pause(new Condition[] { new NeverSatisfiedCondition(), null }, timeout(1000)));
   }
 
   @Test

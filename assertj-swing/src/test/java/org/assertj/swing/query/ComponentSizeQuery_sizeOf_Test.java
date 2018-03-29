@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * @author Yvonne Wang
  */
 class ComponentSizeQuery_sizeOf_Test extends SequentialEDTSafeTestCase {
-  private static final Dimension SIZE = new Dimension(500, 300);
+  private static final Dimension SIZE = new Dimension(640, 480);
 
   private MyWindow window;
 
