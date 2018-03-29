@@ -12,8 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
+import static java.awt.event.InputEvent.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.assertj.swing.data.TableCell.row;
@@ -45,23 +44,23 @@ public class FEST130_wrongModifierBehaviorInJTableFixture_Test extends RobotBase
   }
 
   @Test
-  public void should_Use_Control_Modifier() {
+  void should_Use_Control_Modifier() {
     table.cell(row(1).column(0)).click();
     assertThatSelectedRowsAre(1);
-    robot.pressModifiers(CTRL_MASK);
+    robot.pressModifiers(CTRL_DOWN_MASK);
     table.cell(row(3).column(0)).click();
     table.cell(row(7).column(0)).click();
-    robot.releaseModifiers(CTRL_MASK);
+    robot.releaseModifiers(CTRL_DOWN_MASK);
     assertThatSelectedRowsAre(1, 3, 7);
   }
 
   @Test
-  public void should_Use_Shift_Modifier() {
+  void should_Use_Shift_Modifier() {
     table.cell(row(1).column(0)).click();
     assertThatSelectedRowsAre(1);
-    robot.pressModifiers(SHIFT_MASK);
+    robot.pressModifiers(SHIFT_DOWN_MASK);
     table.cell(row(4).column(0)).click();
-    robot.releaseModifiers(SHIFT_MASK);
+    robot.releaseModifiers(SHIFT_DOWN_MASK);
     assertThatSelectedRowsAre(1, 2, 3, 4);
   }
 

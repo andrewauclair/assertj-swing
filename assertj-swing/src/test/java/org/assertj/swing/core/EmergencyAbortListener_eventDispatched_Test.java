@@ -12,8 +12,7 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
+import static java.awt.event.InputEvent.*;
 import static java.awt.event.KeyEvent.KEY_PRESSED;
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_Z;
@@ -80,7 +79,7 @@ class EmergencyAbortListener_eventDispatched_Test extends EDTSafeTestCase {
 
   @Test
   void should_Terminate_Tests_If_Key_Combination_Matches() {
-    KeyEvent event = new KeyEvent(button().createNew(), KEY_PRESSED, 0, CTRL_MASK | SHIFT_MASK, VK_A, 'A');
+    KeyEvent event = new KeyEvent(button().createNew(), KEY_PRESSED, 0, CTRL_DOWN_MASK | SHIFT_DOWN_MASK, VK_A, 'A');
     listener.eventDispatched(event);
     verify(terminator).terminateTests();
   }

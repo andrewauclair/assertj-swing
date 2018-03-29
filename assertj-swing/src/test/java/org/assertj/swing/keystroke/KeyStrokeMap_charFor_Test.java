@@ -12,16 +12,16 @@
  */
 package org.assertj.swing.keystroke;
 
-import static java.awt.event.InputEvent.SHIFT_MASK;
+import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 import static java.awt.event.KeyEvent.CHAR_UNDEFINED;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import javax.swing.KeyStroke;
-
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyStrokeMap#charFor(javax.swing.KeyStroke)}.
@@ -56,7 +56,7 @@ class KeyStrokeMap_charFor_Test extends KeyStrokeMap_TestCase {
   }
 
   private static KeyStroke removeModifiersExceptShift(KeyStroke base) {
-    final int mask = base.getModifiers() & ~SHIFT_MASK;
+    final int mask = base.getModifiers() & ~SHIFT_DOWN_MASK;
     return KeyStroke.getKeyStroke(VK_A, mask);
   }
 }

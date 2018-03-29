@@ -12,8 +12,7 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
+import static java.awt.event.InputEvent.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -23,14 +22,14 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Alex Ruiz
  */
-public class InputModifiers_isAltGraphDown_Test {
+class InputModifiers_isAltGraphDown_Test {
   @Test
-  public void should_Return_True_If_Alt_Graph_Mask_Is_Present() {
-    assertThat(InputModifiers.isAltGraphDown(ALT_GRAPH_MASK | CTRL_MASK)).isTrue();
+  void should_Return_True_If_Alt_Graph_Mask_Is_Present() {
+    assertThat(InputModifiers.isAltGraphDown(ALT_GRAPH_DOWN_MASK | CTRL_DOWN_MASK)).isTrue();
   }
 
   @Test
-  public void should_Return_False_If_Alt_Graph_Mask_Is_Not_Present() {
-    assertThat(InputModifiers.isAltGraphDown(CTRL_MASK)).isFalse();
+  void should_Return_False_If_Alt_Graph_Mask_Is_Not_Present() {
+    assertThat(InputModifiers.isAltGraphDown(CTRL_DOWN_MASK)).isFalse();
   }
 }

@@ -19,8 +19,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.swing.core.TestRobots.newRobotMock;
 import static org.assertj.swing.util.Platform.controlOrCommandKey;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
@@ -52,7 +52,7 @@ class MultipleSelectionTemplate_multiSelect_Test {
     int key = controlOrCommandKey();
     template.multiSelect();
     assertThat(template.timesSelected).isEqualTo(2);
-    verify(robot).pressKeyWhileRunning(eq(key), anyObject());
+    verify(robot).pressKeyWhileRunning(eq(key), any());
   }
 
   private static class MultipleSelection extends MultipleSelectionTemplate {

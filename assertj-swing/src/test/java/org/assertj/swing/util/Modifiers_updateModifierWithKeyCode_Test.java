@@ -14,17 +14,14 @@ package org.assertj.swing.util;
 
 import org.junit.jupiter.api.Test;
 
-import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
-import static java.awt.event.InputEvent.ALT_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
+import static java.awt.event.InputEvent.ALT_DOWN_MASK;
+import static java.awt.event.InputEvent.ALT_GRAPH_DOWN_MASK;
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
+import static java.awt.event.InputEvent.META_DOWN_MASK;
 import static java.awt.event.InputEvent.META_MASK;
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 import static java.awt.event.InputEvent.SHIFT_MASK;
-import static java.awt.event.KeyEvent.VK_A;
-import static java.awt.event.KeyEvent.VK_ALT;
-import static java.awt.event.KeyEvent.VK_ALT_GRAPH;
-import static java.awt.event.KeyEvent.VK_CONTROL;
-import static java.awt.event.KeyEvent.VK_META;
-import static java.awt.event.KeyEvent.VK_SHIFT;
+import static java.awt.event.KeyEvent.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -38,7 +35,7 @@ class Modifiers_updateModifierWithKeyCode_Test {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_ALT, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
-    assertThat(updatedModifierMask & ALT_MASK).isNotEqualTo(0);
+    assertThat(updatedModifierMask & ALT_DOWN_MASK).isNotEqualTo(0);
   }
 
   @Test
@@ -46,7 +43,7 @@ class Modifiers_updateModifierWithKeyCode_Test {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_ALT_GRAPH, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
-    assertThat(updatedModifierMask & ALT_GRAPH_MASK).isNotEqualTo(0);
+    assertThat(updatedModifierMask & ALT_GRAPH_DOWN_MASK).isNotEqualTo(0);
   }
 
   @Test
@@ -54,7 +51,7 @@ class Modifiers_updateModifierWithKeyCode_Test {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_CONTROL, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
-    assertThat(updatedModifierMask & CTRL_MASK).isNotEqualTo(0);
+    assertThat(updatedModifierMask & CTRL_DOWN_MASK).isNotEqualTo(0);
   }
 
   @Test
@@ -62,7 +59,7 @@ class Modifiers_updateModifierWithKeyCode_Test {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_META, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
-    assertThat(updatedModifierMask & META_MASK).isNotEqualTo(0);
+    assertThat(updatedModifierMask & META_DOWN_MASK).isNotEqualTo(0);
   }
 
   @Test
@@ -70,7 +67,7 @@ class Modifiers_updateModifierWithKeyCode_Test {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_SHIFT, modifierMask);
     assertThat(updatedModifierMask).isNotEqualTo(modifierMask);
-    assertThat(updatedModifierMask & SHIFT_MASK).isNotEqualTo(0);
+    assertThat(updatedModifierMask & SHIFT_DOWN_MASK).isNotEqualTo(0);
   }
 
   @Test
@@ -78,10 +75,10 @@ class Modifiers_updateModifierWithKeyCode_Test {
     int modifierMask = 0;
     int updatedModifierMask = Modifiers.updateModifierWithKeyCode(VK_A, modifierMask);
     assertThat(updatedModifierMask).isEqualTo(modifierMask);
-    assertThat(updatedModifierMask & ALT_MASK).isEqualTo(0);
-    assertThat(updatedModifierMask & ALT_GRAPH_MASK).isEqualTo(0);
-    assertThat(updatedModifierMask & CTRL_MASK).isEqualTo(0);
-    assertThat(updatedModifierMask & META_MASK).isEqualTo(0);
-    assertThat(updatedModifierMask & SHIFT_MASK).isEqualTo(0);
+    assertThat(updatedModifierMask & ALT_DOWN_MASK).isEqualTo(0);
+    assertThat(updatedModifierMask & ALT_GRAPH_DOWN_MASK).isEqualTo(0);
+    assertThat(updatedModifierMask & CTRL_DOWN_MASK).isEqualTo(0);
+    assertThat(updatedModifierMask & META_DOWN_MASK).isEqualTo(0);
+    assertThat(updatedModifierMask & SHIFT_DOWN_MASK).isEqualTo(0);
   }
 }

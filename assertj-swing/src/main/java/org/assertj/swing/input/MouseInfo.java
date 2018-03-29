@@ -12,23 +12,18 @@
  */
 package org.assertj.swing.input;
 
-import static java.awt.event.InputEvent.BUTTON1_MASK;
-import static java.awt.event.InputEvent.BUTTON2_MASK;
-import static java.awt.event.InputEvent.BUTTON3_MASK;
-import static java.awt.event.MouseEvent.MOUSE_ENTERED;
-import static java.awt.event.MouseEvent.MOUSE_EXITED;
-import static java.awt.event.MouseEvent.MOUSE_PRESSED;
-import static java.awt.event.MouseEvent.MOUSE_RELEASED;
-import static org.assertj.swing.query.ComponentShowingQuery.isShowing;
-
-import java.awt.Component;
-import java.awt.Point;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.lang.ref.WeakReference;
 import java.util.Stack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import static java.awt.event.InputEvent.BUTTON1_DOWN_MASK;
+import static java.awt.event.InputEvent.BUTTON2_DOWN_MASK;
+import static java.awt.event.InputEvent.BUTTON3_DOWN_MASK;
+import static java.awt.event.MouseEvent.*;
+import static org.assertj.swing.query.ComponentShowingQuery.isShowing;
 
 /**
  * A description mouse-related operations.
@@ -36,7 +31,7 @@ import javax.annotation.Nullable;
  * @author Alex Ruiz
  */
 class MouseInfo {
-  static final int BUTTON_MASK = BUTTON1_MASK | BUTTON2_MASK | BUTTON3_MASK;
+  static final int BUTTON_MASK = BUTTON1_DOWN_MASK | BUTTON2_DOWN_MASK | BUTTON3_DOWN_MASK;
 
   /** Current mouse position, in component coordinates. */
   private Point location = new Point(0, 0);
@@ -44,9 +39,9 @@ class MouseInfo {
   /** Current mouse position, in screen coordinates. */
   private Point locationOnScreen = new Point(0, 0);
 
-  private final Stack<WeakReference<Component>> componentStack = new Stack<WeakReference<Component>>();
-  private final Stack<Point> locationStack = new Stack<Point>();
-  private final Stack<Point> screenLocationStack = new Stack<Point>();
+  private final Stack<WeakReference<Component>> componentStack = new Stack<>();
+  private final Stack<Point> locationStack = new Stack<>();
+  private final Stack<Point> screenLocationStack = new Stack<>();
 
   private int buttons;
   private int modifiers;
@@ -93,14 +88,14 @@ class MouseInfo {
   }
 
   private int buttonUsed(@Nonnull MouseEvent event) {
-    return event.getModifiers() & BUTTON_MASK;
+    return event.getModifiersEx() & BUTTON_MASK;
   }
 
   private void updateOnMouseEntered(@Nonnull MouseEvent event, @Nullable Point eventScreenLocation) {
     if (event.getID() != MOUSE_ENTERED) {
       return;
     }
-    componentStack.push(new WeakReference<Component>(event.getComponent()));
+    componentStack.push(new WeakReference<>(event.getComponent()));
     Point eventPoint = event.getPoint();
     locationStack.push(eventPoint);
     screenLocationStack.push(eventScreenLocation != null ? eventScreenLocation : eventPoint);

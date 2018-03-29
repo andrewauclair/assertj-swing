@@ -103,7 +103,7 @@ public class InputState {
       if (inputEvent instanceof KeyEvent) {
         synchronized (this) {
           lastEventTime(inputEvent);
-          modifiers(inputEvent.getModifiers());
+          modifiers(inputEvent.getModifiersEx());
           // FIXME add state of individual keys
         }
       }

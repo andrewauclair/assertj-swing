@@ -12,11 +12,9 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.BUTTON1_MASK;
-import static java.awt.event.InputEvent.BUTTON2_MASK;
-import static java.awt.event.InputEvent.BUTTON3_MASK;
-
 import javax.annotation.Nonnull;
+
+import static java.awt.event.InputEvent.*;
 
 /**
  * Mouse buttons. Provides better type safety that the {@code int} values in AWT.
@@ -24,7 +22,7 @@ import javax.annotation.Nonnull;
  * @author Alex Ruiz
  */
 public enum MouseButton {
-  LEFT_BUTTON(BUTTON1_MASK), MIDDLE_BUTTON(BUTTON2_MASK), RIGHT_BUTTON(BUTTON3_MASK);
+  LEFT_BUTTON(BUTTON1_DOWN_MASK), MIDDLE_BUTTON(BUTTON2_DOWN_MASK), RIGHT_BUTTON(BUTTON3_DOWN_MASK);
 
   /**
    * The mouse button modifier.
@@ -33,7 +31,7 @@ public enum MouseButton {
    */
   public final int mask;
 
-  private MouseButton(int mask) {
+  MouseButton(int mask) {
     this.mask = mask;
   }
 

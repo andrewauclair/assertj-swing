@@ -29,9 +29,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MouseButton_lookup_Test {
   private static Stream<Arguments> arguments() {
     return Stream.of(
-            Arguments.of(MouseButton.LEFT_BUTTON, BUTTON1_MASK),
-            Arguments.of(MouseButton.MIDDLE_BUTTON, BUTTON2_MASK),
-            Arguments.of(MouseButton.RIGHT_BUTTON, BUTTON3_MASK)
+            Arguments.of(MouseButton.LEFT_BUTTON, BUTTON1_DOWN_MASK),
+            Arguments.of(MouseButton.MIDDLE_BUTTON, BUTTON2_DOWN_MASK),
+            Arguments.of(MouseButton.RIGHT_BUTTON, BUTTON3_DOWN_MASK)
     );
   }
 

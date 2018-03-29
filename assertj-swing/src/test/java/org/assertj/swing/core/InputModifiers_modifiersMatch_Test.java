@@ -31,7 +31,7 @@ import static org.assertj.swing.test.awt.TestComponents.singletonComponentMock;
  */
 class InputModifiers_modifiersMatch_Test {
   private static Collection<Object[]> modifiers() {
-    return newArrayList(new Object[][] { { ALT_MASK }, { ALT_GRAPH_MASK }, { CTRL_MASK }, { META_MASK }, { SHIFT_MASK } });
+    return newArrayList(new Object[][] { { ALT_DOWN_MASK }, { ALT_GRAPH_DOWN_MASK }, { CTRL_DOWN_MASK }, { META_DOWN_MASK }, { SHIFT_DOWN_MASK } });
   }
 
   @ParameterizedTest

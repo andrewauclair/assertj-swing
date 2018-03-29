@@ -12,13 +12,13 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
+import org.junit.jupiter.api.Test;
+
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 import static java.awt.event.KeyEvent.VK_C;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyPressInfo#keyCode(int)}, {@link KeyPressInfo#modifiers(int...)} {@link KeyPressInfo#keyCode()}
@@ -29,9 +29,9 @@ import org.junit.jupiter.api.Test;
 class KeyPressInfo_keyCode_modifiers_Test {
   @Test
   void should_Create_KeyPressInfo_With_Given_Key_And_Modifiers() {
-    KeyPressInfo keyPressInfo = KeyPressInfo.keyCode(VK_C).modifiers(SHIFT_MASK, CTRL_MASK);
+    KeyPressInfo keyPressInfo = KeyPressInfo.keyCode(VK_C).modifiers(SHIFT_DOWN_MASK, CTRL_DOWN_MASK);
     assertThat(keyPressInfo.keyCode()).isEqualTo(VK_C);
-    assertThat(keyPressInfo.modifiers()).containsOnly(SHIFT_MASK, CTRL_MASK);
+    assertThat(keyPressInfo.modifiers()).containsOnly(SHIFT_DOWN_MASK, CTRL_DOWN_MASK);
   }
 
   @Test

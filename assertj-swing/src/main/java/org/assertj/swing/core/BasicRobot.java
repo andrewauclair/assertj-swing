@@ -12,9 +12,7 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.BUTTON1_MASK;
-import static java.awt.event.InputEvent.BUTTON2_MASK;
-import static java.awt.event.InputEvent.BUTTON3_MASK;
+import static java.awt.event.InputEvent.*;
 import static java.awt.event.KeyEvent.CHAR_UNDEFINED;
 import static java.awt.event.KeyEvent.KEY_TYPED;
 import static java.awt.event.KeyEvent.VK_UNDEFINED;
@@ -117,7 +115,7 @@ public class BasicRobot implements Robot {
     }
   };
 
-  private static final int BUTTON_MASK = BUTTON1_MASK | BUTTON2_MASK | BUTTON3_MASK;
+  private static final int BUTTON_MASK = BUTTON1_DOWN_MASK | BUTTON2_DOWN_MASK | BUTTON3_DOWN_MASK;
 
   private static Toolkit toolkit = ToolkitProvider.instance().defaultToolkit();
   private static WindowMonitor windowMonitor = WindowMonitor.instance();

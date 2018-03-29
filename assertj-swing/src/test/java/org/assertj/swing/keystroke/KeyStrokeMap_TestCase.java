@@ -18,7 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import javax.swing.*;
 import java.util.Collection;
 
-import static java.awt.event.InputEvent.CTRL_MASK;
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import static java.awt.event.KeyEvent.VK_A;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -38,7 +38,7 @@ public abstract class KeyStrokeMap_TestCase {
   @BeforeEach
   public final void setUp() {
     provider = mock(KeyStrokeMappingProvider.class);
-    keyStroke = KeyStroke.getKeyStroke(VK_A, CTRL_MASK);
+    keyStroke = KeyStroke.getKeyStroke(VK_A, CTRL_DOWN_MASK);
     mapping = new KeyStrokeMapping('A', keyStroke);
     mappings = newArrayList();
     mappings.add(mapping);

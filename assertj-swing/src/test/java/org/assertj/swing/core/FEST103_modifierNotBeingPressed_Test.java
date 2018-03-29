@@ -12,8 +12,7 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
+import static java.awt.event.InputEvent.*;
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_M;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -57,7 +56,7 @@ class FEST103_modifierNotBeingPressed_Test extends RobotBasedTestCase {
   @Test
   void should_Press_Key_And_Modifier() {
     frameFixture.moveToFront(); // ensure the window is active
-    robot.pressAndReleaseKey(VK_M, CTRL_MASK);
+    robot.pressAndReleaseKey(VK_M, CTRL_DOWN_MASK);
     JOptionPaneFixture optionPane = findOptionPane().using(robot);
     optionPane.requireInformationMessage().requireMessage("Hello World");
   }
@@ -66,7 +65,7 @@ class FEST103_modifierNotBeingPressed_Test extends RobotBasedTestCase {
   void should_Press_Shift_As_Modifier() {
     frameFixture.moveToFront();
     robot.focus(window.textField);
-    robot.pressAndReleaseKey(VK_A, SHIFT_MASK);
+    robot.pressAndReleaseKey(VK_A, SHIFT_DOWN_MASK);
     frameFixture.textBox().requireText("A");
   }
 
@@ -89,7 +88,7 @@ class FEST103_modifierNotBeingPressed_Test extends RobotBasedTestCase {
       JMenuBar menuBar = new JMenuBar();
       JMenu viewMenu = new JMenu("View");
       JMenuItem viewMessageMenu = new JMenuItem("Message");
-      viewMessageMenu.setAccelerator(getKeyStroke(VK_M, CTRL_MASK));
+      viewMessageMenu.setAccelerator(getKeyStroke(VK_M, CTRL_DOWN_MASK));
       viewMessageMenu.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

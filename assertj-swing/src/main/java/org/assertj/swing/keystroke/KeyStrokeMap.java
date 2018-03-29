@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.keystroke;
 
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 import static java.awt.event.InputEvent.SHIFT_MASK;
 import static java.awt.event.KeyEvent.CHAR_UNDEFINED;
 import static org.assertj.swing.util.Platform.osFamily;
@@ -115,7 +116,7 @@ public class KeyStrokeMap {
 
   @Nullable private static
   Character charWithoutModifiersButShift(@Nonnull KeyStroke keyStroke) {
-    int mask = keyStroke.getModifiers() & ~SHIFT_MASK;
+    int mask = keyStroke.getModifiers() & ~SHIFT_DOWN_MASK;
     return maps.charFor(KeyStroke.getKeyStroke(keyStroke.getKeyCode(), mask));
   }
 

@@ -17,8 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collection;
 
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.META_MASK;
+import static java.awt.event.InputEvent.*;
 import static java.awt.event.KeyEvent.VK_CONTROL;
 import static java.awt.event.KeyEvent.VK_META;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,13 +31,13 @@ import static org.mockito.Mockito.when;
  */
 class Platform_controlOrCommandKey_Test extends Platform_TestCase {
   static Collection<Object[]> booleans() {
-    return newArrayList(new Object[][] { { CTRL_MASK, VK_CONTROL }, { META_MASK, VK_META } });
+    return newArrayList(new Object[][] { { CTRL_DOWN_MASK, VK_CONTROL }, { META_DOWN_MASK, VK_META } });
   }
 
   @ParameterizedTest
   @MethodSource("booleans")
   void should_Return_Control_Or_Command_Key(int mask, int keyCode) {
-    when(toolkit.getMenuShortcutKeyMask()).thenReturn(mask);
+    when(toolkit.getMenuShortcutKeyMaskEx()).thenReturn(mask);
     assertThat(Platform.controlOrCommandKey()).isEqualTo(keyCode);
   }
 }

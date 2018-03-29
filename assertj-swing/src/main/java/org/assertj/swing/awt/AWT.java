@@ -13,6 +13,7 @@
 package org.assertj.swing.awt;
 
 import static java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment;
+import static java.awt.event.InputEvent.BUTTON3_DOWN_MASK;
 import static java.awt.event.InputEvent.BUTTON3_MASK;
 import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
@@ -330,7 +331,7 @@ public class AWT {
    * @return the {@code InputEvent} mask for the pop-up trigger button.
    */
   public static int popupMask() {
-    return BUTTON3_MASK;
+    return BUTTON3_DOWN_MASK;
   }
 
   private AWT() {

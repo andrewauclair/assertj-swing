@@ -12,16 +12,11 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.event.InputEvent.ALT_GRAPH_MASK;
-import static java.awt.event.InputEvent.ALT_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.META_MASK;
-import static java.awt.event.InputEvent.SHIFT_MASK;
-
-import java.awt.event.InputEvent;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.event.InputEvent;
+
+import static java.awt.event.InputEvent.*;
 
 /**
  * Utility methods related to input modifiers.
@@ -44,23 +39,23 @@ final class InputModifiers {
   }
 
   static boolean isShiftDown(int modifiers) {
-    return (modifiers & SHIFT_MASK) != 0;
+    return (modifiers & SHIFT_DOWN_MASK) != 0;
   }
 
   static boolean isControlDown(int modifiers) {
-    return (modifiers & CTRL_MASK) != 0;
+    return (modifiers & CTRL_DOWN_MASK) != 0;
   }
 
   static boolean isMetaDown(int modifiers) {
-    return (modifiers & META_MASK) != 0;
+    return (modifiers & META_DOWN_MASK) != 0;
   }
 
   static boolean isAltDown(int modifiers) {
-    return (modifiers & ALT_MASK) != 0;
+    return (modifiers & ALT_DOWN_MASK) != 0;
   }
 
   static boolean isAltGraphDown(int modifiers) {
-    return (modifiers & ALT_GRAPH_MASK) != 0;
+    return (modifiers & ALT_GRAPH_DOWN_MASK) != 0;
   }
 
   static boolean modifiersMatch(@Nonnull InputEvent e, int modifiers) {

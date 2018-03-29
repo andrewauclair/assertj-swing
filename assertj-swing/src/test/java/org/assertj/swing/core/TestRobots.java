@@ -12,12 +12,13 @@
  */
 package org.assertj.swing.core;
 
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-
-import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 
 /**
  * Implementations of {@link Robot} to be used for testing.
@@ -41,7 +42,7 @@ public final class TestRobots {
         invocation.<Runnable>getArgument(1).run();
         return null;
       }
-    }).when(mock).pressKeyWhileRunning(Mockito.anyInt(), Mockito.anyObject());
+    }).when(mock).pressKeyWhileRunning(anyInt(), any());
 
     return mock;
   }
