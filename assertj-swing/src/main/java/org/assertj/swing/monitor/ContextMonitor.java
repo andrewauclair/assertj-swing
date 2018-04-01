@@ -41,7 +41,7 @@ import org.assertj.swing.annotation.RunsInEDT;
  * 
  * @author Alex Ruiz
  */
-final class ContextMonitor implements AWTEventListener {
+public final class ContextMonitor implements AWTEventListener {
   private static final long EVENT_MASK = WINDOW_EVENT_MASK | COMPONENT_EVENT_MASK;
 
   private final Context context;
@@ -52,7 +52,8 @@ final class ContextMonitor implements AWTEventListener {
     this.windows = windows;
   }
 
-  void attachTo(@Nonnull Toolkit toolkit) {
+  public void attachTo(@Nonnull Toolkit toolkit) {
+    System.out.println("attach listener");
     attachAsWeakEventListener(toolkit, this, EVENT_MASK);
   }
 
@@ -84,6 +85,7 @@ final class ContextMonitor implements AWTEventListener {
       return;
     }
     int id = event.getID();
+    System.out.println("process ComponentEvent with ID: " + id);
     if (id == WINDOW_OPENED) {
       recognizeAsOpenWindow(component);
       return;

@@ -58,13 +58,15 @@ public class WindowMonitor {
     this(toolkit, new Context(toolkit), new WindowStatus(new Windows()));
   }
 
+  public ContextMonitor contextMonitor;
+
   @VisibleForTesting
   @RunsInCurrentThread
   WindowMonitor(@Nonnull Toolkit toolkit, @Nonnull Context context, @Nonnull WindowStatus windowStatus) {
     this.context = context;
     this.windowStatus = windowStatus;
     windows = windowStatus.windows();
-      ContextMonitor contextMonitor = new ContextMonitor(context, windows);
+      contextMonitor = new ContextMonitor(context, windows);
     contextMonitor.attachTo(toolkit);
       WindowAvailabilityMonitor windowAvailabilityMonitor = new WindowAvailabilityMonitor(windows);
     windowAvailabilityMonitor.attachTo(toolkit);
@@ -143,7 +145,7 @@ public class WindowMonitor {
 
   @RunsInEDT
   private static class SingletonLazyLoader {
-    static final WindowMonitor INSTANCE = execute(new GuiQuery<WindowMonitor>() {
+    static final WindowMonitor INSTANCE = execute(new GuiQuery<>() {
       @Override
       protected WindowMonitor executeInEDT() {
         return new WindowMonitor(ToolkitProvider.instance().defaultToolkit());

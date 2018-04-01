@@ -18,6 +18,8 @@ import static org.assertj.core.util.Arrays.array;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 /**
  * Tests for {@link JListDriver#unselectItems(javax.swing.JList, int[])}.
  *
@@ -28,7 +30,7 @@ class JListDriver_unselectItemsByIndex_Test extends JListDriver_TestCase {
   void should_Unselect_Items() {
     showWindow();
     driver.selectItems(list, new int[] { 1, 2 });
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     driver.unselectItems(list, new int[] { 1, 2 });
     assertThat(selectedValues()).isNullOrEmpty();
   }
@@ -37,9 +39,9 @@ class JListDriver_unselectItemsByIndex_Test extends JListDriver_TestCase {
   void should_Unselect_Item() {
     showWindow();
     driver.selectItems(list, new int[] { 1, 2 });
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     driver.unselectItems(list, new int[] { 2 });
-    assertThat(selectedValues()).isEqualTo(array("two"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two"));
   }
 
   @Test

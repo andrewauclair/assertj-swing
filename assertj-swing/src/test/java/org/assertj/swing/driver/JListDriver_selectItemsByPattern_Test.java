@@ -15,6 +15,7 @@ package org.assertj.swing.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Arrays.array;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.assertj.swing.exception.LocationUnavailableException;
@@ -40,14 +41,14 @@ class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase {
     select(1, 2);
     showWindow();
     driver.selectItems(list, array(Pattern.compile("two"), Pattern.compile("three")));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
   }
 
   @Test
   void should_Select_Items_Matching_Pattern() {
     showWindow();
     driver.selectItems(list, array(Pattern.compile("t.*")));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     assertThatCellReaderWasCalled();
   }
 
@@ -55,7 +56,7 @@ class JListDriver_selectItemsByPattern_Test extends JListDriver_TestCase {
   void should_Select_Items_Matching_Patterns() {
     showWindow();
     driver.selectItems(list, array(Pattern.compile("tw.*"), Pattern.compile("thr.*")));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     assertThatCellReaderWasCalled();
   }
 

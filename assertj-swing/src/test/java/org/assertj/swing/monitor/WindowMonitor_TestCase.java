@@ -73,7 +73,7 @@ public abstract class WindowMonitor_TestCase extends SequentialEDTSafeTestCase {
 
   @RunsInEDT
   private static Window[] ownedWindowsOf(final Window w) {
-    return execute(() -> w.getOwnedWindows());
+    return execute(w::getOwnedWindows);
   }
 
   @Override

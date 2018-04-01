@@ -19,6 +19,8 @@ import org.assertj.swing.exception.LocationUnavailableException;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 /**
  * Tests for {@link JListDriver#selectItems(javax.swing.JList, String[])}.
  * 
@@ -37,7 +39,7 @@ class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   void should_Select_Items() {
     showWindow();
     driver.selectItems(list, array("two", "three"));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     assertThatCellReaderWasCalled();
   }
 
@@ -46,14 +48,14 @@ class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
     select(1, 2);
     showWindow();
     driver.selectItems(list, array("two", "three"));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
   }
 
   @Test
   void should_Select_Items_Matching_Pattern() {
     showWindow();
     driver.selectItems(list, array("t.*"));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     assertThatCellReaderWasCalled();
   }
 
@@ -61,7 +63,7 @@ class JListDriver_selectItemsByText_Test extends JListDriver_TestCase {
   void should_Select_Items_Matching_Patterns() {
     showWindow();
     driver.selectItems(list, array("tw.*", "thr.*"));
-    assertThat(selectedValues()).isEqualTo(array("two", "three"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("two", "three"));
     assertThatCellReaderWasCalled();
   }
 

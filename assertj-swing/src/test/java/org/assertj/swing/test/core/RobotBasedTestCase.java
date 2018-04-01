@@ -16,6 +16,7 @@ import org.assertj.swing.core.Robot;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import static org.assertj.swing.core.BasicRobot.robotWithCurrentAwtHierarchy;
 import static org.assertj.swing.core.BasicRobot.robotWithNewAwtHierarchy;
 
 /**

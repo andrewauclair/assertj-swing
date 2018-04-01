@@ -18,6 +18,8 @@ import static org.assertj.core.util.Arrays.array;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 /**
  * Tests for {@link JListDriver#selectItems(javax.swing.JList, int, int)}.
  * 
@@ -29,7 +31,7 @@ class JListDriver_selectItemsByRange_Test extends JListDriver_TestCase {
   void should_Select_Items() {
     showWindow();
     driver.selectItems(list, 0, 1);
-    assertThat(selectedValues()).isEqualTo(array("one", "two"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("one", "two"));
   }
 
   @Test
@@ -37,7 +39,7 @@ class JListDriver_selectItemsByRange_Test extends JListDriver_TestCase {
     select(0, 1);
     showWindow();
     driver.selectItems(list, 0, 1);
-    assertThat(selectedValues()).isEqualTo(array("one", "two"));
+    assertThat(selectedValues()).isEqualTo(Arrays.asList("one", "two"));
   }
 
   @Test

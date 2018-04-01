@@ -47,13 +47,21 @@ class ComponentLocationOnScreenQuery_locationOnScreen_Test extends RobotBasedTes
     window.requireInvoked("getLocationOnScreen");
   }
 
+  @Test
+  void should_Return_Component_Location_On_Screen2() {
+    Point expected = new Point(100, 100);
+    window.startRecording();
+    assertThat(ComponentLocationOnScreenQuery.locationOnScreen(window)).isEqualTo(expected);
+    window.requireInvoked("getLocationOnScreen");
+  }
+
   private static class MyWindow extends TestWindow {
     private boolean recording;
     private final MethodInvocations methodInvocations = new MethodInvocations();
 
     @RunsInEDT
     static MyWindow createNew() {
-      return execute(() -> new MyWindow());
+      return execute(MyWindow::new);
     }
 
     private MyWindow() {

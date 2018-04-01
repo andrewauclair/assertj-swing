@@ -35,7 +35,7 @@ import org.assertj.swing.annotation.RunsInCurrentThread;
 @ThreadSafe
 class Windows {
   @VisibleForTesting
-  static int WINDOW_READY_DELAY = 10000;
+  static int WINDOW_READY_DELAY = 1000;
 
   /** {@link Window#isShowing() isShowing} is true but are not yet ready for input. */
   @GuardedBy("lock")
@@ -112,8 +112,9 @@ class Windows {
           markAsReady(w);
         }
       };
-      windowReadyTimer.schedule(new ProtectingTimerTask(task), WINDOW_READY_DELAY);
+      windowReadyTimer.schedule(new ProtectingTimerTask(task), 0);//WINDOW_READY_DELAY);
       pending.put(w, task);
+      System.out.println("window showing.");
     }
   }
 
@@ -129,6 +130,7 @@ class Windows {
       }
       removeWindowFrom(w, closed, hidden, pending);
       open.put(w, true);
+      System.out.println("window ready.");
     }
   }
 

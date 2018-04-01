@@ -167,6 +167,9 @@ public class BasicRobot implements Robot {
 
   @VisibleForTesting
   BasicRobot(@Nullable Object screenLockOwner, @Nonnull ComponentHierarchy hierarchy) {
+    // TODO This should be in a better place. Currently it seems we need to reattach every time
+    windowMonitor.contextMonitor.attachTo(toolkit);
+
     this.screenLockOwner = screenLockOwner;
     this.hierarchy = hierarchy;
     settings = new Settings();
@@ -303,13 +306,14 @@ public class BasicRobot implements Robot {
 
   @RunsInEDT
   private static Pair<Window, Window> windowAncestorsOf(final @Nullable Component one, final @Nullable Component two) {
-    return execute(new GuiQuery<Pair<Window, Window>>() {
+    return execute(new GuiQuery<>() {
       @Override
       protected Pair<Window, Window> executeInEDT() throws Throwable {
         return Pair.of(windowAncestor(one), windowAncestor(two));
       }
 
-      @Nullable private Window windowAncestor(Component c) {
+      @Nullable
+      private Window windowAncestor(Component c) {
         return (c != null) ? windowAncestorOf(c) : null;
       }
     });
@@ -654,7 +658,7 @@ public class BasicRobot implements Robot {
 
   @RunsInEDT
   @Nonnull private static Pair<Component, Point> invokerAndCenterOfInvoker(final @Nonnull JPopupMenu popupMenu) {
-    Pair<Component, Point> result = execute(new GuiQuery<Pair<Component, Point>>() {
+    Pair<Component, Point> result = execute(new GuiQuery<>() {
       @Override
       protected Pair<Component, Point> executeInEDT() {
         Component invoker = checkNotNull(popupMenu.getInvoker());
