@@ -114,7 +114,6 @@ class Windows {
       };
       windowReadyTimer.schedule(new ProtectingTimerTask(task), 0);//WINDOW_READY_DELAY);
       pending.put(w, task);
-      System.out.println("window showing.");
     }
   }
 

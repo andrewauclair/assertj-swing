@@ -53,7 +53,6 @@ public final class ContextMonitor implements AWTEventListener {
   }
 
   public void attachTo(@Nonnull Toolkit toolkit) {
-    System.out.println("attach listener");
     attachAsWeakEventListener(toolkit, this, EVENT_MASK);
   }
 
@@ -85,7 +84,6 @@ public final class ContextMonitor implements AWTEventListener {
       return;
     }
     int id = event.getID();
-    System.out.println("process ComponentEvent with ID: " + id);
     if (id == WINDOW_OPENED) {
       recognizeAsOpenWindow(component);
       return;

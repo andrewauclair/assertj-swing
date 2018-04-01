@@ -12,24 +12,19 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.BorderLayout.CENTER;
-import static javax.swing.Box.createVerticalStrut;
-import static javax.swing.BoxLayout.Y_AXIS;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-
 import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.fixture.JButtonFixture;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static java.awt.BorderLayout.CENTER;
+import static javax.swing.Box.createVerticalStrut;
+import static javax.swing.BoxLayout.Y_AXIS;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for {@link Scrolling#scrollToVisible(Robot, javax.swing.JComponent)}.
@@ -46,7 +41,6 @@ public class Scrolling_scrollToVisible_Test extends RobotBasedTestCase {
   }
 
   @Test
-  @Disabled("Takes forever to run currently, need to look into it, also clicks task view button in windows 10 which is an issue")
   void should_Auto_Scroll_To_JButton() {
     JButton button = window.button;
     Scrolling.scrollToVisible(robot, button);

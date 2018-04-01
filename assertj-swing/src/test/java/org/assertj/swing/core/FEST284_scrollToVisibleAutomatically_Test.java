@@ -12,27 +12,21 @@
  */
 package org.assertj.swing.core;
 
-import static java.awt.BorderLayout.CENTER;
-import static javax.swing.Box.createVerticalStrut;
-import static javax.swing.BoxLayout.Y_AXIS;
-import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-
 import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.test.core.RobotBasedTestCase;
 import org.assertj.swing.test.recorder.ClickRecorder;
 import org.assertj.swing.test.recorder.ClickRecorderManager;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static java.awt.BorderLayout.CENTER;
+import static javax.swing.Box.createVerticalStrut;
+import static javax.swing.BoxLayout.Y_AXIS;
+import static org.assertj.swing.core.MouseButton.LEFT_BUTTON;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
 
 /**
  * Tests for bug <a href="http://jira.codehaus.org/browse/FEST-284" target="_blank">FEST_284</a>.
@@ -51,7 +45,6 @@ class FEST284_scrollToVisibleAutomatically_Test extends RobotBasedTestCase {
   }
 
   @Test
-  @Disabled("Takes forever to run currently, need to look into it")
   void should_Auto_Scroll_When_Clicking_JButton() {
     ClickRecorder recorder = clickRecorder.attachDirectlyTo(window.button);
     robot.click(window.button);
