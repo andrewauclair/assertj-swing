@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.assertj</groupId>
-    <artifactId>assertj-parent-pom</artifactId>
-    <version>2.1.2</version>
-  </parent>
+  <!--<parent>-->
+    <!--<groupId>com.github.andrewauclair</groupId>-->
+    <!--<artifactId>assertj-parent-pom</artifactId>-->
+    <!--<version>1.0.0-SNAPSHOT</version>-->
+  <!--</parent>-->
 
-  <groupId>org.assertj</groupId>
+  <groupId>com.github.andrewauclair</groupId>
   <artifactId>assertj-swing-parent-pom</artifactId>
-  <version>3.8.1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>AssertJ Swing: Fluent assertions for java unit testing</name>
   <description>Parent POM for all AssertJ-Swing modules</description>
@@ -22,6 +22,13 @@
     <!--<module>assertj-swing-testng</module>-->
   </modules>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -29,32 +36,54 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
         <configuration>
-          <source>10</source>
-          <target>10</target>
+          <source>1.9</source>
+          <target>1.9</target>
+          <jdkToolchain>
+            <version>9</version>
+          </jdkToolchain>
         </configuration>
       </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-release-plugin</artifactId>-->
+        <!--<version>2.5.3</version>-->
+        <!--<configuration>-->
+          <!--<arguments>-DskipTests -Psonatype-oss-release</arguments>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
         <configuration>
-          <arguments>-DskipTests -Psonatype-oss-release</arguments>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
     </plugins>
   </build>
 
   <scm>
-    <developerConnection>scm:git:git@github.com:joel-costigliola/assertj-swing.git</developerConnection>
-    <connection>git://github.com/joel-costigliola/assertj-swing.git</connection>
-    <url>https://github.com/joel-costigliola/assertj-swing</url>
+    <developerConnection>scm:git:git@github.com:andrewauclair/assertj-swing.git</developerConnection>
+    <connection>git://github.com/andrewauclair/assertj-swing.git</connection>
+    <url>https://github.com/andrewauclair/assertj-swing</url>
     <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>github</system>
-    <url>https://github.com/joel-costigliola/assertj-swing/issues</url>
+    <url>https://github.com/andrewauclair/assertj-swing/issues</url>
   </issueManagement>
   <developers>
+    <developer>
+      <id>andrewauclair</id>
+      <name>Andrew Auclair</name>
+      <roles>
+        <role>Owner</role>
+        <role>Developer</role>
+      </roles>
+    </developer>
     <developer>
       <id>joel</id>
       <name>Joel Costigliola</name>
@@ -101,6 +130,11 @@
   </developers>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>6.1</version> <!-- Use newer version of ASM -->
+      </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-archiver</artifactId>

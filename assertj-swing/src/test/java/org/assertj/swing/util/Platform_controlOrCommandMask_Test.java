@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 class Platform_controlOrCommandMask_Test extends Platform_TestCase {
   @Test
   void should_Return_Control_Or_Command_Mask() {
-    when(toolkit.getMenuShortcutKeyMaskEx()).thenReturn(CTRL_DOWN_MASK);
+    when(toolkit.getMenuShortcutKeyMask()).thenReturn(CTRL_DOWN_MASK);
     assertThat(Platform.controlOrCommandMask()).isEqualTo(CTRL_DOWN_MASK);
   }
 }

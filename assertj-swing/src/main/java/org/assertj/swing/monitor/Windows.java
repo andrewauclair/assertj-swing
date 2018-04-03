@@ -112,6 +112,7 @@ class Windows {
           markAsReady(w);
         }
       };
+      // TODO Works with no delay on windows 10, investigate more because we can't keep using the timer task because of illegal access
       windowReadyTimer.schedule(new ProtectingTimerTask(task), 0);//WINDOW_READY_DELAY);
       pending.put(w, task);
     }

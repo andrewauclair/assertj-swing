@@ -37,7 +37,7 @@ class Platform_controlOrCommandKey_Test extends Platform_TestCase {
   @ParameterizedTest
   @MethodSource("booleans")
   void should_Return_Control_Or_Command_Key(int mask, int keyCode) {
-    when(toolkit.getMenuShortcutKeyMaskEx()).thenReturn(mask);
+    when(toolkit.getMenuShortcutKeyMask()).thenReturn(mask);
     assertThat(Platform.controlOrCommandKey()).isEqualTo(keyCode);
   }
 }

@@ -306,7 +306,7 @@ public class BasicRobot implements Robot {
 
   @RunsInEDT
   private static Pair<Window, Window> windowAncestorsOf(final @Nullable Component one, final @Nullable Component two) {
-    return execute(new GuiQuery<>() {
+    return execute(new GuiQuery<Pair<Window, Window>>() {
       @Override
       protected Pair<Window, Window> executeInEDT() throws Throwable {
         return Pair.of(windowAncestor(one), windowAncestor(two));
@@ -658,7 +658,7 @@ public class BasicRobot implements Robot {
 
   @RunsInEDT
   @Nonnull private static Pair<Component, Point> invokerAndCenterOfInvoker(final @Nonnull JPopupMenu popupMenu) {
-    Pair<Component, Point> result = execute(new GuiQuery<>() {
+    Pair<Component, Point> result = execute(new GuiQuery<Pair<Component, Point>>() {
       @Override
       protected Pair<Component, Point> executeInEDT() {
         Component invoker = checkNotNull(popupMenu.getInvoker());

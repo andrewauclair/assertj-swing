@@ -15,4 +15,6 @@ module assertj.swing {
     requires java.desktop;
     requires java.logging;
     requires jsr305;
+    requires fest.reflect;
+    requires fest.util;
 }

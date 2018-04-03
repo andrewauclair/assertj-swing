@@ -70,7 +70,7 @@ public final class Platform {
    * @throws java.awt.HeadlessException if {@code GraphicsEnvironment.isHeadless()}.
    */
   public static int controlOrCommandMask() {
-    return toolkit.getMenuShortcutKeyMaskEx();
+    return toolkit.getMenuShortcutKeyMask();
   }
 
   /**

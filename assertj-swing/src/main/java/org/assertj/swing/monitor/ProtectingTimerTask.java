@@ -25,6 +25,7 @@ import org.assertj.core.util.Preconditions;
  * 
  * @author Alex Ruiz
  */
+// TODO We aren't allowed to reflect and get the state
 class ProtectingTimerTask extends TimerTask {
   private static final int CANCELED = 3;
 
