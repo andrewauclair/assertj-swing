@@ -12,15 +12,11 @@
  */
 package org.assertj.swing.edt;
 
-import static org.fest.reflect.core.Reflection.method;
+import org.assertj.swing.exception.EdtViolationException;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.JComponent;
-import javax.swing.RepaintManager;
-import javax.swing.SwingUtilities;
-
-import org.assertj.swing.exception.EdtViolationException;
+import javax.swing.*;
 
 /**
  * <p>

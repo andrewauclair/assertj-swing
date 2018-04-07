@@ -12,12 +12,9 @@
  */
 package org.assertj.swing.core;
 
-import static org.fest.reflect.core.Reflection.field;
-
-import java.awt.Component;
-import java.awt.KeyboardFocusManager;
-
 import javax.annotation.Nullable;
+import java.awt.*;
+import java.lang.reflect.Field;
 
 /**
  * Finds the current focus owner using Java reflection.
@@ -27,6 +24,13 @@ import javax.annotation.Nullable;
 class ReflectionBasedFocusOwnerFinder implements FocusOwnerFinderStrategy {
   @Override
   @Nullable public Component focusOwner() {
-    return field("focusOwner").ofType(Component.class).in(KeyboardFocusManager.class).get();
+    try {
+      Field focusOwner = KeyboardFocusManager.class.getField("focusOwner");
+      focusOwner.setAccessible(true);
+      return (Component) focusOwner.get(KeyboardFocusManager.getCurrentKeyboardFocusManager());
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

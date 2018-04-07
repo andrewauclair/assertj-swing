@@ -12,25 +12,17 @@
  */
 package org.assertj.swing.internal.assertions.images;
 
-import static java.awt.Color.BLUE;
-import static org.assertj.swing.assertions.data.Point.atPoint;
-import static org.assertj.swing.assertions.error.ShouldBeEqualColors.shouldBeEqualColors;
-import static org.assertj.swing.assertions.error.ShouldBeEqualImages.shouldBeEqualImages;
-import static org.assertj.swing.assertions.error.ShouldHaveDimension.shouldHaveDimension;
-import static org.assertj.swing.test.awt.AwtTestData.blue;
-import static org.assertj.swing.test.awt.AwtTestData.fivePixelBlueImage;
-import static org.assertj.swing.test.awt.AwtTestData.fivePixelYellowImage;
-import static org.assertj.swing.test.awt.AwtTestData.newImage;
-import static org.assertj.swing.test.awt.AwtTestData.yellow;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
-import static org.mockito.Mockito.verify;
-
-import java.awt.image.BufferedImage;
-
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.swing.internal.assertions.ImagesBaseTest;
 import org.assertj.swing.test.ExpectedException;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import static java.awt.Color.BLUE;
+import static org.assertj.swing.assertions.data.Point.atPoint;
+import static org.assertj.swing.test.awt.AwtTestData.*;
 
 /**
  * Tests for <code>{@link Images#assertEqual(AssertionInfo, BufferedImage, BufferedImage)}</code>.
@@ -57,30 +49,12 @@ class Images_assertEqual_Test extends ImagesBaseTest {
 
   @Test
   void should_Fail_If_Actual_Is_Null_And_Expected_Is_Not() {
-    AssertionInfo info = someInfo();
-    try {
-      images.assertEqual(someInfo(), null, fivePixelBlueImage());
-    } catch (AssertionError e) {
-      verifyFailureThrownWhenImagesAreNotEqual(info);
-      return;
-    }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertEqual(someInfo(), null, fivePixelBlueImage()), String.format("expecting images to be equal within offset:<%s>", offset.value));
   }
 
   @Test
   void should_Fail_If_Expected_Is_Null_And_Actual_Is_Not() {
-    AssertionInfo info = someInfo();
-    try {
-      images.assertEqual(someInfo(), actual, null);
-    } catch (AssertionError e) {
-      verifyFailureThrownWhenImagesAreNotEqual(info);
-      return;
-    }
-    failBecauseExpectedAssertionErrorWasNotThrown();
-  }
-
-  private void verifyFailureThrownWhenImagesAreNotEqual(AssertionInfo info) {
-    verify(failures).failure(info, shouldBeEqualImages(offset));
+      ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertEqual(someInfo(), actual, null), String.format("expecting images to be equal within offset:<%s>", offset.value));
   }
 
   @Test
@@ -88,27 +62,18 @@ class Images_assertEqual_Test extends ImagesBaseTest {
     AssertionInfo info = someInfo();
     BufferedImage expected = newImage(6, 6, BLUE);
 
-    ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertEqual(info, actual, expected), "expected size:<6x6> but was:<5x5>");
+    Dimension actualSize = sizeOf(actual);
+    Dimension expectedSize = sizeOf(expected);
 
-//    try {
-//      images.assertEqual(info, actual, expected);
-//    } catch (AssertionError e) {
-//      verify(failures).failure(info, shouldHaveDimension(actual, sizeOf(actual), sizeOf(expected)));
-//      return;
-//    }
-//    failBecauseExpectedAssertionErrorWasNotThrown();
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertEqual(info, actual, expected), String.format("expected size:<%sx%s> but was:<%sx%s> in:<%s>", expectedSize.width, expectedSize.height, actualSize.width,
+            actualSize.height, actual));
   }
 
   @Test
   void should_Fail_If_Images_Have_Same_Size_But_Different_Color() {
     AssertionInfo info = someInfo();
     BufferedImage expected = fivePixelYellowImage();
-    try {
-      images.assertEqual(info, actual, expected);
-    } catch (AssertionError e) {
-      verify(failures).failure(info, shouldBeEqualColors(yellow(), blue(), atPoint(0, 0), offset));
-      return;
-    }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+
+    ExpectedException.assertContainsMessage(AssertionError.class, () -> images.assertEqual(info, actual, expected), String.format("expected:<%s> but was:<%s> at:<%s> within offset:<%s>", yellow(), blue(), atPoint(0, 0), offset.value));
   }
 }

@@ -268,13 +268,4 @@ public class InputState {
   public synchronized @Nullable Point mouseLocationOnScreen() {
     return mouseInfo.locationOnScreen();
   }
-
-  /**
-   * Indicates whether there is a native drag/drop operation in progress.
-   * 
-   * @return {@code true} if there is a native drag/drop operation in progress, {@code false} otherwise.
-   */
-  public boolean isNativeDragActive() {
-    return dragDropInfo.isNativeDragActive();
-  }
 }
