@@ -41,10 +41,11 @@ class AWTExceptionHandlerInstaller_installAWTExceptionHandler_Test {
 
   @Test
   void should_Throw_Error_If_AWT_Event_Handler_Type_Does_Not_Have_Default_Constructor() {
-    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> AWTExceptionHandlerInstaller.installAWTExceptionHandler(WrongEventHandler.class, writer), "The exception handler type should have a default constructor");
+    ExpectedException.assertContainsMessage(IllegalArgumentException.class, () -> AWTExceptionHandlerInstaller.installAWTExceptionHandler(WrongEventHandler.class, writer), "The exception handler type should have a public default constructor");
   }
 
   private static class CorrectEventHandler {
+    public CorrectEventHandler() {}
   }
 
   static class WrongEventHandler {
