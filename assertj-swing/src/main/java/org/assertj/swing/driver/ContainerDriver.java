@@ -12,26 +12,6 @@
  */
 package org.assertj.swing.driver;
 
-import static org.assertj.core.util.Preconditions.checkNotNull;
-import static org.assertj.swing.driver.ComponentMovableQuery.isUserMovable;
-import static org.assertj.swing.driver.ComponentMoveTask.moveComponent;
-import static org.assertj.swing.driver.ComponentPreconditions.checkEnabledAndShowing;
-import static org.assertj.swing.driver.ComponentPreconditions.checkShowing;
-import static org.assertj.swing.driver.ComponentSetSizeTask.setComponentSize;
-import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.assertj.swing.format.Formatting.format;
-import static org.fest.reflect.core.Reflection.method;
-
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.IllegalComponentStateException;
-import java.awt.Insets;
-import java.awt.Point;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.JInternalFrame;
-
 import org.assertj.core.util.VisibleForTesting;
 import org.assertj.swing.annotation.RunsInCurrentThread;
 import org.assertj.swing.annotation.RunsInEDT;
@@ -40,7 +20,22 @@ import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.internal.annotation.InternalApi;
 import org.assertj.swing.util.Pair;
 import org.assertj.swing.util.Triple;
-import org.fest.reflect.exception.ReflectionError;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import static org.assertj.core.util.Preconditions.checkNotNull;
+import static org.assertj.swing.driver.ComponentMovableQuery.isUserMovable;
+import static org.assertj.swing.driver.ComponentMoveTask.moveComponent;
+import static org.assertj.swing.driver.ComponentPreconditions.checkEnabledAndShowing;
+import static org.assertj.swing.driver.ComponentPreconditions.checkShowing;
+import static org.assertj.swing.driver.ComponentSetSizeTask.setComponentSize;
+import static org.assertj.swing.edt.GuiActionRunner.execute;
+import static org.assertj.swing.format.Formatting.format;
 
 /**
  * <p>
@@ -144,11 +139,14 @@ public abstract class ContainerDriver extends ComponentDriver {
   @RunsInCurrentThread
   protected boolean isResizable(@Nonnull Container c) {
     try {
-      Boolean resizable = method("isResizable").withReturnType(boolean.class).in(c).invoke();
-      return checkNotNull(resizable);
-    } catch (ReflectionError e) {
+      Method isResizable = c.getClass().getMethod("isResizable");
+      if (isResizable.getReturnType() == boolean.class) {
+        return (boolean)isResizable.invoke(c);
+      }
+    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
       return false;
     }
+    return false;
   }
 
   @RunsInEDT

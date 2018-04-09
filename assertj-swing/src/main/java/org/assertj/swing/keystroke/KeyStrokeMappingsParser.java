@@ -12,36 +12,27 @@
  */
 package org.assertj.swing.keystroke;
 
+import org.assertj.core.util.VisibleForTesting;
+import org.assertj.swing.exception.ParsingException;
+
+import javax.annotation.Nonnull;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
+
 import static java.lang.Thread.currentThread;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Closeables.closeQuietly;
 import static org.assertj.core.util.Lists.newArrayList;
-import static org.assertj.core.util.Preconditions.checkNotNull;
 import static org.assertj.core.util.Preconditions.checkNotNullOrEmpty;
 import static org.assertj.core.util.Strings.concat;
 import static org.assertj.core.util.Strings.quote;
 import static org.assertj.swing.keystroke.KeyStrokeMapping.mapping;
 import static org.assertj.swing.keystroke.KeyStrokeMappingProvider.NO_MASK;
 import static org.assertj.swing.util.Maps.newHashMap;
-import static org.fest.reflect.core.Reflection.field;
-
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
-import org.assertj.core.util.VisibleForTesting;
-import org.assertj.swing.exception.ParsingException;
-import org.fest.reflect.exception.ReflectionError;
 
 /**
  * <p>
@@ -205,9 +196,9 @@ public class KeyStrokeMappingsParser {
 
   private static int keyCodeFrom(@Nonnull String s) {
     try {
-      Integer keyCode = field("VK_" + s).ofType(int.class).in(KeyEvent.class).get();
-      return checkNotNull(keyCode);
-    } catch (ReflectionError e) {
+      Field field = KeyEvent.class.getField("VK_" + s);
+      return (int) field.get(null);
+    } catch (IllegalAccessException | NoSuchFieldException e) {
       throw new ParsingException(concat("Unable to retrieve key code from text ", quote(s)), e);
     }
   }
@@ -217,9 +208,9 @@ public class KeyStrokeMappingsParser {
       return NO_MASK;
     }
     try {
-      Integer modifiers = field(s).ofType(int.class).in(InputEvent.class).get();
-      return checkNotNull(modifiers);
-    } catch (ReflectionError e) {
+      Field field = InputEvent.class.getField(s);
+      return (int) field.get(null);
+    } catch (IllegalAccessException | NoSuchFieldException e) {
       throw new ParsingException(concat("Unable to retrieve modifiers from text ", quote(s)), e);
     }
   }

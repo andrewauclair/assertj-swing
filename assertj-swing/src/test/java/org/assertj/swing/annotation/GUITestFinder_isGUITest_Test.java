@@ -15,10 +15,9 @@ package org.assertj.swing.annotation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fest.reflect.core.Reflection.method;
-
 import java.lang.reflect.Method;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link GUITestFinder#isGUITest(Class, Method)}.
@@ -62,7 +61,7 @@ class GUITestFinder_isGUITest_Test {
   private NonGUITestSubclass nonGUITestSubclass;
 
   @BeforeEach
-  void setUp() throws Exception {
+  void setUp() {
     guiTest = new GUITestClass();
     nonGUITest = new NonGUITestClass();
     guiTestSubclass = new GUITestSubclass();
@@ -70,41 +69,37 @@ class GUITestFinder_isGUITest_Test {
   }
 
   @Test
-  void should_Return_True_If_Class_Has_GUITest_Annotation() {
+  void should_Return_True_If_Class_Has_GUITest_Annotation() throws NoSuchMethodException {
     Class<? extends GUITestClass> guiTestType = guiTest.getClass();
-    Method guiTestMethod = method("guiTestMethodWithoutAnnotation").in(guiTest).info();
-    boolean isGUITest = GUITestFinder.isGUITest(guiTestType, guiTestMethod);
+    boolean isGUITest = GUITestFinder.isGUITest(guiTestType, guiTest.getClass().getMethod("guiTestMethodWithoutAnnotation"));
     assertThat(isGUITest).isTrue();
   }
 
   @Test
-  void should_Return_True_If_Only_One_Method_Has_GUITest_Annotation() {
+  void should_Return_True_If_Only_One_Method_Has_GUITest_Annotation() throws NoSuchMethodException {
     Class<? extends NonGUITestClass> nonGUITestType = nonGUITest.getClass();
-    Method guiTestMethod = method("guiTestMethod").in(nonGUITest).info();
-    boolean isGUITest = GUITestFinder.isGUITest(nonGUITestType, guiTestMethod);
+    boolean isGUITest = GUITestFinder.isGUITest(nonGUITestType, nonGUITest.getClass().getMethod("guiTestMethod"));
     assertThat(isGUITest).isTrue();
   }
 
   @Test
-  void should_Return_True_If_Superclass_Is_GUI_Test() {
+  void should_Return_True_If_Superclass_Is_GUI_Test() throws NoSuchMethodException {
     Class<? extends GUITestSubclass> guiTestSubtype = guiTestSubclass.getClass();
-    Method guiTestMethod = method("guiTestMethodWithoutAnnotation").in(guiTestSubclass).info();
-    boolean isGUITest = GUITestFinder.isGUITest(guiTestSubtype, guiTestMethod);
+    boolean isGUITest = GUITestFinder.isGUITest(guiTestSubtype, guiTestSubclass.getClass().getMethod("guiTestMethodWithoutAnnotation"));
     assertThat(isGUITest).isTrue();
   }
 
   @Test
-  void should_Return_True_If_Overriden_Method_Is_GUI_Test() {
+  void should_Return_True_If_Overriden_Method_Is_GUI_Test() throws NoSuchMethodException {
     Class<? extends NonGUITestSubclass> nonGUITestSubtype = nonGUITestSubclass.getClass();
-    Method guiTestMethod = method("guiTestMethod").in(nonGUITestSubclass).info();
-    boolean isGUITest = GUITestFinder.isGUITest(nonGUITestSubtype, guiTestMethod);
+    boolean isGUITest = GUITestFinder.isGUITest(nonGUITestSubtype, nonGUITestSubclass.getClass().getMethod("guiTestMethod"));
     assertThat(isGUITest).isTrue();
   }
 
   @Test
-  void should_Return_False_If_Not_Containing_GUITest_Annotation() {
+  void should_Return_False_If_Not_Containing_GUITest_Annotation() throws NoSuchMethodException {
     String s = "Yoda";
-    Method concat = method("concat").withReturnType(String.class).withParameterTypes(String.class).in(s).info();
+    Method concat = String.class.getMethod("concat", String.class);
     assertThat(GUITestFinder.isGUITest(s.getClass(), concat)).isFalse();
   }
 }

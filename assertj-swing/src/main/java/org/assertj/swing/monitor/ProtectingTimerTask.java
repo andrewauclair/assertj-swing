@@ -12,13 +12,11 @@
  */
 package org.assertj.swing.monitor;
 
-import static java.util.logging.Level.WARNING;
-import static org.fest.reflect.core.Reflection.field;
-
+import java.lang.reflect.Field;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
-import org.assertj.core.util.Preconditions;
+import static java.util.logging.Level.WARNING;
 
 /**
  * Prevents misbehaving {@code TimerTask}s from canceling the timer thread by throwing exceptions and/or errors.
@@ -52,9 +50,11 @@ class ProtectingTimerTask extends TimerTask {
 
   private boolean isCanceled() {
     try {
-      int state = Preconditions.checkNotNull(field("state").ofType(int.class).in(task).get());
+      Field field = TimerTask.class.getDeclaredField("state");
+      field.setAccessible(true);
+      int state = (int) field.get(task);
       return state == CANCELED;
-    } catch (RuntimeException e) {
+    } catch (RuntimeException | NoSuchFieldException | IllegalAccessException e) {
       handleException(e);
     }
     return false;
