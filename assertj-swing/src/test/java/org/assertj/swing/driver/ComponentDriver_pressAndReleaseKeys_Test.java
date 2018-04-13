@@ -30,7 +30,7 @@ class ComponentDriver_pressAndReleaseKeys_Test extends ComponentDriver_TestCase 
   @Test
   void should_Throw_Error_If_Array_Of_Keys_Is_Null() {
     int[] keyCodes = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.pressAndReleaseKeys(window.button, keyCodes));
+    assertThrows(NullPointerException.class, () -> driver.pressAndReleaseKeys(window.button, keyCodes));
   }
 
   @Test

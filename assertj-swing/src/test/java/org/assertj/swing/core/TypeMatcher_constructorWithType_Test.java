@@ -24,6 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TypeMatcher_constructorWithType_Test {
   @Test
   void should_Throw_Error_If_Type_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new TypeMatcher(null));
+    assertThrows(NullPointerException.class, () -> new TypeMatcher(null));
   }
 }

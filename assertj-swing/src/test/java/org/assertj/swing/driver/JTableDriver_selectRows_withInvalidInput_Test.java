@@ -42,7 +42,7 @@ public class JTableDriver_selectRows_withInvalidInput_Test extends RobotBasedTes
 
   @Test
   void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.selectRows(table, null));
+    assertThrows(NullPointerException.class, () -> driver.selectRows(table, null));
   }
 
   @Test

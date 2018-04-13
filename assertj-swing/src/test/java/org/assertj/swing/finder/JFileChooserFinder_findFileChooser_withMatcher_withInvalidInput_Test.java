@@ -29,7 +29,7 @@ class JFileChooserFinder_findFileChooser_withMatcher_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JFileChooser> matcher = null;
-    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser(matcher));
+    assertThrows(NullPointerException.class, () -> JFileChooserFinder.findFileChooser(matcher));
   }
 
   @Test
@@ -39,6 +39,6 @@ class JFileChooserFinder_findFileChooser_withMatcher_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser(neverMatches(JFileChooser.class)).withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> JFileChooserFinder.findFileChooser(neverMatches(JFileChooser.class)).withTimeout(10, null));
   }
 }

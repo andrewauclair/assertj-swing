@@ -39,6 +39,6 @@ class JTextComponentDriver_replaceText_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Replacement_Text_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.replaceText(textField, null));
+    assertThrows(NullPointerException.class, () -> driver.replaceText(textField, null));
   }
 }

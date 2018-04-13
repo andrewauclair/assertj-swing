@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 class JFileChooserDriver_selectFiles_withInvalidInput_Test extends JFileChooserDriver_withMocks_TestCase {
   @Test
   void should_Throw_Error_If_Array_Of_Files_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.selectFiles(fileChooser, null));
+    assertThrows(NullPointerException.class, () -> driver.selectFiles(fileChooser, null));
   }
 
   @Test

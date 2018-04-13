@@ -15,17 +15,13 @@ package org.assertj.swing.image;
 import org.assertj.swing.annotation.RunsInEDT;
 import org.assertj.swing.test.core.SequentialEDTSafeTestCase;
 import org.assertj.swing.test.swing.TestWindow;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
+import static org.assertj.swing.assertions.Assertions.assertThat;
 import static org.assertj.swing.edt.GuiActionRunner.execute;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test case for <a href="http://code.google.com/p/fest/issues/detail?id=213">Bug 213</a>.
@@ -48,46 +44,15 @@ public class Bug213_HideCaretInTextFieldWhenTakingScreenshot_Test extends Sequen
   }
 
   @Test
-  @Disabled("Fails on windows 10 because the window is still opening when it tries to take the screenshots")
-  void should_Hide_Caret_In_JTextField_When_Taking_Screenshot() {
+  void should_Hide_Caret_In_JTextField_When_Taking_Screenshot() throws InterruptedException {
+    // wait a second so that the window has been fully shown
+    Thread.sleep(1000);
+
     BufferedImage currentImage = screenshotTaker.takeScreenshotOf(window);
     for (int i = 0; i < 100; i++) {
       BufferedImage newImage = screenshotTaker.takeScreenshotOf(window);
-//      assertThat(newImage).isEqualTo(currentImage);
-      assertTrue(bufferedImagesEqual(currentImage, newImage));
+      assertThat(newImage).isEqualTo(currentImage);
     }
-  }
-
-  boolean bufferedImagesEqual(BufferedImage img1, BufferedImage img2) {
-    File out1 = new File("save1.png");
-    File out2 = new File("save2.png");
-    int height = img1.getHeight();
-    int width = img1.getWidth();
-    if (img1.getWidth() == img2.getWidth() && img1.getHeight() == img2.getHeight()) {
-      for (int x = 0; x < img1.getWidth(); x++) {
-        for (int y = 0; y < img1.getHeight(); y++) {
-          int rgb1 = img1.getRGB(x, y);
-          int rgb2 = img2.getRGB(x, y);
-          if (img1.getRGB(x, y) != img2.getRGB(x, y))
-
-          {
-            try {
-              ImageIO.write(img1, "png", out1);
-            ImageIO.write(img2, "png", out2);
-
-            System.out.println("Wrote to : " + out1.getAbsolutePath());
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          }
-
-            return false;
-        }
-      }
-    } else {
-      return false;
-    }
-    return true;
   }
 
   private static class MyWindow extends TestWindow {

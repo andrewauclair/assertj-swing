@@ -34,7 +34,7 @@ class JTreeDriver_clickPath_withMouseButton_Test extends JTreeDriver_clickCell_T
   @Test
   void should_Throw_Error_If_MouseButton_Is_Null() {
     MouseButton button = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.clickPath(tree, "root", button));
+    assertThrows(NullPointerException.class, () -> driver.clickPath(tree, "root", button));
   }
 
   @Test

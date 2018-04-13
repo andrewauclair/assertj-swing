@@ -60,6 +60,6 @@ class JTableStopCellEditingTask_checkStateAndStopEditing_Test extends JTableCell
 
   @Test
   void should_Throw_Error_If_CellEditor_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> JTableStopCellEditingTask.stopEditing(null));
+    assertThrows(NullPointerException.class, () -> JTableStopCellEditingTask.stopEditing(null));
   }
 }

@@ -25,7 +25,7 @@ class StringTextMatcher_constructor_Test {
   @Test
   void should_Throw_Error_If_Array_Is_Null() {
     String[] values = null;
-    assertThrows(IllegalArgumentException.class, () -> new StringTextMatcher(values));
+    assertThrows(NullPointerException.class, () -> new StringTextMatcher(values));
   }
 
   @Test

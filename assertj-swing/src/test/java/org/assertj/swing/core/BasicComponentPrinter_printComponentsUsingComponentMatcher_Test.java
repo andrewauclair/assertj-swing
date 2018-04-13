@@ -27,13 +27,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class BasicComponentPrinter_printComponentsUsingComponentMatcher_Test extends BasicComponentPrinter_TestCase {
   @Test
   void should_Throw_Error_If_OutputStream_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(null, new NameMatcher("button1")));
+    assertThrows(NullPointerException.class, () -> printer.printComponents(null, new NameMatcher("button1")));
   }
 
   @Test
   void should_Throw_Error_If_ComponentMatcher_Is_Null() {
     ComponentMatcher matcher = null;
-    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(out, matcher));
+    assertThrows(NullPointerException.class, () -> printer.printComponents(out, matcher));
   }
 
   @Test

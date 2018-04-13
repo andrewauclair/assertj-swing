@@ -45,7 +45,7 @@ class KeyStrokeMappingProvider_parse_Test {
   @Test
   void should_Throw_Error_If_File_Name_Is_Null() {
     String file = null;
-    assertThrows(IllegalArgumentException.class, () -> parser.parse(file));
+    assertThrows(NullPointerException.class, () -> parser.parse(file));
   }
 
   @Test
@@ -70,7 +70,7 @@ class KeyStrokeMappingProvider_parse_Test {
   @Test
   void should_Throw_Error_If_File_Is_Null() {
     File file = null;
-    assertThrows(IllegalArgumentException.class, () -> parser.parse(file));
+    assertThrows(AssertionError.class, () -> parser.parse(file));
   }
 
   @Test

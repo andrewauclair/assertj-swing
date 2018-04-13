@@ -30,7 +30,7 @@ class WindowFinder_findDialog_withMatcher_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JDialog> matcher = null;
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog(matcher));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findDialog(matcher));
   }
 
   @Test
@@ -40,6 +40,6 @@ class WindowFinder_findDialog_withMatcher_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog(neverMatches(JDialog.class)).withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findDialog(neverMatches(JDialog.class)).withTimeout(10, null));
   }
 }

@@ -25,7 +25,7 @@ class JListDriver_unselectItemsByIndex_withInvalidInput_Test extends JListDriver
   @Test
   void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
     int[] indices = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.unselectItems(list, indices));
+    assertThrows(NullPointerException.class, () -> driver.unselectItems(list, indices));
   }
 
   @Test

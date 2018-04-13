@@ -36,7 +36,7 @@ class ScreenshotTaker_saveImage_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_File_Path_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> taker.saveImage(NO_IMAGE, null));
+    assertThrows(NullPointerException.class, () -> taker.saveImage(NO_IMAGE, null));
   }
 
   @Test

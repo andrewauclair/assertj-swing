@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.ScreenLockReleaser;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.AfterEach;
@@ -29,15 +30,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class DialogFixture_constructor_withDialog_Test extends EDTSafeTestCase {
-  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
-
+class DialogFixture_constructor_withDialog_Test extends EDTSafeTestCase {
   private DialogFixture fixture;
 
   @AfterEach
   void tearDown() {
     if (fixture != null) {
       fixture.cleanUp();
+    }
+    ScreenLock screenLock = ScreenLock.instance();
+    if (screenLock.acquired()) {
+      screenLock.release(screenLock.getOwner());
     }
   }
 
@@ -51,6 +54,6 @@ public class DialogFixture_constructor_withDialog_Test extends EDTSafeTestCase {
 
   @Test
   void should_Throw_Error_If_Dialog_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> fixture = new DialogFixture((Dialog) null));
+    assertThrows(NullPointerException.class, () -> fixture = new DialogFixture((Dialog) null));
   }
 }

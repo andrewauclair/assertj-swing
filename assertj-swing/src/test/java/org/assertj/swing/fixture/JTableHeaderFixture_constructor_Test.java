@@ -30,11 +30,11 @@ import org.junit.jupiter.api.Test;
 class JTableHeaderFixture_constructor_Test {
   @Test
   void should_Throw_Error_If_Robot_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new JTableHeaderFixture(null, mock(JTableHeader.class)));
+    assertThrows(NullPointerException.class, () -> new JTableHeaderFixture(null, mock(JTableHeader.class)));
   }
 
   @Test
   void should_Throw_Error_If_Target_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new JTableHeaderFixture(singletonRobotMock(), null));
+    assertThrows(NullPointerException.class, () -> new JTableHeaderFixture(singletonRobotMock(), null));
   }
 }

@@ -12,14 +12,14 @@
  */
 package org.assertj.swing.format;
 
-import static org.assertj.swing.test.builder.JComboBoxes.comboBox;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import javax.swing.JButton;
-
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
+
+import static org.assertj.swing.test.builder.JComboBoxes.comboBox;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for {@link IntrospectionComponentFormatter#format(java.awt.Component)}.
@@ -41,6 +41,6 @@ class IntrospectionComponentFormatter_format_withInvalidInput_Test extends EDTSa
 
   @Test
   void should_Throw_Error_If_Component_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> formatter.format(null));
+    assertThrows(NullPointerException.class, () -> formatter.format(null));
   }
 }

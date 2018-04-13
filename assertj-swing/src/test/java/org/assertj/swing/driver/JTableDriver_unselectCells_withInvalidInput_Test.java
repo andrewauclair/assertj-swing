@@ -26,7 +26,7 @@ class JTableDriver_unselectCells_withInvalidInput_Test extends JTableDriver_with
   @Test
   void shouldThrowErrorIfArrayOfCellsToSelectIsNull() {
     TableCell[] cells = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.unselectCells(table, cells));
+    assertThrows(NullPointerException.class, () -> driver.unselectCells(table, cells));
   }
 
   @Test

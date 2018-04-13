@@ -27,7 +27,7 @@ class JTableDriver_selectCells_withInvalidInput_Test extends JTableDriver_withMo
   @Test
   void shouldThrowErrorIfArrayOfCellsToSelectIsNull() {
     TableCell[] cells = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.selectCells(table, cells));
+    assertThrows(NullPointerException.class, () -> driver.selectCells(table, cells));
   }
 
   @Test

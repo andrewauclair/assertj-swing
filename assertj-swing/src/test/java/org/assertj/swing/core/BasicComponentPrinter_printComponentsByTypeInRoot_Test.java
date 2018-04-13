@@ -31,13 +31,13 @@ import javax.swing.JButton;
 class BasicComponentPrinter_printComponentsByTypeInRoot_Test extends BasicComponentPrinter_TestCase {
   @Test
   void should_Throw_Error_If_OutputStream_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(null, JButton.class, windowOne));
+    assertThrows(NullPointerException.class, () -> printer.printComponents(null, JButton.class, windowOne));
   }
 
   @Test
   void should_Throw_Error_If_Type_To_Match_Is_Null() {
     Class<? extends Component> type = null;
-    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(out, type, windowOne));
+    assertThrows(NullPointerException.class, () -> printer.printComponents(out, type, windowOne));
   }
 
   @Test

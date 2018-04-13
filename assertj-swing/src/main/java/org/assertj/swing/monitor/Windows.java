@@ -130,7 +130,6 @@ class Windows {
       }
       removeWindowFrom(w, closed, hidden, pending);
       open.put(w, true);
-      System.out.println("window ready.");
     }
   }
 

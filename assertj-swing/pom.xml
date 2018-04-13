@@ -31,50 +31,13 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.0.2</version>
       </plugin>
-      <!--<plugin>-->
-        <!--<groupId>org.sonatype.plugins</groupId>-->
-        <!--<artifactId>jarjar-maven-plugin</artifactId>-->
-        <!--<version>1.9</version>-->
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<phase>package</phase>-->
-            <!--<goals>-->
-              <!--<goal>jarjar</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-              <!--<includes>-->
-                <!--<include>com.google.code.findbugs:jsr305</include>-->
-                <!--<include>org.easytesting:fest-reflect</include>-->
-                <!--<include>org.easytesting:fest-util</include>-->
-              <!--</includes>-->
-              <!--<rules>-->
-                <!--<rule>-->
-                  <!--<pattern>javax.annotation.**</pattern>-->
-                  <!--<result>org.assertj.swing.dependency.jsr305.@1</result>-->
-                <!--</rule>-->
-                <!--<rule>-->
-                  <!--<pattern>org.fest.reflect.**</pattern>-->
-                  <!--<result>org.assertj.swing.dependency.fest_reflect.@1</result>-->
-                <!--</rule>-->
-                <!--<rule>-->
-                  <!--<pattern>org.fest.util.**</pattern>-->
-                  <!--<result>org.assertj.swing.dependency.fest_util.@1</result>-->
-                <!--</rule>-->
-                <!--<keep>-->
-                  <!--<pattern>org.assertj.swing.**</pattern>-->
-                <!--</keep>-->
-              <!--</rules>-->
-            <!--</configuration>-->
-          <!--</execution>-->
-        <!--</executions>-->
-      <!--</plugin>-->
     </plugins>
   </build>
   <dependencies>
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.8.0</version>
+      <version>3.9.1</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
@@ -85,45 +48,32 @@
     </dependency>
     <dependency>
       <groupId>org.easytesting</groupId>
-      <artifactId>fest-util</artifactId>
-      <version>1.2.5</version>
-      <scope>compile</scope>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.easytesting</groupId>
       <artifactId>fest-test</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.1.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.1.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <version>5.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>5.1.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>2.17.0</version>
+      <version>2.18.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.googlecode.multithreadedtc</groupId>

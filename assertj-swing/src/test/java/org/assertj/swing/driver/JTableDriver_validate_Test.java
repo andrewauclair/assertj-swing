@@ -25,6 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class JTableDriver_validate_Test extends JTableDriver_withMocks_TestCase {
   @Test
   void shouldThrowErrorIfCellToValidateIsNull() {
-    assertThrows(IllegalArgumentException.class, () -> driver.checkCellIndicesInBounds(table, null));
+    assertThrows(NullPointerException.class, () -> driver.checkCellIndicesInBounds(table, null));
   }
 }

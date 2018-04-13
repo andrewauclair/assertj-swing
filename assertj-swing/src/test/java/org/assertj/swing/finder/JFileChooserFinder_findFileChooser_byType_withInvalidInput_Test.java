@@ -29,6 +29,6 @@ class JFileChooserFinder_findFileChooser_byType_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> JFileChooserFinder.findFileChooser().withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> JFileChooserFinder.findFileChooser().withTimeout(10, null));
   }
 }

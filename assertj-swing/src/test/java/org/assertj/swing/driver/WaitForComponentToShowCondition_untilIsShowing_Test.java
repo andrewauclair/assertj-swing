@@ -25,6 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class WaitForComponentToShowCondition_untilIsShowing_Test extends EDTSafeTestCase {
   @Test
   void shouldThrowError_If_Component_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> WaitForComponentToShowCondition.untilIsShowing(null));
+    assertThrows(NullPointerException.class, () -> WaitForComponentToShowCondition.untilIsShowing(null));
   }
 }

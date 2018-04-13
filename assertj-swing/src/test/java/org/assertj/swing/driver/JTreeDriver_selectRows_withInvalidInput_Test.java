@@ -25,7 +25,7 @@ class JTreeDriver_selectRows_withInvalidInput_Test extends JTreeDriver_withMocks
   @Test
   void should_Throw_Error_If_Array_Is_Null() {
     int[] rows = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.selectRows(tree, rows));
+    assertThrows(NullPointerException.class, () -> driver.selectRows(tree, rows));
   }
 
   @Test

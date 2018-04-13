@@ -18,6 +18,7 @@ import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsSymmetric
 import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsTransitive;
 import static org.fest.test.EqualsHashCodeContractAssert.assertMaintainsEqualsAndHashCodeContract;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,7 @@ class RgbColor_equals_hashCode_Test {
 
   @Test
   void should_Not_Be_Equal_To_Object_Of_Different_Type() {
-    assertFalse(color.equals("WHITE"));
+    assertNotEquals("WHITE", color);
   }
 
   @Test
@@ -68,16 +69,16 @@ class RgbColor_equals_hashCode_Test {
 
   @Test
   void should_Not_Be_Equal_To_RgbColor_With_Different_Red_Component() {
-    assertFalse(color.equals(color(0x00FFFF)));
+    assertNotEquals(color, color(0x00FFFF));
   }
 
   @Test
   void should_Not_Be_Equal_To_RgbColor_With_Different_Green_Component() {
-    assertFalse(color.equals(color(0xFF00FF)));
+    assertNotEquals(color, color(0xFF00FF));
   }
 
   @Test
   void should_Not_Be_Equal_To_RgbColor_With_Different_Blue_Component() {
-    assertFalse(color.equals(color(0xFFFF00)));
+    assertNotEquals(color, color(0xFFFF00));
   }
 }

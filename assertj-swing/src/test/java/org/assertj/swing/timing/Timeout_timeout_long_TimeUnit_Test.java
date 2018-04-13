@@ -40,6 +40,6 @@ class Timeout_timeout_long_TimeUnit_Test {
 
   @Test
   void shouldThrowExceptionIfTimeUnitIsNull() {
-    assertThrows(IllegalArgumentException.class, () -> Timeout.timeout(0, null));
+    assertThrows(NullPointerException.class, () -> Timeout.timeout(0, null));
   }
 }

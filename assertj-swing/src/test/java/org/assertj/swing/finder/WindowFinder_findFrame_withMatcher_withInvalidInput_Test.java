@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 
 /**
  * Tests for {@link WindowFinder#findFrame(GenericTypeMatcher)}.
@@ -30,7 +31,7 @@ class WindowFinder_findFrame_withMatcher_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JFrame> matcher = null;
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(matcher));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findFrame(matcher));
   }
 
   @Test
@@ -40,6 +41,6 @@ class WindowFinder_findFrame_withMatcher_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(neverMatches(JFrame.class)).withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findFrame(neverMatches(JFrame.class)).withTimeout(10, null));
   }
 }

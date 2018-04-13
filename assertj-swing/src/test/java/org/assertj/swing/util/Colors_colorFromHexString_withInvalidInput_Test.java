@@ -29,7 +29,7 @@ class Colors_colorFromHexString_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Hex_String_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> Colors.colorFromHexString(null));
+    assertThrows(NullPointerException.class, () -> Colors.colorFromHexString(null));
   }
 
   @Test

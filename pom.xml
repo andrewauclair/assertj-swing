@@ -36,21 +36,20 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
         <configuration>
-          <source>1.9</source>
-          <target>1.9</target>
+          <source>1.10</source>
+          <target>1.10</target>
           <jdkToolchain>
-            <version>9</version>
+            <version>10</version>
           </jdkToolchain>
         </configuration>
+        <dependencies>
+        <dependency>
+          <groupId>org.ow2.asm</groupId>
+          <artifactId>asm</artifactId>
+          <version>6.1.1</version> <!-- Use newer version of ASM -->
+        </dependency>
+        </dependencies>
       </plugin>
-      <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-release-plugin</artifactId>-->
-        <!--<version>2.5.3</version>-->
-        <!--<configuration>-->
-          <!--<arguments>-DskipTests -Psonatype-oss-release</arguments>-->
-        <!--</configuration>-->
-      <!--</plugin>-->
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -76,14 +75,6 @@
     <url>https://github.com/andrewauclair/assertj-swing/issues</url>
   </issueManagement>
   <developers>
-    <developer>
-      <id>andrewauclair</id>
-      <name>Andrew Auclair</name>
-      <roles>
-        <role>Owner</role>
-        <role>Developer</role>
-      </roles>
-    </developer>
     <developer>
       <id>joel</id>
       <name>Joel Costigliola</name>
@@ -131,11 +122,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.ow2.asm</groupId>
-        <artifactId>asm</artifactId>
-        <version>6.1</version> <!-- Use newer version of ASM -->
-      </dependency>
-      <dependency>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-archiver</artifactId>
         <version>2.1.2</version>
@@ -174,7 +160,7 @@
       <dependency>
         <groupId>nl.jqno.equalsverifier</groupId>
         <artifactId>equalsverifier</artifactId>
-        <version>2.3.1</version>
+        <version>2.4.5</version>
         <scope>test</scope>
       </dependency>
     </dependencies>

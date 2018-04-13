@@ -26,11 +26,11 @@ import static org.mockito.Mockito.mock;
 class JTableCellFixture_constructor_Test {
   @Test
   void should_Throw_Error_If_JTableFixture_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new JTableCellFixture(null, row(6).column(8)));
+    assertThrows(NullPointerException.class, () -> new JTableCellFixture(null, row(6).column(8)));
   }
 
   @Test
   void should_Throw_Error_If_TableCell_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new JTableCellFixture(mock(JTableFixture.class), null));
+    assertThrows(NullPointerException.class, () -> new JTableCellFixture(mock(JTableFixture.class), null));
   }
 }

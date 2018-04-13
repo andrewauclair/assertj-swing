@@ -42,7 +42,7 @@ class Pause_pauseWithConditionsAndTimeoutInMilliseconds_Test {
 
   @Test
   void should_Throw_Error_If_Condition_Array_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> Pause.pause((Condition[]) null, 1000));
+    assertThrows(NullPointerException.class, () -> Pause.pause((Condition[]) null, 1000));
   }
 
   @Test

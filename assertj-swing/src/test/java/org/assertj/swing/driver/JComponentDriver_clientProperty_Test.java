@@ -40,7 +40,7 @@ class JComponentDriver_clientProperty_Test extends JComponentDriver_TestCase {
 
   @Test
   void should_Throw_Error_If_Key_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.clientProperty(button, null));
+    assertThrows(NullPointerException.class, () -> driver.clientProperty(button, null));
   }
 
   @RunsInEDT

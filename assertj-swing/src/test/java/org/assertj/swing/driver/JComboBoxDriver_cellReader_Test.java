@@ -25,6 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class JComboBoxDriver_cellReader_Test extends JComboBoxDriver_TestCase {
   @Test
   void should_Throw_Error_If_CellReader_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.replaceCellReader(null));
+    assertThrows(NullPointerException.class, () -> driver.replaceCellReader(null));
   }
 }

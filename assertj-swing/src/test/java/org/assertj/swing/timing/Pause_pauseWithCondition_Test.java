@@ -58,6 +58,6 @@ class Pause_pauseWithCondition_Test {
 
   @Test
   void should_Throw_Error_If_Condition_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> Pause.pause((Condition) null));
+    assertThrows(NullPointerException.class, () -> Pause.pause((Condition) null));
   }
 }

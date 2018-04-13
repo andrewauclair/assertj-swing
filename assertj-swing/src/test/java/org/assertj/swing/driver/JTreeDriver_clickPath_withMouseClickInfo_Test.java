@@ -37,7 +37,7 @@ class JTreeDriver_clickPath_withMouseClickInfo_Test extends JTreeDriver_clickCel
   @Test
   void should_Throw_Error_If_MouseClickInfo_Is_Null() {
     MouseClickInfo info = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.clickPath(tree, "root", info));
+    assertThrows(NullPointerException.class, () -> driver.clickPath(tree, "root", info));
   }
 
   @Test

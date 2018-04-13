@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ComponentDriver_pressAndReleaseKeyWithPressInfo_Test extends ComponentDriver_TestCase {
   @Test
   void should_Throw_Error_If_KeyPressInfo_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.pressAndReleaseKey(window.button, null));
+    assertThrows(NullPointerException.class, () -> driver.pressAndReleaseKey(window.button, null));
   }
 
   @Test

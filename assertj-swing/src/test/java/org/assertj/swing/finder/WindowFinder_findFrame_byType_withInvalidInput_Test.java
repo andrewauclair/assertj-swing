@@ -29,7 +29,7 @@ class WindowFinder_findFrame_byType_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Type_Is_Null() {
     Class<WindowToLaunch> type = null;
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(type));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findFrame(type));
   }
 
   @Test
@@ -39,6 +39,6 @@ class WindowFinder_findFrame_byType_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(JFrame.class).withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findFrame(JFrame.class).withTimeout(10, null));
   }
 }

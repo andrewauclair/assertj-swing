@@ -29,7 +29,7 @@ class WindowFinder_findDialog_byType_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Type_Is_Null() {
     Class<DialogToLaunch> type = null;
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog(type));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findDialog(type));
   }
 
   @Test
@@ -39,6 +39,6 @@ class WindowFinder_findDialog_byType_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog(JDialog.class).withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> WindowFinder.findDialog(JDialog.class).withTimeout(10, null));
   }
 }

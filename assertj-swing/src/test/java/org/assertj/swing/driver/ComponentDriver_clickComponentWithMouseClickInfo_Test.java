@@ -33,7 +33,7 @@ class ComponentDriver_clickComponentWithMouseClickInfo_Test extends ComponentDri
 
   @Test
   void should_Throw_Error_If_MouseClickInfo_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> driver.click(window.button, (MouseClickInfo) null));
+    assertThrows(NullPointerException.class, () -> driver.click(window.button, (MouseClickInfo) null));
   }
 
   @Test

@@ -43,7 +43,7 @@ class EmergencyAbortListener_keyCombination_Test {
 
   @Test
   void should_Throw_Error_If_KeyPressInfo_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> listener.keyCombination(null));
+    assertThrows(NullPointerException.class, () -> listener.keyCombination(null));
   }
 
   @Test

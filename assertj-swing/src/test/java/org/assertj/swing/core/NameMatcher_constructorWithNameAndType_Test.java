@@ -24,6 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class NameMatcher_constructorWithNameAndType_Test {
   @Test
   void should_Throw_Error_If_Type_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new NameMatcher("label", null));
+    assertThrows(NullPointerException.class, () -> new NameMatcher("label", null));
   }
 }

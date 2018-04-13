@@ -30,7 +30,7 @@ class JOptionPaneFinder_findOptionPane_withMatcher_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JOptionPane> matcher = null;
-    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane(matcher));
+    assertThrows(NullPointerException.class, () -> JOptionPaneFinder.findOptionPane(matcher));
   }
 
   @Test
@@ -40,6 +40,6 @@ class JOptionPaneFinder_findOptionPane_withMatcher_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane(neverMatches(JOptionPane.class)).withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> JOptionPaneFinder.findOptionPane(neverMatches(JOptionPane.class)).withTimeout(10, null));
   }
 }

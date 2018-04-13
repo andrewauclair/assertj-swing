@@ -12,6 +12,7 @@
  */
 package org.assertj.swing.fixture;
 
+import org.assertj.swing.lock.ScreenLock;
 import org.assertj.swing.test.ScreenLockReleaser;
 import org.assertj.swing.test.core.EDTSafeTestCase;
 import org.junit.jupiter.api.AfterEach;
@@ -29,14 +30,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @author Alex Ruiz
  */
 class FrameFixture_constructor_withFrame_Test extends EDTSafeTestCase {
-  private ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
-
   private FrameFixture fixture;
 
   @AfterEach
   void tearDown() {
     if (fixture != null) {
       fixture.cleanUp();
+    }
+    ScreenLock screenLock = ScreenLock.instance();
+    if (screenLock.acquired()) {
+      screenLock.release(screenLock.getOwner());
     }
   }
 
@@ -50,6 +53,6 @@ class FrameFixture_constructor_withFrame_Test extends EDTSafeTestCase {
 
   @Test
   void should_Throw_Error_If_Frame_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> fixture = new FrameFixture((Frame) null));
+    assertThrows(NullPointerException.class, () -> fixture = new FrameFixture((Frame) null));
   }
 }

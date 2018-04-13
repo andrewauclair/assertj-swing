@@ -25,6 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FontFixture_constructor_Test {
   @Test
   void should_Throw_Error_If_Font_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> new FontFixture(null));
+    assertThrows(NullPointerException.class, () -> new FontFixture(null));
   }
 }

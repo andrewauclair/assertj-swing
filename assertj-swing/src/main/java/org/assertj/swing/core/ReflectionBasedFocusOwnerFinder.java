@@ -25,7 +25,7 @@ class ReflectionBasedFocusOwnerFinder implements FocusOwnerFinderStrategy {
   @Override
   @Nullable public Component focusOwner() {
     try {
-      Field focusOwner = KeyboardFocusManager.class.getField("focusOwner");
+      Field focusOwner = KeyboardFocusManager.class.getDeclaredField("focusOwner");
       focusOwner.setAccessible(true);
       return (Component) focusOwner.get(KeyboardFocusManager.getCurrentKeyboardFocusManager());
     } catch (NoSuchFieldException | IllegalAccessException e) {

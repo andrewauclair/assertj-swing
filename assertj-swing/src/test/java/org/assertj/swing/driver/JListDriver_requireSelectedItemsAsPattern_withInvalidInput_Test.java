@@ -28,7 +28,7 @@ class JListDriver_requireSelectedItemsAsPattern_withInvalidInput_Test extends JL
   @Test
   void should_Throw_Error_If_Array_Of_Patterns_Is_Null() {
     Pattern[] patterns = null;
-    assertThrows(IllegalArgumentException.class, () -> driver.requireSelectedItems(list, patterns));
+    assertThrows(NullPointerException.class, () -> driver.requireSelectedItems(list, patterns));
   }
 
   @Test

@@ -27,7 +27,7 @@ class PatternTextMatcher_constructor_Test {
   @Test
   void should_Throw_Error_If_Pattern_Array_Is_Null() {
     Pattern[] patterns = null;
-    assertThrows(IllegalArgumentException.class, () -> new PatternTextMatcher(patterns));
+    assertThrows(NullPointerException.class, () -> new PatternTextMatcher(patterns));
   }
 
   @Test

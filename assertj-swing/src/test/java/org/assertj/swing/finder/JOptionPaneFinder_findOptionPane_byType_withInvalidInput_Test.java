@@ -29,6 +29,6 @@ class JOptionPaneFinder_findOptionPane_byType_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(IllegalArgumentException.class, () -> JOptionPaneFinder.findOptionPane().withTimeout(10, null));
+    assertThrows(NullPointerException.class, () -> JOptionPaneFinder.findOptionPane().withTimeout(10, null));
   }
 }

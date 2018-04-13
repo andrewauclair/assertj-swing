@@ -29,9 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
-public class FrameFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase {
-  public ScreenLockReleaser lockReleaser = new ScreenLockReleaser();
-
+class FrameFixture_constructor_withRobotAndName_Test extends RobotBasedTestCase {
   @Test
   void should_Lookup_Showing_Frame_By_Name() {
     Frame target = frame().withName("frame").withTitle(getClass().getSimpleName()).createAndShow();
