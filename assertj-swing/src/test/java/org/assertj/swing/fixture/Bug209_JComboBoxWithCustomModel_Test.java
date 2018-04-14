@@ -48,12 +48,12 @@ public class Bug209_JComboBoxWithCustomModel_Test extends RobotBasedTestCase {
   }
 
   @Test
-  public void should_Have_First_Item_Selected() {
+  void should_Have_First_Item_Selected() {
     dialog.comboBox("cb").requireSelection("hat");
   }
 
   @Test
-  public void should_Have_First_Item_Selected_After_Click() {
+  void should_Have_First_Item_Selected_After_Click() {
     dialog.comboBox("cb").click();
     dialog.comboBox("cb").requireSelection("hat");
   }
