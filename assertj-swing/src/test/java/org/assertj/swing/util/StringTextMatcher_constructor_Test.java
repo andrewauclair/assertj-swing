@@ -25,7 +25,8 @@ class StringTextMatcher_constructor_Test {
   @Test
   void should_Throw_Error_If_Array_Is_Null() {
     String[] values = null;
-    assertThrows(NullPointerException.class, () -> new StringTextMatcher(values));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> new StringTextMatcher(values));
   }
 
   @Test

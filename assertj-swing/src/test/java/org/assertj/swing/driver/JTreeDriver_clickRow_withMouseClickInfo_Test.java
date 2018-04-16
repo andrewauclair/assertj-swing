@@ -36,7 +36,8 @@ public class JTreeDriver_clickRow_withMouseClickInfo_Test extends JTreeDriver_cl
   @Test
   void should_Throw_Error_If_MouseClickInfo_Is_Null() {
     MouseClickInfo info = null;
-    assertThrows(NullPointerException.class, () -> driver.clickRow(tree, 1, info));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.clickRow(tree, 1, info));
   }
 
   @Test

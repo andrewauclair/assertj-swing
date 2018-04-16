@@ -38,6 +38,7 @@ class Pause_pauseWithTimeoutInTimeUnit_Test {
 
   @Test
   void should_Throw_Error_If_Unit_Is_Null() {
-    assertThrows(NullPointerException.class, () -> Pause.pause(2, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause(2, null));
   }
 }

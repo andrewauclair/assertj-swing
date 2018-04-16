@@ -34,7 +34,8 @@ class JTreeDriver_separator_Test {
 
   @Test
   void shouldThrowErrorIfSeparatorIsNull() {
-    assertThrows(NullPointerException.class, () -> driver.replaceSeparator(null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.replaceSeparator(null));
   }
 
   @Test

@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ColorFixture_constructor_Test {
   @Test
   void should_Throw_Error_If_Color_Is_Null() {
-    assertThrows(NullPointerException.class, () -> new ColorFixture(null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> new ColorFixture(null));
   }
 }

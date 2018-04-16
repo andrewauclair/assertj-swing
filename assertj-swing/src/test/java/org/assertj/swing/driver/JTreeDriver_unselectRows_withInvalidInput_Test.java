@@ -25,7 +25,8 @@ class JTreeDriver_unselectRows_withInvalidInput_Test extends JTreeDriver_withMoc
   @Test
   void should_Throw_Error_If_Array_Is_Null() {
     int[] rows = null;
-    assertThrows(NullPointerException.class, () -> driver.unselectRows(tree, rows));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.unselectRows(tree, rows));
   }
 
   @Test

@@ -34,6 +34,7 @@ class JTableDriver_cellReader_Test {
 
   @Test
   void should_Throw_Error_If_CellReader_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.replaceCellReader(null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.replaceCellReader(null));
   }
 }

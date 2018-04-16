@@ -27,7 +27,8 @@ class PatternTextMatcher_constructor_Test {
   @Test
   void should_Throw_Error_If_Pattern_Array_Is_Null() {
     Pattern[] patterns = null;
-    assertThrows(NullPointerException.class, () -> new PatternTextMatcher(patterns));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> new PatternTextMatcher(patterns));
   }
 
   @Test

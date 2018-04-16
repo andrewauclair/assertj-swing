@@ -25,7 +25,8 @@ class JTreeDriver_selectPaths_withInvalidInput_Test extends JTreeDriver_withMock
   @Test
   void should_Throw_Error_If_Array_Is_Null() {
     String[] paths = null;
-    assertThrows(NullPointerException.class, () -> driver.selectPaths(tree, paths));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.selectPaths(tree, paths));
   }
 
   @Test

@@ -41,6 +41,7 @@ class IntrospectionComponentFormatter_format_withInvalidInput_Test extends EDTSa
 
   @Test
   void should_Throw_Error_If_Component_Is_Null() {
-    assertThrows(NullPointerException.class, () -> formatter.format(null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> formatter.format(null));
   }
 }

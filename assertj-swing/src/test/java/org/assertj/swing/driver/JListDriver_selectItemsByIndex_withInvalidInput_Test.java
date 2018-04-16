@@ -26,7 +26,8 @@ class JListDriver_selectItemsByIndex_withInvalidInput_Test extends JListDriver_w
   @Test
   void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
     int[] indices = null;
-    assertThrows(NullPointerException.class, () -> driver.selectItems(list, indices));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.selectItems(list, indices));
   }
 
   @Test

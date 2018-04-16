@@ -53,6 +53,7 @@ class FrameFixture_constructor_withFrame_Test extends EDTSafeTestCase {
 
   @Test
   void should_Throw_Error_If_Frame_Is_Null() {
-    assertThrows(NullPointerException.class, () -> fixture = new FrameFixture((Frame) null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> fixture = new FrameFixture((Frame) null));
   }
 }

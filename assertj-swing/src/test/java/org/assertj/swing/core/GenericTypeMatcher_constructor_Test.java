@@ -27,7 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class GenericTypeMatcher_constructor_Test {
   @Test
   void should_Throw_Error_If_Supported_Type_Is_Null() {
-    assertThrows(NullPointerException.class, () -> new GenericTypeMatcher<JButton>(null) {
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> new GenericTypeMatcher<JButton>(null) {
       @Override
       protected boolean isMatching(@Nonnull JButton component) {
         return true;

@@ -25,7 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class JTreeDriver_requireSelectedRows_Test extends JTreeDriver_selectCell_TestCase {
   @Test
   void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.requireSelection(tree, (int[]) null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.requireSelection(tree, (int[]) null));
   }
 
   @Test

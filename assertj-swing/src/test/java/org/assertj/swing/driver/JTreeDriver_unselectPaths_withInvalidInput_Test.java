@@ -25,7 +25,8 @@ class JTreeDriver_unselectPaths_withInvalidInput_Test extends JTreeDriver_withMo
   @Test
   void should_Throw_Error_If_Array_Is_Null() {
     String[] paths = null;
-    assertThrows(NullPointerException.class, () -> driver.unselectPaths(tree, paths));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.unselectPaths(tree, paths));
   }
 
   @Test

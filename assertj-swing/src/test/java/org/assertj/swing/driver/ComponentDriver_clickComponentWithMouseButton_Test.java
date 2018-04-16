@@ -55,7 +55,8 @@ class ComponentDriver_clickComponentWithMouseButton_Test extends ComponentDriver
 
   @Test
   void should_Throw_Error_If_MouseButton_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.click(window.button, (MouseButton) null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.click(window.button, (MouseButton) null));
   }
 
   @Test

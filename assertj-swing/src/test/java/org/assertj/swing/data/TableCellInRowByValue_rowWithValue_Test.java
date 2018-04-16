@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TableCellInRowByValue_rowWithValue_Test {
   @Test
   void should_Throw_Error_If_Array_Of_Values_Is_Null() {
-    assertThrows(NullPointerException.class, () -> {
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> {
       String[] values = null;
       TableCellInRowByValue.rowWithValue(values);
     });

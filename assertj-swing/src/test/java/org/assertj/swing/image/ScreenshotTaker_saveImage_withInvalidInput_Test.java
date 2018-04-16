@@ -36,7 +36,8 @@ class ScreenshotTaker_saveImage_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_File_Path_Is_Null() {
-    assertThrows(NullPointerException.class, () -> taker.saveImage(NO_IMAGE, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> taker.saveImage(NO_IMAGE, null));
   }
 
   @Test

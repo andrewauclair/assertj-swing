@@ -48,7 +48,8 @@ class Pause_pauseWithConditions_Test {
 
   @Test
   void should_Throw_Error_If_Condition_Array_Is_Null() {
-    assertThrows(NullPointerException.class, () -> Pause.pause((Condition[]) null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause((Condition[]) null));
   }
 
   @Test
@@ -56,12 +57,12 @@ class Pause_pauseWithConditions_Test {
     assertThrows(IllegalArgumentException.class, () -> Pause.pause(new Condition[0]));
   }
 
-  @Test//(expected = WaitTimedOutError.class, timeout = 30100)
+  @Test
   void should_Timeout_If_Conditions_Together_Run_Longer_Than_Timeout() {
     assertTimeoutPreemptively(Duration.ofMillis(30100), () -> assertThrows(WaitTimedOutError.class, () -> Pause.pause(new Condition[] { new SatisfiedCondition(15000), new SatisfiedCondition(20000) })));
   }
 
-  @Test//(expected = WaitTimedOutError.class, timeout = 30100)
+  @Test
   void should_Timeout_If_Any_Condition_Runs_Longer_Than_Timeout() {
     assertTimeoutPreemptively(Duration.ofMillis(30100), () -> assertThrows(WaitTimedOutError.class, () -> Pause.pause(new Condition[] { new SatisfiedCondition(40000) })));
   }

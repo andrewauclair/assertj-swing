@@ -33,7 +33,8 @@ class JComponentDriver_requireToolTipAsPattern_Test extends JComponentDriver_Tes
   @Test
   void should_Throw_Error_If_Pattern_Is_Null() {
     Pattern p = null;
-    assertThrows(NullPointerException.class, () -> driver.requireToolTip(button, p));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.requireToolTip(button, p));
   }
 
   @Test

@@ -33,7 +33,8 @@ class JTreeDriver_clickRow_withMouseButton_Test extends JTreeDriver_clickCell_Te
   @Test
   void should_Throw_Error_If_MouseButton_Is_Null() {
     MouseButton button = null;
-    assertThrows(NullPointerException.class, () -> driver.clickRow(tree, 1, button));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.clickRow(tree, 1, button));
   }
 
   @Test

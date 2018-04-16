@@ -26,7 +26,8 @@ class JListDriver_selectItemsByText_withInvalidInput_Test extends JListDriver_wi
   @Test
   void should_Throw_Error_If_Array_Of_Values_Is_Null() {
     String[] values = null;
-    assertThrows(NullPointerException.class, () -> driver.selectItems(list, values));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.selectItems(list, values));
   }
 
   @Test

@@ -52,7 +52,8 @@ class JTreeDriver_requireSelectedPaths_Test extends JTreeDriver_selectCell_TestC
 
   @Test
   void should_Throw_Error_If_Expected_Array_Of_Paths_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.requireSelection(tree, (String[]) null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.requireSelection(tree, (String[]) null));
   }
 
   @Test

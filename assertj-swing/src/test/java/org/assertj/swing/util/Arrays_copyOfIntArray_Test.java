@@ -26,7 +26,8 @@ class Arrays_copyOfIntArray_Test {
   @Test
   void should_Throw_Error_If_Array_To_Copy_Is_Null() {
     int[] original = null;
-    assertThrows(NullPointerException.class, () -> Arrays.copyOf(original));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Arrays.copyOf(original));
   }
 
   @Test

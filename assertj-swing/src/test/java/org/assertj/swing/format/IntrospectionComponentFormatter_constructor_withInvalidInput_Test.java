@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class IntrospectionComponentFormatter_constructor_withInvalidInput_Test extends EDTSafeTestCase {
   @Test
   void should_Throw_Error_If_Target_Type_Is_Null() {
-    assertThrows(NullPointerException.class, () -> new IntrospectionComponentFormatter(null, "name", "text"));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> new IntrospectionComponentFormatter(null, "name", "text"));
   }
 }

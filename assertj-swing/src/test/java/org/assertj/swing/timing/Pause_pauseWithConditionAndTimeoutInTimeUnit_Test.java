@@ -63,11 +63,13 @@ class Pause_pauseWithConditionAndTimeoutInTimeUnit_Test {
 
   @Test
   void should_Throw_Error_If_Condition_Is_Null() {
-    assertThrows(NullPointerException.class, () -> Pause.pause((Condition) null, timeout(TIMEOUT)));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause((Condition) null, timeout(TIMEOUT)));
   }
 
   @Test
   void should_Throw_Error_If_Timeout_Is_Null() {
-    assertThrows(NullPointerException.class, () -> Pause.pause(new NeverSatisfiedCondition(), null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Pause.pause(new NeverSatisfiedCondition(), null));
   }
 }

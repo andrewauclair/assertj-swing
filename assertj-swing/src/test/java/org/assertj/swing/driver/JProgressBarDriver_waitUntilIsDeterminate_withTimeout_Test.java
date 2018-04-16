@@ -32,7 +32,8 @@ import org.junit.jupiter.api.Test;
 class JProgressBarDriver_waitUntilIsDeterminate_withTimeout_Test extends JProgressBarDriver_TestCase {
   @Test
   void should_Throw_Error_If_Timeout_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.waitUntilIsDeterminate(progressBar, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.waitUntilIsDeterminate(progressBar, null));
   }
 
   @Test

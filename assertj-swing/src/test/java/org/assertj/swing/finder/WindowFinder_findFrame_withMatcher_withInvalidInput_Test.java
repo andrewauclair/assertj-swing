@@ -31,7 +31,8 @@ class WindowFinder_findFrame_withMatcher_withInvalidInput_Test {
   @Test
   void should_Throw_Error_If_Matcher_Is_Null() {
     GenericTypeMatcher<JFrame> matcher = null;
-    assertThrows(NullPointerException.class, () -> WindowFinder.findFrame(matcher));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(matcher));
   }
 
   @Test
@@ -41,6 +42,7 @@ class WindowFinder_findFrame_withMatcher_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(NullPointerException.class, () -> WindowFinder.findFrame(neverMatches(JFrame.class)).withTimeout(10, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findFrame(neverMatches(JFrame.class)).withTimeout(10, null));
   }
 }

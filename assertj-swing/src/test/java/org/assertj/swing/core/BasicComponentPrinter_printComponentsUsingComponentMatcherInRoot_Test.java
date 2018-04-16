@@ -30,13 +30,15 @@ class BasicComponentPrinter_printComponentsUsingComponentMatcherInRoot_Test exte
     BasicComponentPrinter_TestCase {
   @Test
   void should_Throw_Error_If_OutputStream_Is_Null() {
-    assertThrows(NullPointerException.class, () -> printer.printComponents(null, new NameMatcher("button1"), windowOne));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(null, new NameMatcher("button1"), windowOne));
   }
 
   @Test
   void should_Throw_Error_If_ComponentMatcher_Is_Null() {
     ComponentMatcher matcher = null;
-    assertThrows(NullPointerException.class, () -> printer.printComponents(out, matcher, windowOne));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(out, matcher, windowOne));
   }
 
   @Test

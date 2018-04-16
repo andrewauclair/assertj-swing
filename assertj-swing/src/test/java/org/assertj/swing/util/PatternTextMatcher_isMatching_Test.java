@@ -29,7 +29,8 @@ class PatternTextMatcher_isMatching_Test {
   void should_Throw_Error_If_Any_Pattern_In_Array_Is_Null() {
     Pattern[] patterns = { null, Pattern.compile("hello"), null };
     PatternTextMatcher matcher = new PatternTextMatcher(patterns);
-    assertThrows(NullPointerException.class, () -> matcher.isMatching("hello"));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> matcher.isMatching("hello"));
   }
 
   @Test

@@ -26,7 +26,8 @@ class Arrays_copyOfObjectArray_Test {
   @Test
   void should_Throw_Error_If_Array_To_Copy_Is_Null() {
     Object[] original = null;
-    assertThrows(NullPointerException.class, () -> Arrays.copyOf(original));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Arrays.copyOf(original));
   }
 
   @Test

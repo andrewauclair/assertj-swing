@@ -41,6 +41,7 @@ class WindowFinder_findDialog_byName_withInvalidInput_Test {
 
   @Test
   void should_Throw_Error_If_Time_Unit_Is_Null() {
-    assertThrows(NullPointerException.class, () -> WindowFinder.findDialog("dialog").withTimeout(10, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> WindowFinder.findDialog("dialog").withTimeout(10, null));
   }
 }

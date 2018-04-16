@@ -54,7 +54,8 @@ class ComponentDriver_invokePopupAtPoint_Test extends ComponentDriver_invokePopu
 
   @Test
   void should_Throw_Error_If_Point_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.invokePopupMenu(window.textField, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.invokePopupMenu(window.textField, null));
   }
 
   @Test

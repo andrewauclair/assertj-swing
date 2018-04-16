@@ -30,7 +30,8 @@ import org.junit.jupiter.api.Test;
 class MouseClickInfoTest {
   @Test
   void shouldThrowErrorIfMouseButtonIsNull() {
-    assertThrows(NullPointerException.class, () -> MouseClickInfo.button(null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> MouseClickInfo.button(null));
   }
 
   @Test

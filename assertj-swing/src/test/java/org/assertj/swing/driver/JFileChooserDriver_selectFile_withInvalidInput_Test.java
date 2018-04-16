@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class JFileChooserDriver_selectFile_withInvalidInput_Test extends JFileChooserDriver_withMocks_TestCase {
   @Test
   void should_Throw_Error_If_File_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.selectFile(fileChooser, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.selectFile(fileChooser, null));
   }
 }

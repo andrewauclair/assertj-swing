@@ -37,6 +37,7 @@ class KeyPressInfo_keyCode_modifiers_Test {
   @Test
   void should_Throw_Error_If_Modifier_Array_Is_Null() {
     int[] modifiers = null;
-    assertThrows(NullPointerException.class, () -> KeyPressInfo.keyCode(VK_C).modifiers(modifiers));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> KeyPressInfo.keyCode(VK_C).modifiers(modifiers));
   }
 }

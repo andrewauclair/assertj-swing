@@ -40,6 +40,7 @@ class Timeout_timeout_long_TimeUnit_Test {
 
   @Test
   void shouldThrowExceptionIfTimeUnitIsNull() {
-    assertThrows(NullPointerException.class, () -> Timeout.timeout(0, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> Timeout.timeout(0, null));
   }
 }

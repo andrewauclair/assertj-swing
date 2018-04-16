@@ -43,7 +43,8 @@ public class JTableDriver_unselectRows_withInvalidInput_Test extends RobotBasedT
 
   @Test
   void should_Throw_Error_If_Array_Of_Indices_Is_Null() {
-    assertThrows(NullPointerException.class, () -> driver.unselectRows(table, null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> driver.unselectRows(table, null));
   }
 
   @Test

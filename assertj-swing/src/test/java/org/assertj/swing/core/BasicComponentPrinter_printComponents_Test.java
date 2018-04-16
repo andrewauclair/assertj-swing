@@ -27,7 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class BasicComponentPrinter_printComponents_Test extends BasicComponentPrinter_TestCase {
   @Test
   void should_Throw_Error_If_OutputStream_Is_Null() {
-    assertThrows(NullPointerException.class, () -> printer.printComponents(null));
+    // jsr305 throws IllegalArgumentExceptions when @Nonnull is used
+    assertThrows(IllegalArgumentException.class, () -> printer.printComponents(null));
   }
 
   @Test
