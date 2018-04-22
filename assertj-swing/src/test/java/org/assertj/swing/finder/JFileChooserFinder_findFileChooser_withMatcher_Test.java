@@ -56,7 +56,7 @@ class JFileChooserFinder_findFileChooser_withMatcher_Test extends JFileChooserFi
   void should_Find_JFileChooser_Before_Given_Timeout_In_Ms_Expires() {
     window.launchDelay(200);
     clickBrowseButton();
-    JFileChooserFixture found = JFileChooserFinder.findFileChooser(matcher).withTimeout(500).using(robot);
+    JFileChooserFixture found = JFileChooserFinder.findFileChooser(matcher).withTimeout(1000).using(robot);
     assertThat(found.target()).isSameAs(window.fileChooser());
   }
 
